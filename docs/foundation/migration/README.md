@@ -40,16 +40,36 @@ This folder is the per-entity detail layer under it.
 
 | # | Spec | v1 sources | Status |
 | --- | --- | --- | --- |
-| 01 | [users-auth.md](01-users-auth.md) | user, user_profile, verification | ⏳ being written (schema extraction in progress) |
-| 02 | [profiles.md](02-profiles.md) | profile (god table → 8 tables), geo_zipcodes links | ⏳ being written (schema extraction in progress) |
-| 03 | [contacts.md](03-contacts.md) | invite_recipient (+ tags CSV), imports summary | ⏳ being written (schema extraction in progress) |
-| 04 | [reviews.md](04-reviews.md) | review | ⏳ being written (schema extraction in progress) |
-| 05 | [social.md](05-social.md) | social_stream (+ token vault), social_post(+media), social_campaign, campaign_posts, scheduled_posts_automator, social_insight, keyword_insight | ⏳ being written (schema extraction in progress) |
-| 06 | [campaigns.md](06-campaigns.md) | invite_campaign (+S3 bodies), invite_scheduler (recompute!), trackers/history → campaign_events | ⏳ being written (schema extraction in progress) |
-| 07 | [messaging.md](07-messaging.md) | messaging (blob→rows), messaging_settings, keyword(s), call tables, audio | ⏳ being written (schema extraction in progress) |
-| 08 | [media.md](08-media.md) | image, video, S3-Files objects → S3 + media_references discovery | ⏳ being written (schema extraction in progress) |
-| 09 | [surveys.md](09-surveys.md) | survey, survey_question/answer/tracking(+actions)/style | ⏳ being written (schema extraction in progress) |
-| 10 | [misc.md](10-misc.md) | notification→NOTIF prefs, profile_notification, monthly_target, referrals, links/linkmaster, widget, newsletters+categories, manage_request | ⏳ being written (schema extraction in progress) |
+| 01 | [users-auth.md](01-users-auth.md) | user, user_profile, verification | ✅ detailed |
+| 02 | [profiles.md](02-profiles.md) | profile (god table → 8 tables), geo_zipcodes links | ✅ detailed |
+| 03 | [contacts.md](03-contacts.md) | invite_recipient (+ tags CSV), imports summary | ✅ detailed |
+| 04 | [reviews.md](04-reviews.md) | review | ✅ detailed |
+| 05 | [social.md](05-social.md) | social_stream (+ token vault), social_post(+media), social_campaign, campaign_posts, scheduled_posts_automator, social_insight, keyword_insight | ✅ detailed |
+| 06 | [campaigns.md](06-campaigns.md) | invite_campaign (+S3 bodies), invite_scheduler (recompute!), trackers/history → campaign_events | ✅ detailed |
+| 07 | [messaging.md](07-messaging.md) | messaging (blob→rows), messaging_settings, keyword(s), call tables, audio | ✅ detailed |
+| 08 | [media.md](08-media.md) | image, video, S3-Files objects → S3 + media_references discovery | ✅ detailed |
+| 09 | [surveys.md](09-surveys.md) | survey, survey_question/answer/tracking(+actions)/style | ✅ detailed |
+| 10 | [misc.md](10-misc.md) | notification→NOTIF prefs, profile_notification, monthly_target, referrals, links/linkmaster, widget, newsletters+categories, manage_request | ✅ detailed |
+
+## Consolidated R0 schema prerequisites (surfaced by the specs)
+
+Implement BEFORE any spec (they're referenced as "R0" throughout):
+
+1. `legacy_id bigint` (indexed) on every migrated table; composite provenance
+   `(legacy_source, legacy_id)` on `campaign_events` (three v1 source tables share it).
+2. `users.legacy_password jsonb` (scheme/hash/salt — argon2 upgrade-on-login).
+3. `account_type` enum aligned to AD-09 (`none|sales|manager|supervisor|admin`) — current
+   `user|staff|admin|superadmin` loses Sales/Manager (spec-01).
+4. `message_platform` enum + `facebook | instagram | inquiry` (spec-07).
+5. `deleted_at` on `contacts`, `reviews`, `social_posts` (PF-2 soft-delete sets).
+6. `reviews.provider_review_id` (puller dedupe — spec-04).
+7. `conversations.legacy_blob text` (12-month raw retention — spec-07).
+8. `migration_warnings` + `migration_reports`/`migration_report_items` tables (G8, MIGR-1.2).
+9. `user_profiles.role`, plans/subscriptions/entitlements, `suppressions`, `media_references`
+   (already on the R0 list in ../05-roadmap.md).
+
+**Known TODO:** spec-07c (calls/audio) needs a v1 schema extraction pass for the call tables —
+they weren't in the first extraction batch. Marked inside the spec.
 
 Schema ground truth used by these specs: v1 `base_schema_2026-05-19.sql` · v2
 `packages/db/src/schema/` — extracted 2026-07-06. If either schema changes, regenerate the
