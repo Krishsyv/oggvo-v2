@@ -112,6 +112,32 @@ The legal layer for outbound, enforced **at the gateway/send-pipeline** so no fe
 - Eligibility (the campaigns engine) consumes suppression/opt-out as an input — it never
   reimplements it.
 
+## PF-19 Audit trail *(added 2026-07-06 — informed by the shopschool `audit_logs` module, redesigned for this project: multi-tenant scoping, impersonation, worker actors, Postgres-native retention)*
+"Who did what, to which record, when, from where" is queryable for every mutating action:
+- **`audit_events` table** (upgrades the skinny scaffold `audit_log`): `profile_id` (tenant-scoped;
+  NULL for platform-level staff actions), actor (`user_id`, `actor_type: user|staff|system`,
+  **`impersonator_id`** — when staff act as a user, BOTH identities are recorded),
+  `entity_table` + `entity_id`, `action` enum (`create|update|delete|login|logout|impersonate|
+  export|import|bulk_update|bulk_delete|send|connect|disconnect`), `changes` jsonb
+  (`{before, after, fields}` — **diff only the changed fields**, not whole rows),
+  `ip_address`, `user_agent`, `metadata` jsonb, `occurred_at`. Indexed on (entity), (actor),
+  (profile, occurred_at), (action).
+- **Capture is automatic first, explicit second:** a NestJS interceptor on all mutating routes
+  writes the event from request context (TenantGuard supplies profile + actor, incl.
+  impersonation); services add explicit calls only for domain events the interceptor can't see
+  (login/logout, sends, bulk ops, worker actions as `system`). Workers stamp `actor_type=system`
+  + the triggering job id in metadata.
+- **Sanitize before write:** password/token/secret fields never enter `changes`; PF-18 redaction
+  applies (no message bodies — field names only).
+- **Reads:** entity history ("show every change to this contact"), user activity ("what did this
+  user do this week"), admin search (filter by profile/actor/action/date) — one service, used by
+  the ADMIN viewer UI.
+- **Retention:** audit events follow PF-18 windows (default 24 months, then archived to S3) and
+  join the Stage-B partitioning list (AD-05) — no year/month helper columns; Postgres range
+  indexes/partitions do that job here.
+- Audit writes are **fire-and-forget within the transaction boundary rule**: same-transaction for
+  data changes (an update without its audit row must not commit), async for reads/logins.
+
 ## PF-18 Privacy, consent & retention *(added 2026-07-06 gap pass)*
 We hold *other businesses'* customer PII, so data-subject duties are a platform feature:
 - **Export & delete by contact:** one service that, given a contact/phone/email, exports or

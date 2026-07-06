@@ -37,8 +37,11 @@ old plan and why:
   `profiles.tollfree_*`, tutorials catalog (`tutorial_playlists`/`tutorial_videos`),
   `suppressions` (PF-17 — extend the existing `blacklisted_emails` into a channel-generic
   suppression table), `deletion_requests` + retention-window columns (PF-18).
-  **Reuse, don't duplicate:** `campaign_events`, `audit_log` (home for impersonation +
-  staff-action audit), `feature_flags`, `platform_whitelist` already exist in the schema.
+  **Reuse, don't duplicate:** `campaign_events`, `feature_flags`, `platform_whitelist` already
+  exist in the schema. The scaffold `audit_log` (user_id/action/notes/related_*) is **upgraded to
+  `audit_events`** per PF-19 (tenant scope, impersonator attribution, before/after diffs, action
+  enum, retention/archival) — design informed by the shopschool audit module, adapted to
+  OGGVO's tenancy/impersonation/worker model.
 - Exit: `pnpm dev` runs api+web+workers; a demo outbox→queue→gateway→ledger job passes e2e.
 
 ## R1 — Core value loop (get a review, look good doing it)

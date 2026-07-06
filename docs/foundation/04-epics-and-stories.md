@@ -49,6 +49,7 @@ Phases refer to the roadmap releases (R1–R5) in [`05-roadmap.md`](05-roadmap.m
 | **ADMIN** | Back office | admin | `docs/admin/user-stories.md` A1–A12 | — | R2–R4 |
 | **HELP** | Support & tutorials | support/tutorials | `docs/support/user-stories.md`, `docs/tutorials/user-stories.md` | BF-001 (categories + search), BF-033 (contextual prompts), TU-001–TU-021 (content production) | R3–R4 |
 | **REF** | Referral program | tenancy/admin | `docs/referrals/user-stories.md` RF1–RF2 | — | R4 |
+| **AUDIT** | Audit trail ⚠ new (PF-19) | platform/admin | §AUDIT below | — | R0 (capture) + R2 (viewer) |
 | **MIGR** | v1 data migration ✅ GO (decided 2026-07-06) | (ETL) | §MIGR below | — | Phase 3 (Dec) |
 
 **Deliberately dropped from v1** (greenfield decision — don't port): story composer stub, Buttons
@@ -187,6 +188,28 @@ ship linear, decide branching later), Contact-Advisor mailto (replaced by HELP c
   per-profile monthly generation quota (entitlement); AC3 nothing auto-publishes without the
   existing scheduling/approval path.
 - **AI-1.3 — AI usage metric.** Dashboard "AI Used" reads a real counter (v1 hardcoded 0%).
+
+### §AUDIT — Audit trail (PF-19; design informed by shopschool's audit module, adapted)
+
+> "This user did this at this time." Capture ships in R0 (it must exist before the first feature
+> writes data); the viewer UI ships with ADMIN in R2. Requested 2026-07-06.
+
+- **AUDIT-1.1 — Automatic capture.** As the **System** I record an `audit_events` row for every
+  mutating API action without per-feature code. AC1 interceptor derives profile, actor,
+  **impersonator when staff act as a user**, IP, user-agent from request context; AC2 `changes`
+  holds changed-fields-only before/after diffs; AC3 secrets/PII-bodies never captured (PF-18
+  redaction); AC4 the audit row commits in the same transaction as the data change.
+- **AUDIT-1.2 — Domain & worker events.** As the **System** I record events the interceptor can't
+  see: login/logout, impersonate start/stop, exports/imports, bulk ops, campaign/broadcast sends,
+  provider connect/disconnect — and worker actions as `actor_type=system` with the job id.
+- **AUDIT-1.3 — Entity history.** As an **Owner** I see "who changed what" on a record (contact,
+  campaign, settings) as a timeline. AC1 tenant-scoped (my profile only); AC2 field-level diffs
+  rendered human-readably.
+- **AUDIT-1.4 — Admin activity search.** As **Staff-Support** I filter events by profile, actor,
+  action, entity, and date range to answer support forensics in one query. AC1 impersonated
+  actions clearly attributed to the staff member; AC2 export of a filtered set.
+- **AUDIT-1.5 — Retention & archival.** As the **System** I archive events past the retention
+  window (default 24 months) to S3 and prune the hot table (Stage-B partition-ready).
 
 ### §MIGR — v1 data migration (**GO — decided 2026-07-06**, scheduled Phase 3)
 
