@@ -40,6 +40,10 @@ questions deliberately.
 7. [`07-flow-diagrams.md`](07-flow-diagrams.md) — mermaid diagrams for the cross-cutting flows no
    domain file owns: send pipeline, error taxonomy, entitlement sync, team invites, TFV and
    disconnect state machines, media delete, migration cutover.
+8. [`08-v1-migration-plan.md`](08-v1-migration-plan.md) — the detailed MIGR design:
+   freeze-and-cutover strategy, URL/identity preservation, entity-by-entity edge cases
+   (passwords, tokens, blobs, in-flight schedules), webhook re-registration, cutover runbook,
+   validation gate, customer comms.
 
 ## Inputs consumed
 

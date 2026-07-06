@@ -192,7 +192,8 @@ ship linear, decide branching later), Contact-Advisor mailto (replaced by HELP c
 
 > **Decision: v1 customers WILL migrate to v2.** ETL build starts in Sprint 8 slack / release
 > week, pilot cohort migrates in Phase 3 (Dec 7–19), remaining waves through January. See
-> `06-team-plan-90d.md` Phase 3. Mapping source: `docs/SCHEMA-REDESIGN.md` (column-exact v1→v2).
+> `06-team-plan-90d.md` Phase 3. **Detailed design: [`08-v1-migration-plan.md`](08-v1-migration-plan.md)**
+> (strategy, edge cases, runbook); column mapping: `docs/SCHEMA-REDESIGN.md`.
 
 - **MIGR-1.1 — ETL per profile.** As **Staff-Admin** I migrate a selected v1 profile into v2
   (idempotent, re-runnable): profile + satellites, users/memberships, contacts (+tags CSV→m:n),
