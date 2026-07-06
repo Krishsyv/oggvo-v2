@@ -1,0 +1,37 @@
+{
+  "name": "oggvo-v2",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Oggvo platform v2 — Next.js + NestJS + Drizzle + PostgreSQL monorepo",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "db:generate": "pnpm --filter @oggvo/db generate",
+    "db:migrate": "pnpm --filter @oggvo/db migrate",
+    "db:push": "pnpm --filter @oggvo/db push",
+    "db:studio": "pnpm --filter @oggvo/db studio",
+    "db:seed": "pnpm --filter @oggvo/db seed",
+    "stack:up": "docker compose up -d",
+    "stack:down": "docker compose down",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "ioredis": "^5.10.1"
+    }
+  }
+}

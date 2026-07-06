@@ -1,0 +1,14 @@
+{
+  // NOTE: outDir/rootDir are intentionally NOT set here. A relative outDir in a
+  // shared/extended tsconfig resolves relative to THIS file, so every consumer
+  // would emit into packages/config/tsconfig/dist. Each app sets its own.
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "ES2022"
+  }
+}

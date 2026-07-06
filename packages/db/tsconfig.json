@@ -1,0 +1,10 @@
+{
+  "extends": "@oggvo/config/tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  // drizzle.config.ts is loaded by drizzle-kit's own bundler, not tsc; it sits
+  // outside rootDir (src), so it is intentionally excluded from the typecheck program.
+  "include": ["src/**/*.ts"]
+}
