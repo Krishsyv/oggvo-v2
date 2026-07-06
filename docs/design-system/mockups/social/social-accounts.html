@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Connected Accounts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Social Accounts</h1>
+      <p class="text-sm text-gray-500 mt-1">Connect your pages, then compose and schedule posts from one place.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <a href="social-planner.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+        Content Planner
+      </a>
+      <a href="social-composer.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        New Post
+      </a>
+    </div>
+  </div>
+
+  <!-- Shared in-page tab nav -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+
+  <!-- Insights summary strip -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-story="US-1.1" data-ac="AC3">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Connected accounts</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">4<span class="text-base font-normal text-gray-400"> / 5</span></div>
+      <div class="text-xs text-gray-400 mt-1">1 not connected</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Total followers</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">18.4k</div>
+      <div class="text-xs text-success-600 mt-1">▲ 312 this month</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Engagement (30d)</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">3.1%</div>
+      <div class="text-xs text-success-600 mt-1">▲ 0.4 pts</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Posts published (30d)</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">62</div>
+      <div class="text-xs text-gray-400 mt-1">3 scheduled ahead</div>
+    </div>
+  </div>
+
+  <!-- Connected accounts grid -->
+  <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4" data-story="US-1.1" data-ac="AC1">
+
+    <!-- Facebook — connected -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-11 w-11 shrink-0 rounded-lg bg-linkedin grid place-items-center text-lg font-semibold text-white">f</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Facebook</div>
+            <div class="text-xs text-gray-400 truncate">Oggvo Realty Group</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+      </div>
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-xs text-gray-400">Last synced 6 min ago · 8.2k followers</div>
+        <button data-disconnect class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Disconnect</button>
+      </div>
+    </div>
+
+    <!-- Instagram — connected -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-11 w-11 shrink-0 rounded-lg bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-lg font-semibold text-white">ig</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Instagram</div>
+            <div class="text-xs text-gray-400 truncate">@oggvorealty</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+      </div>
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-xs text-gray-400">Last synced 6 min ago · 5.7k followers</div>
+        <button data-disconnect class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Disconnect</button>
+      </div>
+    </div>
+
+    <!-- Google Business — connected -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-11 w-11 shrink-0 rounded-lg bg-google grid place-items-center text-lg font-semibold text-white">G</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Google Business</div>
+            <div class="text-xs text-gray-400 truncate">Oggvo Realty — Main St</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+      </div>
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-xs text-gray-400">Last synced 1 hr ago · 2 locations</div>
+        <button data-disconnect class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Disconnect</button>
+      </div>
+    </div>
+
+    <!-- LinkedIn — connected -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col" data-story="US-1.2" data-ac="AC4">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-11 w-11 shrink-0 rounded-lg bg-linkedin grid place-items-center text-base font-semibold text-white">in</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">LinkedIn</div>
+            <div class="text-xs text-gray-400 truncate">Oggvo Realty Group · Company</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Token expiring</span>
+      </div>
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-xs text-gray-400">Re-auth in 6 days · 1.9k followers</div>
+        <button data-connect="LinkedIn" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Reconnect</button>
+      </div>
+    </div>
+
+    <!-- Twitter / X — not connected -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col" data-story="US-1.2" data-ac="AC1">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-11 w-11 shrink-0 rounded-lg bg-gray-900 grid place-items-center text-lg font-semibold text-white">X</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Twitter / X</div>
+            <div class="text-xs text-gray-400 truncate">Not connected</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+      </div>
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-xs text-gray-400">Connect via OAuth to publish here</div>
+        <button data-connect="Twitter / X" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18a2 2 0 012 2v8a2 2 0 01-2 2h-4.5M10 8l4 4-4 4M14 12H4"/></svg>
+          Connect
+        </button>
+      </div>
+    </div>
+
+    <!-- Add platform tile -->
+    <a href="#" class="border border-dashed border-gray-300 rounded-card p-5 flex flex-col items-center justify-center text-center hover:border-primary-300 transition min-h-[7rem]">
+      <span class="h-10 w-10 rounded-full bg-primary-50 text-primary-600 grid place-items-center mb-2">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+      </span>
+      <div class="text-sm font-medium text-gray-700">Add a platform</div>
+      <div class="text-xs text-gray-400 mt-0.5">Manage all sources in Settings → Accounts</div>
+    </a>
+
+  </div>
+
+  <p class="mock-note mt-6">GET /social/accounts. Connect opens provider OAuth → GET /social/oauth/{facebook|twitter|linkedin|google}; tokens are AES-GCM encrypted at rest (fix-on-rebuild: v1 stored plaintext). Disconnect = DELETE /social/accounts/{id}. Insights strip from social_insights (new v2 table).</p>
+
+  <!-- Connect / OAuth modal -->
+  <div id="m-connect" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-6.1" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span id="mc-logo" class="h-9 w-9 rounded-lg grid place-items-center text-white font-semibold" style="background:#1877f2">f</span>
+          <h3 class="text-lg font-semibold text-gray-900">Connect <span id="mc-name">Facebook</span></h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <p>You'll be redirected to <span id="mc-name2" class="font-medium text-gray-800">Facebook</span> to authorize Oggvo to publish on your behalf. We request only posting + page-read permissions.</p>
+        <ol class="list-decimal list-inside space-y-1">
+          <li>Sign in and grant access on the provider's consent screen.</li>
+          <li>Pick the page / account to publish to (Facebook → pages + Instagram; Google → location; LinkedIn → page).</li>
+          <li>You'll return here with the account connected.</li>
+        </ol>
+        <p class="text-xs text-gray-400 border-t border-gray-100 pt-3">The access token is encrypted at rest (AES-GCM). Disconnect any time.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Redirecting to provider…" data-tone="primary" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Continue to <span id="mc-name3">Facebook</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disconnect confirm modal -->
+  <div id="m-disconnect" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-1.3" data-ac="AC2">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-sm">
+      <div class="p-5 text-center space-y-3">
+        <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.36 6.64A9 9 0 1112 3v9"/></svg></span>
+        <h3 class="text-lg font-semibold text-gray-900">Disconnect <span id="md-name">Facebook</span>?</h3>
+        <p class="text-sm text-gray-500">This account will stop being a publish target. Scheduled posts to it will fail. You can reconnect any time.</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Account disconnected" data-tone="error" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Disconnect</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "../index.html", label: "All mockups" }, route: "/social", search: "Search social…" });</script>
+<script>
+  (function () {
+    var BRAND = { "Facebook": "#1877f2", "Instagram": "#dd2a7b", "Google Business": "#dc4e41", "LinkedIn": "#0077b5", "Twitter / X": "#000000" };
+    function cardName(btn) {
+      var card = btn.closest(".bg-white");
+      var el = card && card.querySelector(".font-semibold.text-gray-900");
+      return el ? el.textContent.trim() : "this account";
+    }
+    function openConnect(name) {
+      document.getElementById("mc-name").textContent = name;
+      document.getElementById("mc-name2").textContent = name;
+      document.getElementById("mc-name3").textContent = name;
+      var logo = document.getElementById("mc-logo");
+      logo.style.background = BRAND[name] || "#2e90fa";
+      logo.textContent = name.charAt(0);
+      document.getElementById("m-connect").classList.remove("hidden");
+    }
+    document.addEventListener("click", function (e) {
+      var c = e.target.closest("[data-connect]");
+      if (c) { openConnect(c.getAttribute("data-connect") || cardName(c)); return; }
+      var d = e.target.closest("[data-disconnect]");
+      if (d) { document.getElementById("md-name").textContent = cardName(d); document.getElementById("m-disconnect").classList.remove("hidden"); return; }
+      var closer = e.target.closest("[data-close]");
+      if (closer) {
+        var t = closer.getAttribute("data-toast");
+        if (t) OggvoShell.toast(t, closer.getAttribute("data-tone") || "gray");
+        document.getElementById("m-connect").classList.add("hidden");
+        document.getElementById("m-disconnect").classList.add("hidden");
+      }
+    });
+    ["m-connect", "m-disconnect"].forEach(function (id) {
+      var m = document.getElementById(id);
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { document.getElementById("m-connect").classList.add("hidden"); document.getElementById("m-disconnect").classList.add("hidden"); } });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-4 sm:p-6">
+
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex">
+    <div class="flex gap-4 h-[calc(100vh-8rem)] w-full">
+
+      <!-- LEFT: inbox list -->
+      <aside class="w-80 shrink-0 border-r border-gray-200 flex flex-col" data-story="US-M1.1" data-ac="AC1">
+        <!-- header -->
+        <div class="p-3 border-b border-gray-200">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-gray-900">Inbox</span>
+            <a href="connect-new.html" class="inline-flex items-center gap-1 rounded-card bg-primary-500 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-primary-600">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z"/></svg>
+              New
+            </a>
+          </div>
+          <div class="mt-2 relative">
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6"/><path d="m18 18-3.5-3.5" stroke-linecap="round"/></svg>
+            <input type="text" id="inbox-search" placeholder="Search messages…" class="h-9 w-full pl-8 pr-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <div id="inbox-tabs" class="mt-2 flex items-center gap-1.5">
+            <button data-value="all" class="rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">All</button>
+            <button data-value="closed" class="rounded-full px-2.5 py-1 text-xs font-medium text-gray-500 hover:bg-gray-100">Closed</button>
+            <button id="plat-sms" class="ml-auto inline-flex items-center gap-1 rounded-full border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-600 hover:bg-gray-50">
+              <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 .8 1.6L12 11v4a1 1 0 0 1-1.4.9l-2-1A1 1 0 0 1 8 14v-3L3.2 4.6A1 1 0 0 1 3 4Z"/></svg>
+              SMS
+            </button>
+          </div>
+        </div>
+
+        <!-- conversation list -->
+        <div id="conv-list" class="flex-1 overflow-y-auto divide-y divide-gray-100">
+
+          <!-- row 1 -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">AR</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Alicia Reyes</p>
+              <p class="text-xs text-gray-500 truncate">Sounds great, see you then!</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">9:42a</span>
+            </div>
+          </div>
+
+          <!-- row 2 SELECTED -->
+          <div class="flex items-center gap-3 p-3 bg-primary-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">DM</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Dana Moore</p>
+              <p class="text-xs text-gray-500 truncate">Perfect — I'll send the photos over.</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">9:31a</span>
+              <span class="bg-primary-500 text-white text-[10px] rounded-full px-1.5">2</span>
+            </div>
+          </div>
+
+          <!-- row 3 -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">TG</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Theo Grant</p>
+              <p class="text-xs text-gray-500 truncate">Can we reschedule for Friday afternoon?</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">8:55a</span>
+              <span class="bg-primary-500 text-white text-[10px] rounded-full px-1.5">1</span>
+            </div>
+          </div>
+
+          <!-- row 4 STOP -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer" data-story="US-M1.5" data-ac="AC1">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">PN</div>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5">
+                <p class="font-medium text-gray-900 truncate">Priya Nair</p>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-error-100 text-error-700"><span class="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>STOP</span>
+              </div>
+              <p class="text-xs text-gray-500 truncate">STOP</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">Yest</span>
+            </div>
+          </div>
+
+          <!-- row 5 -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">LC</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Liam Cho</p>
+              <p class="text-xs text-gray-500 truncate">Thanks for the quick turnaround 👍</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">Yest</span>
+            </div>
+          </div>
+
+          <!-- row 6 -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">SK</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Sofia Klein</p>
+              <p class="text-xs text-gray-500 truncate">Is the appointment still on for Monday?</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">Mon</span>
+            </div>
+          </div>
+
+          <!-- row 7 -->
+          <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer">
+            <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">RB</div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-gray-900 truncate">Ravi Banerjee</p>
+              <p class="text-xs text-gray-500 truncate">Forwarded call · missed</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[11px] text-gray-400">Mon</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- RIGHT: thread -->
+      <section class="flex-1 flex flex-col min-w-0">
+        <!-- thread header -->
+        <div class="p-3 border-b border-gray-200 flex items-center justify-between">
+          <div class="flex items-center gap-3 min-w-0">
+            <div id="thread-avatar" class="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">DM</div>
+            <div class="min-w-0">
+              <p id="thread-name" class="font-medium text-gray-900 truncate">Dana Moore</p>
+              <p id="thread-phone" class="text-xs text-gray-500">(415) 555-0192</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <button title="Contact / history" class="rounded-card p-2 text-gray-500 hover:bg-gray-100">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="7" r="3"/><path d="M4 16a6 6 0 0 1 12 0" stroke-linecap="round"/></svg>
+            </button>
+            <button title="Archive" data-archive data-story="US-M1.4" class="rounded-card p-2 text-gray-500 hover:bg-gray-100">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="14" height="4" rx="1"/><path d="M4.5 8v7a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V8M8 11h4" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- messages -->
+        <div id="thread-msgs" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50" data-story="US-M1.2" data-ac="AC1">
+
+          <div class="flex justify-center">
+            <span class="rounded-full bg-gray-200 px-3 py-0.5 text-[11px] font-medium text-gray-500">Today</span>
+          </div>
+
+          <!-- inbound -->
+          <div>
+            <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-3 py-2 text-sm max-w-[75%] text-gray-700">Hi! Just confirming our 2pm appointment tomorrow.</div>
+            <p class="mt-0.5 text-[11px] text-gray-400">9:18a</p>
+          </div>
+
+          <!-- outbound -->
+          <div class="flex flex-col items-end">
+            <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-3 py-2 text-sm max-w-[75%] ml-auto">Yes, all set for 2pm. Looking forward to it!</div>
+            <p class="mt-0.5 text-[11px] text-gray-400">9:21a · Me</p>
+          </div>
+
+          <!-- system note: forwarded call -->
+          <div class="flex justify-center">
+            <span class="rounded-full bg-gray-100 px-3 py-1 text-[11px] text-gray-500">📞 Forwarded call · 2m 14s</span>
+          </div>
+
+          <!-- inbound with attachment -->
+          <div>
+            <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-3 py-2 text-sm max-w-[75%] text-gray-700">
+              Here's the before photo of the kitchen.
+              <div class="mt-2 h-24 w-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                <svg class="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="12" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="m4 15 4-4 3 3 2-2 3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <p class="mt-0.5 text-[11px] text-gray-400">9:27a</p>
+          </div>
+
+          <!-- outbound -->
+          <div class="flex flex-col items-end">
+            <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-3 py-2 text-sm max-w-[75%] ml-auto">Perfect — could you send a couple more angles when you get a chance?</div>
+            <p class="mt-0.5 text-[11px] text-gray-400">9:30a · Me</p>
+          </div>
+
+          <!-- inbound -->
+          <div>
+            <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-3 py-2 text-sm max-w-[75%] text-gray-700">Perfect — I'll send the photos over.</div>
+            <p class="mt-0.5 text-[11px] text-gray-400">9:31a</p>
+          </div>
+
+        </div>
+
+        <!-- compose -->
+        <div class="p-3 border-t border-gray-200" data-story="US-M1.3" data-ac="AC1">
+          <div class="flex items-end gap-2">
+            <button title="Attach media" class="rounded-card p-2 text-gray-500 hover:bg-gray-100">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 7.5 8.5 13a2.5 2.5 0 0 1-3.5-3.5l6-6a3.5 3.5 0 0 1 5 5L9.5 15" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <input type="text" id="compose-input" maxlength="160" placeholder="Type a message…" class="flex-1 h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <button id="compose-sched" title="Schedule" class="rounded-card p-2 text-gray-500 hover:bg-gray-100">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="compose-send" class="h-10 inline-flex items-center gap-1.5 rounded-card bg-primary-500 px-4 text-sm font-medium text-white hover:bg-primary-600">
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.5 3.3 17 10 2.5 16.7 4 11l7-1-7-1z"/></svg>
+              Send
+            </button>
+          </div>
+          <div id="sched-row" class="hidden mt-2 flex items-center gap-2" data-story="US-M7.2">
+            <span class="text-xs text-gray-500">Send at</span>
+            <input type="date" class="h-9 px-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <input type="time" class="h-9 px-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <span class="text-[11px] text-gray-400">profile timezone</span>
+          </div>
+          <p class="mt-1 text-right text-[11px] text-gray-400"><span id="compose-count">0</span> / 160</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <p class="mock-note mt-4">GET /conversations + /conversations/:id/messages. v2 stores one row per message (v1 serialized blob). Compose → POST /messages (now or scheduled).</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "connect", storyDomain: "messaging", back: { href: "../index.html", label: "All mockups" }, route: "/connect", search: "Search conversations…" });
+</script>
+<script>
+  (function () {
+    var list = document.getElementById("conv-list");
+    var rows = [].slice.call(list.children).filter(function (r) { return r.querySelector && r.querySelector(".font-medium"); });
+    var search = document.getElementById("inbox-search");
+    var curTab = "all";
+
+    function nameOf(r) { var p = r.querySelector(".font-medium"); return p ? p.textContent.trim() : ""; }
+    function isClosed(r) { return !!r.querySelector(".bg-error-100"); } // STOP convs treated as closed
+    function applyFilter() {
+      var q = (search.value || "").toLowerCase().trim();
+      rows.forEach(function (r) {
+        var okTab = curTab === "all" || isClosed(r);
+        var okSearch = !q || r.textContent.toLowerCase().indexOf(q) !== -1;
+        r.classList.toggle("hidden", !(okTab && okSearch));
+      });
+    }
+    OggvoShell.buttonGroup(document.getElementById("inbox-tabs"), {
+      active: "bg-primary-50 text-primary-700",
+      inactive: "text-gray-500 hover:bg-gray-100",
+      onChange: function (v) { curTab = v; applyFilter(); }
+    });
+    search.addEventListener("input", applyFilter);
+
+    // Platform filter (single SMS pill — toggle active)
+    var plat = document.getElementById("plat-sms");
+    plat.addEventListener("click", function () {
+      var on = plat.classList.toggle("bg-primary-50");
+      plat.classList.toggle("text-primary-700", on);
+      OggvoShell.toast(on ? "Filtered to SMS" : "Showing all channels", "gray");
+    });
+
+    // Select a conversation → mark active + update thread header
+    var avatar = document.getElementById("thread-avatar"), tname = document.getElementById("thread-name"), tphone = document.getElementById("thread-phone");
+    rows.forEach(function (r) {
+      r.addEventListener("click", function () {
+        rows.forEach(function (x) { x.classList.remove("bg-primary-50"); });
+        r.classList.add("bg-primary-50");
+        var n = nameOf(r);
+        tname.textContent = n;
+        avatar.textContent = r.querySelector(".rounded-full") ? r.querySelector(".rounded-full").textContent.trim().slice(0, 2) : "";
+        var unread = r.querySelector(".bg-primary-500"); if (unread) unread.remove();
+        OggvoShell.toast("Opened " + n, "gray");
+      });
+    });
+
+    // Compose
+    var input = document.getElementById("compose-input"), count = document.getElementById("compose-count");
+    var msgs = document.getElementById("thread-msgs"), send = document.getElementById("compose-send");
+    input.addEventListener("input", function () { count.textContent = input.value.length; });
+    document.getElementById("compose-sched").addEventListener("click", function () {
+      document.getElementById("sched-row").classList.toggle("hidden");
+    });
+    function doSend() {
+      var v = input.value.trim(); if (!v) return;
+      var wrap = document.createElement("div");
+      wrap.className = "flex flex-col items-end";
+      wrap.innerHTML = '<div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-3 py-2 text-sm max-w-[75%] ml-auto"></div><p class="mt-0.5 text-[11px] text-gray-400">now · Me</p>';
+      wrap.querySelector("div").textContent = v;
+      msgs.appendChild(wrap); msgs.scrollTop = msgs.scrollHeight;
+      input.value = ""; count.textContent = "0";
+      OggvoShell.toast("Sent", "success");
+    }
+    send.addEventListener("click", doSend);
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doSend(); } });
+
+    document.querySelector("[data-archive]").addEventListener("click", function () { OggvoShell.toast("Conversation archived", "gray"); });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Reviews</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Reviews</h1>
+      <p class="text-sm text-gray-500 mt-1">2,841 reviews &middot; 5 platforms</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <a href="reviews-calendar.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3v3m8-3v3M4 8h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+        Calendar
+      </a>
+      <a href="reviews-statistics.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 16v-5m4 5V8m4 8v-3"/></svg>
+        Statistics
+      </a>
+      <a href="reviews-autoshare.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-600 rounded-card hover:bg-gray-100">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+        Auto-share
+      </a>
+      <a href="reviews-create.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add Review
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. Sticky filter bar -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-3 mb-4 flex flex-wrap gap-3 items-center sticky top-16 z-10" data-story="US-R1.4">
+    <div class="relative flex-1 min-w-[16rem]" data-story="US-R1.3">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.3-4.3M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+      <input type="text" placeholder="Search over 2,841 reviews by reviewer, content or site" class="w-full pl-9 pr-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-card placeholder-gray-400 focus:bg-white focus:border-primary-400 focus:ring-2 focus:ring-primary-100" />
+    </div>
+    <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3v3m8-3v3M4 8h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+      Jun 1 &ndash; Jun 24
+    </button>
+    <select class="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 focus:border-primary-400 focus:ring-2 focus:ring-primary-100">
+      <option>All sources</option>
+      <option>Google</option>
+      <option>Facebook</option>
+      <option>Yelp</option>
+      <option>Zillow</option>
+      <option>Realtor</option>
+      <option>Others</option>
+    </select>
+    <select class="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 focus:border-primary-400 focus:ring-2 focus:ring-primary-100">
+      <option>Any rating</option>
+      <option>5&#9733;</option>
+      <option>4&#9733; &amp; up</option>
+      <option>&le;3&#9733;</option>
+    </select>
+    <div class="ml-auto inline-flex items-center bg-gray-100 rounded-card p-0.5" data-story="US-R1.2" data-ac="AC1">
+      <button id="view-list" class="inline-grid place-items-center h-8 w-8 rounded-[0.6rem] bg-primary-50 text-primary-700" aria-label="List view">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+      </button>
+      <button id="view-grid" class="inline-grid place-items-center h-8 w-8 rounded-[0.6rem] text-gray-500 hover:text-gray-700" aria-label="Grid view">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Feed -->
+  <div id="feed" class="space-y-4" data-story="US-R1.1" data-ac="AC2">
+
+    <!-- (a) Google 5★ replied, VIP reviewer -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start gap-3">
+        <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">MR</div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900">Marcus Reyes</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-primary-50 text-primary-700">VIP</span>
+              </div>
+              <span class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Google</span>
+              <span class="text-xs text-gray-500 whitespace-nowrap">Jun 22, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule. I have already recommended them to three colleagues.</p>
+      <div class="border-l-2 border-primary-200 pl-3 text-sm text-gray-500 mt-3">
+        <span class="font-medium text-gray-600">Owner replied:</span> Thank you so much, Marcus &mdash; it was a pleasure working with you. We look forward to helping your colleagues too!
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#dc4e41">G</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">F</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">I</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">X</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">in</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-reply" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17l-5-5 5-5M4 12h11a5 5 0 015 5v1"/></svg>
+            Reply
+          </button>
+          <a href="../social/social-testimonial.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+            Share
+          </a>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (b) Facebook 3★ needs reply -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start gap-3">
+        <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">JL</div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900">Jenna Liu</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Needs reply</span>
+              </div>
+              <span class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Facebook</span>
+              <span class="text-xs text-gray-500 whitespace-nowrap">Jun 20, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">The service was fine overall but the scheduling was confusing and I had to call twice to confirm my appointment. Hoping the process gets a little smoother next time.</p>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">G</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#1877f2">F</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">I</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">X</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">in</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="../social/social-testimonial.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+            Share
+          </a>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (c) Yelp 1★ escalated -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start gap-3">
+        <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">TB</div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900">Tom Bennett</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Escalated</span>
+              </div>
+              <span class="text-warning-500 text-sm tracking-tight">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Yelp</span>
+              <span class="text-xs text-gray-500 whitespace-nowrap">Jun 18, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Extremely disappointed. My appointment was cancelled last minute without notice and no one followed up. I expected far better given the price I paid. Would not recommend.</p>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">G</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">F</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">I</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">X</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">in</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="../social/social-testimonial.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+            Share
+          </a>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (d) Oggvo funnel feedback 4★ with contact disclosure -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start gap-3">
+        <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">DA</div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <span class="font-semibold text-gray-900">Dana Alvarez</span>
+              <div class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-50 text-primary-700">Oggvo Funnel</span>
+              <span class="text-xs text-gray-500 whitespace-nowrap">Jun 16, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Great experience and friendly staff. Just a small wait at check-in, otherwise everything was excellent. Happy to come back.</p>
+      <div class="flex items-center gap-2 mt-3 text-sm text-gray-500">
+        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 14a4 4 0 10-8 0M12 11a3 3 0 100-6 3 3 0 000 6zM4 20a8 8 0 0116 0"/></svg>
+        <span>dana@acme.com &middot; (415) 555-0192</span>
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">G</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">F</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">I</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">X</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">in</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-contact" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 14a4 4 0 10-8 0M12 11a3 3 0 100-6 3 3 0 000 6z"/></svg>
+            Contact
+          </button>
+          <a href="../social/social-testimonial.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+            Share
+          </a>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (e) Zillow 5★ posted to Facebook -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start gap-3">
+        <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">PK</div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900">Priya Kapoor</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Shared</span>
+              </div>
+              <span class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Zillow</span>
+              <span class="text-xs text-gray-500 whitespace-nowrap">Jun 14, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Could not have asked for a better agent. Priya found us our dream home, negotiated brilliantly, and made the whole process stress-free. Five stars without hesitation.</p>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">G</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#1877f2">F</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">I</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">X</span>
+          <span class="grid place-items-center h-7 w-7 rounded-full bg-gray-300 text-[11px] font-bold text-white opacity-30">in</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="../social/social-testimonial.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>
+            Share
+          </a>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 4. Infinite-scroll + states note, then one skeleton card -->
+  <p class="mock-note mt-6 mb-3">Infinite scroll appends pages (page &lt; pages). Empty: star icon + 'No reviews' + Add Review CTA. Loading: 3 skeleton cards.</p>
+
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R1.1" data-ac="AC3">
+    <div class="flex items-start gap-3">
+      <div class="skeleton h-10 w-10 rounded-full shrink-0"></div>
+      <div class="flex-1 space-y-2">
+        <div class="skeleton h-3.5 w-40"></div>
+        <div class="skeleton h-3 w-24"></div>
+      </div>
+    </div>
+    <div class="space-y-2 mt-4">
+      <div class="skeleton h-3 w-full"></div>
+      <div class="skeleton h-3 w-11/12"></div>
+      <div class="skeleton h-3 w-2/3"></div>
+    </div>
+  </div>
+
+  <!-- 5. Shared per-card ⋯ menu (repositioned under the clicked button) -->
+  <div id="row-menu" class="hidden fixed z-40 w-44 bg-white border border-gray-200 rounded-card shadow-pop py-1 text-sm" data-story="US-R1.5" data-ac="AC3">
+    <button data-open-modal="m-reply" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17l-5-5 5-5M4 12h11a5 5 0 015 5v1"/></svg>Reply</button>
+    <a href="../social/social-testimonial.html" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4M18 8a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 8zM6 14.5A2.5 2.5 0 103.5 12 2.5 2.5 0 006 14.5zm12 6a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0018 20.5z"/></svg>Share</a>
+    <a href="#" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5m0-5l-7 7M10 5H6a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-4"/></svg>View original</a>
+    <button data-open-modal="m-contact" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 14a4 4 0 10-8 0M12 11a3 3 0 100-6 3 3 0 000 6z"/></svg>Contact</button>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-open-modal="m-delete" class="w-full flex items-center gap-2.5 px-3 py-2 text-error-600 hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>Delete</button>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · Reply (Google only)  — POST /reviews/:id/reply        -->
+  <!-- ============================================================ -->
+  <div id="m-reply" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-R3.1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-primary-50 text-primary-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h5M5 5h14a1 1 0 011 1v9a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg></span>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Reply to Marcus Reyes</h3>
+            <p class="text-xs text-gray-500">This reply will be visible publicly.</p>
+          </div>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <!-- mini review preview -->
+        <div class="rounded-card border border-gray-200 bg-gray-50 p-3">
+          <div class="flex items-center gap-2">
+            <span class="h-7 w-7 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600">MR</span>
+            <span class="font-medium text-gray-900 text-sm">Marcus Reyes</span>
+            <span class="text-warning-500 text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-600">Google · Jun 22, 2026</span>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule.</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Reply</label>
+          <textarea rows="6" placeholder="Write a public reply…" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-toast="Reply submitted successfully!" data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Reply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · Delete (soft-delete warning) — DELETE /reviews/:id    -->
+  <!-- ============================================================ -->
+  <div id="m-delete" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-R3.2">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-error-100 text-error-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></span>
+          <h3 class="text-lg font-semibold text-gray-900">Delete Review</h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <p class="font-medium text-gray-900">Deleting reviews from the Oggvo software does not remove them from the platform! *</p>
+        <p>* If you want to attempt to remove a review from that platform, you can report the review from the specific platform.</p>
+        <p>** Removing a review from the portal also removes it from the stream/splash widgets.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-toast="Review deleted" data-toast-tone="error" data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete **</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · Contact (phone/email + copy) — read-only             -->
+  <!-- ============================================================ -->
+  <div id="m-contact" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-R3.3">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">DA</span>
+          <h3 class="text-lg font-semibold text-gray-900">Dana Alvarez</h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Mobile</label>
+          <div class="flex items-center gap-2">
+            <input readonly value="(415) 555-0192" class="flex-1 h-10 px-3 rounded-card border border-gray-300 bg-gray-50 text-gray-700" />
+            <button data-toast="Copied to clipboard" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Copy</button>
+            <a href="tel:+14155550192" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h4l1 5-2.5 1.5a11 11 0 005 5L13 14l5 1v4a1 1 0 01-1 1A15 15 0 014 6a1 1 0 011-1z"/></svg>Text</a>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <div class="flex items-center gap-2">
+            <input readonly value="dana@acme.com" class="flex-1 h-10 px-3 rounded-card border border-gray-300 bg-gray-50 text-gray-700" />
+            <button data-toast="Copied to clipboard" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Copy</button>
+            <a href="mailto:dana@acme.com" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "reviews", storyDomain: "reviews", back: { href: "../index.html", label: "All mockups" }, route: "/reviews", search: "Search reviews, reviewers, platforms…" });
+</script>
+<script>
+  (function () {
+    // ---- List / Grid view toggle (cookie view.reviews.type) ----
+    var feed = document.getElementById("feed");
+    var bList = document.getElementById("view-list");
+    var bGrid = document.getElementById("view-grid");
+    var onCls = ["bg-primary-50", "text-primary-700"];
+    var offCls = ["text-gray-500", "hover:text-gray-700"];
+    function setActive(active, idle) {
+      onCls.forEach(function (c) { active.classList.add(c); idle.classList.remove(c); });
+      offCls.forEach(function (c) { idle.classList.add(c); active.classList.remove(c); });
+    }
+    function setView(v) {
+      var cards = [].slice.call(feed.children);
+      if (v === "grid") {
+        feed.className = "columns-1 sm:columns-2 gap-4";
+        cards.forEach(function (c) { c.classList.add("mb-4", "break-inside-avoid"); });
+        setActive(bGrid, bList);
+      } else {
+        feed.className = "space-y-4";
+        cards.forEach(function (c) { c.classList.remove("mb-4", "break-inside-avoid"); });
+        setActive(bList, bGrid);
+      }
+    }
+    bList.addEventListener("click", function () { setView("list"); });
+    bGrid.addEventListener("click", function () { setView("grid"); });
+
+    // ---- Shared per-card ⋯ menu ----
+    var menu = document.getElementById("row-menu");
+    function closeMenu() { menu.classList.add("hidden"); }
+    [].slice.call(document.querySelectorAll("[data-row-menu]")).forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var r = btn.getBoundingClientRect();
+        menu.style.top = (r.bottom + 6) + "px";
+        menu.style.left = Math.max(8, r.right - 176) + "px";
+        menu.classList.toggle("hidden");
+      });
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("#row-menu") && !e.target.closest("[data-row-menu]")) closeMenu();
+    });
+
+    // ---- Modal open/close (shared) ----
+    function open(id) { closeMenu(); var m = document.getElementById(id); if (m) m.classList.remove("hidden"); }
+    function closeAll() { [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var opener = e.target.closest("[data-open-modal]");
+      if (opener) { e.preventDefault(); open(opener.getAttribute("data-open-modal")); return; }
+      var closer = e.target.closest("[data-close]");
+      if (closer) { closeAll(); }
+      var t = e.target.closest("[data-toast]");
+      if (t) { OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-toast-tone") || "success"); }
+    });
+    [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) {
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeAll(); closeMenu(); } });
+  })();
+</script>
+</body>
+</html>

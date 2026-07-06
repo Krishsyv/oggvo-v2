@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Funnel Designer · Main</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+  <!-- CONTENT -->
+
+  <!-- 1. Header row -->
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Funnel Designer</h1>
+    <div class="flex items-center gap-3">
+      <div class="inline-flex items-center gap-2 bg-gray-100 rounded-card px-3 py-2 text-sm">
+        <span class="font-mono text-gray-700">oggvo.com/r/acme-co</span>
+        <button type="button" data-copy title="Copy link" class="text-gray-400 hover:text-gray-700">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <a href="funnel-public.html" class="inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+        View public funnel
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. In-page TabBar (Main ACTIVE) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6">
+    <a href="design-main.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Main</a>
+    <a href="design-funnel.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Positive Review</a>
+    <a href="design-negative.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Negative Review</a>
+    <a href="design-thanks.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Thank You</a>
+  </nav>
+
+  <!-- 3. Unlayer-style visual designer -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-D1.1" data-ac="AC1">
+
+    <!-- Editor toolbar -->
+    <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-gray-200">
+      <div class="flex items-center gap-2 min-w-0">
+        <svg class="h-5 w-5 text-primary-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+          <path d="M2 2l7.586 7.586"></path>
+          <circle cx="11" cy="11" r="2"></circle>
+        </svg>
+        <span class="text-sm font-medium text-gray-900 truncate">Visual designer</span>
+        <span class="hidden sm:inline-flex items-center gap-1.5 ml-2 badge bg-success-100 text-success-700"><span class="badge-dot"></span>Auto-saved</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" data-device="desktop" title="Desktop preview" class="icon-btn text-primary-600 bg-primary-50">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+        </button>
+        <button type="button" data-device="mobile" title="Mobile preview" class="icon-btn">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>
+        </button>
+        <span class="mx-1 h-6 w-px bg-gray-200"></span>
+        <!-- Floating Save -->
+        <button type="button" id="save-design" data-story="US-D1.1" data-ac="AC3" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          Save
+        </button>
+      </div>
+    </div>
+
+    <!-- Workspace: content-blocks rail + canvas -->
+    <div class="grid lg:grid-cols-[220px_1fr]">
+
+      <!-- LEFT: Content blocks rail -->
+      <div class="border-b lg:border-b-0 lg:border-r border-gray-200 p-4">
+        <p class="mock-note mb-3">Content blocks · drag onto canvas</p>
+        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2.5" data-blocks>
+          <div draggable="true" data-block="Text" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            <span class="text-sm font-medium text-gray-700">Text</span>
+          </div>
+          <div draggable="true" data-block="Image" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+            <span class="text-sm font-medium text-gray-700">Image</span>
+          </div>
+          <div draggable="true" data-block="Button" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="4"></rect></svg>
+            <span class="text-sm font-medium text-gray-700">Button</span>
+          </div>
+          <div draggable="true" data-block="Divider" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line></svg>
+            <span class="text-sm font-medium text-gray-700">Divider</span>
+          </div>
+          <div draggable="true" data-block="Columns" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="16" rx="1"></rect><rect x="14" y="4" width="7" height="16" rx="1"></rect></svg>
+            <span class="text-sm font-medium text-gray-700">Columns</span>
+          </div>
+          <div draggable="true" data-block="Video" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polygon points="10 9 15 12 10 15 10 9"></polygon></svg>
+            <span class="text-sm font-medium text-gray-700">Video</span>
+          </div>
+          <div draggable="true" data-block="Social" class="flex items-center gap-2.5 px-3 py-2.5 rounded-card border border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50 cursor-grab select-none">
+            <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"></circle><circle cx="17" cy="6" r="2.4"></circle><circle cx="17" cy="18" r="2.4"></circle><path d="M8.3 10.9l6.4-3.5m0 9.2L8.3 13.1"></path></svg>
+            <span class="text-sm font-medium text-gray-700">Social</span>
+          </div>
+        </div>
+        <p class="mock-note mt-4">Inserting an <b class="font-semibold">Image</b> opens the library picker. Try it &rarr;</p>
+        <button type="button" id="open-library" class="mt-2 w-full h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 inline-flex items-center justify-center gap-2">
+          <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          Image library
+        </button>
+      </div>
+
+      <!-- RIGHT: Canvas -->
+      <div class="bg-gray-100 p-6 lg:p-10 relative overflow-hidden" style="background-image: linear-gradient(#e4e7ec 1px, transparent 1px), linear-gradient(90deg, #e4e7ec 1px, transparent 1px); background-size: 24px 24px;">
+
+        <!-- (a) Loading skeleton state (toggleable) -->
+        <div id="canvas-loading" data-story="US-D1.1" data-ac="AC2" class="hidden max-w-3xl mx-auto bg-white rounded-card shadow-card p-6 space-y-4">
+          <p class="mock-note text-center">Loading your existing design… (GET /design/getdesign)</p>
+          <div class="skeleton h-10 w-full"></div>
+          <div class="skeleton h-6 w-2/3 mx-auto"></div>
+          <div class="skeleton h-40 w-full"></div>
+          <div class="skeleton h-9 w-40 mx-auto"></div>
+        </div>
+
+        <!-- Loaded canvas -->
+        <div id="canvas" class="max-w-3xl mx-auto bg-white rounded-card shadow-card overflow-hidden">
+          <!-- header bar block -->
+          <div data-canvas-block style="background:#1849A9" class="text-white px-6 py-4 flex items-center justify-between cursor-pointer hover:outline hover:outline-2 hover:outline-primary-400 hover:outline-offset-[-2px]">
+            <span class="font-semibold tracking-tight">Acme Co</span>
+            <span class="h-8 w-8 rounded-full bg-white/25 grid place-items-center text-xs font-semibold">AC</span>
+          </div>
+          <!-- heading text block -->
+          <div data-canvas-block class="px-8 pt-8 pb-2 text-center cursor-pointer hover:outline hover:outline-2 hover:outline-primary-400 hover:outline-offset-[-2px]">
+            <h2 class="text-2xl font-semibold text-gray-900">How was your experience?</h2>
+            <p class="text-sm text-gray-500 mt-2">Tap a star to let us know.</p>
+          </div>
+          <!-- image placeholder block -->
+          <div data-canvas-block class="px-8 py-6 cursor-pointer hover:outline hover:outline-2 hover:outline-primary-400 hover:outline-offset-[-2px]">
+            <div class="aspect-[16/7] w-full rounded-card border-2 border-dashed border-gray-300 bg-gray-50 grid place-items-center text-gray-400">
+              <div class="text-center">
+                <svg class="h-8 w-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+                <p class="text-xs mt-1.5">Image placeholder — click to choose from library</p>
+              </div>
+            </div>
+          </div>
+          <!-- button block -->
+          <div data-canvas-block class="px-8 pb-10 text-center cursor-pointer hover:outline hover:outline-2 hover:outline-primary-400 hover:outline-offset-[-2px]">
+            <span class="inline-flex items-center justify-center px-6 py-3 rounded-card bg-primary-500 text-white text-sm font-semibold">Leave a review</span>
+          </div>
+        </div>
+
+        <!-- drop hint -->
+        <p class="mock-note text-center mt-6">~1024px canvas · drag blocks from the rail to compose the funnel page</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. State annotations -->
+  <div class="grid sm:grid-cols-2 gap-3 mt-5">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3.5 flex items-start gap-2.5">
+      <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-success-100 text-success-600 grid place-items-center"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+      <div>
+        <p class="text-sm font-medium text-gray-900">Save success</p>
+        <p class="mock-note mt-1">Save &rarr; toast "Data Saved Successfully!" — try the Save button above.</p>
+      </div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3.5 flex items-start gap-2.5">
+      <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-error-100 text-error-600 grid place-items-center"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+      <div>
+        <p class="text-sm font-medium text-gray-900">Failure states</p>
+        <p class="mock-note mt-1">Load failure → "We could not load your existing design!" · Save failure → "We could not save your design!"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toggle loading-state helper (mock-only) -->
+  <div class="mt-3">
+    <button type="button" id="toggle-loading" class="inline-flex items-center gap-2 text-sm text-primary-600 hover:underline">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+      Toggle loading-skeleton state
+    </button>
+  </div>
+
+  <!-- 5. mock-note: endpoints + storage -->
+  <p class="mock-note mt-6">GET /design/getdesign · POST /design/savedesign {json, html:{fonts,css,body}} · media/image (paginated) · media/upload (source=Funnel). v1 stores the design on S3 (funnel.json + html.json); v2 stores inline in funnel_designs.exported_json / exported_html.</p>
+
+  <!-- ===== Image-library picker popover ===== -->
+  <div id="library-modal" data-story="US-D1.1" data-ac="AC4" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white border border-gray-200 rounded-card shadow-pop w-full max-w-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Image library</h3>
+          <p class="mock-note mt-0.5">GET media/image?page&perPage=20</p>
+        </div>
+        <button type="button" data-close title="Close" class="icon-btn"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div class="p-5">
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+          <!-- Upload tile -->
+          <button type="button" id="upload-tile" class="aspect-square rounded-card border-2 border-dashed border-gray-300 bg-gray-50 grid place-items-center text-gray-500 hover:border-primary-400 hover:text-primary-600">
+            <div class="text-center">
+              <svg class="h-6 w-6 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span class="block text-xs font-medium mt-1">Upload</span>
+            </div>
+          </button>
+          <!-- Library thumbnails -->
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-primary-100 to-primary-300"></button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-success-100 to-success-500"></button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-warning-100 to-warning-500"></button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-error-100 to-error-500"></button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-gray-200 to-gray-500"></button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-primary-200 to-primary-500 relative">
+            <span class="absolute top-1 right-1 h-5 w-5 rounded-full bg-white/80 grid place-items-center text-error-500"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path></svg></span>
+          </button>
+          <button type="button" data-lib-img class="aspect-square rounded-card border border-gray-200 overflow-hidden hover:ring-2 hover:ring-primary-300 bg-gradient-to-br from-success-200 to-primary-400"></button>
+        </div>
+        <p class="mock-note mt-4">Hover a tile to reveal delete · click a tile to insert into the selected block.</p>
+      </div>
+      <div class="flex items-center justify-between gap-3 px-5 py-4 border-t border-gray-200">
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="h-9 w-9 rounded-card border border-gray-300 bg-white text-gray-400 grid place-items-center hover:bg-gray-50" disabled><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <span class="text-sm text-gray-500 px-1">Page 1 of 3</span>
+          <button type="button" class="h-9 w-9 rounded-card border border-gray-300 bg-white text-gray-700 grid place-items-center hover:bg-gray-50"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+        </div>
+        <button type="button" data-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Delete-media confirm modal (v1 native confirm) ===== -->
+  <div id="delete-media-modal" data-story="US-D1.1" data-ac="AC4" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white border border-gray-200 rounded-card shadow-pop w-full max-w-md">
+      <div class="p-5 text-center space-y-3">
+        <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></span>
+        <h3 class="text-lg font-semibold text-gray-900">Delete file</h3>
+        <p class="text-sm text-gray-700">Are you sure you want to delete this file?</p>
+        <p class="text-sm text-gray-500">You won't be able to revert this.</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" id="dm-confirm" class="h-10 px-4 rounded-card bg-error-500 text-sm font-medium text-white hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "design", storyDomain: "design-funnel", back: { href: "../index.html", label: "All mockups" }, route: "/design", search: "Search…" });
+</script>
+<script>
+  (function () {
+    // ---- Copy public funnel link ----
+    var copyBtn = document.querySelector("[data-copy]");
+    if (copyBtn) copyBtn.addEventListener("click", function () {
+      if (navigator.clipboard) navigator.clipboard.writeText("oggvo.com/r/acme-co").catch(function () {});
+      OggvoShell.toast("Link copied to clipboard", "success");
+    });
+
+    // ---- Device preview toggle ----
+    var canvas = document.getElementById("canvas");
+    var deskBtn = document.querySelector('[data-device="desktop"]');
+    var mobBtn = document.querySelector('[data-device="mobile"]');
+    function setDevice(mobile) {
+      deskBtn.className = "icon-btn" + (mobile ? "" : " text-primary-600 bg-primary-50");
+      mobBtn.className = "icon-btn" + (mobile ? " text-primary-600 bg-primary-50" : "");
+      canvas.classList.toggle("max-w-3xl", !mobile);
+      canvas.classList.toggle("max-w-sm", mobile);
+    }
+    deskBtn.addEventListener("click", function () { setDevice(false); });
+    mobBtn.addEventListener("click", function () { setDevice(true); });
+
+    // ---- Save (success toast) ----
+    document.getElementById("save-design").addEventListener("click", function () {
+      OggvoShell.toast("Data Saved Successfully!", "success");
+    });
+
+    // ---- Toggle loading skeleton state ----
+    var loading = document.getElementById("canvas-loading");
+    document.getElementById("toggle-loading").addEventListener("click", function () {
+      var showLoading = loading.classList.contains("hidden");
+      loading.classList.toggle("hidden", !showLoading);
+      canvas.classList.toggle("hidden", showLoading);
+    });
+
+    // ---- Content-block drag feedback (mock) ----
+    [].slice.call(document.querySelectorAll("[data-block]")).forEach(function (b) {
+      b.addEventListener("dragstart", function () { b.classList.add("ds-dragging"); });
+      b.addEventListener("dragend", function () {
+        b.classList.remove("ds-dragging");
+        OggvoShell.toast(b.getAttribute("data-block") + " block added", "primary");
+      });
+    });
+
+    // ---- Image library picker ----
+    var lib = document.getElementById("library-modal");
+    function openLib() { lib.classList.remove("hidden"); }
+    document.getElementById("open-library").addEventListener("click", openLib);
+    // clicking the Image block tile or the canvas image placeholder also opens it
+    var imgBlock = document.querySelector('[data-block="Image"]');
+    if (imgBlock) imgBlock.addEventListener("click", openLib);
+    var canvasBlocks = document.querySelectorAll("#canvas [data-canvas-block]");
+    if (canvasBlocks[2]) canvasBlocks[2].addEventListener("click", openLib);
+
+    // insert image (or open delete confirm if the hover delete badge is clicked)
+    [].slice.call(lib.querySelectorAll("[data-lib-img]")).forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        if (e.target.closest(".text-error-500")) { openDeleteMedia(); return; }
+        lib.classList.add("hidden");
+        OggvoShell.toast("Image inserted into block", "success");
+      });
+    });
+
+    document.getElementById("upload-tile").addEventListener("click", function () {
+      OggvoShell.toast("Uploading… (POST media/upload, source=Funnel)", "primary");
+      setTimeout(function () { OggvoShell.toast("Image uploaded", "success"); }, 900);
+    });
+
+    // ---- Delete-media confirm ----
+    var dm = document.getElementById("delete-media-modal");
+    function openDeleteMedia() { dm.classList.remove("hidden"); }
+    document.getElementById("dm-confirm").addEventListener("click", function () {
+      dm.classList.add("hidden");
+      OggvoShell.toast("File deleted", "error");
+    });
+
+    // ---- Shared close (data-close / backdrop / Escape) ----
+    [lib, dm].forEach(function (m) {
+      m.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", function () { m.classList.add("hidden"); }); });
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { lib.classList.add("hidden"); dm.classList.add("hidden"); } });
+  })();
+</script>
+</body>
+</html>

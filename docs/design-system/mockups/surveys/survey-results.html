@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Survey Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader + tabs -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+    <div>
+      <h1 class="text-xl font-semibold text-gray-900">Customer Satisfaction Q2</h1>
+      <p class="text-sm text-gray-500 mt-0.5">Post-purchase NPS + open feedback</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="text" value="Jun 1 – Jun 24, 2026" readonly class="h-10 px-3 rounded-card border border-gray-300 bg-white text-sm text-gray-700 w-44 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      <button type="button" data-export class="inline-flex items-center gap-1.5 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-700 hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabbar -->
+  <div class="border-b border-gray-200 mb-6">
+    <nav data-tabs class="flex gap-6 text-sm">
+      <button type="button" data-value="overview" class="py-3 -mb-px text-primary-600 border-b-2 border-primary-500 font-medium">Overview</button>
+      <button type="button" data-value="responses" class="py-3 -mb-px text-gray-500 hover:text-gray-700">Responses</button>
+      <button type="button" data-value="activity" class="py-3 -mb-px text-gray-500 hover:text-gray-700">Activity</button>
+    </nav>
+  </div>
+
+  <!-- ============ OVERVIEW panel ============ -->
+  <div data-panel="overview">
+
+  <!-- KPI cards -->
+  <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6" data-story="US-5.1" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium uppercase tracking-wide text-gray-500">Views</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900 tabular-nums">1,204</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium uppercase tracking-wide text-gray-500">Responses</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900 tabular-nums">486</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium uppercase tracking-wide text-gray-500">Completed</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900 tabular-nums">379</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium uppercase tracking-wide text-gray-500">Completion rate</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900 tabular-nums">78%</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium uppercase tracking-wide text-gray-500">Avg rating</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900 tabular-nums">4.3 <span class="text-amber-500 text-lg">★</span></div>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-6">
+
+    <!-- Per-question result blocks -->
+    <div class="space-y-4" data-story="US-5.1" data-ac="AC2">
+
+      <!-- Q1 · star rating distribution -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gray-100 text-xs font-medium text-gray-600">1</span>
+          <h3 class="font-medium text-gray-900">How would you rate your overall experience?</h3>
+          <span class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Star rating</span>
+        </div>
+        <div class="space-y-2.5">
+          <!-- 5 star -->
+          <div class="flex items-center gap-3">
+            <span class="w-20 text-amber-500 text-sm shrink-0">★★★★★</span>
+            <div class="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden"><div class="h-3 rounded-full bg-primary-500" style="width:54%"></div></div>
+            <span class="w-16 text-right text-xs tabular-nums text-gray-600">262 · 54%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-20 text-amber-500 text-sm shrink-0">★★★★</span>
+            <div class="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden"><div class="h-3 rounded-full bg-primary-500" style="width:27%"></div></div>
+            <span class="w-16 text-right text-xs tabular-nums text-gray-600">131 · 27%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-20 text-amber-500 text-sm shrink-0">★★★</span>
+            <div class="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden"><div class="h-3 rounded-full bg-primary-500" style="width:11%"></div></div>
+            <span class="w-16 text-right text-xs tabular-nums text-gray-600">53 · 11%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-20 text-amber-500 text-sm shrink-0">★★</span>
+            <div class="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden"><div class="h-3 rounded-full bg-primary-500" style="width:5%"></div></div>
+            <span class="w-16 text-right text-xs tabular-nums text-gray-600">24 · 5%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-20 text-amber-500 text-sm shrink-0">★</span>
+            <div class="flex-1 h-3 rounded-full bg-gray-100 overflow-hidden"><div class="h-3 rounded-full bg-primary-500" style="width:3%"></div></div>
+            <span class="w-16 text-right text-xs tabular-nums text-gray-600">16 · 3%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 · multiple choice horizontal bars -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gray-100 text-xs font-medium text-gray-600">2</span>
+          <h3 class="font-medium text-gray-900">Which features do you use most?</h3>
+          <span class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Multiple choice</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span class="text-gray-700">Reviews</span><span class="text-xs tabular-nums text-gray-500">318 · 66%</span></div>
+            <div class="h-2.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-2.5 rounded-full bg-primary-500" style="width:66%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span class="text-gray-700">SMS Campaigns</span><span class="text-xs tabular-nums text-gray-500">241 · 50%</span></div>
+            <div class="h-2.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-2.5 rounded-full bg-primary-500" style="width:50%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span class="text-gray-700">Social Posting</span><span class="text-xs tabular-nums text-gray-500">178 · 37%</span></div>
+            <div class="h-2.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-2.5 rounded-full bg-primary-500" style="width:37%"></div></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-1"><span class="text-gray-700">Surveys</span><span class="text-xs tabular-nums text-gray-500">92 · 19%</span></div>
+            <div class="h-2.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-2.5 rounded-full bg-primary-500" style="width:19%"></div></div>
+          </div>
+        </div>
+        <p class="mock-note mt-3">Aggregable types render an option breakdown (votes + rate %); the bar is colored by the survey's progress color.</p>
+      </div>
+
+      <!-- Q3 · long text answers -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gray-100 text-xs font-medium text-gray-600">3</span>
+          <h3 class="font-medium text-gray-900">What could we do better?</h3>
+          <span class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Long text · 211 responses</span>
+        </div>
+        <div class="space-y-3">
+          <div class="rounded-card border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-700">"Faster review responses would be great — otherwise loving the dashboard."</div>
+          <div class="rounded-card border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-700">"A dark mode for the mobile app, please."</div>
+          <div class="rounded-card border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-700">"More campaign templates and an undo on the editor."</div>
+          <a href="#" class="inline-block text-sm text-primary-600 hover:underline">View all 211 answers →</a>
+        </div>
+        <p class="mock-note mt-3">Non-aggregable types show an "N responses" count + sample answer cards (full list on the Responses tab).</p>
+      </div>
+
+    </div>
+
+    <!-- Share sidebar -->
+    <div class="space-y-4 self-start">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-4" data-story="US-3.1" data-ac="AC1">
+        <h3 class="text-base font-semibold text-gray-900 mb-1">Share this Survey</h3>
+        <p class="text-xs text-gray-500 mb-3">Your survey is live, share the link below. It will be anonymous entry using this link.</p>
+        <div class="flex items-center gap-2 bg-gray-100 rounded-card px-3 py-2 text-sm font-mono text-gray-700">
+          <a href="survey-public.html" class="truncate hover:text-primary-600" title="Open public survey page">app.oggvo.com/s/csat-q2</a>
+          <button type="button" data-copy title="Copy link" class="ml-auto text-gray-400 hover:text-gray-700 p-0.5 shrink-0">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        <button type="button" data-open="m-invite" class="mt-3 w-full inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14a4 4 0 1 0-8 0M12 3v9m0-9l-3 3m3-3l3 3"/></svg>
+          Invite contacts
+        </button>
+      </div>
+      <div class="bg-white border border-dashed border-gray-300 rounded-card p-4 text-center">
+        <svg class="h-7 w-7 mx-auto text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v.5M11.3 11.5a1 1 0 1 1 1.8.5c-.4.6-1.1.8-1.1 1.5M12 16v.5"/></svg>
+        <div class="mt-1.5 text-sm font-medium text-gray-900">No questions?</div>
+        <div class="text-xs text-gray-500">Empty state shows an Edit Survey button. Loading shows 5 skeleton cards.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="mock-note mt-6">Results: GET /surveys/3/results?start_date,end_date — stats strip + per-question aggregates. Fix-on-rebuild: date range was sent backwards in v1; aggregation is set-based.</p>
+
+  </div><!-- /overview panel -->
+
+  <!-- ============ RESPONSES panel ============ -->
+  <div data-panel="responses" hidden data-story="US-5.2" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm whitespace-nowrap">
+          <thead>
+            <tr class="bg-gray-50 text-xs uppercase text-gray-500 text-left">
+              <th class="px-4 py-3 font-medium">Submitted</th>
+              <th class="px-4 py-3 font-medium">1 · Overall rating</th>
+              <th class="px-4 py-3 font-medium">2 · Features used</th>
+              <th class="px-4 py-3 font-medium">3 · What could we do better?</th>
+              <th class="px-4 py-3 font-medium">4 · Email</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 text-gray-500">Jun 24, 2026 · 2:14 PM</td>
+              <td class="px-4 py-3 text-amber-500">★★★★★</td>
+              <td class="px-4 py-3 text-gray-700">Reviews, SMS Campaigns</td>
+              <td class="px-4 py-3 text-gray-700 max-w-xs truncate">Faster review responses would be great.</td>
+              <td class="px-4 py-3 text-gray-700">dana@acme.co</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 text-gray-500">Jun 24, 2026 · 11:02 AM</td>
+              <td class="px-4 py-3 text-amber-500">★★★★</td>
+              <td class="px-4 py-3 text-gray-700">Reviews</td>
+              <td class="px-4 py-3 text-gray-700 max-w-xs truncate">A dark mode for the mobile app, please.</td>
+              <td class="px-4 py-3 text-gray-400 italic">—</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 text-gray-500">Jun 23, 2026 · 6:48 PM</td>
+              <td class="px-4 py-3 text-amber-500">★★★</td>
+              <td class="px-4 py-3 text-gray-700">Social Posting, Surveys</td>
+              <td class="px-4 py-3 text-gray-700 max-w-xs truncate">More campaign templates and an undo on the editor.</td>
+              <td class="px-4 py-3 text-gray-700">lee@brightside.io</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 text-sm text-gray-500">
+        <span>3 of 379 sessions</span>
+        <div class="flex items-center gap-1">
+          <button class="h-8 px-3 rounded-card border border-gray-300 bg-white text-gray-400" disabled>Prev</button>
+          <button class="h-8 w-8 rounded-card bg-primary-500 text-white">1</button>
+          <button class="h-8 px-3 rounded-card border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white border border-dashed border-gray-300 rounded-card p-6 text-center mt-4">
+      <svg class="h-8 w-8 mx-auto text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+      <div class="mt-2 text-sm font-medium text-gray-900">No responses</div>
+      <div class="text-xs text-gray-500">This survey has no responses yet — empty state shows a Refresh button.</div>
+    </div>
+    <p class="mock-note mt-4">Responses: GET /surveys/3/responses?page,q,start_date,end_date — one column per question, one row per session (paginated by session). Export → GET /surveys/3/export (.xlsx).</p>
+  </div>
+
+  <!-- ============ ACTIVITY panel ============ -->
+  <div data-panel="activity" hidden data-story="US-5.3" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50 text-xs uppercase text-gray-500 text-left">
+              <th class="px-4 py-3 font-medium">Recipient</th>
+              <th class="px-4 py-3 font-medium">Status</th>
+              <th class="px-4 py-3 font-medium">Date</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3"><div class="font-medium text-gray-900">Dana Whitfield</div><div class="text-xs text-gray-500">+1 (415) 555-0182</div></td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Completed</span></td>
+              <td class="px-4 py-3 text-gray-500">Jun 24, 2026 · 2:14 PM</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3"><div class="font-medium text-gray-900">Marcus Lee</div><div class="text-xs text-gray-500">+1 (628) 555-0114</div></td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>Answered</span></td>
+              <td class="px-4 py-3 text-gray-500">Jun 24, 2026 · 11:02 AM</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3"><div class="font-medium text-gray-900">Unknown</div><div class="text-xs text-gray-500">Anonymous</div></td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Started</span></td>
+              <td class="px-4 py-3 text-gray-500">Jun 23, 2026 · 6:48 PM</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3"><div class="font-medium text-gray-900">Unknown</div><div class="text-xs text-gray-500">Anonymous</div></td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Opened</span></td>
+              <td class="px-4 py-3 text-gray-500">Jun 23, 2026 · 4:30 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="mock-note mt-4">Activity: GET /surveys/3/activity?page,q,status,start_date,end_date — per-recipient action log (Opened / Started / Answered / Completed). Anonymous sessions show "Unknown". Built in v1 but the tab was commented out — see Open questions.</p>
+  </div>
+
+  <!-- ============ Invite contacts modal ============ -->
+  <div data-modal="m-invite" data-story="US-3.2" data-ac="AC2" class="hidden fixed inset-0 z-50 grid place-items-center p-4">
+    <div data-close class="absolute inset-0 bg-gray-900/50"></div>
+    <div class="relative w-full max-w-lg bg-white border border-gray-200 rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h2 class="text-base font-semibold text-gray-900">Invite Contacts</h2>
+        <button type="button" data-close class="text-gray-400 hover:text-gray-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="p-5 space-y-4">
+        <p class="text-xs text-gray-500">Sharing the link using invite creates a trackable survey that can be tracked from the Activity tab.</p>
+
+        <!-- publish toggle -->
+        <div class="flex items-center justify-between rounded-card border border-gray-200 px-4 py-3">
+          <div>
+            <div class="text-sm font-medium text-gray-700">Published</div>
+            <div class="text-xs text-gray-500">The survey is Active and accepting responses.</div>
+          </div>
+          <button type="button" data-switch role="switch" aria-checked="true" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors">
+            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow translate-x-5 transition-transform"></span>
+          </button>
+        </div>
+
+        <!-- public link -->
+        <div>
+          <label class="text-sm font-medium text-gray-700">Share link</label>
+          <div class="mt-1 flex items-center gap-2 bg-gray-100 rounded-card px-3 py-2 text-sm font-mono text-gray-700">
+            <span class="truncate">app.oggvo.com/s/csat-q2</span>
+            <button type="button" data-copy title="Copy" class="ml-auto text-gray-400 hover:text-gray-700 p-0.5 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
+        </div>
+
+        <!-- channel toggles -->
+        <div class="flex items-center gap-4">
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-600" /> Invite By SMS</label>
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600" /> Invite By Email</label>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-send-invite class="inline-flex items-center h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Send Invite</button>
+      </div>
+      <p class="mock-note px-5 pb-4">Invite → POST /surveys/3/invite {recipients[], types[]} — spins up a tagged survey campaign (SMS/Email) via the campaigns module.</p>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "surveys", storyDomain: "surveys", back: { href: "surveys-list.html", label: "All surveys" }, route: "/surveys/3/results", search: "Search surveys…" });</script>
+<script>
+  (function () {
+    // ---- Tabs ----
+    var tabs = document.querySelector("[data-tabs]");
+    function showPanel(v) {
+      [].slice.call(document.querySelectorAll("[data-panel]")).forEach(function (p) { p.hidden = p.getAttribute("data-panel") !== v; });
+    }
+    if (tabs && window.OggvoShell) {
+      OggvoShell.buttonGroup(tabs, {
+        active: "text-primary-600 border-b-2 border-primary-500 font-medium",
+        inactive: "text-gray-500 hover:text-gray-700",
+        onChange: function (v) { showPanel(v); },
+      });
+    }
+
+    // ---- Export ----
+    var exportBtn = document.querySelector("[data-export]");
+    if (exportBtn) exportBtn.addEventListener("click", function () { OggvoShell.toast("Preparing your export…", "primary"); });
+
+    // ---- Copy link ----
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-copy]")) OggvoShell.toast("Copied!", "success");
+    });
+
+    // ---- Switches ----
+    document.addEventListener("click", function (e) {
+      var sw = e.target.closest("[data-switch]"); if (!sw) return;
+      var on = sw.getAttribute("aria-checked") !== "true";
+      sw.setAttribute("aria-checked", on ? "true" : "false");
+      sw.classList.toggle("bg-primary-500", on); sw.classList.toggle("bg-gray-300", !on);
+      var knob = sw.querySelector("span");
+      if (knob) { knob.classList.toggle("translate-x-5", on); knob.classList.toggle("translate-x-0.5", !on); }
+    });
+
+    // ---- Modals ----
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    function openModal(id) { var m = document.querySelector('[data-modal="' + id + '"]'); if (m) m.classList.remove("hidden"); }
+    document.addEventListener("click", function (e) {
+      var ob = e.target.closest("[data-open]"); if (ob) { openModal(ob.getAttribute("data-open")); return; }
+      if (e.target.closest("[data-close]")) closeAll();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+    var sendInvite = document.querySelector("[data-send-invite]");
+    if (sendInvite) sendInvite.addEventListener("click", function () { closeAll(); OggvoShell.toast("Invites sent successfully!", "success"); });
+  })();
+</script>
+</body>
+</html>

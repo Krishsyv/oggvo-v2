@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Tutorials</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Tutorials</h1>
+      <p class="text-sm text-gray-500 mt-1">Short walkthroughs for every part of Oggvo — grouped by section so you can find what you need.</p>
+    </div>
+    <a href="../support/support.html" data-story="US-T3.1" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4"/><circle cx="12" cy="12" r="9"/></svg>
+      Help Center
+    </a>
+  </div>
+
+  <!-- Search -->
+  <div class="relative mb-4" data-story="US-T1.3" data-ac="AC1">
+    <svg class="h-4 w-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+    <input id="tut-search" type="text" placeholder="Search tutorials by title…" class="w-full h-11 pl-10 pr-3 text-sm bg-white border border-gray-300 rounded-card placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+  </div>
+
+  <!-- Category tabs (BF-001: grouped by tab) -->
+  <div id="cat-tabs" data-story="US-T1.2" data-ac="AC1" class="flex flex-wrap items-center gap-1.5 mb-6">
+    <button data-cat="all"       class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-primary-500 text-white">All <span class="opacity-70">21</span></button>
+    <button data-cat="dashboard" class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Dashboard <span class="text-gray-400">1</span></button>
+    <button data-cat="design"    class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Design <span class="text-gray-400">5</span></button>
+    <button data-cat="reviews"   class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Reviews <span class="text-gray-400">3</span></button>
+    <button data-cat="campaigns" class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Campaigns <span class="text-gray-400">5</span></button>
+    <button data-cat="surveys"   class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Surveys <span class="text-gray-400">2</span></button>
+    <button data-cat="widgets"   class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Widgets <span class="text-gray-400">2</span></button>
+    <button data-cat="contacts"  class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Contacts <span class="text-gray-400">1</span></button>
+    <button data-cat="social"    class="cat-chip px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-gray-50">Social <span class="text-gray-400">1</span></button>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+    <!-- ============ LEFT: player ============ -->
+    <div class="w-full lg:w-3/5 space-y-4">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-T2.1" data-ac="AC1">
+        <!-- 16:9 video placeholder -->
+        <div id="tut-player" class="relative aspect-video w-full grid place-items-center" style="background:linear-gradient(135deg,#1849a9,#2e90fa)">
+          <button class="h-16 w-16 rounded-full bg-white/90 grid place-items-center shadow-lg hover:scale-105 transition-transform">
+            <svg class="h-7 w-7 text-primary-600 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/60 text-white text-xs font-medium" id="tut-dur">4:12</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <span id="tut-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Dashboard</span>
+            <button data-story="US-T2.2" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8m-8 5h8M7 4h10a1 1 0 011 1v14l-3-2-3 2-3-2-3 2V5a1 1 0 011-1z"/></svg>
+              Copy link
+            </button>
+          </div>
+          <h2 id="tut-title" class="text-xl font-semibold text-gray-900 mt-2">What the Dashboard is for</h2>
+          <p id="tut-desc" class="text-sm text-gray-600 mt-1.5">How to read your funnel, social, and Connect analytics — and how clients should be leveraging the dashboard to track reputation growth.</p>
+        </div>
+      </div>
+      <p class="mock-note">v1 <code>/tutorials</code> — YouTube playlists per section. v2: served from <code>GET /tutorials</code> (playlist + video metadata); grouped by product area (BF-001) with client-side search.</p>
+    </div>
+
+    <!-- ============ RIGHT: searchable, grouped playlist ============ -->
+    <div class="w-full lg:w-2/5">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-T1.1" data-ac="AC1">
+        <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+          <h3 class="text-sm font-semibold text-gray-900">Playlist</h3>
+          <span id="tut-count" class="text-xs text-gray-400">21 tutorials</span>
+        </div>
+        <div id="tut-list" class="max-h-[560px] overflow-y-auto p-2 space-y-0.5">
+          <!-- rows injected by JS -->
+        </div>
+        <div id="tut-empty" class="hidden px-4 py-10 text-center text-sm text-gray-500">
+          <svg class="h-8 w-8 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+          No tutorials match your search.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "tutorials", storyDomain: "tutorials", back: { href: "../index.html", label: "All mockups" }, route: "/tutorials", search: "Search…" });</script>
+<script>
+(function () {
+  // TU-001..021 grounded content, grouped by product area.
+  var CATS = { dashboard:"Dashboard", design:"Design", reviews:"Reviews", campaigns:"Campaigns", surveys:"Surveys", widgets:"Widgets", contacts:"Contacts", social:"Social" };
+  var VIDEOS = [
+    { cat:"dashboard", t:"What the Dashboard is for", d:"4:12", desc:"How to read your funnel, social, and Connect analytics — and how clients should be leveraging the dashboard to track reputation growth." },
+    { cat:"design", t:"Making basic edits (photos & text)", d:"3:05", desc:"Edit funnel copy and swap images with the visual designer." },
+    { cat:"design", t:"Using AI for text", d:"2:48", desc:"Generate and rewrite funnel copy with the AI assistant." },
+    { cat:"design", t:"Using AI & stock photos for images", d:"3:20", desc:"Pull AI and stock imagery straight into your funnel." },
+    { cat:"design", t:"Changing header / footer color", d:"1:52", desc:"Match the funnel header and footer to your brand colors." },
+    { cat:"design", t:"Funnel background photo & correct size", d:"2:10", desc:"Set a background image and the recommended dimensions." },
+    { cat:"reviews", t:"Manually adding reviews", d:"3:31", desc:"Add reviews from other platforms and why it's worth doing." },
+    { cat:"reviews", t:"Sharing reviews", d:"2:57", desc:"Share reviews manually to social and the benefits of doing so." },
+    { cat:"reviews", t:"Responding to reviews", d:"3:44", desc:"Reply to Google reviews and why responses matter." },
+    { cat:"campaigns", t:"Build a quick example newsletter", d:"6:18", desc:"An end-to-end newsletter using all the relevant tools." },
+    { cat:"campaigns", t:"Adding tags to a campaign / client", d:"2:22", desc:"What tags are for and how targeting works." },
+    { cat:"campaigns", t:"Activating & pausing campaigns", d:"2:40", desc:"How to activate and pause cadences — and when to pause." },
+    { cat:"campaigns", t:"AI & stock photos in campaigns", d:"3:12", desc:"Use AI and stock imagery in review campaigns and newsletters." },
+    { cat:"campaigns", t:"Create & customize buttons", d:"2:05", desc:"Add a button, style it, and attach a link." },
+    { cat:"surveys", t:"Create a basic survey", d:"4:01", desc:"Build a survey to measure a client's experience." },
+    { cat:"surveys", t:"Use a survey as a quote tool", d:"3:37", desc:"Repurpose surveys for quotes with a custom start button." },
+    { cat:"widgets", t:"Email signature widget", d:"2:33", desc:"Add the review widget to your email signature." },
+    { cat:"widgets", t:"Customizing widgets", d:"2:19", desc:"Where to copy and paste the embed code for each widget." },
+    { cat:"contacts", t:"Setting an activation limit", d:"2:48", desc:"How to set a daily activation limit and what Oggvo recommends." },
+    { cat:"social", t:"Set up review sharing (auto)", d:"3:58", desc:"Auto-share reviews to social on a weekly cadence." },
+    { cat:"reviews", t:"Auto-share setup & settings", d:"3:16", desc:"Configure the review auto-share and what each option does." }
+  ];
+
+  var list = document.getElementById("tut-list");
+  var empty = document.getElementById("tut-empty");
+  var countEl = document.getElementById("tut-count");
+  var activeCat = "all", query = "";
+
+  function row(v, i) {
+    return '<button data-i="' + i + '" data-cat="' + v.cat + '" data-title="' + v.t.toLowerCase() +
+      '" class="tut-row w-full flex items-center gap-3 p-2 rounded-lg text-left hover:bg-gray-50">' +
+        '<span class="relative h-12 w-20 shrink-0 rounded-md grid place-items-center" style="background:linear-gradient(135deg,#1849a9,#2e90fa)">' +
+          '<svg class="h-4 w-4 text-white/90" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' +
+          '<span class="absolute bottom-0.5 right-0.5 px-1 rounded bg-black/60 text-white text-[10px]">' + v.d + '</span>' +
+        '</span>' +
+        '<span class="min-w-0 flex-1">' +
+          '<span class="block text-sm font-medium text-gray-800 truncate">' + v.t + '</span>' +
+          '<span class="block text-xs text-gray-400 mt-0.5">' + CATS[v.cat] + '</span>' +
+        '</span>' +
+      '</button>';
+  }
+
+  function render() {
+    var shown = 0;
+    list.innerHTML = VIDEOS.map(row).join("");
+    [].slice.call(list.querySelectorAll(".tut-row")).forEach(function (el) {
+      var okCat = activeCat === "all" || el.getAttribute("data-cat") === activeCat;
+      var okQ = !query || el.getAttribute("data-title").indexOf(query) !== -1;
+      var show = okCat && okQ;
+      el.style.display = show ? "" : "none";
+      if (show) shown++;
+    });
+    empty.classList.toggle("hidden", shown > 0);
+    countEl.textContent = shown + " tutorial" + (shown === 1 ? "" : "s");
+    // wire selection
+    [].slice.call(list.querySelectorAll(".tut-row")).forEach(function (el) {
+      el.addEventListener("click", function () { select(parseInt(el.getAttribute("data-i"), 10), el); });
+    });
+  }
+
+  function select(i, el) {
+    var v = VIDEOS[i];
+    document.getElementById("tut-title").textContent = v.t;
+    document.getElementById("tut-desc").textContent = v.desc;
+    document.getElementById("tut-dur").textContent = v.d;
+    document.getElementById("tut-badge").textContent = CATS[v.cat];
+    [].slice.call(list.querySelectorAll(".tut-row")).forEach(function (r) { r.classList.remove("bg-primary-50"); });
+    if (el) el.classList.add("bg-primary-50");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // category tabs
+  document.getElementById("cat-tabs").addEventListener("click", function (e) {
+    var chip = e.target.closest(".cat-chip");
+    if (!chip) return;
+    activeCat = chip.getAttribute("data-cat");
+    [].slice.call(document.querySelectorAll(".cat-chip")).forEach(function (c) {
+      var on = c === chip;
+      c.classList.toggle("bg-primary-500", on);
+      c.classList.toggle("text-white", on);
+      c.classList.toggle("bg-white", !on);
+      c.classList.toggle("border", !on);
+      c.classList.toggle("border-gray-300", !on);
+      c.classList.toggle("text-gray-600", !on);
+    });
+    render();
+  });
+
+  document.getElementById("tut-search").addEventListener("input", function (e) {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  render();
+})();
+</script>
+</body></html>

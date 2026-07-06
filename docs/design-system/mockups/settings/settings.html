@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Settings</h1>
+    <p class="mt-1 text-sm text-gray-500">Manage your business identity, branding, team and integrations.</p>
+  </div>
+
+  <div class="grid lg:grid-cols-4 gap-6">
+
+    <!-- LEFT sub-nav (col-span-1) -->
+    <nav class="lg:col-span-1">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-2 space-y-0.5">
+        <a href="#business-profile" data-section="business-profile" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium bg-primary-50 text-primary-700">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+          Business Profile
+        </a>
+        <a href="#branding" data-section="branding" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 100 20 2.5 2.5 0 002.5-2.5c0-.6-.2-1.1-.6-1.5-.4-.4-.6-.9-.6-1.5a2.5 2.5 0 012.5-2.5H18a4 4 0 004-4 10 10 0 00-10-8z"/></svg>
+          Branding
+        </a>
+        <a href="#notifications" data-section="notifications" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17a3 3 0 006 0m-9-3.5V11a6 6 0 1112 0v2.5l1.5 2.5H4.5L6 13.5z"/></svg>
+          Notifications
+        </a>
+        <a href="#team-roles" data-section="team-roles" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14a4 4 0 10-8 0m12.5 4a3.5 3.5 0 00-3-3.4m-11 3.4a3.5 3.5 0 013-3.4m6.5-5.1a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
+          Team &amp; Roles
+        </a>
+        <a href="#billing" data-section="billing" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          Billing
+        </a>
+        <div class="my-1 border-t border-gray-100"></div>
+        <a href="integrations.html" class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50 group">
+          <span class="flex items-center gap-3">
+            <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a3 3 0 013-3h1V4a2 2 0 114 0v2h1a3 3 0 013 3v1h2a2 2 0 110 4h-2v1a3 3 0 01-3 3h-1v2a2 2 0 11-4 0v-2H9a3 3 0 01-3-3v-1H4a2 2 0 110-4h2V9z"/></svg>
+            Integrations
+          </span>
+          <svg class="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="a2p-compliance.html" class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50 group">
+          <span class="flex items-center gap-3">
+            <svg class="h-4 w-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9.3 12l1.8 1.8L15 10"/></svg>
+            Messaging Compliance
+          </span>
+          <svg class="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+
+      <p class="mock-note mt-3">Sub-nav routes: /settings/{business,branding,notifications,team,billing}. Integrations &amp; Messaging Compliance link to their own surfaces.</p>
+    </nav>
+
+    <!-- RIGHT content (col-span-3) -->
+    <div class="lg:col-span-3 space-y-6">
+
+      <!-- ===================== BUSINESS PROFILE panel ===================== -->
+      <div data-panel="business-profile" class="space-y-6">
+
+      <!-- Business Profile card -->
+      <section id="business-profile" data-story="US-1.1" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-200">
+          <div>
+            <h2 class="text-sm font-semibold text-gray-900">Business Profile</h2>
+            <p class="mt-0.5 text-xs text-gray-500">Your public business identity and contact details.</p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500">
+            <span class="h-2 w-2 rounded-full bg-success-500"></span> Saved
+          </span>
+        </div>
+
+        <div class="p-5 space-y-5">
+          <!-- Logo upload + preview -->
+          <div class="flex items-center gap-4" data-story="US-2.2" data-ac="AC1">
+            <div class="h-16 w-16 shrink-0 rounded-card border border-gray-200 bg-gray-50 grid place-items-center overflow-hidden">
+              <div class="h-10 w-10 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold">AC</div>
+            </div>
+            <div class="min-w-0">
+              <label class="text-sm font-medium text-gray-700">Business logo</label>
+              <p class="text-xs text-gray-500 mt-0.5">PNG or JPG, square recommended. Replaces the previous file.</p>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" data-bp-logo="upload" class="inline-flex items-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                  Upload
+                </button>
+                <button type="button" data-bp-logo="remove" class="h-9 px-3 rounded-card text-sm font-medium text-gray-500 hover:text-gray-700">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium text-gray-700">Business name</label>
+              <input type="text" value="Acme Roofing Co." class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Contact email</label>
+              <input type="email" value="hello@acmeroofing.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Phone</label>
+              <input type="tel" value="(415) 555-0142" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Website</label>
+              <input type="url" value="https://acmeroofing.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="text-sm font-medium text-gray-700">Business address</label>
+              <input type="text" value="1200 Market Street, Suite 400" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">City</label>
+              <input type="text" value="San Francisco" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium text-gray-700">State</label>
+                <input type="text" value="CA" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-gray-700">ZIP</label>
+                <input type="text" value="94103" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Timezone (synced from address) -->
+          <div class="grid sm:grid-cols-2 gap-4" data-story="US-1.2" data-ac="AC1">
+            <div>
+              <label class="text-sm font-medium text-gray-700">Timezone</label>
+              <select class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                <option>America/Los_Angeles</option>
+                <option selected>America/New_York</option>
+                <option>America/Chicago</option>
+                <option>America/Denver</option>
+              </select>
+              <p class="mt-1.5 flex items-center gap-1.5 text-xs text-gray-500">
+                <svg class="h-3.5 w-3.5 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/></svg>
+                Synced from your address. Manual overrides are preserved.
+              </p>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Business hours</label>
+              <div class="mt-1.5 flex items-center gap-2">
+                <input type="text" value="08:00 AM" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+                <span class="text-sm text-gray-400">to</span>
+                <input type="text" value="06:00 PM" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+              </div>
+              <p class="mt-1.5 text-xs text-gray-500">Honoured per-profile, never hardcoded to Pacific.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+          <button type="button" data-bp-reset class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Reset</button>
+          <button type="button" data-save="Business profile" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            Save changes
+          </button>
+        </div>
+      </section>
+
+      <p class="mock-note">Loads <code>GET /profiles/current</code>; saves typed, satellite-scoped <code>PATCH /profiles/current</code> + logo via <code>POST /profiles/current/logos/business</code> (S3). Google links are server-derived and stripped from writes — no <code>save-settings</code> god-endpoint.</p>
+
+      </div><!-- /business-profile panel -->
+
+      <!-- ===================== TEAM & ROLES panel ===================== -->
+      <div data-panel="team-roles" class="hidden space-y-6">
+
+      <!-- Team & Roles preview card -->
+      <section id="team-roles" data-story="US-3.1" class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-200">
+          <div>
+            <h2 class="text-sm font-semibold text-gray-900">Team &amp; Roles</h2>
+            <p class="mt-0.5 text-xs text-gray-500">People with access to this profile.</p>
+          </div>
+          <button type="button" data-invite-open data-story="US-3.2" class="inline-flex items-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+            Invite member
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-200">
+                <th class="px-5 py-2.5 font-medium">Member</th>
+                <th class="px-5 py-2.5 font-medium">Role</th>
+                <th class="px-5 py-2.5 font-medium">Status</th>
+                <th class="px-5 py-2.5 font-medium text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody data-member-body class="divide-y divide-gray-100">
+              <tr data-member-row data-name="Alex Carter">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="h-8 w-8 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-[11px] font-semibold text-white">AC</span>
+                    <span><span class="block font-medium text-gray-900">Alex Carter</span><span class="block text-xs text-gray-500">alex@acmeroofing.com</span></span>
+                  </div>
+                </td>
+                <td class="px-5 py-3"><span data-role-pill class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Owner</span></td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Active</span></td>
+                <td class="px-5 py-3 text-right"><span class="text-xs text-gray-400">—</span></td>
+              </tr>
+              <tr data-member-row data-name="Jordan Lee">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="h-8 w-8 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600">JL</span>
+                    <span><span class="block font-medium text-gray-900">Jordan Lee</span><span class="block text-xs text-gray-500">jordan@acmeroofing.com</span></span>
+                  </div>
+                </td>
+                <td class="px-5 py-3"><span data-role-pill class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Admin</span></td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Active</span></td>
+                <td class="px-5 py-3">
+                  <div class="flex items-center justify-end gap-2">
+                    <select data-role-select class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                      <option selected>Admin</option><option>Manager</option><option>Member</option>
+                    </select>
+                    <button type="button" data-member-remove class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-50">Remove</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-member-row data-name="Priya Menon">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="h-8 w-8 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600">PM</span>
+                    <span><span class="block font-medium text-gray-900">Priya Menon</span><span class="block text-xs text-gray-500">priya@acmeroofing.com</span></span>
+                  </div>
+                </td>
+                <td class="px-5 py-3"><span data-role-pill class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Manager</span></td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-warning-500"></span> Pending</span></td>
+                <td class="px-5 py-3">
+                  <div class="flex items-center justify-end gap-2">
+                    <select data-role-select class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                      <option>Admin</option><option selected>Manager</option><option>Member</option>
+                    </select>
+                    <button type="button" data-member-remove class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-50">Remove</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-member-row data-name="Sam Rivera">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="h-8 w-8 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600">SR</span>
+                    <span><span class="block font-medium text-gray-900">Sam Rivera</span><span class="block text-xs text-gray-500">sam@acmeroofing.com</span></span>
+                  </div>
+                </td>
+                <td class="px-5 py-3"><span data-role-pill class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Member</span></td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Active</span></td>
+                <td class="px-5 py-3">
+                  <div class="flex items-center justify-end gap-2">
+                    <select data-role-select class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                      <option>Admin</option><option>Manager</option><option selected>Member</option>
+                    </select>
+                    <button type="button" data-member-remove class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-50">Remove</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="mock-note">Team is v2-new (v1 was owner-only, dead markup). <code>GET /profiles/current/members</code> · invite <code>POST /profiles/current/members/invitations</code> · role change <code>PATCH /profiles/current/members/{userId}</code>. RBAC enforced via <code>@RequirePermission</code> guards.</p>
+
+      </div><!-- /team-roles panel -->
+
+      <!-- ===================== BRANDING panel ===================== -->
+      <div data-panel="branding" class="hidden space-y-6">
+
+      <section data-story="US-2.1" class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="px-5 py-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900">Branding</h2>
+          <p class="mt-0.5 text-xs text-gray-500">Logos and brand colors used across widgets, emails and review images.</p>
+        </div>
+
+        <div class="p-5 space-y-6">
+          <!-- Logo upload + live preview -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="h-24 w-24 shrink-0 rounded-card border border-gray-200 bg-gray-50 grid place-items-center overflow-hidden">
+              <div data-brand-logo class="h-16 w-16 rounded-card grid place-items-center font-bold text-white text-lg" style="background:linear-gradient(135deg,#6366f1,#4338ca)">AC</div>
+            </div>
+            <div class="min-w-0">
+              <label class="text-sm font-medium text-gray-700">Brand logo</label>
+              <p class="text-xs text-gray-500 mt-0.5">PNG or JPG up to 2&nbsp;MB. Shown on the public review funnel and newsletters.</p>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" data-brand-logo-btn="update" class="inline-flex items-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                  Update logo
+                </button>
+                <button type="button" data-brand-logo-btn="delete" class="h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-error-600 hover:bg-error-50">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand color -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium text-gray-700">Primary color</label>
+              <div class="mt-1.5 flex items-center gap-2">
+                <input type="color" data-brand-color value="#6366f1" class="h-10 w-12 rounded-card border border-gray-300 bg-white p-1 cursor-pointer" />
+                <input type="text" data-brand-color-hex value="#6366f1" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+              </div>
+              <p class="mt-1.5 text-xs text-gray-500">Drives buttons and accents on public surfaces.</p>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Accent color</label>
+              <div class="mt-1.5 flex items-center gap-2">
+                <input type="color" data-brand-color value="#22c55e" class="h-10 w-12 rounded-card border border-gray-300 bg-white p-1 cursor-pointer" />
+                <input type="text" data-brand-color-hex value="#22c55e" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+              </div>
+              <p class="mt-1.5 text-xs text-gray-500">Used for success states and highlights.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+          <button type="button" data-save="Branding" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            Save changes
+          </button>
+        </div>
+      </section>
+
+      <p class="mock-note">Logos stream to S3 via the media module; keys stored in DB, served from one CDN domain (no per-caller host rewriting). Colors persist to <code>PATCH /profiles/current/review-settings</code>.</p>
+
+      </div><!-- /branding panel -->
+
+      <!-- ===================== NOTIFICATIONS panel ===================== -->
+      <div data-panel="notifications" class="hidden space-y-6">
+
+      <section data-story="US-4.1" class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="px-5 py-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900">Notifications</h2>
+          <p class="mt-0.5 text-xs text-gray-500">Choose which alerts reach you and how.</p>
+        </div>
+
+        <div class="divide-y divide-gray-100">
+          <div class="flex items-center justify-between gap-4 px-5 py-4">
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-gray-900">New review alerts</p>
+              <p class="text-xs text-gray-500 mt-0.5">Email the notification list whenever a review lands.</p>
+            </div>
+            <button type="button" data-switch="on" aria-label="Toggle new review alerts" class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-primary-500 transition-colors">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between gap-4 px-5 py-4">
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-gray-900">Negative feedback</p>
+              <p class="text-xs text-gray-500 mt-0.5">Immediate alert for gated feedback below the star threshold.</p>
+            </div>
+            <button type="button" data-switch="on" aria-label="Toggle negative feedback alerts" class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-primary-500 transition-colors">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between gap-4 px-5 py-4">
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-gray-900">Campaign summaries</p>
+              <p class="text-xs text-gray-500 mt-0.5">Weekly digest of sends, opens and conversions.</p>
+            </div>
+            <button type="button" data-switch="off" aria-label="Toggle campaign summaries" class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-gray-300 transition-colors">
+              <span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between gap-4 px-5 py-4">
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-gray-900">Product updates</p>
+              <p class="text-xs text-gray-500 mt-0.5">Occasional emails about new OGGVO features.</p>
+            </div>
+            <button type="button" data-switch="off" aria-label="Toggle product updates" class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-gray-300 transition-colors">
+              <span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+          <button type="button" data-save="Notification preferences" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            Save changes
+          </button>
+        </div>
+      </section>
+
+      <p class="mock-note">Review-alert recipients live in <code>email_notifications</code>; push devices in <code>push_channels</code> (server-tracked <code>is_active</code>, replacing the v1 <code>opn</code> cookie hack).</p>
+
+      </div><!-- /notifications panel -->
+
+      <!-- ===================== BILLING panel ===================== -->
+      <div data-panel="billing" class="hidden space-y-6">
+
+      <section class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="px-5 py-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900">Plan &amp; billing</h2>
+          <p class="mt-0.5 text-xs text-gray-500">Your subscription and payment method.</p>
+        </div>
+        <div class="p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-card border border-primary-200 bg-primary-50 p-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-base font-semibold text-gray-900">Growth</span>
+                <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Current plan</span>
+              </div>
+              <p class="mt-1 text-sm text-gray-600">$149 / month · billed monthly · renews Aug 1, 2026</p>
+              <p class="mt-0.5 text-xs text-gray-500">Visa ending 4242</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" data-billing="payment" class="h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Update payment</button>
+              <button type="button" data-billing="plan" class="h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Change plan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="px-5 py-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900">Invoices</h2>
+          <p class="mt-0.5 text-xs text-gray-500">Download past receipts.</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-200">
+                <th class="px-5 py-2.5 font-medium">Date</th>
+                <th class="px-5 py-2.5 font-medium">Amount</th>
+                <th class="px-5 py-2.5 font-medium">Status</th>
+                <th class="px-5 py-2.5 font-medium text-right">Receipt</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="px-5 py-3 text-gray-900">Jul 1, 2026</td>
+                <td class="px-5 py-3 text-gray-600">$149.00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Paid</span></td>
+                <td class="px-5 py-3 text-right"><button type="button" data-invoice="Jul 1, 2026" class="text-xs font-medium text-primary-600 hover:underline">Download</button></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 text-gray-900">Jun 1, 2026</td>
+                <td class="px-5 py-3 text-gray-600">$149.00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Paid</span></td>
+                <td class="px-5 py-3 text-right"><button type="button" data-invoice="Jun 1, 2026" class="text-xs font-medium text-primary-600 hover:underline">Download</button></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 text-gray-900">May 1, 2026</td>
+                <td class="px-5 py-3 text-gray-600">$149.00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-success-500"></span> Paid</span></td>
+                <td class="px-5 py-3 text-right"><button type="button" data-invoice="May 1, 2026" class="text-xs font-medium text-primary-600 hover:underline">Download</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="mock-note">Billing is v2-new. Subscription + invoices via the payments module (current Stripe SDK, server-side webhook signature verification enabled).</p>
+
+      </div><!-- /billing panel -->
+
+    </div>
+  </div>
+
+  <!-- Invite member modal -->
+  <div data-invite-modal data-story="US-3.2" data-ac="AC1" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="w-full max-w-md bg-white rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-sm font-semibold text-gray-900">Invite member</h3>
+        <button type="button" data-invite-close class="text-gray-400 hover:text-gray-600" aria-label="Close">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-gray-700">Email address</label>
+          <input type="email" data-invite-email placeholder="teammate@acmeroofing.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+        </div>
+        <div>
+          <label class="text-sm font-medium text-gray-700">Role</label>
+          <select data-invite-role class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+            <option>Admin</option><option selected>Manager</option><option>Member</option>
+          </select>
+          <p class="mt-1.5 text-xs text-gray-500">Roles map to <code>@RequirePermission</code> guards on the API.</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-invite-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-invite-send class="h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Send invite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm remove-member modal -->
+  <div data-confirm-modal data-story="US-3.4" data-ac="AC2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-card shadow-pop">
+      <div class="p-5">
+        <div class="flex items-start gap-3">
+          <span class="h-9 w-9 shrink-0 rounded-full bg-error-100 text-error-600 grid place-items-center">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/></svg>
+          </span>
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900">Remove member</h3>
+            <p class="mt-1 text-sm text-gray-600">Remove <span data-confirm-name class="font-medium text-gray-900">this member</span> from the profile? They lose access immediately.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-confirm-cancel class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-confirm-ok class="h-10 px-4 rounded-card bg-error-500 text-white text-sm font-medium hover:bg-error-600">Remove</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "settings", storyDomain: "settings", back: { href: "../index.html", label: "All mockups" }, route: "/settings", search: "Search settings…" });</script>
+<script>
+  (function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+    // ---- Left sub-nav → panel switching ----------------------------------
+    var navLinks = $$("[data-section]");
+    var panels = $$("[data-panel]");
+    function showSection(id) {
+      panels.forEach(function (p) { p.classList.toggle("hidden", p.getAttribute("data-panel") !== id); });
+      navLinks.forEach(function (a) {
+        var active = a.getAttribute("data-section") === id;
+        a.classList.toggle("bg-primary-50", active);
+        a.classList.toggle("text-primary-700", active);
+        a.classList.toggle("font-medium", active);
+        a.classList.toggle("text-gray-700", !active);
+        a.classList.toggle("hover:bg-gray-50", !active);
+        if (active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+        var icon = a.querySelector("svg");
+        if (icon) icon.classList.toggle("text-gray-400", !active);
+      });
+    }
+    navLinks.forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); showSection(a.getAttribute("data-section")); });
+    });
+    // open the panel named in the URL hash (e.g. header "Profile" → #business-profile)
+    function openHash() {
+      var id = (location.hash || "").replace(/^#/, "");
+      if (id && panels.some(function (p) { return p.getAttribute("data-panel") === id; })) showSection(id);
+    }
+    openHash();
+    window.addEventListener("hashchange", openHash);
+
+    // ---- Generic Save buttons → toast ------------------------------------
+    $$("[data-save]").forEach(function (btn) {
+      btn.addEventListener("click", function () { OggvoShell.toast(btn.getAttribute("data-save") + " saved", "success"); });
+    });
+
+    // ---- Business-profile: Reset + logo Upload/Remove --------------------
+    var bpReset = $("[data-bp-reset]");
+    if (bpReset) bpReset.addEventListener("click", function () { OggvoShell.toast("Changes reset", "gray"); });
+    $$("[data-bp-logo]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var a = btn.getAttribute("data-bp-logo");
+        OggvoShell.toast(a === "upload" ? "Logo updated" : "Logo removed", a === "upload" ? "success" : "gray");
+      });
+    });
+
+    // ---- Switch rows (Notifications) -------------------------------------
+    $$("[data-switch]").forEach(function (sw) {
+      sw.addEventListener("click", function () {
+        var on = sw.getAttribute("data-switch") !== "on";
+        sw.setAttribute("data-switch", on ? "on" : "off");
+        sw.classList.toggle("bg-primary-500", on);
+        sw.classList.toggle("bg-gray-300", !on);
+        var knob = sw.querySelector("span");
+        knob.classList.toggle("translate-x-5", on);
+        knob.classList.toggle("translate-x-0.5", !on);
+      });
+    });
+
+    // ---- Branding: color sync + logo Update/Delete -----------------------
+    $$("[data-brand-color]").forEach(function (picker) {
+      var hex = picker.parentElement.querySelector("[data-brand-color-hex]");
+      var preview = $("[data-brand-logo]");
+      picker.addEventListener("input", function () {
+        if (hex) hex.value = picker.value;
+        if (preview && picker === $("[data-brand-color]")) preview.style.background = "linear-gradient(135deg," + picker.value + ",#4338ca)";
+      });
+    });
+    $$("[data-brand-color-hex]").forEach(function (hex) {
+      var picker = hex.parentElement.querySelector("[data-brand-color]");
+      hex.addEventListener("change", function () { if (picker && /^#[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value; });
+    });
+    $$("[data-brand-logo-btn]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var a = btn.getAttribute("data-brand-logo-btn");
+        OggvoShell.toast(a === "update" ? "Brand logo updated" : "Brand logo deleted", a === "update" ? "success" : "gray");
+      });
+    });
+
+    // ---- Billing ---------------------------------------------------------
+    var bill = { payment: "Payment method updated", plan: "Plan change requested" };
+    $$("[data-billing]").forEach(function (btn) {
+      btn.addEventListener("click", function () { OggvoShell.toast(bill[btn.getAttribute("data-billing")], "primary"); });
+    });
+    $$("[data-invoice]").forEach(function (btn) {
+      btn.addEventListener("click", function () { OggvoShell.toast("Downloading invoice · " + btn.getAttribute("data-invoice"), "gray"); });
+    });
+
+    // ---- Team: role select per member ------------------------------------
+    $$("[data-role-select]").forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        var row = sel.closest("[data-member-row]");
+        var pill = row && row.querySelector("[data-role-pill]");
+        if (pill) pill.textContent = sel.value;
+        OggvoShell.toast((row ? row.getAttribute("data-name") : "Member") + " is now " + sel.value, "success");
+      });
+    });
+
+    // ---- Team: Invite modal ----------------------------------------------
+    var inviteModal = $("[data-invite-modal]");
+    var inviteEmail = $("[data-invite-email]");
+    var inviteRole = $("[data-invite-role]");
+    function openInvite() { inviteModal.classList.remove("hidden"); if (inviteEmail) inviteEmail.focus(); }
+    function closeInvite() { inviteModal.classList.add("hidden"); }
+    $$("[data-invite-open]").forEach(function (b) { b.addEventListener("click", openInvite); });
+    $$("[data-invite-close]").forEach(function (b) { b.addEventListener("click", closeInvite); });
+    var inviteSend = $("[data-invite-send]");
+    if (inviteSend) inviteSend.addEventListener("click", function () {
+      var email = (inviteEmail.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { OggvoShell.toast("Enter a valid email", "error"); return; }
+      OggvoShell.toast("Invite sent to " + email + " (" + inviteRole.value + ")", "success");
+      inviteEmail.value = "";
+      closeInvite();
+    });
+
+    // ---- Team: Remove member (confirm modal) -----------------------------
+    var confirmModal = $("[data-confirm-modal]");
+    var confirmName = $("[data-confirm-name]");
+    var pendingRow = null;
+    function closeConfirm() { confirmModal.classList.add("hidden"); pendingRow = null; }
+    $$("[data-member-remove]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        pendingRow = btn.closest("[data-member-row]");
+        if (confirmName) confirmName.textContent = pendingRow ? pendingRow.getAttribute("data-name") : "this member";
+        confirmModal.classList.remove("hidden");
+      });
+    });
+    var confirmCancel = $("[data-confirm-cancel]");
+    if (confirmCancel) confirmCancel.addEventListener("click", closeConfirm);
+    var confirmOk = $("[data-confirm-ok]");
+    if (confirmOk) confirmOk.addEventListener("click", function () {
+      if (pendingRow) { var name = pendingRow.getAttribute("data-name"); pendingRow.remove(); OggvoShell.toast(name + " removed", "gray"); }
+      closeConfirm();
+    });
+
+    // ---- Overlay click + Escape close both modals ------------------------
+    [inviteModal, confirmModal].forEach(function (m) {
+      if (m) m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeInvite(); closeConfirm(); }
+    });
+  })();
+</script>
+</body>
+</html>

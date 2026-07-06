@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · New Message</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+  <div class="grid lg:grid-cols-5 gap-6">
+
+    <!-- LEFT: recipient picker -->
+    <section class="lg:col-span-3">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-4">
+
+        <div>
+          <h1 class="text-xl font-semibold text-gray-900">New message</h1>
+          <p class="text-sm text-gray-500">Pick recipients to text.</p>
+        </div>
+
+        <!-- Search + add link -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="recip-search" placeholder="Search contacts by name" class="h-10 w-full pl-9 pr-3 rounded-card border border-gray-300 focus:ring-2 focus:ring-primary-200 focus:outline-none text-sm" />
+          </div>
+          <a href="../contacts/contact-form.html" data-story="US-M2.1" data-ac="AC2" class="inline-flex items-center gap-1 text-sm font-medium text-primary-700 hover:text-primary-800 whitespace-nowrap">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add New Recipient
+          </a>
+        </div>
+
+        <!-- Contact list -->
+        <div id="recip-list" class="divide-y divide-gray-100 border border-gray-200 rounded-card max-h-[420px] overflow-y-auto" data-story="US-M2.1" data-ac="AC1">
+
+          <!-- checked -->
+          <label class="flex items-center gap-3 p-3 bg-primary-50 cursor-pointer">
+            <input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">AM</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Aisha Mensah</span>
+              <span class="block text-xs text-gray-500">+1 (415) 555-0182</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">vip</span>
+            </span>
+          </label>
+
+          <!-- checked -->
+          <label class="flex items-center gap-3 p-3 bg-primary-50 cursor-pointer">
+            <input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">BC</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Bao Chen</span>
+              <span class="block text-xs text-gray-500">+1 (206) 555-0147</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">lead</span>
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">newsletter</span>
+            </span>
+          </label>
+
+          <!-- unchecked -->
+          <label class="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50">
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">CD</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Carlos Diaz</span>
+              <span class="block text-xs text-gray-500">+1 (312) 555-0190</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">lead</span>
+            </span>
+          </label>
+
+          <!-- checked -->
+          <label class="flex items-center gap-3 p-3 bg-primary-50 cursor-pointer">
+            <input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">EF</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Elena Ferraro</span>
+              <span class="block text-xs text-gray-500">+1 (646) 555-0123</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">vip</span>
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">newsletter</span>
+            </span>
+          </label>
+
+          <!-- disabled / invalid (no phone) -->
+          <label class="flex items-center gap-3 p-3 opacity-60 cursor-not-allowed">
+            <input type="checkbox" disabled class="h-4 w-4 rounded border-gray-300" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 text-xs font-semibold">FG</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Farah Gulati</span>
+              <span class="block text-xs text-gray-400">No phone number</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-error-100 text-error-700 px-2 py-0.5 rounded-full text-xs font-medium">Invalid</span>
+            </span>
+          </label>
+
+          <!-- unchecked -->
+          <label class="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50">
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">HI</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Hiroshi Ito</span>
+              <span class="block text-xs text-gray-500">+1 (503) 555-0166</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">newsletter</span>
+            </span>
+          </label>
+
+          <!-- unchecked -->
+          <label class="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50">
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">JK</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Jamal Khan</span>
+              <span class="block text-xs text-gray-500">+1 (713) 555-0138</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">vip</span>
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">lead</span>
+            </span>
+          </label>
+
+          <!-- unchecked -->
+          <label class="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50">
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">LM</span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-gray-900 truncate">Lucia Moreno</span>
+              <span class="block text-xs text-gray-500">+1 (305) 555-0119</span>
+            </span>
+            <span class="flex flex-wrap gap-1 justify-end">
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">newsletter</span>
+            </span>
+          </label>
+
+          <!-- skeleton sentinel for infinite scroll -->
+          <div class="flex items-center gap-3 p-3">
+            <span class="skeleton h-4 w-4 rounded"></span>
+            <span class="skeleton h-9 w-9 rounded-full"></span>
+            <span class="flex-1 space-y-1.5">
+              <span class="skeleton block h-3 w-32 rounded"></span>
+              <span class="skeleton block h-2.5 w-24 rounded"></span>
+            </span>
+          </div>
+
+        </div>
+
+        <!-- footer strip -->
+        <div class="flex items-center justify-between rounded-card bg-gray-50 border border-gray-200 px-3 py-2" data-story="US-M2.1" data-ac="AC2">
+          <span id="recip-count" class="text-sm font-medium text-gray-700">3 selected</span>
+          <button type="button" id="recip-clear" class="text-sm text-gray-500 hover:text-gray-700">Unselect all (3)</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT: compose -->
+    <section class="lg:col-span-2" data-story="US-M2.1" data-ac="AC3">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-4">
+
+        <h2 class="text-base font-semibold text-gray-900">Compose</h2>
+
+        <div>
+          <textarea rows="6" placeholder="Type your message…" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:ring-2 focus:ring-primary-200 focus:outline-none text-sm resize-none">Hi [[first_name]], thanks for visiting! …</textarea>
+          <div class="mt-1 flex items-center justify-between text-xs text-gray-500">
+            <span>42 / 160</span>
+            <span>(1 segment)</span>
+          </div>
+        </div>
+
+        <!-- placeholder pills -->
+        <div class="space-y-1.5">
+          <p class="text-xs font-medium text-gray-500">Insert placeholder</p>
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" class="font-mono text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 px-2 py-1 rounded-card">[[first_name]]</button>
+            <button type="button" class="font-mono text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 px-2 py-1 rounded-card">[[profile_name]]</button>
+            <button type="button" class="font-mono text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 px-2 py-1 rounded-card">[[profile_url]]</button>
+          </div>
+        </div>
+
+        <!-- media attach -->
+        <button type="button" class="inline-flex items-center gap-2 h-10 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>
+          Add image (MMS)
+        </button>
+
+        <!-- schedule toggle -->
+        <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+          <div>
+            <p class="text-sm font-medium text-gray-900">Schedule for later</p>
+            <p class="text-xs text-gray-500">Send now if off.</p>
+          </div>
+          <button type="button" data-switch role="switch" aria-checked="false" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors">
+            <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow translate-x-0.5 transition-transform"></span>
+          </button>
+        </div>
+
+        <!-- footer send -->
+        <button type="button" id="recip-send" class="w-full inline-flex items-center justify-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          Send to <span id="recip-n">3</span> recipients
+        </button>
+
+      </div>
+    </section>
+
+  </div>
+
+  <p class="mock-note mt-6">GET /contacts?with_phone_number=1 (infinite scroll). Send → POST /messages with recipients[] (1 credit per recipient + per attachment).</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "connect", storyDomain: "messaging", back: { href: "connect-inbox.html", label: "Back to Connect" }, route: "/connect/new", search: "Search…" });
+</script>
+<script>
+  (function () {
+    var list = document.getElementById("recip-list");
+    var labels = [].slice.call(list.querySelectorAll("label"));
+    var countEl = document.getElementById("recip-count");
+    var clearBtn = document.getElementById("recip-clear");
+    var sendN = document.getElementById("recip-n");
+    var search = document.getElementById("recip-search");
+
+    function cb(l) { return l.querySelector('input[type="checkbox"]'); }
+    function update() {
+      var checked = labels.filter(function (l) { return cb(l).checked; });
+      labels.forEach(function (l) { l.classList.toggle("bg-primary-50", cb(l).checked); });
+      var n = checked.length;
+      countEl.textContent = n + " selected";
+      clearBtn.textContent = "Unselect all (" + n + ")";
+      sendN.textContent = n;
+    }
+    list.addEventListener("change", function (e) { if (e.target.matches('input[type="checkbox"]')) update(); });
+    clearBtn.addEventListener("click", function () { labels.forEach(function (l) { if (!cb(l).disabled) cb(l).checked = false; }); update(); });
+    search.addEventListener("input", function () {
+      var q = (search.value || "").toLowerCase().trim();
+      labels.forEach(function (l) {
+        var name = (l.querySelector(".font-medium") || {}).textContent || "";
+        l.classList.toggle("hidden", !!q && name.toLowerCase().indexOf(q) === -1);
+      });
+    });
+    document.getElementById("recip-send").addEventListener("click", function () {
+      var n = labels.filter(function (l) { return cb(l).checked; }).length;
+      if (!n) { OggvoShell.toast("Pick at least one recipient", "error"); return; }
+      OggvoShell.toast("Sent to " + n + " recipient" + (n === 1 ? "" : "s"), "success");
+    });
+
+    // Schedule switch
+    var sw = document.querySelector("[data-switch]");
+    sw.addEventListener("click", function () {
+      var on = sw.getAttribute("aria-checked") !== "true";
+      sw.setAttribute("aria-checked", on ? "true" : "false");
+      sw.classList.toggle("bg-primary-500", on); sw.classList.toggle("bg-gray-200", !on);
+      var k = sw.querySelector("span"); k.classList.toggle("translate-x-5", on); k.classList.toggle("translate-x-0.5", !on);
+    });
+
+    update();
+  })();
+</script>
+</body>
+</html>

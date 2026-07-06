@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Compose Post</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">New Post</h1>
+    <p class="text-sm text-gray-500 mt-1">Generate and schedule new social media post.</p>
+  </div>
+
+  <!-- Shared in-page tab nav -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+  <p class="mock-note mb-4">Testimonial variant of this composer: <a href="social-testimonial.html" class="text-primary-600 hover:underline">New Testimonial</a> (the screen the reviews "Share" button lands on).</p>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+
+    <!-- LEFT: composer -->
+    <form class="space-y-5">
+
+      <!-- Target platforms -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-2.1" data-ac="AC1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Publish to</label>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-primary-200 bg-primary-50 text-primary-700">
+            <span class="h-5 w-5 rounded bg-linkedin grid place-items-center text-[10px] font-bold text-white">f</span>Facebook
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <button type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-primary-200 bg-primary-50 text-primary-700">
+            <span class="h-5 w-5 rounded bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-[10px] font-bold text-white">ig</span>Instagram
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <button type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-300 bg-white text-gray-600 hover:bg-gray-50">
+            <span class="h-5 w-5 rounded bg-google grid place-items-center text-[10px] font-bold text-white">G</span>Google
+          </button>
+          <button type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-300 bg-white text-gray-600 hover:bg-gray-50">
+            <span class="h-5 w-5 rounded bg-linkedin grid place-items-center text-[9px] font-bold text-white">in</span>LinkedIn
+          </button>
+          <button type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed">
+            <span class="h-5 w-5 rounded bg-gray-400 grid place-items-center text-[10px] font-bold text-white">X</span>Twitter / X
+          </button>
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Twitter / X is greyed out — not connected. <a href="social-accounts.html" class="text-primary-600 hover:underline">Connect it</a>.</p>
+      </section>
+
+      <!-- Message -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-2.1" data-ac="AC2">
+        <label for="msg" class="block text-sm font-medium text-gray-700 mb-1.5">Message</label>
+        <textarea id="msg" rows="6" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">Just closed on this stunning Craftsman on Maple Ave 🏡 Three offers in 48 hours — our sellers are thrilled. Thinking of listing this spring? Let's talk. #realestate #oggvorealty</textarea>
+        <div class="mt-2 flex items-center justify-between">
+          <p class="text-xs text-warning-700 inline-flex items-center gap-1">
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            Instagram needs ≥1 photo · Twitter ≤4 photos
+          </p>
+          <span class="text-xs text-gray-400">196 / 280 <span class="text-gray-300">(Twitter limit)</span></span>
+        </div>
+      </section>
+
+      <!-- Media -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-2.1" data-ac="AC1">
+        <div class="flex items-center justify-between mb-3">
+          <label class="block text-sm font-medium text-gray-700">Media</label>
+          <button type="button" data-open-media class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M12 3v13m-5-8 5-5 5 5"/></svg>
+            Add media
+          </button>
+        </div>
+        <div class="grid grid-cols-4 gap-3">
+          <div class="relative aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300 group">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg>
+            <span class="absolute top-1 left-1 cursor-grab text-gray-400">⋮⋮</span>
+            <button class="absolute top-1 right-1 h-5 w-5 rounded-full bg-white/90 text-gray-500 grid place-items-center text-xs shadow">✕</button>
+          </div>
+          <div class="relative aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg>
+            <span class="absolute top-1 left-1 cursor-grab text-gray-400">⋮⋮</span>
+            <button class="absolute top-1 right-1 h-5 w-5 rounded-full bg-white/90 text-gray-500 grid place-items-center text-xs shadow">✕</button>
+          </div>
+          <div class="relative aspect-square rounded-lg bg-gray-900/90 grid place-items-center text-white/80">
+            <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <span class="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1 rounded">0:18</span>
+            <button class="absolute top-1 right-1 h-5 w-5 rounded-full bg-white/90 text-gray-500 grid place-items-center text-xs shadow">✕</button>
+          </div>
+          <button type="button" data-open-media class="aspect-square rounded-lg border border-dashed border-gray-300 grid place-items-center text-gray-400 hover:border-primary-300 hover:text-primary-500">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+          </button>
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Drag the ⋮⋮ handle to reorder. 2 photos · 1 video.</p>
+      </section>
+
+      <!-- Schedule -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-2.2" data-ac="AC1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Timing</label>
+        <div class="flex flex-wrap items-center gap-3">
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="radio" name="when" class="text-primary-500 focus:ring-primary-200" /> Publish now</label>
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="radio" name="when" checked class="text-primary-500 focus:ring-primary-200" /> Schedule</label>
+          <input type="datetime-local" value="2026-06-26T09:30" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Future-only, shown in your profile timezone (America/New_York).</p>
+      </section>
+
+      <!-- Footer actions -->
+      <div class="flex items-center justify-between gap-2" data-story="US-2.2" data-ac="AC2">
+        <button type="button" class="px-3.5 py-2 text-sm font-medium text-gray-500 rounded-card hover:bg-gray-100">Reset</button>
+        <div class="flex items-center gap-2">
+          <a href="social-accounts.html" class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</a>
+          <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+            Schedule post
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- RIGHT: live preview -->
+    <div class="lg:sticky lg:top-20 self-start">
+      <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-2.1" data-ac="AC3">
+        <!-- preview tabs -->
+        <div class="px-5 pt-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900 mb-3">Live preview</h2>
+          <div class="flex items-center gap-5 text-sm overflow-x-auto">
+            <button class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-linkedin grid place-items-center text-[9px] font-bold text-white">f</span>Facebook</button>
+            <button class="pb-3 -mb-px text-gray-500 hover:text-gray-700 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-[9px] font-bold text-white">ig</span>Instagram</button>
+            <button class="pb-3 -mb-px text-gray-500 hover:text-gray-700 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-google grid place-items-center text-[9px] font-bold text-white">G</span>Google</button>
+            <button class="pb-3 -mb-px text-gray-500 hover:text-gray-700 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-linkedin grid place-items-center text-[8px] font-bold text-white">in</span>LinkedIn</button>
+          </div>
+        </div>
+
+        <!-- mock post card (Facebook) -->
+        <div class="p-5">
+          <div class="border border-gray-200 rounded-card overflow-hidden">
+            <div class="flex items-center gap-3 p-3">
+              <span class="h-10 w-10 rounded-full bg-linkedin grid place-items-center text-sm font-semibold text-white">f</span>
+              <div>
+                <div class="text-sm font-semibold text-gray-900">Oggvo Realty Group</div>
+                <div class="text-xs text-gray-400">Scheduled · Jun 26 · 9:30 AM · 🌐</div>
+              </div>
+            </div>
+            <p class="px-3 pb-3 text-sm text-gray-700">Just closed on this stunning Craftsman on Maple Ave 🏡 Three offers in 48 hours — our sellers are thrilled. Thinking of listing this spring? Let's talk. <span class="text-primary-600">#realestate #oggvorealty</span></p>
+            <div class="grid grid-cols-2 gap-0.5">
+              <div class="aspect-[4/3] bg-gray-100 grid place-items-center text-gray-300"><svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+              <div class="aspect-[4/3] bg-gray-100 grid place-items-center text-gray-300"><svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+            </div>
+            <div class="flex items-center justify-around px-3 py-2 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 10v11M2 14l1.5 6A2 2 0 0 0 5.4 21H17a2 2 0 0 0 2-1.6l1.4-7A2 2 0 0 0 18.5 10H13l1-4a2 2 0 0 0-2-2.5L7 10z"/></svg>Like</span>
+              <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg>Comment</span>
+              <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share</span>
+            </div>
+          </div>
+          <p class="mt-3 text-xs text-gray-400">Previewing Facebook · 2 of 3 media shown (FB carousel).</p>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <p class="mock-note mt-6">POST /social/posts { socials[], photos[], videos[], schedule, message } → one social_posts row per platform × media, status queued/scheduled; the social-publish BullMQ worker publishes async. Per-platform validation errors return keyed by platform name.</p>
+
+  <!-- Media picker modal (Images / Videos / Upload) -->
+  <div id="m-media" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-6.2" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-2xl">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Add media</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 pt-3 border-b border-gray-200">
+        <div id="media-tabs" class="flex items-center gap-5 text-sm">
+          <button data-tab="images" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Images</button>
+          <button data-tab="videos" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Videos</button>
+          <button data-tab="upload" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Upload</button>
+        </div>
+      </div>
+      <div class="p-5">
+        <div data-panel="images" class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+          <button class="relative aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300 ring-2 ring-primary-500"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg><span class="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary-500 text-white grid place-items-center text-[10px]">✓</span></button>
+          <button class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+        </div>
+        <div data-panel="videos" class="hidden">
+          <div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+            <button class="relative aspect-square rounded-lg bg-gray-900/90 grid place-items-center text-white/80"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1 rounded">0:18</span></button>
+            <button class="aspect-square rounded-lg bg-gray-900/90 grid place-items-center text-white/80"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+        </div>
+        <div data-panel="upload" class="hidden">
+          <div class="rounded-card border-2 border-dashed border-gray-300 p-10 text-center text-sm text-gray-500">
+            <svg class="h-8 w-8 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+            Drop files here or <span class="text-primary-600 font-medium">Browse</span>
+            <p class="text-xs text-gray-400 mt-1">Images up to 30 MB · video up to 50 MB</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Media inserted" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Insert Media</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "social-accounts.html", label: "Back to Social" }, route: "/social/create", search: "Search social…" });</script>
+<script>
+  (function () {
+    var modal = document.getElementById("m-media");
+    function close() { modal.classList.add("hidden"); }
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-open-media]")) { modal.classList.remove("hidden"); return; }
+      var closer = e.target.closest("[data-close]");
+      if (closer && modal.contains(closer)) {
+        var t = closer.getAttribute("data-toast"); if (t) OggvoShell.toast(t, "success");
+        close();
+      }
+    });
+    modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    // tab switch
+    var tabs = document.getElementById("media-tabs");
+    tabs.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-tab]"); if (!b) return;
+      [].slice.call(tabs.querySelectorAll("[data-tab]")).forEach(function (x) {
+        var on = x === b;
+        x.className = "pb-3 -mb-px " + (on ? "font-medium text-primary-600 border-b-2 border-primary-500" : "text-gray-500 hover:text-gray-700");
+      });
+      [].slice.call(modal.querySelectorAll("[data-panel]")).forEach(function (p) {
+        p.classList.toggle("hidden", p.getAttribute("data-panel") !== b.getAttribute("data-tab"));
+      });
+    });
+  })();
+</script>
+</body>
+</html>

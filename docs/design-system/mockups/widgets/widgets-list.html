@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Widgets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <div class="max-w-6xl space-y-6">
+
+    <!-- 1. PageHeader -->
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900">Widgets</h1>
+        <p class="mt-1 text-sm text-gray-500">Embeddable surfaces you drop into your own website, emails, or Google listing.</p>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 w-full max-w-md" data-story="US-1.2" data-ac="AC1">
+        <select id="widget-status" class="h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-200">
+          <option value="all">All statuses</option>
+          <option value="live">Live</option>
+          <option value="draft">Draft</option>
+          <option value="none">Not set up</option>
+        </select>
+        <div class="relative flex-1">
+          <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+          <input id="widget-search" type="text" placeholder="Search widgets…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Your widgets (already configured) -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-1.3" data-ac="AC1">
+      <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between gap-4">
+        <h2 class="text-sm font-semibold text-gray-900">Your widgets</h2>
+        <span id="configured-count" class="text-xs text-gray-500">3 configured</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-100">
+              <th class="px-5 py-2.5">Widget</th>
+              <th class="px-5 py-2.5">Type</th>
+              <th class="px-5 py-2.5">Status</th>
+              <th class="px-5 py-2.5">Updated</th>
+              <th class="px-5 py-2.5"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td class="px-5 py-3 font-medium text-gray-900">Homepage Review Stream</td>
+              <td class="px-5 py-3 text-gray-600">Review Stream</td>
+              <td class="px-5 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span></td>
+              <td class="px-5 py-3 text-gray-500">Jun 22, 2026</td>
+              <td class="px-5 py-3">
+                <div class="flex items-center justify-end gap-3">
+                  <a href="widget-editor.html" class="text-primary-600 hover:underline font-medium">Edit</a>
+                  <button type="button" data-del-row class="text-gray-400 hover:text-error-600" aria-label="Delete widget"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-5 py-3 font-medium text-gray-900">Contact Pop-up</td>
+              <td class="px-5 py-3 text-gray-600">Chat Widget</td>
+              <td class="px-5 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span></td>
+              <td class="px-5 py-3 text-gray-500">Jun 19, 2026</td>
+              <td class="px-5 py-3">
+                <div class="flex items-center justify-end gap-3">
+                  <a href="widget-editor.html" class="text-primary-600 hover:underline font-medium">Edit</a>
+                  <button type="button" data-del-row class="text-gray-400 hover:text-error-600" aria-label="Delete widget"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-5 py-3 font-medium text-gray-900">Footer Splash</td>
+              <td class="px-5 py-3 text-gray-600">Review Splash</td>
+              <td class="px-5 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Draft</span></td>
+              <td class="px-5 py-3 text-gray-500">Jun 24, 2026</td>
+              <td class="px-5 py-3">
+                <div class="flex items-center justify-end gap-3">
+                  <a href="widget-editor.html" class="text-primary-600 hover:underline font-medium">Edit</a>
+                  <button type="button" data-del-row class="text-gray-400 hover:text-error-600" aria-label="Delete widget"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></button>
+                </div>
+              </td>
+            </tr>
+            <tr id="widgets-empty" class="hidden"><td colspan="5" class="px-5 py-8 text-center text-sm text-gray-500">No widgets match your filters.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Gallery of widget types -->
+    <div>
+      <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Add a widget</h2>
+      <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-story="US-1.1" data-ac="AC2">
+
+        <!-- Review Stream -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 p-3 flex flex-col gap-1.5">
+            <div class="bg-white rounded border border-gray-200 px-2 py-1.5 shadow-sm">
+              <div class="text-warning-500 text-[10px] leading-none">★★★★★</div>
+              <div class="mt-1 h-1.5 w-3/4 rounded bg-gray-200"></div>
+            </div>
+            <div class="bg-white rounded border border-gray-200 px-2 py-1.5 shadow-sm">
+              <div class="text-warning-500 text-[10px] leading-none">★★★★<span class="text-gray-300">★</span></div>
+              <div class="mt-1 h-1.5 w-2/3 rounded bg-gray-200"></div>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Review Stream</h3>
+              <span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">A live list of your latest reviews with stars and aggregate rating.</p>
+            <a href="widget-editor.html" class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Edit</a>
+          </div>
+        </div>
+
+        <!-- Floating / Review Button -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 grid place-items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold text-white shadow" style="background:#175CD3">
+              <span class="text-warning-300">★</span> Review Us
+            </span>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Floating Badge</h3>
+              <span class="badge bg-gray-100 text-gray-500"><span class="badge-dot"></span>Not set up</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">A "Review Us" button that sends visitors straight to your funnel.</p>
+            <button type="button" data-open="m-create" data-create class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</button>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 p-3 flex items-center gap-2">
+            <div class="flex-1 bg-white rounded border border-gray-200 p-2 shadow-sm">
+              <div class="text-warning-500 text-[10px] leading-none">★★★★★</div>
+              <div class="mt-1 h-1.5 w-full rounded bg-gray-200"></div>
+              <div class="mt-1 h-1.5 w-2/3 rounded bg-gray-200"></div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-gray-300"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-gray-300"></span>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Carousel</h3>
+              <span class="badge bg-gray-100 text-gray-500"><span class="badge-dot"></span>Not set up</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">Auto-rotating cards that cycle through your best reviews.</p>
+            <button type="button" data-open="m-create" data-create class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</button>
+          </div>
+        </div>
+
+        <!-- Grid Wall -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 p-3 grid grid-cols-2 gap-2">
+            <div class="bg-white rounded border border-gray-200 p-1.5 shadow-sm"><div class="text-warning-500 text-[9px] leading-none">★★★★★</div><div class="mt-1 h-1 w-full rounded bg-gray-200"></div></div>
+            <div class="bg-white rounded border border-gray-200 p-1.5 shadow-sm"><div class="text-warning-500 text-[9px] leading-none">★★★★★</div><div class="mt-1 h-1 w-full rounded bg-gray-200"></div></div>
+            <div class="bg-white rounded border border-gray-200 p-1.5 shadow-sm"><div class="text-warning-500 text-[9px] leading-none">★★★★<span class="text-gray-300">★</span></div><div class="mt-1 h-1 w-full rounded bg-gray-200"></div></div>
+            <div class="bg-white rounded border border-gray-200 p-1.5 shadow-sm"><div class="text-warning-500 text-[9px] leading-none">★★★★★</div><div class="mt-1 h-1 w-full rounded bg-gray-200"></div></div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Grid Wall</h3>
+              <span class="badge bg-gray-100 text-gray-500"><span class="badge-dot"></span>Not set up</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">A masonry wall of reviews for a dedicated testimonials page.</p>
+            <button type="button" data-open="m-create" data-create class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</button>
+          </div>
+        </div>
+
+        <!-- Splash -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 relative">
+            <div class="absolute bottom-3 left-3 right-3 bg-white rounded-card border border-gray-200 shadow p-2 flex items-center gap-2">
+              <span class="h-7 w-7 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-[10px] font-semibold text-white">JD</span>
+              <div class="min-w-0">
+                <div class="text-warning-500 text-[10px] leading-none">★★★★★</div>
+                <div class="mt-1 h-1.5 w-24 rounded bg-gray-200"></div>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Review Splash</h3>
+              <span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Draft</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">A rotating bottom-corner toast that surfaces fresh reviews.</p>
+            <a href="widget-editor.html" class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Edit</a>
+          </div>
+        </div>
+
+        <!-- Chat -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col" data-story="US-2.4" data-ac="AC1">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 relative">
+            <div class="absolute bottom-3 right-3 h-9 w-9 rounded-full grid place-items-center text-white shadow" style="background:#175CD3">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg>
+            </div>
+            <div class="absolute bottom-3 left-3 w-28 bg-white rounded-card border border-gray-200 shadow px-2 py-1.5 text-[10px] text-gray-600">Free evaluation? Click here.</div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Chat Widget</h3>
+              <span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">A lead-capture pop-up that opens a Connect conversation.</p>
+            <a href="widget-editor.html" class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Edit</a>
+          </div>
+        </div>
+
+        <!-- Email Signature -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 grid place-items-center p-3">
+            <div class="text-center">
+              <div class="text-[10px] text-gray-500">How would you rate us?</div>
+              <div class="mt-1 text-warning-500 text-xl leading-none">★★★★★</div>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Email Signature</h3>
+              <span class="badge bg-gray-100 text-gray-500"><span class="badge-dot"></span>Not set up</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">Clickable star HTML for Outlook / Gmail signatures.</p>
+            <button type="button" data-open="m-create" data-create class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</button>
+          </div>
+        </div>
+
+        <!-- Google Review Schema -->
+        <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden flex flex-col">
+          <div class="h-32 bg-gray-50 border-b border-gray-100 grid place-items-center p-3">
+            <div class="bg-white rounded border border-gray-200 px-3 py-2 shadow-sm text-center">
+              <div class="text-[10px] font-semibold text-gray-700">Acme Co</div>
+              <div class="mt-0.5 flex items-center justify-center gap-1 text-[10px]"><span class="font-semibold text-gray-700">4.8</span><span class="text-warning-500">★★★★★</span><span class="text-gray-400">(214)</span></div>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-gray-900">Google Schema</h3>
+              <span class="badge bg-gray-100 text-gray-500"><span class="badge-dot"></span>Not set up</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500 flex-1">JSON-LD aggregateRating for a Google rich-snippet star rating.</p>
+            <button type="button" data-open="m-create" data-create class="mt-3 inline-flex items-center justify-center gap-2 h-9 px-3 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</button>
+          </div>
+        </div>
+
+      </div>
+      <p id="gallery-empty" class="hidden text-sm text-gray-500 py-10 text-center">No widget types match your filters.</p>
+    </div>
+
+    <!-- 4. Mock note -->
+    <p class="mock-note">Gallery + configured rows from GET /widgets (config bundle, scoped to profileId). Chat card is gated on permissions.sms — without it the action becomes an "Upgrade to customize" mailto CTA.</p>
+
+  </div>
+
+  <!-- Modal · Create widget -->
+  <div id="m-create" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">Create a widget</h3><p class="text-xs text-gray-500">Pick a type and give it a name.</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Widget type</label>
+          <select id="create-type" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option>Review Stream</option>
+            <option>Floating Badge</option>
+            <option>Carousel</option>
+            <option>Grid Wall</option>
+            <option>Review Splash</option>
+            <option>Chat Widget</option>
+            <option>Email Signature</option>
+            <option>Google Schema</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input id="create-name" type="text" placeholder="e.g. Homepage Reviews" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="create-confirm" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Create widget</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal · Delete widget -->
+  <div id="m-delete" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-sm">
+      <div class="p-5 text-center space-y-3">
+        <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></span>
+        <h3 class="text-lg font-semibold text-gray-900">Delete widget</h3>
+        <p class="text-sm text-gray-500">Remove <span id="delete-name" class="font-medium text-gray-900">this widget</span>? The embed snippet will stop rendering. This can't be undone.</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="delete-confirm" data-close class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "widgets", storyDomain: "widgets", back: { href: "../index.html", label: "All mockups" }, route: "/widgets", search: "Search widgets…" });</script>
+<script>
+  (function () {
+    var statusSel = document.getElementById("widget-status");
+    var search    = document.getElementById("widget-search");
+    var countEl   = document.getElementById("configured-count");
+    var emptyRow  = document.getElementById("widgets-empty");
+    var galleryEmpty = document.getElementById("gallery-empty");
+
+    var rows  = [].slice.call(document.querySelectorAll("table tbody tr")).filter(function (r) { return r.querySelector('a[href="widget-editor.html"]'); });
+    var cards = [].slice.call(document.querySelectorAll("#gallery-grid > div"));
+
+    function statusKey(el) {
+      var b = el.querySelector(".badge");
+      if (!b) return "none";
+      if (b.classList.contains("bg-success-100")) return "live";
+      if (b.classList.contains("bg-warning-100")) return "draft";
+      return "none";
+    }
+    function applyFilter() {
+      var st = statusSel.value;
+      var q = (search.value || "").toLowerCase().trim();
+      var shownRows = 0;
+      rows.forEach(function (r) {
+        var ok = (st === "all" || statusKey(r) === st) && (!q || r.textContent.toLowerCase().indexOf(q) !== -1);
+        r.classList.toggle("hidden", !ok); if (ok) shownRows++;
+      });
+      emptyRow.classList.toggle("hidden", shownRows !== 0);
+      countEl.textContent = shownRows + " configured";
+
+      var shownCards = 0;
+      cards.forEach(function (c) {
+        var ok = (st === "all" || statusKey(c) === st) && (!q || c.textContent.toLowerCase().indexOf(q) !== -1);
+        c.classList.toggle("hidden", !ok); if (ok) shownCards++;
+      });
+      galleryEmpty.classList.toggle("hidden", shownCards !== 0);
+    }
+    statusSel.addEventListener("change", applyFilter);
+    search.addEventListener("input", applyFilter);
+
+    // Create — preset type from the card that opened the modal
+    var createType = document.getElementById("create-type");
+    var createName = document.getElementById("create-name");
+    [].slice.call(document.querySelectorAll("[data-create]")).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = btn.closest("#gallery-grid > div");
+        var h3 = card && card.querySelector("h3");
+        var name = h3 ? h3.textContent.trim() : "";
+        if (name && [].some.call(createType.options, function (o) { return o.value === name || o.text === name; })) createType.value = name;
+        createName.value = "";
+      });
+    });
+    document.getElementById("create-confirm").addEventListener("click", function () {
+      var name = (createName.value || "").trim() || createType.value;
+      closeAll();
+      OggvoShell.toast("Widget “" + name + "” created", "success");
+    });
+
+    // Delete — remember the row that opened the confirm
+    var pendingRow = null;
+    var deleteName = document.getElementById("delete-name");
+    [].slice.call(document.querySelectorAll("[data-del-row]")).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        pendingRow = btn.closest("tr");
+        var cell = pendingRow && pendingRow.querySelector("td");
+        deleteName.textContent = cell ? cell.textContent.trim() : "this widget";
+        document.getElementById("m-delete").classList.remove("hidden");
+      });
+    });
+    document.getElementById("delete-confirm").addEventListener("click", function () {
+      if (pendingRow) { pendingRow.remove(); rows = rows.filter(function (r) { return r !== pendingRow; }); pendingRow = null; applyFilter(); }
+      OggvoShell.toast("Widget deleted", "error");
+    });
+
+    // Generic modal open / close / backdrop / Escape
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var o = e.target.closest("[data-open]");
+      if (o) { var m = document.getElementById(o.getAttribute("data-open")); if (m) m.classList.remove("hidden"); return; }
+      if (e.target.closest("[data-close]")) closeAll();
+    });
+    [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+
+    applyFilter();
+  })();
+</script>
+</body>
+</html>

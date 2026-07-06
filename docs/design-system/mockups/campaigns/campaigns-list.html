@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Campaigns</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. SMS-onboarding banner -->
+  <div class="bg-primary-50 border border-primary-100 rounded-card px-4 py-3 mb-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="grid place-items-center h-9 w-9 rounded-full bg-primary-100 text-primary-600 shrink-0">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zm3 14h4"/></svg>
+      </span>
+      <p class="text-sm text-gray-700">Set up a dedicated SMS number to send text campaigns.</p>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <button class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Set up SMS</button>
+      <button class="inline-grid place-items-center h-8 w-8 text-primary-400 rounded-card hover:bg-primary-100" aria-label="Dismiss">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Campaigns</h1>
+      <p class="text-sm text-gray-500 mt-1">Acme Co</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button data-open="m-settings" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.6a1.4 1.4 0 013.4 0l.2.9a1.4 1.4 0 002 1.2l.8-.4a1.4 1.4 0 011.8 1.8l-.4.8a1.4 1.4 0 001.2 2l.9.2a1.4 1.4 0 010 3.4l-.9.2a1.4 1.4 0 00-1.2 2l.4.8a1.4 1.4 0 01-1.8 1.8l-.8-.4a1.4 1.4 0 00-2 1.2l-.2.9a1.4 1.4 0 01-3.4 0l-.2-.9a1.4 1.4 0 00-2-1.2l-.8.4a1.4 1.4 0 01-1.8-1.8l.4-.8a1.4 1.4 0 00-1.2-2l-.9-.2a1.4 1.4 0 010-3.4l.9-.2a1.4 1.4 0 001.2-2l-.4-.8a1.4 1.4 0 011.8-1.8l.8.4a1.4 1.4 0 002-1.2l.2-.9z"/><circle cx="12" cy="12" r="2.6"/></svg>
+        Campaign Settings
+      </button>
+      <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Create New Campaign
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Type TabBar -->
+  <div class="border-b border-gray-200 mb-4" data-story="US-C1.1" data-ac="AC1">
+    <nav id="type-tabs" class="flex items-center gap-6 text-sm overflow-x-auto">
+      <button type="button" data-value="email" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Review (Email)</button>
+      <button type="button" data-value="sms" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">SMS</button>
+      <button type="button" data-value="newsletter" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Newsletter</button>
+      <button type="button" data-value="birthday" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Birthday</button>
+      <button type="button" data-value="anniversary" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Anniversary</button>
+      <button type="button" data-value="thankyou" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">ThankYou</button>
+    </nav>
+  </div>
+
+  <!-- 4. Filters row -->
+  <div class="flex flex-wrap gap-3 items-center mb-4" data-story="US-C1.2" data-ac="AC1">
+    <div class="relative flex-1 min-w-[16rem]">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.3-4.3M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+      <input type="text" id="campaign-search" placeholder="Search campaigns by name or subject" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="status-filter" class="h-10 px-3 rounded-card border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-200">
+      <option>All statuses</option>
+      <option>Active</option>
+      <option>Paused</option>
+      <option>Inactive</option>
+    </select>
+  </div>
+
+  <!-- 5. Table card -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-C1.1" data-ac="AC2">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 text-xs uppercase text-gray-500 text-left">
+            <th class="px-5 py-3 font-medium">Name</th>
+            <th class="px-5 py-3 font-medium text-right">Subscribed</th>
+            <th class="px-5 py-3 font-medium text-right">Sent</th>
+            <th class="px-5 py-3 font-medium text-right">Opens</th>
+            <th class="px-5 py-3 font-medium text-right">Clicks</th>
+            <th class="px-5 py-3 font-medium">Status</th>
+            <th class="px-5 py-3 font-medium text-center w-10"></th>
+            <th class="px-5 py-3 font-medium text-center w-10"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+
+          <!-- Row 1: Active -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">Spring Review Invite</a>
+              <div class="text-xs text-gray-500">We'd love your feedback on your recent visit</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,248</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,180</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">642</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">214</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Immediately · Send on weekends: Off · Target: vip,leads" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Row 2: Active -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">Post-Visit Thank You</a>
+              <div class="text-xs text-gray-500">Thanks for stopping by — here's 10% off</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,194</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,194</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">731</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">298</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Immediately · Send on weekends: On · Target: all-contacts" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Row 3: Paused -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">Monthly Newsletter</a>
+              <div class="text-xs text-gray-500">June at Acme Co — news, tips &amp; offers</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,326</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">980</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">402</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">96</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Paused</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Scheduled · 1st of month 9:00am · Send on weekends: Off · Target: subscribers" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Row 4: Active -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">New Listing Alert</a>
+              <div class="text-xs text-gray-500">Just listed — homes you'll want to see</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">874</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">812</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">503</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">187</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Immediately · Send on weekends: Off · Target: buyers" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Row 5: Inactive (draft) -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">Referral Reward</a>
+              <div class="text-xs text-gray-500">Refer a friend, you both get $25</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">512</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-400">—</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-400">—</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-400">—</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Inactive</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Not scheduled (draft) · Send on weekends: Off · Target: none" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Row 6: Active -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="campaigns-editor.html" class="font-semibold text-gray-900 hover:text-primary-600">Win-Back Offer</a>
+              <div class="text-xs text-gray-500">We miss you — come back for 15% off</div>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,032</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">1,032</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">389</td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">142</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-gray-100 hover:text-gray-600" title="Immediately · Send on weekends: On · Target: lapsed-90d" aria-label="Schedule info">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01"/></svg>
+              </button>
+            </td>
+            <td class="px-5 py-3 text-center">
+              <button data-row-menu class="inline-grid place-items-center h-8 w-8 text-gray-500 rounded-card hover:bg-gray-100" aria-label="Actions">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <tr id="empty-row" class="hidden"><td colspan="8" class="px-5 py-12 text-center text-sm text-gray-500">No campaigns match these filters.</td></tr>
+
+          <!-- Loading: one sample skeleton row -->
+          <tr>
+            <td class="px-5 py-3">
+              <div class="skeleton h-3.5 w-40 mb-2"></div>
+              <div class="skeleton h-3 w-56"></div>
+            </td>
+            <td class="px-5 py-3"><div class="skeleton h-3 w-12 ml-auto"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-3 w-12 ml-auto"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-3 w-10 ml-auto"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-3 w-10 ml-auto"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-5 w-16 rounded-full"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-5 w-5 rounded-full mx-auto"></div></td>
+            <td class="px-5 py-3"><div class="skeleton h-5 w-5 rounded-full mx-auto"></div></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. Notes -->
+  <p class="mock-note mt-4">GET /campaigns?type=&amp;status=&amp;q= — v2 returns per-row stats inline (v1 N+1) and paginates. Status: 0 Paused / 1 Active / 2 Inactive.</p>
+  <p class="mock-note mt-1.5">Empty state = 'No campaigns' + Create New Campaign CTA. Loading = 5 skeleton rows (one rendered above as a sample).</p>
+
+  <!-- Shared row ⋯ menu (repositioned under the clicked button) -->
+  <div id="row-menu" data-story="US-C1.3" data-ac="AC1" class="hidden fixed z-40 w-44 bg-white border border-gray-200 rounded-card shadow-pop py-1 text-sm">
+    <button id="menu-activate" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6M20 20v-6h-6M20 8a8 8 0 00-15-2M4 16a8 8 0 0015 2"/></svg>Activate</button>
+    <button data-sendtest class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send a test</button>
+    <a href="campaigns-editor.html" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>Edit</a>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-open="m-delete" class="w-full flex items-center gap-2.5 px-3 py-2 text-error-600 hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>Delete</button>
+  </div>
+
+  <!-- Modal · Campaign Settings (sub-tabs: settings / setup / delete) -->
+  <div id="m-settings" data-modal data-story="US-C6.1" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 id="settings-title" class="text-lg font-semibold text-gray-900">Campaign Settings</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 pt-3 border-b border-gray-200">
+        <div id="settings-tabs" class="flex items-center gap-5 text-sm">
+          <button data-value="settings" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Settings</button>
+          <button data-value="setup" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">SMS setup</button>
+          <button data-value="delete" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">SMS delete</button>
+        </div>
+      </div>
+      <div class="px-5 py-4">
+        <!-- settings panel -->
+        <div data-panel="settings" class="space-y-4">
+          <div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-2">Email Settings</h4>
+            <div class="space-y-3">
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">From Name</label><input type="text" value="Acme Co" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /><p class="text-xs text-gray-400 mt-1">If empty, default value will be used</p></div>
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">Reply To</label><input type="email" value="hello@acme.com" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /><p class="text-xs text-gray-400 mt-1">If empty, default value will be used</p></div>
+            </div>
+          </div>
+          <hr class="border-gray-200" />
+          <div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-2">SMS Settings</h4>
+            <div><label class="block text-sm font-medium text-gray-700 mb-1">SMS Number</label><input type="text" value="(415) 555-0100" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /><p class="text-xs text-gray-400 mt-1">Invites are sent from this number</p></div>
+          </div>
+        </div>
+        <!-- setup panel -->
+        <div data-panel="setup" class="hidden space-y-3">
+          <div class="flex items-end gap-2">
+            <div class="flex-1"><label class="block text-sm font-medium text-gray-700 mb-1">Area code</label><input type="text" placeholder="415" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+            <button data-toast="Searching numbers…" class="h-10 px-3.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Search</button>
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Available numbers</label><div class="rounded-card border border-gray-300 p-3 text-sm text-gray-500">No available numbers</div></div>
+        </div>
+        <!-- delete panel -->
+        <div data-panel="delete" class="hidden text-center space-y-2 py-4">
+          <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+          <p class="font-semibold text-gray-900">Are you sure?</p>
+          <p class="text-sm text-gray-500">Deleting your SMS number will stop all SMS campaigns!</p>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="settings-confirm" data-close data-toast="Data updated successfully!" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Update</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal · Send a Test (Email/SMS field swap) -->
+  <div id="m-sendtest" data-modal data-story="US-C6.2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">Send a Test</h3><p id="sendtest-sub" class="text-xs text-gray-500">Campaign: Spring Review Invite</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3">
+        <div data-test-field="email"><label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label><input type="email" placeholder="you@example.com" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        <div data-test-field="sms" class="hidden"><label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label><input type="text" placeholder="(415) 555-0123" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">First Name</label><input type="text" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label><input type="text" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Campaign sent successfully!" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal · Delete -->
+  <div id="m-delete" data-modal data-story="US-C6.3" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-sm">
+      <div class="p-5 text-center space-y-3">
+        <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></span>
+        <h3 class="text-lg font-semibold text-gray-900">Delete campaign</h3>
+        <p class="text-sm text-gray-500">Are you sure? You won't be able to revert this!</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="delete-confirm" data-close class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal · Campaign Schedule (activation) -->
+  <div id="m-schedule" data-modal data-story="US-C6.6" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">Campaign Schedule</h3><p class="text-xs text-gray-500">Update schedule date in order to activate this campaign</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Schedule Date</label><input id="schedule-date" type="date" min="2026-06-27" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        <p class="text-xs text-warning-700 inline-flex items-start gap-1.5"><svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v5m0 3h.01"/></svg>If you keep the current schedule date, the campaign will remain inactive.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="schedule-activate" disabled class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card opacity-50 cursor-not-allowed">Activate</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "campaigns", storyDomain: "campaigns", back: { href: "../index.html", label: "All mockups" }, route: "/campaigns", search: "Search campaigns…" });
+</script>
+<script>
+  (function () {
+    var TYPE = {
+      "Spring Review Invite": "email", "Win-Back Offer": "email",
+      "Post-Visit Thank You": "thankyou",
+      "Monthly Newsletter": "newsletter", "New Listing Alert": "newsletter", "Referral Reward": "newsletter"
+    };
+    var tbody = document.querySelector("table tbody");
+    var emptyRow = document.getElementById("empty-row");
+    var rows = [].slice.call(tbody.querySelectorAll("tr")).filter(function (r) { return r.querySelector('a[href="campaigns-editor.html"]'); });
+    var search = document.getElementById("campaign-search");
+    var statusSel = document.getElementById("status-filter");
+    var curType = "email";
+
+    function nameOf(r) { var a = r.querySelector("a"); return a ? a.textContent.trim() : ""; }
+    function typeOf(r) { return TYPE[nameOf(r)] || "email"; }
+    function statusOf(r) {
+      if (r.querySelector(".bg-success-100")) return "Active";
+      if (r.querySelector(".bg-warning-100")) return "Paused";
+      if (r.querySelector(".bg-gray-100")) return "Inactive";
+      return "";
+    }
+    var BADGE = {
+      Active: ["bg-success-100 text-success-700", "bg-success-500"],
+      Paused: ["bg-warning-100 text-warning-700", "bg-warning-500"],
+      Inactive: ["bg-gray-100 text-gray-600", "bg-gray-400"]
+    };
+    function setStatus(r, s) {
+      var b = BADGE[s];
+      r.children[5].innerHTML = '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ' + b[0] + '"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full ' + b[1] + ' align-middle"></span>' + s + '</span>';
+    }
+    function applyFilter() {
+      var q = (search.value || "").toLowerCase().trim();
+      var st = statusSel.value;
+      var any = false;
+      rows.forEach(function (r) {
+        var ok = typeOf(r) === curType && (st === "All statuses" || statusOf(r) === st) && (!q || r.textContent.toLowerCase().indexOf(q) !== -1);
+        r.classList.toggle("hidden", !ok); if (ok) any = true;
+      });
+      emptyRow.classList.toggle("hidden", any);
+    }
+    OggvoShell.buttonGroup(document.getElementById("type-tabs"), {
+      active: "font-medium text-primary-600 border-b-2 border-primary-500",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (v) { curType = v; applyFilter(); }
+    });
+    search.addEventListener("input", applyFilter);
+    statusSel.addEventListener("change", applyFilter);
+
+    // Row ⋯ menu
+    var menu = document.getElementById("row-menu");
+    var menuActivate = document.getElementById("menu-activate");
+    function closeMenu() { menu.classList.add("hidden"); }
+    [].slice.call(document.querySelectorAll("[data-row-menu]")).forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        window.__row = btn.closest("tr");
+        menuActivate.textContent = statusOf(window.__row) === "Active" ? "Pause" : "Activate";
+        var r = btn.getBoundingClientRect();
+        menu.style.top = (r.bottom + 6) + "px"; menu.style.left = Math.max(8, r.right - 176) + "px";
+        menu.classList.toggle("hidden");
+      });
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("#row-menu") && !e.target.closest("[data-row-menu]")) closeMenu();
+    });
+    menuActivate.addEventListener("click", function () {
+      var row = window.__row; closeMenu();
+      if (statusOf(row) === "Active") { setStatus(row, "Paused"); applyFilter(); OggvoShell.toast("Campaign Status Updated", "gray"); }
+      else { document.getElementById("m-schedule").classList.remove("hidden"); } // activating → schedule
+    });
+    document.querySelector("[data-sendtest]").addEventListener("click", function () {
+      closeMenu();
+      var row = window.__row, t = typeOf(row);
+      document.getElementById("sendtest-sub").textContent = "Campaign: " + nameOf(row);
+      document.querySelector('[data-test-field="email"]').classList.toggle("hidden", t === "sms");
+      document.querySelector('[data-test-field="sms"]').classList.toggle("hidden", t !== "sms");
+      document.getElementById("m-sendtest").classList.remove("hidden");
+    });
+
+    // Schedule activation
+    var schedDate = document.getElementById("schedule-date");
+    var schedBtn = document.getElementById("schedule-activate");
+    schedDate.addEventListener("input", function () {
+      var ok = !!schedDate.value && schedDate.value >= schedDate.min;
+      schedBtn.disabled = !ok;
+      schedBtn.classList.toggle("opacity-50", !ok); schedBtn.classList.toggle("cursor-not-allowed", !ok);
+    });
+    schedBtn.addEventListener("click", function () {
+      if (schedBtn.disabled) return;
+      if (window.__row) { setStatus(window.__row, "Active"); applyFilter(); }
+      document.getElementById("m-schedule").classList.add("hidden");
+      OggvoShell.toast("Campaign Status Updated", "success");
+    });
+    document.getElementById("delete-confirm").addEventListener("click", function () {
+      if (window.__row) { window.__row.remove(); rows = rows.filter(function (r) { return r !== window.__row; }); applyFilter(); }
+      OggvoShell.toast("Campaign deleted", "error");
+    });
+
+    // Settings sub-tabs
+    var stitle = document.getElementById("settings-title");
+    var STITLES = { settings: "Campaign Settings", setup: "Search SMS Numbers", delete: "Delete SMS Account" };
+    var sconfirm = document.getElementById("settings-confirm");
+    OggvoShell.buttonGroup(document.getElementById("settings-tabs"), {
+      active: "font-medium text-primary-600 border-b-2 border-primary-500",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (v) {
+        stitle.textContent = STITLES[v];
+        [].slice.call(document.querySelectorAll("#m-settings [data-panel]")).forEach(function (p) { p.classList.toggle("hidden", p.getAttribute("data-panel") !== v); });
+        if (v === "delete") { sconfirm.textContent = "Yes, Delete it!"; sconfirm.setAttribute("data-toast", "SMS number deleted successfully!"); sconfirm.className = "px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600"; }
+        else if (v === "setup") { sconfirm.textContent = "Save Number"; sconfirm.setAttribute("data-toast", "Data updated successfully!"); sconfirm.className = "px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600"; }
+        else { sconfirm.textContent = "Update"; sconfirm.setAttribute("data-toast", "Data updated successfully!"); sconfirm.className = "px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600"; }
+      }
+    });
+
+    // Generic modal open/close/toast
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var o = e.target.closest("[data-open]");
+      if (o) { var m = document.getElementById(o.getAttribute("data-open")); if (m) { closeMenu(); m.classList.remove("hidden"); } return; }
+      if (e.target.closest("[data-close]")) closeAll();
+      var t = e.target.closest("[data-toast]");
+      if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+    });
+    [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeAll(); closeMenu(); } });
+
+    applyFilter();
+  })();
+</script>
+</body>
+</html>

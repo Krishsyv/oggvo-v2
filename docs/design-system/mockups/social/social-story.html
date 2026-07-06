@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Compose Story</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">New Story</h1>
+    <p class="text-sm text-gray-500 mt-1">Generate and schedule a new story for social media.</p>
+  </div>
+
+  <!-- Shared in-page tab nav (Story is a Composer sub-route) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+  <p class="mock-note mb-4">Story variant of the composer. Feed-post sibling: <a href="social-composer.html" class="text-primary-600 hover:underline">New Post</a>. Stories are vertical (9:16) and ephemeral — they expire after 24h.</p>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+
+    <!-- LEFT: composer -->
+    <form class="space-y-5" id="story-form">
+
+      <!-- Target platforms (Stories-capable only) -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-7.1" data-ac="AC1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Publish to</label>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" data-plat="Facebook" class="plat-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-primary-200 bg-primary-50 text-primary-700">
+            <span class="h-5 w-5 rounded bg-linkedin grid place-items-center text-[10px] font-bold text-white">f</span>Facebook
+            <svg class="chk h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <button type="button" data-plat="Instagram" class="plat-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-primary-200 bg-primary-50 text-primary-700">
+            <span class="h-5 w-5 rounded bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-[10px] font-bold text-white">ig</span>Instagram
+            <svg class="chk h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <button type="button" disabled class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed">
+            <span class="h-5 w-5 rounded bg-gray-400 grid place-items-center text-[10px] font-bold text-white">G</span>Google
+          </button>
+          <button type="button" disabled class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed">
+            <span class="h-5 w-5 rounded bg-gray-400 grid place-items-center text-[9px] font-bold text-white">in</span>LinkedIn
+          </button>
+          <button type="button" disabled class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed">
+            <span class="h-5 w-5 rounded bg-gray-400 grid place-items-center text-[10px] font-bold text-white">X</span>Twitter / X
+          </button>
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Only <span class="font-medium text-gray-500">Facebook</span> and <span class="font-medium text-gray-500">Instagram</span> expose a Stories API — Google, LinkedIn and Twitter/X have no story surface.</p>
+      </section>
+
+      <!-- Template generator: Category -> Template -> Version -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-7.1" data-ac="AC2">
+        <div class="flex items-center justify-between mb-3">
+          <label class="block text-sm font-medium text-gray-700">Story template</label>
+          <span class="text-xs text-gray-400">Category-driven generation</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label for="sel-category" class="block text-xs font-medium text-gray-500 mb-1">Category</label>
+            <select id="sel-category" class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"></select>
+          </div>
+          <div>
+            <label for="sel-template" class="block text-xs font-medium text-gray-500 mb-1">Template</label>
+            <select id="sel-template" class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"></select>
+          </div>
+          <div>
+            <label for="sel-version" class="block text-xs font-medium text-gray-500 mb-1">Version</label>
+            <select id="sel-version" class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"></select>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-warning-700 inline-flex items-center gap-1">
+          <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+          Fix-on-rebuild: v1 mislabeled all three dropdowns "Select Category" — v2 labels them Category / Template / Version.
+        </p>
+      </section>
+
+      <!-- Background / media -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-7.1" data-ac="AC3">
+        <div class="flex items-center justify-between mb-3">
+          <label class="block text-sm font-medium text-gray-700">Background &amp; media</label>
+          <button type="button" data-open-media class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M12 3v13m-5-8 5-5 5 5"/></svg>
+            Pick media
+          </button>
+        </div>
+        <div class="grid grid-cols-4 gap-3">
+          <div class="relative aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300 ring-2 ring-primary-500">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg>
+            <span class="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary-500 text-white grid place-items-center text-[10px]">✓</span>
+          </div>
+          <div class="relative aspect-[9/16] rounded-lg bg-gray-900/90 grid place-items-center text-white/80">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <span class="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1 rounded">0:09</span>
+          </div>
+          <button type="button" data-open-media class="aspect-[9/16] rounded-lg border border-dashed border-gray-300 grid place-items-center text-gray-400 hover:border-primary-300 hover:text-primary-500">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+          </button>
+        </div>
+        <p class="mt-2 text-xs text-gray-400">One media per story · 9:16 safe frame (1080 × 1920). Selected media fills the preview behind the template overlay.</p>
+      </section>
+
+      <!-- Caption / text overlay -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-7.1" data-ac="AC4">
+        <label for="overlay" class="block text-sm font-medium text-gray-700 mb-1.5">Text overlay</label>
+        <textarea id="overlay" rows="2" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">Happy 4th of July! 🎆 Open all weekend — swing by.</textarea>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <span class="text-xs font-medium text-gray-500">Position</span>
+          <div id="pos-group" class="inline-flex items-center bg-gray-100 rounded-card p-0.5">
+            <button type="button" data-value="top" class="px-3 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">Top</button>
+            <button type="button" data-value="middle" class="px-3 py-1.5 text-sm font-medium rounded-[0.6rem] bg-white text-primary-700 shadow-card">Middle</button>
+            <button type="button" data-value="bottom" class="px-3 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">Bottom</button>
+          </div>
+          <span class="ml-auto text-xs text-gray-400"><span id="overlay-count">44</span> chars</span>
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Stories carry no clickable link or hashtags in-frame — overlay text is display-only.</p>
+      </section>
+
+      <!-- Schedule -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-7.2" data-ac="AC1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Timing</label>
+        <div class="flex flex-wrap items-center gap-3">
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="radio" name="when" value="now" class="text-primary-500 focus:ring-primary-200" /> Post now</label>
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700"><input type="radio" name="when" value="schedule" checked class="text-primary-500 focus:ring-primary-200" /> Schedule</label>
+          <input id="sched-at" type="datetime-local" value="2026-07-04T09:30" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+        <p class="mt-2 text-xs text-gray-400">Future-only, shown in your profile timezone (America/New_York).</p>
+      </section>
+
+      <!-- Footer actions -->
+      <div class="flex items-center justify-between gap-2" data-story="US-7.2" data-ac="AC2">
+        <button type="button" id="reset-btn" class="px-3.5 py-2 text-sm font-medium text-gray-500 rounded-card hover:bg-gray-100">Reset</button>
+        <div class="flex items-center gap-2">
+          <a href="social-accounts.html" class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</a>
+          <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+            <span id="submit-label">Schedule story</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- RIGHT: live 9:16 preview -->
+    <div class="lg:sticky lg:top-20 self-start">
+      <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-7.1" data-ac="AC5">
+        <!-- preview tabs -->
+        <div class="px-5 pt-4 border-b border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-900 mb-3">Live preview</h2>
+          <div id="pv-tabs" class="flex items-center gap-5 text-sm overflow-x-auto">
+            <button data-value="Instagram" class="pv-tab pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-[9px] font-bold text-white">ig</span>Instagram</button>
+            <button data-value="Facebook" class="pv-tab pb-3 -mb-px text-gray-500 hover:text-gray-700 flex items-center gap-1.5"><span class="h-4 w-4 rounded bg-linkedin grid place-items-center text-[9px] font-bold text-white">f</span>Facebook</button>
+          </div>
+        </div>
+
+        <!-- 9:16 story frame -->
+        <div class="p-5 grid place-items-center">
+          <div class="w-full max-w-[300px]">
+            <div id="story-frame" class="relative mx-auto aspect-[9/16] w-full rounded-[1.75rem] overflow-hidden shadow-pop ring-4 ring-gray-900/5" style="background:linear-gradient(160deg,#1849a9,#2e90fa)">
+              <!-- media fill placeholder -->
+              <div class="absolute inset-0 grid place-items-center text-white/30">
+                <svg class="h-16 w-16" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg>
+              </div>
+              <!-- scrim for legibility -->
+              <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.34))"></div>
+
+              <!-- progress segments (story chrome) -->
+              <div id="pv-segments" class="absolute top-2.5 left-3 right-3 flex gap-1">
+                <span class="h-0.5 flex-1 rounded-full bg-white/90"></span>
+                <span class="h-0.5 flex-1 rounded-full bg-white/40"></span>
+                <span class="h-0.5 flex-1 rounded-full bg-white/40"></span>
+              </div>
+
+              <!-- author header -->
+              <div class="absolute top-5 left-3 right-3 flex items-center gap-2">
+                <span id="pv-ring" class="p-[2px] rounded-full bg-gradient-to-tr from-warning-500 to-error-600">
+                  <span class="h-7 w-7 rounded-full bg-white grid place-items-center text-[10px] font-bold text-gray-700 ring-2 ring-white">OR</span>
+                </span>
+                <span class="text-xs font-semibold text-white drop-shadow">Oggvo Realty Group</span>
+                <span class="text-[11px] text-white/70">1h</span>
+                <span class="ml-auto text-white/80 text-lg leading-none">⋯</span>
+              </div>
+
+              <!-- template badge -->
+              <span id="pv-badge" class="absolute top-16 left-1/2 -translate-x-1/2 inline-flex items-center px-2.5 py-1 rounded-full bg-white/90 text-[11px] font-bold text-gray-800 whitespace-nowrap">🎆 4th of July</span>
+
+              <!-- overlay text -->
+              <div id="pv-overlay" class="absolute inset-x-4 flex" style="top:50%;transform:translateY(-50%)">
+                <p id="pv-overlay-text" class="w-full text-center text-white text-lg font-bold leading-snug drop-shadow-[0_1px_6px_rgba(0,0,0,.5)]">Happy 4th of July! 🎆 Open all weekend — swing by.</p>
+              </div>
+
+              <!-- IG reply bar / FB footer -->
+              <div id="pv-footer" class="absolute bottom-3 left-3 right-3 flex items-center gap-2">
+                <span class="flex-1 h-8 rounded-full border border-white/50 text-white/70 text-xs flex items-center px-3">Send message</span>
+                <svg class="h-5 w-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                <svg class="h-5 w-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>
+              </div>
+            </div>
+            <p class="mt-3 text-center text-xs text-gray-400"><span id="pv-caption">Previewing Instagram Story</span> · 9:16 · expires in 24h</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <p class="mock-note mt-6" data-story="US-7.2" data-ac="AC3">POST /social/posts { type:'story', socials[], photos[]/videos[], overlay:{ text, position }, template:{ category, template, version }, schedule } → one social_posts row per platform, type=story, status queued/scheduled; the social-publish BullMQ worker publishes async. Story requires exactly one media; per-platform validation errors return keyed by platform name. Rows record a 24h expiry.</p>
+
+  <!-- Media picker modal (Images / Videos / Upload) — reused from the post composer -->
+  <div id="m-media" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-6.2" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-2xl">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Pick media</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 pt-3 border-b border-gray-200">
+        <div id="media-tabs" class="flex items-center gap-5 text-sm">
+          <button data-tab="images" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Images</button>
+          <button data-tab="videos" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Videos</button>
+          <button data-tab="upload" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Upload</button>
+        </div>
+      </div>
+      <div class="p-5">
+        <div data-panel="images" class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+          <button class="relative aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300 ring-2 ring-primary-500"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg><span class="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary-500 text-white grid place-items-center text-[10px]">✓</span></button>
+          <button class="aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+          <button class="aspect-[9/16] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></button>
+        </div>
+        <div data-panel="videos" class="hidden">
+          <div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+            <button class="relative aspect-[9/16] rounded-lg bg-gray-900/90 grid place-items-center text-white/80"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1 rounded">0:09</span></button>
+            <button class="aspect-[9/16] rounded-lg bg-gray-900/90 grid place-items-center text-white/80"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+        </div>
+        <div data-panel="upload" class="hidden">
+          <div class="rounded-card border-2 border-dashed border-gray-300 p-10 text-center text-sm text-gray-500">
+            <svg class="h-8 w-8 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+            Drop files here or <span class="text-primary-600 font-medium">Browse</span>
+            <p class="text-xs text-gray-400 mt-1">Vertical media recommended · images up to 30 MB · video up to 50 MB</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Media inserted" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Insert Media</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "../index.html", label: "All mockups" }, route: "/social/create/story", search: "Search…" });</script>
+<script>
+  (function () {
+    // ---- media picker modal (mirrors social-composer.html) ----
+    var modal = document.getElementById("m-media");
+    function close() { modal.classList.add("hidden"); }
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-open-media]")) { modal.classList.remove("hidden"); return; }
+      var closer = e.target.closest("[data-close]");
+      if (closer && modal.contains(closer)) {
+        var t = closer.getAttribute("data-toast"); if (t) OggvoShell.toast(t, "success");
+        close();
+      }
+    });
+    modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    var tabs = document.getElementById("media-tabs");
+    tabs.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-tab]"); if (!b) return;
+      [].slice.call(tabs.querySelectorAll("[data-tab]")).forEach(function (x) {
+        var on = x === b;
+        x.className = "pb-3 -mb-px " + (on ? "font-medium text-primary-600 border-b-2 border-primary-500" : "text-gray-500 hover:text-gray-700");
+      });
+      [].slice.call(modal.querySelectorAll("[data-panel]")).forEach(function (p) {
+        p.classList.toggle("hidden", p.getAttribute("data-panel") !== b.getAttribute("data-tab"));
+      });
+    });
+
+    // ---- template generator (Category -> Template -> Version) ----
+    var TEMPLATES = {
+      "Holiday": {
+        "4th of July": { badge: "🎆 4th of July", bg: "linear-gradient(160deg,#b42318,#1849a9)" },
+        "Thanksgiving": { badge: "🍂 Thanksgiving", bg: "linear-gradient(160deg,#b54708,#dc6803)" },
+        "Christmas":    { badge: "🎄 Merry Christmas", bg: "linear-gradient(160deg,#067647,#b42318)" }
+      },
+      "Promotion": {
+        "Weekend Sale": { badge: "🏷️ Weekend Sale", bg: "linear-gradient(160deg,#6941c6,#e31b54)" },
+        "New Listing":  { badge: "🏡 New Listing", bg: "linear-gradient(160deg,#1849a9,#2e90fa)" }
+      },
+      "Announcement": {
+        "Now Open":    { badge: "✨ Now Open", bg: "linear-gradient(160deg,#0e7090,#15b79e)" },
+        "We're Hiring": { badge: "📣 We're Hiring", bg: "linear-gradient(160deg,#175cd3,#6941c6)" }
+      }
+    };
+    var VERSIONS = ["Type 1", "Type 2", "Type 3"];
+
+    var selCat = document.getElementById("sel-category");
+    var selTpl = document.getElementById("sel-template");
+    var selVer = document.getElementById("sel-version");
+    var frame = document.getElementById("story-frame");
+    var badge = document.getElementById("pv-badge");
+
+    function fill(sel, items) { sel.innerHTML = items.map(function (i) { return '<option>' + i + '</option>'; }).join(""); }
+    function applyTemplate() {
+      var cat = selCat.value, tpl = selTpl.value;
+      var t = (TEMPLATES[cat] || {})[tpl];
+      if (!t) return;
+      frame.style.background = t.bg;
+      badge.textContent = t.badge;
+    }
+    fill(selCat, Object.keys(TEMPLATES));
+    function refreshTemplates() { fill(selTpl, Object.keys(TEMPLATES[selCat.value])); applyTemplate(); }
+    fill(selVer, VERSIONS);
+    refreshTemplates();
+    selCat.addEventListener("change", refreshTemplates);
+    selTpl.addEventListener("change", applyTemplate);
+    selVer.addEventListener("change", applyTemplate);
+
+    // ---- platform chips (multi-select) ----
+    document.querySelectorAll(".plat-chip").forEach(function (c) {
+      c.addEventListener("click", function () {
+        var on = c.classList.toggle("bg-primary-50");
+        c.classList.toggle("border-primary-200", on);
+        c.classList.toggle("text-primary-700", on);
+        c.classList.toggle("border-gray-300", !on);
+        c.classList.toggle("bg-white", !on);
+        c.classList.toggle("text-gray-600", !on);
+        c.querySelector(".chk").style.display = on ? "" : "none";
+      });
+    });
+
+    // ---- overlay text + position ----
+    var overlay = document.getElementById("overlay");
+    var pvText = document.getElementById("pv-overlay-text");
+    var pvOverlay = document.getElementById("pv-overlay");
+    function refreshOverlay() {
+      pvText.textContent = overlay.value || "";
+      document.getElementById("overlay-count").textContent = overlay.value.length;
+    }
+    overlay.addEventListener("input", refreshOverlay);
+
+    OggvoShell.buttonGroup(document.getElementById("pos-group"), {
+      active: "bg-white text-primary-700 shadow-card",
+      inactive: "text-gray-500",
+      onChange: function (val) {
+        if (val === "top")    { pvOverlay.style.top = "14%"; pvOverlay.style.transform = "none"; }
+        else if (val === "bottom") { pvOverlay.style.top = "auto"; pvOverlay.style.bottom = "16%"; pvOverlay.style.transform = "none"; }
+        else { pvOverlay.style.top = "50%"; pvOverlay.style.bottom = "auto"; pvOverlay.style.transform = "translateY(-50%)"; }
+      }
+    });
+
+    // ---- preview platform tab (IG vs FB chrome) ----
+    var ring = document.getElementById("pv-ring");
+    var footer = document.getElementById("pv-footer");
+    var caption = document.getElementById("pv-caption");
+    OggvoShell.buttonGroup(document.getElementById("pv-tabs"), {
+      active: "font-medium text-primary-600 border-b-2 border-primary-500",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (val) {
+        var ig = val === "Instagram";
+        ring.className = ig
+          ? "p-[2px] rounded-full bg-gradient-to-tr from-warning-500 to-error-600"
+          : "p-[2px] rounded-full bg-white/60";
+        footer.style.display = ig ? "" : "none";
+        caption.textContent = "Previewing " + val + " Story";
+      }
+    });
+
+    // ---- schedule radios toggle submit label ----
+    document.querySelectorAll('input[name="when"]').forEach(function (r) {
+      r.addEventListener("change", function () {
+        document.getElementById("sched-at").disabled = r.value === "now";
+        document.getElementById("submit-label").textContent = r.value === "now" ? "Post story" : "Schedule story";
+      });
+    });
+
+    // ---- submit / reset ----
+    document.getElementById("story-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var plats = [].slice.call(document.querySelectorAll(".plat-chip")).filter(function (c) { return c.classList.contains("bg-primary-50"); });
+      if (!plats.length) { OggvoShell.toast("Select at least one platform", "error"); return; }
+      var mode = document.querySelector('input[name="when"]:checked').value;
+      OggvoShell.toast(mode === "now" ? "Story created successfully!" : "Story scheduled successfully!", "success");
+    });
+    document.getElementById("reset-btn").addEventListener("click", function () { OggvoShell.toast("Composer reset", "gray"); });
+
+    refreshOverlay();
+  })();
+</script>
+</body>
+</html>

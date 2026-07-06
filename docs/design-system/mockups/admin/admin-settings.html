@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Platform Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-semibold text-gray-900">Platform Settings</h1>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+          OGGVO_ADMIN
+        </span>
+      </div>
+      <p class="text-sm text-gray-500 mt-1">Global settings that apply across every account — distinct from a tenant's own Settings page.</p>
+    </div>
+    <a href="admin.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+      Admin Console
+    </a>
+  </div>
+
+  <form id="settings-form" class="max-w-3xl space-y-6">
+
+    <!-- Card A — Data-deletion grace period -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A10.1" data-ac="AC1">
+      <h2 class="text-base font-medium text-gray-900">Facebook / Instagram data-deletion grace period</h2>
+      <p class="text-sm text-gray-500 mt-1 mb-4">When a Meta account is disconnected (in-app or removed on Facebook's side), its data is hidden immediately and permanently deleted after this window. Reconnecting before then cancels the deletion.</p>
+      <label class="block max-w-[220px]">
+        <span class="block text-sm font-medium text-gray-700 mb-1">Grace period (days)</span>
+        <input id="grace-days" type="number" min="1" step="1" value="30" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </label>
+      <p class="text-xs text-gray-400 mt-2">Changing this affects only deletions started from now on — requests already counting down keep their original date. Default is 30.</p>
+    </section>
+
+    <!-- Card B — Global toggles -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A10.2" data-ac="AC1">
+      <h2 class="text-base font-medium text-gray-900 mb-1">Global toggles</h2>
+      <p class="text-sm text-gray-500 mb-3">Platform-wide switches. Turning one off overrides the corresponding per-tenant setting everywhere.</p>
+      <div class="space-y-1">
+
+        <div class="toggle-row flex items-center justify-between py-3 border-b border-gray-100">
+          <div><span class="block text-sm font-medium text-gray-700">Maintenance mode</span><span class="block text-xs text-gray-400">Puts the portal in read-only and shows a banner to every tenant.</span></div>
+          <button type="button" role="switch" aria-checked="false" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+
+        <div class="toggle-row flex items-center justify-between py-3 border-b border-gray-100">
+          <div><span class="block text-sm font-medium text-gray-700">Allow new sign-ups</span><span class="block text-xs text-gray-400">When off, the public registration flow is closed.</span></div>
+          <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+
+        <div class="toggle-row flex items-center justify-between py-3 border-b border-gray-100">
+          <div><span class="block text-sm font-medium text-gray-700">Outbound SMS enabled</span><span class="block text-xs text-gray-400">Master kill-switch for all Twilio sends across the platform.</span></div>
+          <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+
+        <div class="toggle-row flex items-center justify-between py-3">
+          <div><span class="block text-sm font-medium text-gray-700">Enforce webhook signature verification</span><span class="block text-xs text-gray-400">Square, Twilio &amp; Shopify signatures required (v1 had these disabled).</span></div>
+          <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Card C — Feature flags -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A10.3" data-ac="AC1">
+      <div class="flex items-center justify-between mb-1">
+        <h2 class="text-base font-medium text-gray-900">Feature flags</h2>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700">Staged rollout</span>
+      </div>
+      <p class="text-sm text-gray-500 mb-3">Gate in-progress features. Each flag can target a rollout scope before general availability.</p>
+      <div class="space-y-1">
+
+        <div class="toggle-row flex items-center justify-between py-3 border-b border-gray-100">
+          <div class="min-w-0"><span class="block text-sm font-medium text-gray-700">Toll-free verification UI <code class="text-[11px] text-gray-400 font-mono">tollfree_verification</code></span></div>
+          <div class="flex items-center gap-3 shrink-0">
+            <select class="h-9 px-2.5 rounded-card border border-gray-300 text-xs focus:outline-none focus:ring-2 focus:ring-primary-200"><option>All accounts</option><option selected>Beta cohort</option><option>Internal only</option><option>Off</option></select>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+        </div>
+
+        <div class="toggle-row flex items-center justify-between py-3 border-b border-gray-100">
+          <div class="min-w-0"><span class="block text-sm font-medium text-gray-700">Auto-share whitelist <code class="text-[11px] text-gray-400 font-mono">auto_share_platforms</code></span></div>
+          <div class="flex items-center gap-3 shrink-0">
+            <select class="h-9 px-2.5 rounded-card border border-gray-300 text-xs focus:outline-none focus:ring-2 focus:ring-primary-200"><option selected>All accounts</option><option>Beta cohort</option><option>Internal only</option><option>Off</option></select>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+        </div>
+
+        <div class="toggle-row flex items-center justify-between py-3">
+          <div class="min-w-0"><span class="block text-sm font-medium text-gray-700">Unified campaign events <code class="text-[11px] text-gray-400 font-mono">campaign_events_v2</code></span></div>
+          <div class="flex items-center gap-3 shrink-0">
+            <select class="h-9 px-2.5 rounded-card border border-gray-300 text-xs focus:outline-none focus:ring-2 focus:ring-primary-200"><option>All accounts</option><option>Beta cohort</option><option selected>Internal only</option><option>Off</option></select>
+            <button type="button" role="switch" aria-checked="false" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Card D — Defaults -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A10.2" data-ac="AC2">
+      <h2 class="text-base font-medium text-gray-900 mb-1">Platform defaults</h2>
+      <p class="text-sm text-gray-500 mb-4">Applied to newly-created accounts unless overridden per tenant.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">Default toll-free policy</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>Web connect only (pilot)</option><option>Full messaging</option><option>Disabled</option></select></label>
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">Trial length (days)</span><input type="number" min="1" value="14" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">Starter monthly SMS credit</span><input type="number" min="0" step="100" value="1000" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">Support email</span><input type="email" value="support@oggvo.com" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+      </div>
+    </section>
+
+    <!-- Sticky footer -->
+    <div class="flex items-center justify-between gap-3 pt-1">
+      <p class="text-xs text-gray-400">Last saved by <span class="font-medium text-gray-600">Alicia Reyes</span> · Jun 30, 2026 · 4:12 PM</p>
+      <div class="flex items-center gap-2">
+        <button type="button" id="reset-btn" class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Reset</button>
+        <button type="button" id="save-btn" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Save settings
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <p class="mock-note mt-6 max-w-3xl">GET /admin/settings → PUT /admin/settings { data_deletion_grace_days, toggles{}, feature_flags{}, defaults{} }. Gated to OGGVO_ADMIN (tier 4); ACCOUNT_MANAGER+ may read but not write global flags. Every change writes an audit row (actor, key, old→new). v1 exposed only the grace-period field — the toggles &amp; flags are new in v2.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "admin", storyDomain: "admin", back: { href: "../index.html", label: "All mockups" }, route: "/admin/settings", search: "Search settings…" });</script>
+<script>
+(function () {
+  // ---- switches ----
+  document.querySelectorAll(".ds-switch").forEach(function (sw) {
+    sw.addEventListener("click", function () {
+      var on = sw.getAttribute("aria-checked") === "true";
+      var knob = sw.querySelector(".ds-knob");
+      sw.setAttribute("aria-checked", on ? "false" : "true");
+      sw.classList.toggle("bg-primary-500", !on);
+      sw.classList.toggle("bg-gray-300", on);
+      knob.classList.toggle("translate-x-5", !on);
+      knob.classList.toggle("translate-x-0.5", on);
+    });
+  });
+
+  // ---- grace validation ----
+  var grace = document.getElementById("grace-days");
+
+  document.getElementById("save-btn").addEventListener("click", function () {
+    var v = parseInt(grace.value, 10);
+    if (!Number.isInteger(v) || v < 1) { OggvoShell.toast("Grace period must be a whole number of days (1+)", "error"); return; }
+    OggvoShell.toast("Platform settings saved", "success");
+  });
+  document.getElementById("reset-btn").addEventListener("click", function () { OggvoShell.toast("Reverted unsaved changes", "gray"); });
+})();
+</script>
+</body></html>

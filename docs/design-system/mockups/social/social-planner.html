@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Content Calendar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Content Calendar</h1>
+      <p class="text-sm text-gray-500 mt-1">Your scheduled posts across every connected platform.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="inline-flex rounded-card border border-gray-200 p-0.5 bg-gray-50">
+        <button class="h-8 px-3 rounded-[7px] text-sm font-medium text-gray-500 hover:text-gray-700">Week</button>
+        <button class="h-8 px-3 rounded-[7px] text-sm font-medium bg-primary-50 text-primary-700 border border-primary-200">Month</button>
+      </div>
+      <a href="social-composer.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        New Post
+      </a>
+    </div>
+  </div>
+
+  <!-- Shared in-page tab nav -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+
+  <div class="grid lg:grid-cols-[1fr_20rem] gap-6">
+
+    <!-- Calendar -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-3.2" data-ac="AC1">
+      <div class="flex items-center justify-between px-5 py-3 border-b border-gray-200">
+        <div class="flex items-center gap-2">
+          <button class="icon-btn h-8 w-8"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg></button>
+          <h2 class="text-sm font-semibold text-gray-900">June 2026</h2>
+          <button class="icon-btn h-8 w-8"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <!-- platform legend -->
+        <div class="hidden sm:flex items-center gap-3 text-xs text-gray-500">
+          <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-linkedin"></span>FB</span>
+          <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-error-500"></span>IG</span>
+          <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-google"></span>Google</span>
+          <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-primary-600"></span>LinkedIn</span>
+        </div>
+      </div>
+
+      <!-- weekday header -->
+      <div class="grid grid-cols-7 text-center text-xs uppercase text-gray-400 bg-gray-50 border-b border-gray-200">
+        <div class="py-2">Sun</div><div class="py-2">Mon</div><div class="py-2">Tue</div><div class="py-2">Wed</div><div class="py-2">Thu</div><div class="py-2">Fri</div><div class="py-2">Sat</div>
+      </div>
+
+      <!-- weeks -->
+      <div class="grid grid-cols-7 text-xs" data-story="US-3.2" data-ac="AC2">
+        <!-- row 1 -->
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-300">31</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">1</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">2<div class="mt-1 space-y-1"><span class="block truncate rounded bg-linkedin/10 text-linkedin px-1 py-0.5">9:30 New listing</span></div></div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">3</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">4<div class="mt-1 space-y-1"><span class="block truncate rounded bg-error-500/10 text-error-700 px-1 py-0.5">12:00 Reel tour</span></div></div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">5</div>
+        <div class="min-h-[5.5rem] border-b border-gray-100 p-1.5 text-gray-500">6</div>
+        <!-- row 2 -->
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">7</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">8<div class="mt-1 space-y-1"><span class="block truncate rounded bg-google/10 text-google px-1 py-0.5">8:00 GBP update</span></div></div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">9</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">10<div class="mt-1 space-y-1"><span class="block truncate rounded bg-primary-600/10 text-primary-700 px-1 py-0.5">10:00 Market note</span><span class="block truncate rounded bg-linkedin/10 text-linkedin px-1 py-0.5">15:00 Testimonial</span></div></div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">11</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">12</div>
+        <div class="min-h-[5.5rem] border-b border-gray-100 p-1.5 text-gray-500">13</div>
+        <!-- row 3 -->
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">14</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">15</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">16<div class="mt-1 space-y-1"><span class="block truncate rounded bg-error-500/10 text-error-700 px-1 py-0.5">11:30 Open house</span></div></div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">17</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">18</div>
+        <div class="min-h-[5.5rem] border-b border-r border-gray-100 p-1.5 text-gray-500">19</div>
+        <div class="min-h-[5.5rem] border-b border-gray-100 p-1.5 text-gray-500">20</div>
+        <!-- row 4 (today = 24) -->
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 text-gray-500">21</div>
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 text-gray-500">22</div>
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 text-gray-500">23</div>
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 bg-primary-50/40"><span class="inline-grid h-5 w-5 place-items-center rounded-full bg-primary-500 text-white">24</span><div class="mt-1 space-y-1"><span class="block truncate rounded bg-linkedin/10 text-linkedin px-1 py-0.5">9:30 Closing 🏡</span></div></div>
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 text-gray-500">25</div>
+        <div class="min-h-[5.5rem] border-r border-gray-100 p-1.5 text-gray-500">26<div class="mt-1 space-y-1"><span class="block truncate rounded bg-linkedin/10 text-linkedin px-1 py-0.5">9:30 Maple Ave</span><span class="block truncate rounded bg-error-500/10 text-error-700 px-1 py-0.5">9:30 Maple Ave</span></div></div>
+        <div class="min-h-[5.5rem] p-1.5 text-gray-500">27</div>
+      </div>
+    </section>
+
+    <!-- Side: upcoming + insights -->
+    <div class="space-y-4">
+
+      <!-- Insights mini-chart -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-4" data-story="US-5.2" data-ac="AC2">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-gray-900">Posts this week</h2>
+          <span class="text-xs text-success-600">▲ 18%</span>
+        </div>
+        <svg viewBox="0 0 280 90" class="w-full h-auto" preserveAspectRatio="none" role="img" aria-label="Posts per day bar chart">
+          <line x1="0" y1="80" x2="280" y2="80" stroke="#e5e7eb" stroke-width="1" />
+          <rect x="6"   y="50" width="28" height="30" rx="2" fill="#bce0ff" />
+          <rect x="44"  y="34" width="28" height="46" rx="2" fill="#8eccff" />
+          <rect x="82"  y="58" width="28" height="22" rx="2" fill="#bce0ff" />
+          <rect x="120" y="26" width="28" height="54" rx="2" fill="#59afff" />
+          <rect x="158" y="42" width="28" height="38" rx="2" fill="#8eccff" />
+          <rect x="196" y="18" width="28" height="62" rx="2" fill="#2e90fa" />
+          <rect x="234" y="62" width="28" height="18" rx="2" fill="#bce0ff" />
+        </svg>
+        <div class="flex justify-between mt-1 text-[10px] text-gray-400 px-1">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+      </section>
+
+      <!-- Upcoming list -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-3.2" data-ac="AC1">
+        <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-gray-900">Upcoming</h2>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">7 scheduled</span>
+        </div>
+        <div class="divide-y divide-gray-100">
+          <a href="social-composer.html" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50">
+            <span class="h-7 w-7 shrink-0 rounded bg-linkedin grid place-items-center text-[10px] font-bold text-white">f</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm text-gray-900 truncate">Closing on Maple Ave 🏡</div>
+              <div class="text-xs text-gray-400">Today · 9:30 AM</div>
+            </div>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>Scheduled</span>
+          </a>
+          <a href="social-composer.html" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50">
+            <span class="h-7 w-7 shrink-0 rounded bg-google grid place-items-center text-[10px] font-bold text-white">G</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm text-gray-900 truncate">June market update</div>
+              <div class="text-xs text-gray-400">Jun 26 · 9:30 AM</div>
+            </div>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>Scheduled</span>
+          </a>
+          <a href="social-composer.html" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50">
+            <span class="h-7 w-7 shrink-0 rounded bg-gradient-to-br from-warning-500 to-error-600 grid place-items-center text-[10px] font-bold text-white">ig</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm text-gray-900 truncate">Reel: Maple Ave walkthrough</div>
+              <div class="text-xs text-gray-400">Jun 26 · 12:00 PM</div>
+            </div>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>Scheduled</span>
+          </a>
+          <a href="social-composer.html" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50">
+            <span class="h-7 w-7 shrink-0 rounded bg-linkedin grid place-items-center text-[9px] font-bold text-white">in</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm text-gray-900 truncate">5★ testimonial — the Patels</div>
+              <div class="text-xs text-gray-400">Jun 28 · 3:00 PM</div>
+            </div>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>Scheduled</span>
+          </a>
+        </div>
+        <a href="#" class="block px-4 py-2.5 text-center text-sm text-primary-600 hover:bg-gray-50 border-t border-gray-100">View all scheduled</a>
+      </section>
+
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">Calendar chips from GET /social/posts?status=scheduled, grouped by scheduled date and colored by platform. Clicking a chip opens /social/edit/:id to reschedule (re-queues via social-publish). Mini-chart from GET /social/analytics/overview-chart. Times render in profile timezone.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "social-accounts.html", label: "Back to Social" }, route: "/social/planner", search: "Search social…" });</script>
+</body>
+</html>

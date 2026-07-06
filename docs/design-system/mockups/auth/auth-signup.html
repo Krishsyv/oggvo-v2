@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Create account</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-100 text-gray-700">
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+
+  <div class="min-h-screen grid place-items-center p-4">
+    <div class="w-full max-w-md space-y-3">
+
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="text-sm text-primary-600 hover:underline">← All mockups</a>
+        <p class="mock-note">PUBLIC · /signup · no portal shell</p>
+      </div>
+
+      <!-- Signup card -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-8">
+        <div class="flex flex-col items-center text-center mb-6">
+          <div class="h-10 w-10 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold">O</div>
+          <h1 class="text-xl font-semibold text-gray-900 mt-3">Create your account</h1>
+          <p class="text-sm text-gray-500 mt-1">Start your OGGVO workspace in minutes</p>
+        </div>
+
+        <form id="signupForm" class="space-y-4" onsubmit="return false" novalidate>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Full name</label>
+            <input id="suName" type="text" autocomplete="name" placeholder="Jane Doe"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <p id="suNameErr" class="text-xs text-error-600 hidden"></p>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Business name</label>
+            <input id="suBusiness" type="text" autocomplete="organization" placeholder="Acme Co"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <p id="suBusinessErr" class="text-xs text-error-600 hidden"></p>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Email</label>
+            <input id="suEmail" type="email" autocomplete="email" placeholder="you@business.com"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <p id="suEmailErr" class="text-xs text-error-600 hidden"></p>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Password</label>
+            <input id="suPassword" type="password" autocomplete="new-password" placeholder="At least 8 characters"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <!-- strength hint -->
+            <div class="flex items-center gap-1.5 pt-0.5">
+              <span id="suBar0" class="h-1.5 flex-1 rounded-full bg-gray-200"></span>
+              <span id="suBar1" class="h-1.5 flex-1 rounded-full bg-gray-200"></span>
+              <span id="suBar2" class="h-1.5 flex-1 rounded-full bg-gray-200"></span>
+              <span id="suBar3" class="h-1.5 flex-1 rounded-full bg-gray-200"></span>
+            </div>
+            <p id="suStrength" class="text-xs text-gray-500">Use 8+ chars with a number &amp; symbol.</p>
+            <p id="suPasswordErr" class="text-xs text-error-600 hidden"></p>
+          </div>
+
+          <label class="flex items-start gap-2 text-sm text-gray-600 select-none">
+            <input id="suTerms" type="checkbox" class="mt-0.5 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            <span>I agree to the <a href="#" class="text-primary-600 hover:underline">Terms</a> and <a href="#" class="text-primary-600 hover:underline">Privacy Policy</a>.</span>
+          </label>
+
+          <button id="suSubmit" type="submit" disabled
+            class="w-full h-11 rounded-card bg-primary-500 text-white font-medium hover:bg-primary-600 disabled:opacity-60 disabled:cursor-not-allowed">Create account</button>
+
+          <div id="suStatus" class="hidden rounded-card px-3 py-2 text-sm text-center"></div>
+        </form>
+
+        <p class="text-sm text-center text-gray-600 mt-6">
+          Already have an account?
+          <a href="auth-login.html" class="text-primary-600 hover:underline font-medium">Sign in</a>
+        </p>
+      </div>
+
+      <p class="mock-note">POST /auth/register → creates user + draft profile, then enqueues a verification email (new_user token, 90d TTL) on the email queue. Net-new in v2 (v1 had no self-serve signup).</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById('signupForm');
+      var name = document.getElementById('suName');
+      var business = document.getElementById('suBusiness');
+      var email = document.getElementById('suEmail');
+      var pw = document.getElementById('suPassword');
+      var terms = document.getElementById('suTerms');
+      var submit = document.getElementById('suSubmit');
+      var status = document.getElementById('suStatus');
+      var strengthLabel = document.getElementById('suStrength');
+      var bars = [
+        document.getElementById('suBar0'),
+        document.getElementById('suBar1'),
+        document.getElementById('suBar2'),
+        document.getElementById('suBar3')
+      ];
+      var errs = {
+        name: document.getElementById('suNameErr'),
+        business: document.getElementById('suBusinessErr'),
+        email: document.getElementById('suEmailErr'),
+        pw: document.getElementById('suPasswordErr')
+      };
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function showErr(el, input, msg) {
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        input.classList.add('border-error-500');
+      }
+      function clearErr(el, input) {
+        el.classList.add('hidden');
+        el.textContent = '';
+        input.classList.remove('border-error-500');
+      }
+
+      // Terms gate
+      terms.addEventListener('change', function () {
+        submit.disabled = !terms.checked;
+      });
+
+      // Live password strength
+      function scorePassword(v) {
+        var s = 0;
+        if (v.length >= 8) s++;
+        if (/[a-z]/.test(v) && /[A-Z]/.test(v)) s++;
+        if (/\d/.test(v)) s++;
+        if (/[^A-Za-z0-9]/.test(v)) s++;
+        return s;
+      }
+      pw.addEventListener('input', function () {
+        clearErr(errs.pw, pw);
+        var v = pw.value;
+        var score = scorePassword(v); // 0..4
+        var level, color, label;
+        if (!v) { level = 0; }
+        else if (score <= 1) { level = 1; }
+        else if (score <= 3) { level = 2; }
+        else { level = 3; }
+        // level: 1 weak, 2 medium, 3 strong
+        if (level === 1) { color = 'bg-error-500'; label = 'Weak — add length, cases, numbers & symbols.'; }
+        else if (level === 2) { color = 'bg-warning-500'; label = 'Medium — add a symbol or more length.'; }
+        else if (level === 3) { color = 'bg-success-500'; label = 'Strong — good to go.'; }
+        else { color = ''; label = 'Use 8+ chars with a number & symbol.'; }
+        var filled = level; // 0..3 bars filled
+        bars.forEach(function (bar, i) {
+          bar.className = 'h-1.5 flex-1 rounded-full ' + (i < filled ? color : 'bg-gray-200');
+        });
+        strengthLabel.textContent = label;
+        strengthLabel.className = 'text-xs ' + (
+          level === 1 ? 'text-error-600' :
+          level === 2 ? 'text-warning-600' :
+          level === 3 ? 'text-success-600' : 'text-gray-500');
+      });
+
+      name.addEventListener('input', function () { clearErr(errs.name, name); });
+      business.addEventListener('input', function () { clearErr(errs.business, business); });
+      email.addEventListener('input', function () { clearErr(errs.email, email); });
+
+      form.addEventListener('submit', function () {
+        clearErr(errs.name, name);
+        clearErr(errs.business, business);
+        clearErr(errs.email, email);
+        clearErr(errs.pw, pw);
+        status.classList.add('hidden');
+        if (!terms.checked) return; // button already gated
+
+        var ok = true;
+        if (!name.value.trim()) { showErr(errs.name, name, 'Full name is required.'); ok = false; }
+        if (!business.value.trim()) { showErr(errs.business, business, 'Business name is required.'); ok = false; }
+        if (!EMAIL_RE.test(email.value.trim())) { showErr(errs.email, email, 'Enter a valid email address.'); ok = false; }
+        if (pw.value.length < 8) { showErr(errs.pw, pw, 'Password must be at least 8 characters.'); ok = false; }
+        if (!ok) return;
+
+        submit.disabled = true;
+        var original = submit.textContent;
+        submit.textContent = 'Creating…';
+        setTimeout(function () {
+          status.textContent = 'Check your email — we sent a verification link to ' +
+            email.value.trim() + ' (new_user token, 90-day TTL). (mockup, no email sent)';
+          status.className = 'rounded-card px-3 py-2 text-sm text-center bg-success-100 text-success-700';
+          status.classList.remove('hidden');
+          submit.textContent = original;
+          submit.disabled = false;
+        }, 900);
+      });
+    })();
+  </script>
+</body>
+</html>

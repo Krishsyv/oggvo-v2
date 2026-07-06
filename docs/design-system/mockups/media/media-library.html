@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Media Library</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5" data-story="US-M1.1">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Media Library</h1>
+      <p class="text-sm text-gray-500 mt-1">One shared pool of images and videos — reused across posts, campaigns, and funnels, served from a single CDN.</p>
+    </div>
+    <button type="button" data-open-upload class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600 shrink-0" data-story="US-M2.1">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+      Upload
+    </button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex items-center border-b border-gray-200 mb-5" data-story="US-M1.1" data-ac="AC1">
+    <nav id="media-tabs" class="-mb-px flex flex-1 gap-6" aria-label="Tabs">
+      <button data-tab="image" class="media-tab whitespace-nowrap border-b-2 border-primary-500 text-primary-600 py-3 px-1 text-sm font-medium">
+        Images <span class="ml-1 text-xs font-normal text-gray-400" id="count-image">12</span>
+      </button>
+      <button data-tab="video" class="media-tab whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 py-3 px-1 text-sm font-medium">
+        Videos <span class="ml-1 text-xs font-normal text-gray-400" id="count-video">4</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Search + filters -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-6" data-story="US-M1.2">
+    <div class="relative flex-1">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="media-search" type="text" placeholder="Search by filename…" class="w-full h-11 pl-10 pr-3 text-sm bg-white border border-gray-300 rounded-card placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <div class="flex items-center gap-3" data-story="US-M1.2" data-ac="AC2">
+      <select id="filter-type" class="h-11 px-3 text-sm bg-white border border-gray-300 rounded-card text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-200">
+        <option value="all">All types</option>
+        <option value="image">Images</option>
+        <option value="video">Videos</option>
+      </select>
+      <input id="filter-date" type="date" class="h-11 px-3 text-sm bg-white border border-gray-300 rounded-card text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+  </div>
+
+  <!-- Loading skeleton grid (hidden by default; annotated example) -->
+  <div id="media-loading" class="hidden grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-6">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3"><div class="skeleton aspect-square w-full rounded-lg mb-3"></div><div class="skeleton h-3 w-3/4 rounded mb-2"></div><div class="skeleton h-2.5 w-1/2 rounded"></div></div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3"><div class="skeleton aspect-square w-full rounded-lg mb-3"></div><div class="skeleton h-3 w-3/4 rounded mb-2"></div><div class="skeleton h-2.5 w-1/2 rounded"></div></div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3"><div class="skeleton aspect-square w-full rounded-lg mb-3"></div><div class="skeleton h-3 w-3/4 rounded mb-2"></div><div class="skeleton h-2.5 w-1/2 rounded"></div></div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-3"><div class="skeleton aspect-square w-full rounded-lg mb-3"></div><div class="skeleton h-3 w-3/4 rounded mb-2"></div><div class="skeleton h-2.5 w-1/2 rounded"></div></div>
+  </div>
+
+  <!-- Media grid -->
+  <div id="media-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" data-story="US-M1.1" data-ac="AC2">
+    <!-- tiles injected by JS -->
+  </div>
+
+  <!-- Empty state -->
+  <div id="media-empty" class="hidden bg-white border border-gray-200 rounded-card shadow-card px-6 py-16 text-center" data-story="US-M1.1" data-ac="AC4">
+    <svg class="h-10 w-10 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+    <p id="empty-title" class="text-sm font-medium text-gray-700">No media yet</p>
+    <p id="empty-sub" class="text-xs text-gray-400 mt-1">Upload an image or video to get started.</p>
+    <button type="button" data-open-upload class="mt-4 inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+      Upload
+    </button>
+  </div>
+
+  <!-- Mock-notes: endpoints -->
+  <div class="mt-8 space-y-2">
+    <p class="mock-note">GET /media?type=image|video&amp;q=&amp;from=&amp;to=&amp;page= — non-deleted media for the active profile, newest first, paginated; each item carries <code>key</code>, <code>cdnUrl</code>, dimensions, bytes, and <code>referenceCount</code>. Thumbnails/URLs are derived from the DB <code>key</code> + one CloudFront host — no <code>assets/media/...</code> mount, no per-caller rewriting (fix-on-rebuild: single media host).</p>
+    <p class="mock-note">POST /media (presigned) — returns <code>{ key, uploadUrl }</code>; the browser PUTs bytes straight to S3, then finalizes the row (<code>images</code>/<code>videos</code>). No NFS mount, no <code>file_exists()</code>/<code>-&gt;move()</code>, no "directory not writable" on a missing prefix (fix-on-rebuild: S3 media storage).</p>
+    <p class="mock-note">DELETE /media/:id — server runs the <strong>single reference-count query</strong> first; returns <code>409 Conflict</code> + the usage list when the file is still referenced (post / campaign / funnel). The physical S3 delete is never keyed off one feature's table (fix-on-rebuild: media ownership / reference count).</p>
+  </div>
+
+</main>
+
+<!-- ============ Preview modal ============ -->
+<div id="m-preview" class="hidden fixed inset-0 z-50 bg-gray-900/60 grid place-items-center p-4" data-story="US-M1.3">
+  <div class="bg-white rounded-card shadow-pop w-full max-w-3xl overflow-hidden">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+      <h3 id="pv-filename" class="text-base font-semibold text-gray-900 truncate">image.jpg</h3>
+      <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2">
+      <div id="pv-canvas" class="aspect-square grid place-items-center" style="background:linear-gradient(135deg,#1849a9,#2e90fa)"></div>
+      <div class="p-5 space-y-4">
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Details</h4>
+          <dl class="text-sm divide-y divide-gray-100 border-t border-b border-gray-100">
+            <div class="flex justify-between py-2"><dt class="text-gray-500">Dimensions</dt><dd id="pv-dims" class="text-gray-900 font-medium">1080 × 1080</dd></div>
+            <div class="flex justify-between py-2"><dt class="text-gray-500">Size</dt><dd id="pv-size" class="text-gray-900 font-medium">240 KB</dd></div>
+            <div class="flex justify-between py-2"><dt class="text-gray-500">Uploaded</dt><dd id="pv-date" class="text-gray-900 font-medium">Jun 22, 2026</dd></div>
+          </dl>
+        </div>
+        <div data-story="US-M3.1" data-ac="AC3">
+          <h4 class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Used in <span id="pv-refcount">3</span> places</h4>
+          <ul id="pv-refs" class="space-y-1.5 text-sm text-gray-600"></ul>
+        </div>
+        <button type="button" data-copy-url class="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H16a3 3 0 013 3v6a3 3 0 01-3 3h-6a3 3 0 01-3-3v-2.5M8 3h6a3 3 0 013 3v6a3 3 0 01-3 3H8a3 3 0 01-3-3V6a3 3 0 013-3z"/></svg>
+          Copy CDN URL
+        </button>
+        <p class="mock-note">One canonical CloudFront URL for every caller — <code>https://cdn.oggvo.com/&lt;key&gt;</code>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Delete confirm modal (reference-aware) ============ -->
+<div id="m-delete" class="hidden fixed inset-0 z-50 bg-gray-900/60 grid place-items-center p-4" data-story="US-M4.1">
+  <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+    <div class="p-5">
+      <div class="flex items-start gap-3">
+        <span class="h-10 w-10 shrink-0 rounded-full bg-error-100 grid place-items-center text-error-600">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0-.5 12a2 2 0 01-2 2H9.5a2 2 0 01-2-2L7 7"/></svg>
+        </span>
+        <div class="min-w-0 flex-1">
+          <h3 class="text-base font-semibold text-gray-900">Delete media</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Delete <span id="del-filename" class="font-medium text-gray-700">image.jpg</span>? This also removes the file from S3.</p>
+        </div>
+      </div>
+
+      <!-- Referenced warning (US-M4.2) -->
+      <div id="del-warning" class="hidden mt-4 rounded-card border border-warning-500/40 bg-warning-100 p-3" data-story="US-M4.2" data-ac="AC1">
+        <div class="flex items-start gap-2">
+          <svg class="h-4 w-4 text-warning-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+          <div class="min-w-0">
+            <p class="text-sm font-medium text-warning-700">Still used in <span id="del-refcount">3</span> places</p>
+            <p class="text-xs text-warning-600 mt-0.5">Deleting it will break these references. Remove it from them first.</p>
+            <ul id="del-refs" class="mt-2 space-y-1 text-xs text-warning-700"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unreferenced note (US-M4.1) -->
+      <div id="del-safe" class="hidden mt-4 rounded-card border border-gray-200 bg-gray-50 p-3" data-story="US-M4.1" data-ac="AC2">
+        <p class="text-sm text-gray-600">This file isn't used anywhere. Safe to delete.</p>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+      <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+      <button id="del-confirm" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600 disabled:opacity-40 disabled:cursor-not-allowed">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Upload modal ============ -->
+<div id="m-upload" class="hidden fixed inset-0 z-50 bg-gray-900/60 grid place-items-center p-4" data-story="US-M2.1" data-ac="AC1">
+  <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+      <h3 class="text-base font-semibold text-gray-900">Upload media</h3>
+      <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="p-5">
+      <div id="drop-zone" class="rounded-card border-2 border-dashed border-gray-300 p-10 text-center text-sm text-gray-500 hover:border-primary-300 transition-colors cursor-pointer">
+        <svg class="h-9 w-9 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+        Drop files here or <span class="text-primary-600 font-medium">Browse</span>
+        <p class="text-xs text-gray-400 mt-1">Images up to 30 MB · video up to 50 MB</p>
+      </div>
+      <!-- example upload progress row (US-M2.1 AC3) -->
+      <div class="mt-4 space-y-2" data-story="US-M2.1" data-ac="AC3">
+        <div class="flex items-center gap-3">
+          <span class="h-9 w-9 shrink-0 rounded-lg bg-gray-100 grid place-items-center text-gray-400"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></span>
+          <div class="min-w-0 flex-1">
+            <div class="flex justify-between text-xs mb-1"><span class="text-gray-600 truncate">storefront-hero.jpg</span><span class="text-gray-400">72%</span></div>
+            <div class="h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full bg-primary-500 rounded-full" style="width:72%"></div></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 opacity-90">
+          <span class="h-9 w-9 shrink-0 rounded-lg bg-success-100 grid place-items-center text-success-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+          <div class="min-w-0 flex-1">
+            <div class="flex justify-between text-xs mb-1"><span class="text-gray-600 truncate">team-photo.png</span><span class="text-success-600">Uploaded</span></div>
+            <div class="h-1.5 rounded-full bg-success-100 overflow-hidden"><div class="h-full bg-success-500 rounded-full" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="mock-note mt-4">Direct-to-S3 <strong>presigned upload</strong>: POST /media → <code>{ key, uploadUrl }</code>; the browser PUTs bytes to S3, then finalizes the DB row. The API never proxies file bytes.</p>
+    </div>
+    <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+      <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+      <button data-close data-toast="Upload complete" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Done</button>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "media", storyDomain: "media", back: { href: "../index.html", label: "All mockups" }, route: "/media", search: "Search…" });</script>
+<script>
+(function () {
+  // ---- mock data (image + video pool; refs = reference-count usages) ----
+  var GRADS = ["#1849a9,#2e90fa", "#417D7A,#82DBD8", "#AC7D88,#EC994B", "#7c3aed,#c084fc", "#0e7490,#22d3ee", "#b45309,#f59e0b", "#be123c,#fb7185", "#15803d,#4ade80"];
+  var MEDIA = [
+    { type:"image", name:"storefront-hero.jpg",   dims:"1600 × 900",  size:"312 KB", date:"Jul 2, 2026",  refs:["Funnel background", "Social post · Jun 28"] },
+    { type:"image", name:"review-marcus.jpg",      dims:"1080 × 1080", size:"240 KB", date:"Jun 22, 2026", refs:["Social post · Jun 22", "Campaign: Spring Review Drive", "Funnel link: Google"] },
+    { type:"image", name:"team-photo.png",         dims:"1200 × 800",  size:"188 KB", date:"Jun 18, 2026", refs:[] },
+    { type:"image", name:"logo-mark.png",          dims:"512 × 512",   size:"24 KB",  date:"Jun 10, 2026", refs:["Brand logo", "Campaign: Newsletter May"] },
+    { type:"image", name:"promo-summer.jpg",       dims:"1080 × 1350", size:"402 KB", date:"Jun 8, 2026",  refs:["Social post · Jun 9"] },
+    { type:"image", name:"product-shot-01.jpg",    dims:"1080 × 1080", size:"265 KB", date:"Jun 3, 2026",  refs:[] },
+    { type:"image", name:"testimonial-bg.jpg",     dims:"1080 × 1080", size:"210 KB", date:"May 30, 2026", refs:["Review auto-share template"] },
+    { type:"image", name:"office-exterior.jpg",    dims:"1600 × 1067", size:"356 KB", date:"May 24, 2026", refs:[] },
+    { type:"image", name:"holiday-banner.png",     dims:"1500 × 500",  size:"144 KB", date:"May 20, 2026", refs:["Campaign: Holiday 2025"] },
+    { type:"image", name:"staff-avatar.jpg",       dims:"400 × 400",   size:"38 KB",  date:"May 12, 2026", refs:[] },
+    { type:"image", name:"menu-board.jpg",         dims:"1080 × 1920", size:"488 KB", date:"May 5, 2026",  refs:["Social post · May 6", "Social post · May 20"] },
+    { type:"image", name:"before-after.png",       dims:"1200 × 600",  size:"176 KB", date:"Apr 28, 2026", refs:[] },
+    { type:"video", name:"intro-reel.mp4",         dims:"1080 × 1920", size:"18.4 MB · 0:24", date:"Jun 30, 2026", refs:["Social post · Jul 1"] },
+    { type:"video", name:"customer-story.mp4",     dims:"1920 × 1080", size:"31.2 MB · 0:48", date:"Jun 14, 2026", refs:["Social post · Jun 15", "Campaign: Q3 Launch"] },
+    { type:"video", name:"product-demo.mp4",       dims:"1920 × 1080", size:"42.0 MB · 1:12", date:"May 27, 2026", refs:[] },
+    { type:"video", name:"quick-tip.mp4",          dims:"1080 × 1080", size:"9.8 MB · 0:15",  date:"May 9, 2026",  refs:["Social post · May 10"] }
+  ];
+  MEDIA.forEach(function (m, i) { m.grad = GRADS[i % GRADS.length]; });
+
+  var grid = document.getElementById("media-grid");
+  var empty = document.getElementById("media-empty");
+  var state = { type: "image", query: "" };
+
+  function refBadge(m) {
+    var n = m.refs.length;
+    if (n === 0) return '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-500">Unused</span>';
+    return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-primary-100 text-primary-700" title="Reference count">' +
+      '<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.8 10.2a4 4 0 0 0-5.7 0l-2.8 2.8a4 4 0 0 0 5.7 5.7l1-1M10.2 13.8a4 4 0 0 0 5.7 0l2.8-2.8a4 4 0 0 0-5.7-5.7l-1 1"/></svg>' +
+      'Used in ' + n + '</span>';
+  }
+
+  function tile(m, i) {
+    var isVideo = m.type === "video";
+    var canvas = isVideo
+      ? '<span class="absolute inset-0 grid place-items-center text-white/90"><svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'
+      : '<span class="absolute inset-0 grid place-items-center text-white/40"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg></span>';
+    return '<div class="media-tile group bg-white border border-gray-200 rounded-card shadow-card p-3" data-i="' + i + '" data-name="' + m.name.toLowerCase() + '">' +
+        '<div class="relative aspect-square w-full rounded-lg overflow-hidden mb-3" style="background:linear-gradient(135deg,' + m.grad + ')">' +
+          canvas +
+          '<div class="absolute inset-0 bg-gray-900/45 opacity-0 group-hover:opacity-100 transition-opacity grid place-items-center gap-2 grid-flow-col">' +
+            '<button data-act="preview" title="Preview" class="h-9 w-9 rounded-full bg-white/90 grid place-items-center text-gray-700 hover:bg-white"><svg class="h-4 w-4 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"/><circle cx="12" cy="12" r="3"/></svg></button>' +
+            '<button data-act="copy" title="Copy URL" class="h-9 w-9 rounded-full bg-white/90 grid place-items-center text-gray-700 hover:bg-white"><svg class="h-4 w-4 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H16a3 3 0 013 3v6a3 3 0 01-3 3h-6a3 3 0 01-3-3v-2.5M8 3h6a3 3 0 013 3v6a3 3 0 01-3 3H8a3 3 0 01-3-3V6a3 3 0 013-3z"/></svg></button>' +
+            '<button data-act="delete" title="Delete" class="h-9 w-9 rounded-full bg-white/90 grid place-items-center text-error-600 hover:bg-white"><svg class="h-4 w-4 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0-.5 12a2 2 0 01-2 2H9.5a2 2 0 01-2-2L7 7"/></svg></button>' +
+          '</div>' +
+        '</div>' +
+        '<p class="text-sm font-medium text-gray-800 truncate" title="' + m.name + '">' + m.name + '</p>' +
+        '<div class="flex items-center justify-between gap-2 mt-1">' +
+          '<span class="text-xs text-gray-400 truncate">' + m.dims + ' · ' + m.size + '</span>' +
+          refBadge(m) +
+        '</div>' +
+      '</div>';
+  }
+
+  function render() {
+    var items = MEDIA.filter(function (m) { return m.type === state.type; });
+    var shown = items.filter(function (m) { return !state.query || m.name.toLowerCase().indexOf(state.query) !== -1; });
+    grid.innerHTML = shown.map(function (m) { return tile(m, MEDIA.indexOf(m)); }).join("");
+    var isEmpty = shown.length === 0;
+    grid.classList.toggle("hidden", isEmpty);
+    empty.classList.toggle("hidden", !isEmpty);
+    if (isEmpty) {
+      var filtered = !!state.query;
+      document.getElementById("empty-title").textContent = filtered ? "No media matches your search" : "No media yet";
+      document.getElementById("empty-sub").textContent = filtered ? "Try a different filename or clear the search." : "Upload an image or video to get started.";
+    }
+    document.getElementById("count-image").textContent = MEDIA.filter(function (m) { return m.type === "image"; }).length;
+    document.getElementById("count-video").textContent = MEDIA.filter(function (m) { return m.type === "video"; }).length;
+  }
+
+  // ---- tabs ----
+  document.getElementById("media-tabs").addEventListener("click", function (e) {
+    var b = e.target.closest(".media-tab"); if (!b) return;
+    state.type = b.getAttribute("data-tab");
+    [].slice.call(document.querySelectorAll(".media-tab")).forEach(function (x) {
+      var on = x === b;
+      x.classList.toggle("border-primary-500", on);
+      x.classList.toggle("text-primary-600", on);
+      x.classList.toggle("border-transparent", !on);
+      x.classList.toggle("text-gray-500", !on);
+    });
+    document.getElementById("filter-type").value = state.type;
+    render();
+  });
+
+  // ---- search + filters ----
+  document.getElementById("media-search").addEventListener("input", function (e) {
+    state.query = e.target.value.trim().toLowerCase(); render();
+  });
+  document.getElementById("filter-type").addEventListener("change", function (e) {
+    var v = e.target.value;
+    state.type = (v === "all") ? "image" : v;
+    document.querySelector('.media-tab[data-tab="' + state.type + '"]').click();
+  });
+
+  // ---- modals (scoped to this page's own modals) ----
+  var MODALS = [].slice.call(document.querySelectorAll("#m-preview, #m-delete, #m-upload"));
+  function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
+  function closeModal(el) { el.classList.add("hidden"); }
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-open-upload]")) { openModal("m-upload"); return; }
+    var closer = e.target.closest("[data-close]");
+    if (closer && MODALS.indexOf(closer.closest("#m-preview, #m-delete, #m-upload")) !== -1) {
+      var modal = closer.closest("#m-preview, #m-delete, #m-upload");
+      var t = closer.getAttribute("data-toast"); if (t) OggvoShell.toast(t, "success");
+      closeModal(modal);
+    }
+  });
+  MODALS.forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m) closeModal(m); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") MODALS.forEach(function (m) { if (!m.classList.contains("hidden")) closeModal(m); });
+  });
+
+  // ---- tile actions ----
+  grid.addEventListener("click", function (e) {
+    var actBtn = e.target.closest("[data-act]");
+    var tileEl = e.target.closest(".media-tile");
+    if (!tileEl) return;
+    var m = MEDIA[parseInt(tileEl.getAttribute("data-i"), 10)];
+    var act = actBtn ? actBtn.getAttribute("data-act") : "preview";
+    if (act === "copy") { OggvoShell.toast("Link copied", "success"); return; }
+    if (act === "delete") { openDelete(m); return; }
+    openPreview(m); // preview (also default tile click)
+  });
+
+  // ---- preview modal ----
+  function openPreview(m) {
+    document.getElementById("pv-filename").textContent = m.name;
+    document.getElementById("pv-dims").textContent = m.dims;
+    document.getElementById("pv-size").textContent = m.size;
+    document.getElementById("pv-date").textContent = m.date;
+    document.getElementById("pv-canvas").style.background = "linear-gradient(135deg," + m.grad + ")";
+    document.getElementById("pv-refcount").textContent = m.refs.length;
+    var refsEl = document.getElementById("pv-refs");
+    refsEl.innerHTML = m.refs.length
+      ? m.refs.map(function (r) { return '<li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-primary-400"></span>' + r + '</li>'; }).join("")
+      : '<li class="text-gray-400">Not referenced anywhere — safe to delete.</li>';
+    openModal("m-preview");
+  }
+  document.querySelector("#m-preview [data-copy-url]").addEventListener("click", function () { OggvoShell.toast("Link copied", "success"); });
+
+  // ---- delete modal (reference-aware) ----
+  var pendingDelete = null;
+  function openDelete(m) {
+    pendingDelete = m;
+    document.getElementById("del-filename").textContent = m.name;
+    var n = m.refs.length;
+    var warn = document.getElementById("del-warning");
+    var safe = document.getElementById("del-safe");
+    var confirm = document.getElementById("del-confirm");
+    warn.classList.toggle("hidden", n === 0);
+    safe.classList.toggle("hidden", n !== 0);
+    if (n > 0) {
+      document.getElementById("del-refcount").textContent = n;
+      document.getElementById("del-refs").innerHTML = m.refs.map(function (r) {
+        return '<li class="flex items-center gap-1.5"><svg class="h-3 w-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M5 12h14"/></svg>' + r + '</li>';
+      }).join("");
+      confirm.disabled = true;                 // US-M4.2: blocked while referenced
+      confirm.textContent = "Referenced — can't delete";
+    } else {
+      confirm.disabled = false;
+      confirm.textContent = "Delete";
+    }
+    openModal("m-delete");
+  }
+  document.getElementById("del-confirm").addEventListener("click", function () {
+    if (!pendingDelete || pendingDelete.refs.length) return;
+    var idx = MEDIA.indexOf(pendingDelete);
+    if (idx > -1) MEDIA.splice(idx, 1);
+    closeModal(document.getElementById("m-delete"));
+    OggvoShell.toast("Media deleted", "success");
+    render();
+  });
+
+  render();
+})();
+</script>
+</body></html>

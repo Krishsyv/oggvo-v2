@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · New page (template)</title>
+  <!-- 1) Tokens + theme + styles. Always include these four in this order. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tailwind-config.js"></script>
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+  <!-- 2) Put ALL page content inside this one element. The shell wraps it with the
+          sidebar + top-bar automatically. Keep the class as-is. -->
+  <main data-shell-content class="flex-1 p-6">
+
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900">Page title</h1>
+        <p class="text-sm text-gray-500 mt-1">One-line description of this screen.</p>
+      </div>
+      <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Primary action</button>
+    </div>
+
+    <!-- Reusable building blocks: shadow-card panels, dot badges, tables, buttons -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-6">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">tag</span>
+      </div>
+      <p class="text-sm text-gray-600">Drop your screen content here. See <code>../README.md</code> for the full component list, and the contacts/reviews pages for worked examples.</p>
+    </div>
+
+  </main>
+
+  <!-- 3) Mount the shell. Set `active` to your nav key (see NAV in assets/shell.js):
+          dashboard | reviews | contacts | campaigns | connect | social | settings -->
+  <script src="assets/shell.js"></script>
+  <script>
+    OggvoShell.mount({
+      active: "dashboard",
+      back: { href: "index.html", label: "All mockups" }, // omit to hide the back-link
+      route: "/your/route",
+      search: "Search…",            // pass null to hide the search box
+      // user: { name: "Acme Co", initials: "AC", tz: "America/New_York", email: "team@acme.com" },
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Staff User</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-semibold text-gray-900">Edit staff user</h1>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+          OGGVO_ADMIN
+        </span>
+      </div>
+      <p class="text-sm text-gray-500 mt-1">Set personal details, role, accessible profiles and granular permissions. New users are emailed an activation invite.</p>
+    </div>
+    <a href="admin.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+      Back to Users
+    </a>
+  </div>
+
+  <form id="user-form" class="max-w-4xl space-y-6">
+
+    <!-- Section 1 — Personal Information -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A11.1" data-ac="AC1">
+      <h2 class="text-base font-medium text-gray-900 mb-1">Personal information</h2>
+      <p class="text-sm text-gray-500 mb-4">First and last name each need ≥3 characters; email must be valid.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">First name <span class="text-error-500">*</span></span><input id="first" type="text" value="Hannah" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block text-sm font-medium text-gray-700 mb-1">Last name <span class="text-error-500">*</span></span><input id="last" type="text" value="Lee" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block sm:col-span-2"><span class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-error-500">*</span></span>
+          <div class="relative">
+            <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+            <input id="email" type="email" value="hannah@oggvo.com" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+        </label>
+      </div>
+
+      <!-- Profile picture -->
+      <div class="mt-4">
+        <span class="block text-sm font-medium text-gray-700 mb-1">Profile picture <span class="text-gray-400 font-normal">(PNG / JPG, optional)</span></span>
+        <div class="flex items-center gap-4">
+          <span class="h-16 w-16 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-lg font-semibold text-white shrink-0">HL</span>
+          <div class="flex items-center gap-2">
+            <label class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 cursor-pointer">
+              <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v11m0-11l-4 4m4-4l4 4"/></svg>
+              Upload
+              <input type="file" accept="image/png,image/jpeg" class="hidden" />
+            </label>
+            <button type="button" data-toast="Photo cleared" data-tone="gray" class="px-3.5 py-2 text-sm font-medium text-error-600 bg-white border border-gray-300 rounded-card hover:bg-error-100">Remove</button>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">Clearing the photo sends <code class="font-mono">imageRemoved</code> on save. Max 800×800px.</p>
+      </div>
+    </section>
+
+    <!-- Section 2 — Role -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A11.1" data-ac="AC2">
+      <h2 class="text-base font-medium text-gray-900 mb-1">Role</h2>
+      <p class="text-sm text-gray-500 mb-4">You may not assign a role above your own tier. Selecting <b class="font-medium text-gray-700">Admin</b> grants full access and hides profiles &amp; permissions.</p>
+      <div id="role-group" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <button type="button" data-role="User" class="role-card text-left rounded-card border-2 border-gray-200 bg-white p-3 hover:border-gray-300"><span class="block font-semibold text-gray-900">User</span><span class="block text-xs text-gray-500 mt-0.5">Requires custom permissions</span></button>
+        <button type="button" data-role="Sales" class="role-card text-left rounded-card border-2 border-gray-200 bg-white p-3 hover:border-gray-300"><span class="block font-semibold text-gray-900">Sales</span><span class="block text-xs text-gray-500 mt-0.5">Requires custom permissions</span></button>
+        <button type="button" data-role="Manager" class="role-card text-left rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white p-3"><span class="block font-semibold text-gray-900">Manager</span><span class="block text-xs text-gray-500 mt-0.5">Requires custom permissions</span></button>
+        <button type="button" data-role="Supervisor" class="role-card text-left rounded-card border-2 border-gray-200 bg-white p-3 hover:border-gray-300"><span class="block font-semibold text-gray-900">Supervisor</span><span class="block text-xs text-gray-500 mt-0.5">Requires custom permissions</span></button>
+        <button type="button" data-role="Admin" class="role-card text-left rounded-card border-2 border-gray-200 bg-white p-3 hover:border-gray-300"><span class="block font-semibold text-gray-900">Admin</span><span class="block text-xs text-primary-600 mt-0.5">Full access</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3 — Profiles (hidden when Admin) -->
+    <section id="profiles-section" class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A11.2" data-ac="AC1">
+      <h2 class="text-base font-medium text-gray-900 mb-1">Accessible profiles</h2>
+      <p class="text-sm text-gray-500 mb-3">Business accounts this user can enter. Search and add; remove with the ×.</p>
+      <div id="profile-chips" class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="chip inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Bloom Florist <button type="button" data-chip class="hover:text-primary-900"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+        <span class="chip inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Urban Cuts <button type="button" data-chip class="hover:text-primary-900"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+      </div>
+      <div class="relative max-w-md">
+        <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+        <input type="text" placeholder="Search business accounts to add…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+    </section>
+
+    <!-- Section 4 — Permissions (hidden when Admin) -->
+    <section id="perms-section" class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-A11.2" data-ac="AC2">
+      <div class="flex items-center justify-between mb-1">
+        <h2 class="text-base font-medium text-gray-900">Permissions</h2>
+        <div class="flex items-center gap-2">
+          <button type="button" id="perm-all" class="text-xs font-medium text-primary-600 hover:underline">Select all</button>
+          <span class="text-gray-300">·</span>
+          <button type="button" id="perm-none" class="text-xs font-medium text-gray-500 hover:underline">Clear</button>
+        </div>
+      </div>
+      <p class="text-sm text-gray-500 mb-4">Granular access per module. The module master checkbox toggles all of its scoped permissions. Canonical enum: <code class="font-mono text-xs">Analytics · Design · Widgets · Social · Reviews · Connect · Invites · Support</code>.</p>
+
+      <div id="perm-groups" class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <!-- module cards injected by JS -->
+      </div>
+      <p class="mock-note mt-4">Fix-on-rebuild: v1 sent <code>Social Media</code> but the server whitelisted <code>Social</code> — v2 uses one canonical typed enum shared API↔web. Admin role gets no explicit permissions (implicit full access).</p>
+    </section>
+
+    <!-- Admin note (shown when Admin) -->
+    <section id="admin-note" class="hidden bg-primary-50 border border-primary-200 rounded-card p-4 flex items-start gap-3">
+      <svg class="h-5 w-5 text-primary-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+      <p class="text-sm text-primary-800"><b class="font-semibold">Admin</b> grants unrestricted, cross-tenant access. Profiles and per-module permissions don't apply and are hidden. Only an Admin may create or promote another Admin.</p>
+    </section>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-end gap-2 pt-1">
+      <a href="admin.html" class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</a>
+      <button type="button" id="save-btn" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Save user
+      </button>
+    </div>
+
+  </form>
+
+  <p class="mock-note mt-6 max-w-4xl">Create → POST /admin/users (multipart: first, last, email, role, image, profiles[], permissions[]) → enqueues activation email on the <code>email</code> queue. Edit → GET /admin/users/:id prefills · PUT /admin/users/:id (with <code>imageRemoved</code> flag). Role validated <code>in_list[User,Sales,Manager,Supervisor,Admin]</code> server-side; caller may not assign above own tier. Gated to OGGVO_ADMIN / @Roles(ACCOUNT_MANAGER)+.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "admin", storyDomain: "admin", back: { href: "admin.html", label: "Admin Console" }, route: "/admin/users/:id", search: "Search users…" });</script>
+<script>
+(function () {
+  // ---- permission module catalogue (granular scopes per canonical enum) ----
+  var MODULES = [
+    { key: "Analytics", desc: "Traffic, clicks & conversion", scopes: ["View dashboards", "Export reports"] },
+    { key: "Design", desc: "Funnel builder", scopes: ["View funnel", "Edit funnel", "Publish funnel"] },
+    { key: "Widgets", desc: "Widgets & plugins", scopes: ["View widgets", "Manage embeds"] },
+    { key: "Social", desc: "Social accounts & posts", scopes: ["View posts", "Publish posts", "Manage accounts"] },
+    { key: "Reviews", desc: "Reviews & testimonials", scopes: ["View reviews", "Respond", "Share to social"] },
+    { key: "Connect", desc: "Connect inbox & SMS", scopes: ["View inbox", "Send SMS", "Manage campaigns"] },
+    { key: "Invites", desc: "Invite users to the portal", scopes: ["Send invites"] },
+    { key: "Support", desc: "Account-manager support", scopes: ["Open tickets"] }
+  ];
+  // default checked scopes for the "User" role (mirrors v1 defaults)
+  var DEFAULT_ON = { Analytics: true, Design: true, Widgets: true, Social: true, Reviews: true };
+
+  var host = document.getElementById("perm-groups");
+  host.innerHTML = MODULES.map(function (m) {
+    var on = !!DEFAULT_ON[m.key];
+    var scopes = m.scopes.map(function (s) {
+      return '<label class="flex items-center gap-2 py-1 cursor-pointer"><input type="checkbox" class="perm-scope h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200"' + (on ? " checked" : "") + ' /><span class="text-sm text-gray-600">' + s + '</span></label>';
+    }).join("");
+    return '<div class="perm-card rounded-card border border-gray-200 p-3.5" data-module="' + m.key + '">' +
+        '<label class="flex items-start justify-between gap-2 cursor-pointer">' +
+          '<span><span class="block text-sm font-semibold text-gray-900">' + m.key + '</span><span class="block text-xs text-gray-400">' + m.desc + '</span></span>' +
+          '<input type="checkbox" class="perm-master mt-0.5 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200"' + (on ? " checked" : "") + ' />' +
+        '</label>' +
+        '<div class="mt-2.5 pt-2.5 border-t border-gray-100 space-y-0.5">' + scopes + '</div>' +
+      '</div>';
+  }).join("");
+
+  // ---- master <-> scope wiring ----
+  [].slice.call(host.querySelectorAll(".perm-card")).forEach(function (card) {
+    var master = card.querySelector(".perm-master");
+    var scopes = [].slice.call(card.querySelectorAll(".perm-scope"));
+    master.addEventListener("change", function () { scopes.forEach(function (s) { s.checked = master.checked; }); });
+    scopes.forEach(function (s) {
+      s.addEventListener("change", function () {
+        var anyOn = scopes.some(function (x) { return x.checked; });
+        var allOn = scopes.every(function (x) { return x.checked; });
+        master.checked = anyOn;
+        master.indeterminate = anyOn && !allOn;
+      });
+    });
+  });
+  function setAll(val) {
+    [].slice.call(host.querySelectorAll(".perm-master, .perm-scope")).forEach(function (c) { c.checked = val; c.indeterminate = false; });
+  }
+  document.getElementById("perm-all").addEventListener("click", function () { setAll(true); });
+  document.getElementById("perm-none").addEventListener("click", function () { setAll(false); });
+
+  // ---- role selection ----
+  var role = "Manager";
+  function applyRole(v) {
+    role = v;
+    [].slice.call(document.querySelectorAll(".role-card")).forEach(function (b) {
+      var on = b.getAttribute("data-role") === v;
+      b.classList.toggle("border-primary-500", on);
+      b.classList.toggle("ring-2", on);
+      b.classList.toggle("ring-primary-100", on);
+      b.classList.toggle("border-gray-200", !on);
+    });
+    var isAdmin = v === "Admin";
+    document.getElementById("profiles-section").classList.toggle("hidden", isAdmin);
+    document.getElementById("perms-section").classList.toggle("hidden", isAdmin);
+    document.getElementById("admin-note").classList.toggle("hidden", !isAdmin);
+  }
+  document.getElementById("role-group").addEventListener("click", function (e) {
+    var b = e.target.closest(".role-card"); if (b) applyRole(b.getAttribute("data-role"));
+  });
+
+  // ---- profile chips ----
+  document.getElementById("profile-chips").addEventListener("click", function (e) {
+    var x = e.target.closest("[data-chip]"); if (x) x.closest(".chip").remove();
+  });
+
+  // ---- misc toasts ----
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-toast]");
+    if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+  });
+
+  // ---- save ----
+  document.getElementById("save-btn").addEventListener("click", function () {
+    var first = document.getElementById("first").value.trim();
+    var last = document.getElementById("last").value.trim();
+    var email = document.getElementById("email").value.trim();
+    if (first.length < 3) { OggvoShell.toast("First name needs at least 3 characters", "error"); return; }
+    if (last.length < 3) { OggvoShell.toast("Last name needs at least 3 characters", "error"); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { OggvoShell.toast("Enter a valid email address", "error"); return; }
+    OggvoShell.toast("User saved as " + role, "success");
+  });
+})();
+</script>
+</body></html>

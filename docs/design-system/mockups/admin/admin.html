@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Admin Console</h1>
+      <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+        OGGVO_ADMIN
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Export
+      </button>
+      <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        New Account
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. KPI row -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-story="US-A1.1" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Total accounts</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">1,284</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Active</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-success-100 text-success-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">1,047</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Trials</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l2.5 2"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">86</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Reviews processed</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-warning-100 text-warning-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.5 4.5l2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5L5 9.2l4.5-.6 2-4.1z"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">312.8k</div>
+    </div>
+  </div>
+
+  <!-- 2. TabBar -->
+  <div class="border-b border-gray-200 mb-5">
+    <nav id="admin-tabs" class="flex gap-6 text-sm">
+      <button type="button" data-value="accounts" class="py-3 font-medium text-primary-600 border-b-2 border-primary-500">Accounts</button>
+      <button type="button" data-value="users" class="py-3 font-medium text-gray-500 hover:text-gray-700">Users</button>
+      <button type="button" data-value="templates" class="py-3 font-medium text-gray-500 hover:text-gray-700">Templates</button>
+    </nav>
+  </div>
+
+  <!-- ============ ACCOUNTS PANEL ============ -->
+  <div data-panel="accounts">
+
+  <!-- 3. Search + status filter row -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4" data-story="US-A1.2" data-ac="AC1">
+    <div class="relative flex-1 max-w-sm">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="acct-search" type="text" placeholder="Search by business, owner or email…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="acct-status" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All statuses</option>
+      <option value="active">Active</option>
+      <option value="trial">Trial</option>
+      <option value="suspended">Suspended</option>
+      <option value="paused">Paused</option>
+    </select>
+    <select class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option>Created · anytime</option>
+      <option>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>Last 90 days</option>
+    </select>
+  </div>
+
+  <!-- 4. Accounts table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-A1.1" data-ac="AC3">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Business</th>
+            <th class="px-4 py-3 font-medium">Owner</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="px-4 py-3 font-medium text-right">Reviews</th>
+            <th class="px-4 py-3 font-medium text-right">Contacts</th>
+            <th class="px-4 py-3 font-medium">Created</th>
+            <th class="w-16 px-4 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+
+          <!-- Row 1 — Active -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">BL</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Bloom Florist</span>
+                  <span class="block text-xs text-gray-500">Growth · bloom-florist</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Hannah Lee</span><span class="block text-xs text-gray-500">hannah@bloomflorist.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">2,431</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">1,902</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jan 14, 2024</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 2 — Trial -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">SV</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Summit Ventures</span>
+                  <span class="block text-xs text-gray-500">Trial · summit-ventures</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Diego Marquez</span><span class="block text-xs text-gray-500">diego@summitventures.io</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>Trial</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">47</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">128</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jun 09, 2026</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 3 — Suspended -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-gray-400 to-gray-600 grid place-items-center text-xs font-semibold text-white shrink-0">RH</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Riverside Hardware</span>
+                  <span class="block text-xs text-gray-500">Starter · riverside-hw</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Marcus Owens</span><span class="block text-xs text-gray-500">m.owens@riverside-hw.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Suspended</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">612</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">540</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Mar 22, 2023</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 4 — Paused -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">PD</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Pacific Dental Group</span>
+                  <span class="block text-xs text-gray-500">Growth · pacific-dental</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Priya Raman</span><span class="block text-xs text-gray-500">priya@pacificdental.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Paused</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">3,118</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">2,776</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Nov 03, 2023</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 5 — Active -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">UC</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Urban Cuts Barbershop</span>
+                  <span class="block text-xs text-gray-500">Starter · urban-cuts</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Thomas Nguyen</span><span class="block text-xs text-gray-500">tom@urbancuts.co</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">894</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">1,205</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jul 18, 2024</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 6 — Trial -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">GH</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Greenhouse Café</span>
+                  <span class="block text-xs text-gray-500">Trial · greenhouse-cafe</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Elena Castillo</span><span class="block text-xs text-gray-500">elena@greenhousecafe.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>Trial</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">18</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">62</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jun 17, 2026</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 7 — Suspended -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-gray-400 to-gray-600 grid place-items-center text-xs font-semibold text-white shrink-0">AF</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Apex Fitness Studio</span>
+                  <span class="block text-xs text-gray-500">Growth · apex-fitness</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">James Donovan</span><span class="block text-xs text-gray-500">james@apexfitness.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Suspended</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">1,540</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">2,310</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Sep 28, 2023</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Row 8 — Active -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 align-top">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">MT</span>
+                <span class="leading-tight">
+                  <span class="block font-semibold text-gray-900">Maple Tree Realty</span>
+                  <span class="block text-xs text-gray-500">Enterprise · maple-tree</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 align-top leading-tight"><span class="block text-gray-700">Alicia Reyes</span><span class="block text-xs text-gray-500">alicia@mapletreerealty.com</span></td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">5,872</td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">4,431</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">May 06, 2022</td>
+            <td class="px-4 py-3 align-top text-right relative">
+              <button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+            </td>
+          </tr>
+
+          <!-- Empty state -->
+          <tr id="acct-empty" class="hidden">
+            <td colspan="7" class="px-4 py-14 text-center">
+              <span class="inline-grid place-items-center h-11 w-11 rounded-card bg-gray-100 text-gray-400 mb-3"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+              <p class="text-sm font-medium text-gray-700">No accounts match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Try a different search term or status.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination footer -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–8 of 1,284</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">3</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- accounts state note -->
+  <p class="mock-note mt-6">GET /admin/stats + GET /admin/profiles?query,status[],dates[],page (perPage 10). Impersonate → POST /admin/impersonate/:id (tier-bounded · audited; exit via /admin/impersonate/exit). Adjust limits → PATCH /admin/profiles/:id (sms_credit + tollfree_policy). Whole area gated to OGGVO_ADMIN / @Roles(ACCOUNT_MANAGER)+. Loading: skeleton rows.</p>
+
+  </div><!-- /ACCOUNTS PANEL -->
+
+  <!-- ============ USERS PANEL ============ -->
+  <div data-panel="users" class="hidden" data-story="US-A3.1" data-ac="AC1">
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+      <div class="relative flex-1 max-w-sm">
+        <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+        <input id="user-search" type="text" placeholder="Search staff by name or email…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+      <select id="user-role" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+        <option value="">All roles</option>
+        <option value="Admin">Admin</option>
+        <option value="Supervisor">Supervisor</option>
+        <option value="Manager">Manager</option>
+        <option value="Sales">Sales</option>
+        <option value="User">User</option>
+      </select>
+      <button data-open="m-user" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add User
+      </button>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+            <tr class="text-left">
+              <th class="px-4 py-3 font-medium">Name</th>
+              <th class="px-4 py-3 font-medium">Email</th>
+              <th class="px-4 py-3 font-medium">Role</th>
+              <th class="px-4 py-3 font-medium">Status</th>
+              <th class="px-4 py-3 font-medium">Created</th>
+              <th class="w-16 px-4 py-3 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="user-tbody" class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50" data-role="Admin">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><span class="h-9 w-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">AR</span><span class="font-semibold text-gray-900">Alicia Reyes</span></div></td>
+              <td class="px-4 py-3 text-gray-600">alicia@oggvo.com</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Admin</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Feb 02, 2022</td>
+              <td class="px-4 py-3 text-right"><button data-user-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-role="Supervisor">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><span class="h-9 w-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">DM</span><span class="font-semibold text-gray-900">Diego Marquez</span></div></td>
+              <td class="px-4 py-3 text-gray-600">diego@oggvo.com</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Supervisor</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Aug 19, 2022</td>
+              <td class="px-4 py-3 text-right"><button data-user-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-role="Manager">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><span class="h-9 w-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">HL</span><span class="font-semibold text-gray-900">Hannah Lee</span></div></td>
+              <td class="px-4 py-3 text-gray-600">hannah@oggvo.com</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Manager</span></td>
+              <td class="px-4 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Invited</span></td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jun 24, 2026</td>
+              <td class="px-4 py-3 text-right"><button data-user-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-role="Sales">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><span class="h-9 w-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">TN</span><span class="font-semibold text-gray-900">Thomas Nguyen</span></div></td>
+              <td class="px-4 py-3 text-gray-600">thomas@oggvo.com</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Sales</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jan 07, 2024</td>
+              <td class="px-4 py-3 text-right"><button data-user-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-role="User">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><span class="h-9 w-9 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 grid place-items-center text-xs font-semibold text-white shrink-0">MO</span><span class="font-semibold text-gray-900">Marcus Owens</span></div></td>
+              <td class="px-4 py-3 text-gray-600">m.owens@oggvo.com</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">User</span></td>
+              <td class="px-4 py-3"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Suspended</span></td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Oct 30, 2023</td>
+              <td class="px-4 py-3 text-right"><button data-user-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr id="user-empty" class="hidden">
+              <td colspan="6" class="px-4 py-14 text-center">
+                <p class="text-sm font-medium text-gray-700">No staff match your filters</p>
+                <p class="text-xs text-gray-400 mt-1">Try a different search term or role.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mock-note mt-6">GET /admin/users?query,types[],suspended,page → role scoped by caller account_type. Row actions: Edit → PATCH /admin/users/:id · Suspend/Activate → PATCH /admin/users/:id/status · Resend invite → POST /admin/users/:id/invite · Delete → DELETE /admin/users/:id (ACCOUNT_MANAGER raises a manage_request; SUPERVISOR+ deletes). Role pill: bg-primary-100/text-primary-700.</p>
+
+  </div><!-- /USERS PANEL -->
+
+  <!-- ============ TEMPLATES PANEL ============ -->
+  <div data-panel="templates" class="hidden" data-story="US-A6.1" data-ac="AC1">
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+      <div class="relative flex-1 max-w-sm">
+        <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+        <input id="tpl-search" type="text" placeholder="Search templates…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+      <select id="tpl-type" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+        <option value="">All types</option>
+        <option value="Email">Email</option>
+        <option value="SMS">SMS</option>
+        <option value="Newsletter">Newsletter</option>
+        <option value="Birthday">Birthday</option>
+      </select>
+      <button data-open="m-tpl" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add Template
+      </button>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+            <tr class="text-left">
+              <th class="px-4 py-3 font-medium">Template</th>
+              <th class="px-4 py-3 font-medium">Type</th>
+              <th class="px-4 py-3 font-medium">Category</th>
+              <th class="px-4 py-3 font-medium">Status</th>
+              <th class="w-40 px-4 py-3 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tpl-tbody" class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50" data-type="Email">
+              <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Review Request — Classic</span><span class="block text-xs text-gray-500">Subject: How was your visit?</span></td>
+              <td class="px-4 py-3 text-gray-600">Email</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Review</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 text-right"><button data-tpl-edit data-name="Review Request — Classic" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit</button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-type="SMS">
+              <td class="px-4 py-3"><span class="block font-semibold text-gray-900">SMS Review Nudge</span><span class="block text-xs text-gray-500">160-char segment · placeholders</span></td>
+              <td class="px-4 py-3 text-gray-600">SMS</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Review</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 text-right"><button data-tpl-edit data-name="SMS Review Nudge" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit</button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-type="Newsletter">
+              <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Monthly Newsletter — Spring</span><span class="block text-xs text-gray-500">Subject: What's new this month</span></td>
+              <td class="px-4 py-3 text-gray-600">Newsletter</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Marketing</span></td>
+              <td class="px-4 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Draft</span></td>
+              <td class="px-4 py-3 text-right"><button data-tpl-edit data-name="Monthly Newsletter — Spring" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit</button></td>
+            </tr>
+            <tr class="hover:bg-gray-50" data-type="Birthday">
+              <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Birthday Greeting</span><span class="block text-xs text-gray-500">Subject: Happy Birthday from us!</span></td>
+              <td class="px-4 py-3 text-gray-600">Birthday</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Lifecycle</span></td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 text-right"><button data-tpl-edit data-name="Birthday Greeting" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit</button></td>
+            </tr>
+            <tr id="tpl-empty" class="hidden">
+              <td colspan="5" class="px-4 py-14 text-center">
+                <p class="text-sm font-medium text-gray-700">No templates match your filters</p>
+                <p class="text-xs text-gray-400 mt-1">Try a different search term or type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mock-note mt-6">GET /admin/newsletters?type,search — shared campaign/newsletter template library grouped by category. Edit → SMS opens PUT /campaigns/templates/:id · non-SMS opens the drag-drop CampaignEditor. Add → POST /admin/newsletters. Delete → DELETE /admin/newsletters/:id.</p>
+
+  </div><!-- /TEMPLATES PANEL -->
+
+  <!-- Shared ACCOUNTS actions menu (one instance, repositioned under the clicked row button) -->
+  <div data-row-menu class="hidden fixed z-40 w-56 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 text-sm">
+    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path stroke-linecap="round" d="M5 19a7 7 0 0114 0"/></svg>View account</a>
+    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit profile</a>
+    <button data-open="m-limits" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 4v16M18 4v16M6 8h12M6 16h12"/></svg>Adjust limits</button>
+    <button data-suspend-toggle class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.36 6.64A9 9 0 1 1 12 3v9"/></svg><span data-suspend-label>Suspend</span></button>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-open="m-impersonate" data-story="US-A2.1" data-ac="AC1" class="w-full flex items-start gap-2.5 px-3 py-2 text-left text-primary-700 rounded-lg hover:bg-primary-50">
+      <svg class="h-4 w-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12H3m0 0l4-4m-4 4l4 4M21 4v16"/></svg>
+      <span class="leading-tight"><span class="block font-medium">Impersonate</span><span class="block text-[11px] text-gray-400">Log in as this account · writes an audit entry</span></span>
+    </button>
+    <button data-open="m-delete-acct" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-error-600 rounded-lg hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5h6v2m-8 0l1 12h8l1-12"/></svg>Delete account</button>
+  </div>
+
+  <!-- Shared USERS actions menu -->
+  <div data-user-row-menu class="hidden fixed z-40 w-52 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 text-sm">
+    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit user</a>
+    <button data-user-toast="Activation invite re-sent" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>Resend invite</button>
+    <button data-user-toast="User suspended" data-user-tone="warning" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.36 6.64A9 9 0 1 1 12 3v9"/></svg>Suspend</button>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-open="m-delete-user" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-error-600 rounded-lg hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5h6v2m-8 0l1 12h8l1-12"/></svg>Delete user</button>
+  </div>
+
+  <!-- Impersonate confirm -->
+  <div id="m-impersonate" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Impersonate account?</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-600">You'll be logged in as <b class="font-medium text-gray-900" data-biz>this account</b>. This action <b class="font-medium text-gray-900">writes an audit entry</b> and is tier-bounded. Exit impersonation from the top bar when done.</div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-impersonate-confirm class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Impersonate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete account confirm -->
+  <div id="m-delete-acct" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Delete account?</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-600">This permanently deletes <b class="font-medium text-gray-900" data-biz>this account</b> and all of its data. Account managers raise a deletion request for supervisor approval; supervisors delete immediately. This can't be undone.</div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-delete-confirm class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete user confirm -->
+  <div id="m-delete-user" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Delete user?</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-600">This removes the staff user and their profile access. Account managers raise a deletion request for supervisor approval. This can't be undone.</div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="User deleted" data-tone="error" class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adjust limits -->
+  <div id="m-limits" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Adjust limits · <span data-biz>account</span></h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4 text-sm text-gray-600">
+        <label class="block">
+          <span class="block font-medium text-gray-700 mb-1">Monthly SMS credit</span>
+          <input type="number" value="2500" min="0" step="100" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </label>
+        <label class="block">
+          <span class="block font-medium text-gray-700 mb-1">Toll-free policy</span>
+          <select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option>Web connect only (pilot)</option>
+            <option>Full messaging</option>
+            <option>Disabled</option>
+          </select>
+        </label>
+        <p class="text-xs text-gray-400">Changes take effect on the next billing sync. SMS credit is measured in message segments.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-limits-confirm class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save limits</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add user (stub) -->
+  <div id="m-user" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Add staff user</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Full name</span><input type="text" placeholder="Jane Doe" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Email</span><input type="email" placeholder="jane@oggvo.com" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Role</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>User</option><option>Sales</option><option>Manager</option><option>Supervisor</option><option>Admin</option></select></label>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Invitation sent" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Send invite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add template (stub) -->
+  <div id="m-tpl" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Add template</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Name</span><input type="text" placeholder="Review Request — Modern" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Type</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>Email</option><option>SMS</option><option>Newsletter</option><option>Birthday</option></select></label>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Template created" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Create</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "admin", storyDomain: "admin", back: { href: "../index.html", label: "All mockups" }, route: "/admin", search: "Search accounts…" });
+
+  (function () {
+    // ---- 1. Tab switching (Accounts / Users / Templates) ----
+    var panels = {};
+    [].slice.call(document.querySelectorAll("[data-panel]")).forEach(function (p) { panels[p.getAttribute("data-panel")] = p; });
+    OggvoShell.buttonGroup(document.getElementById("admin-tabs"), {
+      active: "font-medium text-primary-600 border-b-2 border-primary-500",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (v) {
+        Object.keys(panels).forEach(function (k) { panels[k].classList.toggle("hidden", k !== v); });
+        closeRowMenus();
+      },
+    });
+
+    // ---- 2. Accounts search + status filter (live) ----
+    var acctSearch = document.getElementById("acct-search");
+    var acctStatus = document.getElementById("acct-status");
+    var acctEmpty = document.getElementById("acct-empty");
+    var acctRows = [].slice.call(document.querySelector("[data-panel='accounts'] tbody").querySelectorAll("tr")).filter(function (r) { return r !== acctEmpty; });
+    function statusOf(r) {
+      if (r.querySelector(".bg-success-100")) return "active";
+      if (r.querySelector(".bg-primary-100")) return "trial";
+      if (r.querySelector(".bg-error-100")) return "suspended";
+      if (r.querySelector(".bg-warning-100")) return "paused";
+      return "";
+    }
+    function filterAccounts() {
+      var q = (acctSearch.value || "").trim().toLowerCase();
+      var st = acctStatus.value;
+      var any = false;
+      acctRows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) && (!st || statusOf(r) === st);
+        r.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      acctEmpty.classList.toggle("hidden", any);
+    }
+    acctSearch.addEventListener("input", filterAccounts);
+    acctStatus.addEventListener("change", filterAccounts);
+
+    // ---- 3. Users search + role filter (live) ----
+    var userSearch = document.getElementById("user-search");
+    var userRole = document.getElementById("user-role");
+    var userEmpty = document.getElementById("user-empty");
+    var userRows = [].slice.call(document.getElementById("user-tbody").querySelectorAll("tr")).filter(function (r) { return r !== userEmpty; });
+    function filterUsers() {
+      var q = (userSearch.value || "").trim().toLowerCase();
+      var role = userRole.value;
+      var any = false;
+      userRows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) && (!role || r.getAttribute("data-role") === role);
+        r.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      userEmpty.classList.toggle("hidden", any);
+    }
+    userSearch.addEventListener("input", filterUsers);
+    userRole.addEventListener("change", filterUsers);
+
+    // ---- 4. Templates search + type filter (live) ----
+    var tplSearch = document.getElementById("tpl-search");
+    var tplType = document.getElementById("tpl-type");
+    var tplEmpty = document.getElementById("tpl-empty");
+    var tplRows = [].slice.call(document.getElementById("tpl-tbody").querySelectorAll("tr")).filter(function (r) { return r !== tplEmpty; });
+    function filterTemplates() {
+      var q = (tplSearch.value || "").trim().toLowerCase();
+      var ty = tplType.value;
+      var any = false;
+      tplRows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) && (!ty || r.getAttribute("data-type") === ty);
+        r.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      tplEmpty.classList.toggle("hidden", any);
+    }
+    tplSearch.addEventListener("input", filterTemplates);
+    tplType.addEventListener("change", filterTemplates);
+
+    // ---- 5. Row action menus (accounts + users), positioned under the kebab ----
+    var acctMenu = document.querySelector("[data-row-menu]");
+    var userMenu = document.querySelector("[data-user-row-menu]");
+    var activeBiz = "this account";          // business name for the currently open account menu
+    function closeRowMenus() { acctMenu.classList.add("hidden"); userMenu.classList.add("hidden"); }
+    function place(menu, btn) {
+      var r = btn.getBoundingClientRect();
+      menu.classList.remove("hidden");
+      menu.style.top = (r.bottom + 6) + "px";
+      menu.style.left = Math.max(8, r.right - menu.offsetWidth) + "px";
+    }
+    document.querySelectorAll("[data-menu-btn]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var wasOpen = !acctMenu.classList.contains("hidden");
+        closeRowMenus();
+        if (wasOpen) return;
+        var row = btn.closest("tr");
+        activeBiz = row.querySelector(".font-semibold").textContent.trim();
+        // set Suspend/Activate label from row status
+        var suspended = statusOf(row) === "suspended";
+        acctMenu.querySelector("[data-suspend-label]").textContent = suspended ? "Activate" : "Suspend";
+        place(acctMenu, btn);
+      });
+    });
+    document.querySelectorAll("[data-user-menu]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var wasOpen = !userMenu.classList.contains("hidden");
+        closeRowMenus();
+        if (wasOpen) return;
+        place(userMenu, btn);
+      });
+    });
+
+    // ---- 6. Account menu inline actions (suspend/activate toggle) ----
+    acctMenu.querySelector("[data-suspend-toggle]").addEventListener("click", function () {
+      var verb = acctMenu.querySelector("[data-suspend-label]").textContent;
+      closeRowMenus();
+      OggvoShell.toast(activeBiz + " " + (verb === "Activate" ? "activated" : "suspended"), verb === "Activate" ? "success" : "warning");
+    });
+    // user menu simple toasts
+    userMenu.querySelectorAll("[data-user-toast]").forEach(function (b) {
+      b.addEventListener("click", function () { closeRowMenus(); OggvoShell.toast(b.getAttribute("data-user-toast"), b.getAttribute("data-user-tone") || "primary"); });
+    });
+
+    // ---- 7. Modals (open / close / confirm) ----
+    function fillBiz(m) { [].slice.call(m.querySelectorAll("[data-biz]")).forEach(function (el) { el.textContent = activeBiz; }); }
+    function closeModals() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var opener = e.target.closest("[data-open]");
+      if (opener) {
+        var m = document.getElementById(opener.getAttribute("data-open"));
+        if (m) { closeRowMenus(); fillBiz(m); m.classList.remove("hidden"); }
+        return;
+      }
+      if (e.target.closest("[data-impersonate-confirm]")) { OggvoShell.toast("Impersonating " + activeBiz + "…", "primary"); }
+      else if (e.target.closest("[data-delete-confirm]")) { OggvoShell.toast(activeBiz + " deleted", "error"); }
+      else if (e.target.closest("[data-limits-confirm]")) { OggvoShell.toast("Limits updated for " + activeBiz, "success"); }
+      else {
+        var t = e.target.closest("[data-toast]");
+        if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+      }
+      if (e.target.closest("[data-close]")) closeModals();
+    });
+    document.querySelectorAll("[data-tpl-edit]").forEach(function (b) {
+      b.addEventListener("click", function () { OggvoShell.toast("Opening editor · " + b.getAttribute("data-name"), "primary"); });
+    });
+    [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) {
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+
+    // ---- 8. Global dismiss (outside click / Escape / scroll) ----
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-row-menu]") && !e.target.closest("[data-user-row-menu]") &&
+          !e.target.closest("[data-menu-btn]") && !e.target.closest("[data-user-menu]")) closeRowMenus();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeRowMenus(); closeModals(); } });
+    window.addEventListener("scroll", closeRowMenus, true);
+  })();
+</script>
+</body>
+</html>

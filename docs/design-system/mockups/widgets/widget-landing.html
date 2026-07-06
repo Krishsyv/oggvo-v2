@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Landing Page Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <div class="max-w-6xl space-y-6">
+
+    <!-- 1. PageHeader -->
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-2xl font-semibold text-gray-900">Landing Page</h1>
+          <span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">A hosted "you're invited to review" page · auto-saves on every change.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-xs text-gray-500"><svg class="h-3.5 w-3.5 text-success-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>All changes saved</span>
+        <a href="widgets-list.html" class="inline-flex items-center gap-2 h-10 px-3.5 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+          Widgets
+        </a>
+        <button type="button" data-done class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Done
+        </button>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-6 items-start" data-story="US-5.1" data-ac="AC1">
+
+      <!-- 2. LEFT — config panel -->
+      <section class="lg:col-span-2 bg-white border border-gray-200 rounded-card shadow-card divide-y divide-gray-100" data-story="US-5.1" data-ac="AC2">
+        <div class="px-5 py-4">
+          <h2 class="text-sm font-semibold text-gray-900">Configuration</h2>
+        </div>
+
+        <!-- Background image -->
+        <div class="p-5 space-y-2.5" data-story="US-5.2" data-ac="AC1">
+          <label class="text-sm font-medium text-gray-700">Page background</label>
+          <div class="flex items-center justify-center rounded-card border border-dashed border-gray-300 bg-gray-50 px-6 py-5">
+            <div class="relative flex flex-col items-center justify-center text-center">
+              <input id="cfg-bg-file" type="file" class="absolute inset-0 h-full w-full opacity-0 cursor-pointer" aria-label="Upload background" />
+              <span class="grid place-items-center h-9 w-9 rounded-full border-[6px] border-gray-50 bg-gray-100 text-gray-500">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 13l3-3 3 3M12 10v7M4 16.5A4.5 4.5 0 016 8a5.5 5.5 0 0110.5-1.5A4 4 0 0119 14"/></svg>
+              </span>
+              <p class="mt-1.5 text-sm text-gray-600"><span class="font-medium text-primary-600">Click to upload</span> or drag &amp; drop</p>
+              <p class="text-xs text-gray-400">PNG / JPG · 1920×1080 recommended</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-gray-400 shrink-0">Or pick a preset</span>
+            <div id="cfg-bg-presets" class="flex flex-wrap items-center gap-2">
+              <button type="button" data-bg="linear-gradient(135deg,#1d2939,#475467)" style="background:linear-gradient(135deg,#1d2939,#475467)" class="h-7 w-10 rounded border border-gray-200 ring-offset-2 ring-gray-900" aria-label="Slate"></button>
+              <button type="button" data-bg="linear-gradient(135deg,#7a5af8,#2e90fa)" style="background:linear-gradient(135deg,#7a5af8,#2e90fa)" class="h-7 w-10 rounded border border-gray-200 ring-offset-2 ring-gray-900" aria-label="Dusk"></button>
+              <button type="button" data-bg="linear-gradient(135deg,#0e9384,#12b76a)" style="background:linear-gradient(135deg,#0e9384,#12b76a)" class="h-7 w-10 rounded border border-gray-200 ring-offset-2 ring-gray-900" aria-label="Meadow"></button>
+              <button type="button" data-bg="linear-gradient(135deg,#b54708,#f79009)" style="background:linear-gradient(135deg,#b54708,#f79009)" class="h-7 w-10 rounded border border-gray-200 ring-offset-2 ring-gray-900" aria-label="Amber"></button>
+            </div>
+          </div>
+          <p class="mock-note">Signed S3 upload (media module) — key stored in <span class="font-mono">properties.backgroundKey</span>, served from CDN. Never a local <span class="font-mono">assets/media/…</span> path.</p>
+        </div>
+
+        <!-- Headline + subtext -->
+        <div class="p-5 space-y-4" data-story="US-5.2" data-ac="AC2">
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Headline</label>
+            <input id="cfg-headline" type="text" value="You're invited to review" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Subtext</label>
+            <textarea id="cfg-subtext" rows="3" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm resize-y focus:outline-none focus:ring-2 focus:ring-primary-200">Your feedback means the world to us. Please tap below to rate your experience with Acme Co.</textarea>
+          </div>
+        </div>
+
+        <!-- Review stream embed -->
+        <div class="p-5 space-y-3" data-story="US-5.3" data-ac="AC1">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <span class="text-sm font-medium text-gray-900">Show review stream</span>
+              <p class="text-xs text-gray-500">Render your latest reviews under the hero.</p>
+            </div>
+            <button type="button" role="switch" data-switch="stream" aria-checked="true" class="shrink-0 relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+          <div id="cfg-stream-opts" class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Minimum rating</label>
+            <select id="cfg-min" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option value="0">Any</option>
+              <option value="3">3★ &amp; up</option>
+              <option value="4" selected>4★ &amp; up</option>
+              <option value="5">5★ only</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="p-5 space-y-4" data-story="US-5.4" data-ac="AC1">
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">CTA button label</label>
+            <input id="cfg-cta-label" type="text" value="Rate Your Experience" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">CTA destination</label>
+            <select id="cfg-cta-dest" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option selected>Review funnel (oggv.co/r/acme)</option>
+              <option>Google review link</option>
+              <option>Custom URL…</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Theme color -->
+        <div class="p-5 space-y-2" data-story="US-5.4" data-ac="AC1">
+          <label class="text-sm font-medium text-gray-700">Theme color</label>
+          <p class="text-xs text-gray-500 -mt-1">Header/footer gradient &amp; CTA button.</p>
+          <div id="cfg-swatches" class="flex flex-wrap items-center gap-2.5">
+            <button type="button" data-color="#175cd3" style="background:#175cd3" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Navy"></button>
+            <button type="button" data-color="#2e90fa" style="background:#2e90fa" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Blue"></button>
+            <button type="button" data-color="#12b76a" style="background:#12b76a" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Green"></button>
+            <button type="button" data-color="#f79009" style="background:#f79009" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Amber"></button>
+            <button type="button" data-color="#f04438" style="background:#f04438" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Red"></button>
+            <button type="button" data-color="#7a5af8" style="background:#7a5af8" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Violet"></button>
+            <button type="button" data-color="#0e9384" style="background:#0e9384" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Teal"></button>
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <span id="cfg-color-preview" class="h-10 w-10 rounded-card border border-gray-300 shrink-0" style="background:#175cd3"></span>
+            <input id="cfg-color-text" type="text" value="#175CD3" class="flex-1 h-10 px-3 rounded-card border border-gray-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+        </div>
+
+        <!-- Star color -->
+        <div class="p-5 space-y-2" data-story="US-5.4" data-ac="AC1">
+          <label class="text-sm font-medium text-gray-700">Star color</label>
+          <p class="text-xs text-gray-500 -mt-1">Rating row (parity with v1 activeColor / inactiveColor).</p>
+          <div id="cfg-star-swatches" class="flex flex-wrap items-center gap-2.5">
+            <button type="button" data-star="#fdb022" style="background:#fdb022" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Amber"></button>
+            <button type="button" data-star="#f79009" style="background:#f79009" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Orange"></button>
+            <button type="button" data-star="#12b76a" style="background:#12b76a" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Green"></button>
+            <button type="button" data-star="#f04438" style="background:#f04438" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Red"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. RIGHT — live preview + copy URL/embed -->
+      <div class="lg:col-span-3 space-y-6">
+
+        <!-- Live preview -->
+        <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-5.1" data-ac="AC1">
+          <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between gap-4">
+            <h2 class="text-sm font-semibold text-gray-900">Live preview</h2>
+            <span class="mock-note">Updates on every config change</span>
+          </div>
+
+          <div class="p-5 bg-gray-50 rounded-b-card">
+            <!-- browser chrome -->
+            <div class="rounded-t-card border border-b-0 border-gray-200 bg-white px-3 py-2 flex items-center gap-2">
+              <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-error-300"></span><span class="h-2.5 w-2.5 rounded-full bg-warning-300"></span><span class="h-2.5 w-2.5 rounded-full bg-success-300"></span></span>
+              <span id="pv-url" class="ml-2 flex-1 truncate rounded bg-gray-100 px-2 py-1 text-[11px] font-mono text-gray-500">widgets.oggvo.com/p/8fa2-acme</span>
+            </div>
+
+            <!-- HERO -->
+            <div class="border-x border-gray-200 overflow-hidden">
+              <div id="pv-hero" class="relative px-6 py-10 grid place-items-center text-center" style="background:linear-gradient(135deg,#1d2939,#475467)">
+                <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(0,0,0,.30))"></div>
+
+                <!-- top gradient bar -->
+                <div id="pv-topbar" class="absolute top-0 inset-x-0 h-9 flex items-center justify-center text-[11px] font-medium text-white" style="background:linear-gradient(90deg,#134a9e,#175cd3)">Help us, help others · You're invited to review.</div>
+
+                <div class="relative w-full max-w-md rounded-card bg-white/95 shadow-card px-6 py-7 mt-6 mb-3">
+                  <div id="pv-logo" class="mx-auto grid place-items-center h-11 w-11 rounded-card text-white text-sm font-bold" style="background:#175cd3">AC</div>
+                  <h3 id="pv-headline" class="mt-4 text-lg font-semibold text-gray-900">You're invited to review</h3>
+                  <p id="pv-subtext" class="mt-2 text-sm text-gray-600">Your feedback means the world to us. Please tap below to rate your experience with Acme Co.</p>
+                  <div id="pv-stars" class="mt-4 text-2xl leading-none tracking-wide" style="color:#fdb022">★★★★★</div>
+                  <button id="pv-cta" type="button" class="mt-5 inline-flex items-center justify-center h-10 px-5 rounded-card text-sm font-semibold text-white" style="background:#175cd3">Rate Your Experience</button>
+                </div>
+
+                <!-- bottom gradient bar -->
+                <div id="pv-botbar" class="absolute bottom-0 inset-x-0 h-3" style="background:linear-gradient(90deg,#134a9e,#175cd3)"></div>
+              </div>
+            </div>
+
+            <!-- REVIEW STREAM (toggle) -->
+            <div id="pv-stream" class="border border-t-0 border-gray-200 rounded-b-card bg-white px-5 py-5" data-story="US-5.3" data-ac="AC1">
+              <div id="pv-aggregate" class="flex items-center gap-2 mb-3">
+                <span class="text-lg leading-none" style="color:#fdb022">★★★★★</span>
+                <span id="pv-agg-score" class="text-sm font-semibold text-gray-900">4.8</span>
+                <span class="text-sm text-gray-500">· 214 reviews</span>
+              </div>
+              <div id="pv-cards">
+                <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4 mb-3" data-rating="5">
+                  <div class="flex items-center gap-3">
+                    <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#175cd3">JD</span>
+                    <div class="min-w-0">
+                      <div class="text-sm font-semibold text-gray-900">Jordan D.</div>
+                      <div class="text-sm leading-none" style="color:#fdb022">★★★★★</div>
+                    </div>
+                    <span class="ml-auto text-xs text-gray-400">Jun 18, 2026</span>
+                  </div>
+                  <p class="mt-2.5 text-sm text-gray-600">Absolutely fantastic service from start to finish. Highly recommend.</p>
+                </div>
+                <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4 mb-3" data-rating="4">
+                  <div class="flex items-center gap-3">
+                    <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#175cd3">MR</span>
+                    <div class="min-w-0">
+                      <div class="text-sm font-semibold text-gray-900">Maria R.</div>
+                      <div class="text-sm leading-none" style="color:#fdb022">★★★★<span class="text-gray-300">★</span></div>
+                    </div>
+                    <span class="ml-auto text-xs text-gray-400">Jun 15, 2026</span>
+                  </div>
+                  <p class="mt-2.5 text-sm text-gray-600">Great experience overall. Quick turnaround and friendly staff.</p>
+                </div>
+                <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4" data-rating="5">
+                  <div class="flex items-center gap-3">
+                    <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#175cd3">TS</span>
+                    <div class="min-w-0">
+                      <div class="text-sm font-semibold text-gray-900">Tom S.</div>
+                      <div class="text-sm leading-none" style="color:#fdb022">★★★★★</div>
+                    </div>
+                    <span class="ml-auto text-xs text-gray-400">Jun 12, 2026</span>
+                  </div>
+                  <p class="mt-2.5 text-sm text-gray-600">Couldn't be happier. Professional, on time, and fairly priced.</p>
+                </div>
+              </div>
+              <p id="pv-more" class="mt-3 text-center text-xs text-gray-400">Showing 3 of 214 reviews · the rest load on scroll</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Copy page URL / embed -->
+        <section class="bg-white border border-gray-200 rounded-card shadow-card divide-y divide-gray-100" data-story="US-5.5" data-ac="AC1">
+          <div class="px-5 py-4">
+            <h2 class="text-sm font-semibold text-gray-900">Copy page URL / embed</h2>
+            <p class="text-xs text-gray-500">Share the hosted page, or embed it in your own site.</p>
+          </div>
+
+          <!-- Page URL -->
+          <div class="p-5 space-y-2" data-copy-scope>
+            <label class="text-sm font-medium text-gray-700">Hosted page URL</label>
+            <div class="flex gap-2">
+              <input data-copy-src type="text" readonly value="https://widgets.oggvo.com/p/8fa2-acme" class="flex-1 h-10 px-3 rounded-card border border-gray-300 bg-gray-50 text-sm font-mono text-gray-600 truncate focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              <button type="button" data-copy-btn class="inline-flex items-center gap-2 h-10 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 shrink-0">
+                <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path stroke-linecap="round" d="M5 15V5a2 2 0 012-2h10"/></svg>
+                <span data-copy-label>Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Embed code -->
+          <div class="p-5 space-y-2" data-copy-scope>
+            <div class="flex items-center justify-between gap-4">
+              <label class="text-sm font-medium text-gray-700">Embed code</label>
+              <button type="button" data-copy-btn class="inline-flex items-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path stroke-linecap="round" d="M5 15V5a2 2 0 012-2h10"/></svg>
+                <span data-copy-label>Copy</span>
+              </button>
+            </div>
+            <pre class="bg-gray-900 text-gray-100 rounded-card p-4 text-xs overflow-x-auto"><code data-copy-src>&lt;script src="https://widgets.oggvo.com/embed.js" data-widget="landing" data-profile="8fa2-acme"&gt;&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- Mock note -->
+        <p class="mock-note">Config auto-saves to <span class="font-mono">widgets.properties</span> via <span class="font-mono">PUT /widgets/landing</span> (scoped to profileId; single row for widgetType <span class="font-mono">landing</span>). The public page is SSR at <span class="font-mono">GET /public/widgets/:profileId/landing</span> (origin-checked iframe + postMessage resize), and the reviews come from the same source as the Review Stream widget. Both the page URL and embed are <strong>absolute</strong> CDN URLs — never v1's orphaned relative <span class="font-mono">/widget/widget.js?widgetID=1</span> path.</p>
+
+      </div>
+    </div>
+  </div>
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "widgets", storyDomain: "widgets", back: { href: "../index.html", label: "All mockups" }, route: "/widgets/landing", search: "Search…" });
+
+  // Copy-to-clipboard for URL + embed blocks
+  document.querySelectorAll("[data-copy-btn]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var scope = btn.closest("[data-copy-scope]");
+      var src = scope ? scope.querySelector("[data-copy-src]") : null;
+      var text = src ? (src.value != null && src.tagName === "INPUT" ? src.value : src.textContent) : "";
+      var label = btn.querySelector("[data-copy-label]");
+      function done() {
+        if (label) label.textContent = "Copied!";
+        OggvoShell.toast("Copied to clipboard", "success");
+        setTimeout(function () { if (label) label.textContent = "Copy"; }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else { done(); }
+    });
+  });
+
+  // ---- Config panel drives the live landing preview ----
+  (function () {
+    var state = { bg: "linear-gradient(135deg,#1d2939,#475467)", color: "#175cd3", star: "#fdb022", stream: true, min: 4 };
+
+    var pvHero    = document.getElementById("pv-hero");
+    var pvTop     = document.getElementById("pv-topbar");
+    var pvBot     = document.getElementById("pv-botbar");
+    var pvLogo    = document.getElementById("pv-logo");
+    var pvCta     = document.getElementById("pv-cta");
+    var pvStars   = document.getElementById("pv-stars");
+    var pvStream  = document.getElementById("pv-stream");
+    var pvCards   = document.getElementById("pv-cards");
+    var pvMore    = document.getElementById("pv-more");
+    var streamOpts = document.getElementById("cfg-stream-opts");
+    var cards     = [].slice.call(pvCards.querySelectorAll(".pv-card"));
+
+    function gradient(hex) {
+      return "linear-gradient(90deg," + shade(hex, -18) + "," + hex + ")";
+    }
+    // simple darken for the gradient's left stop
+    function shade(hex, pct) {
+      var n = parseInt(hex.slice(1), 16);
+      var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      var f = (100 + pct) / 100;
+      r = Math.max(0, Math.min(255, Math.round(r * f)));
+      g = Math.max(0, Math.min(255, Math.round(g * f)));
+      b = Math.max(0, Math.min(255, Math.round(b * f)));
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    function applyPreview() {
+      pvHero.style.background = state.bg;
+      pvTop.style.background = gradient(state.color);
+      pvBot.style.background = gradient(state.color);
+      pvLogo.style.background = state.color;
+      pvCta.style.background = state.color;
+      pvStars.style.color = state.star;
+
+      // stream on/off
+      pvStream.classList.toggle("hidden", !state.stream);
+      streamOpts.classList.toggle("hidden", !state.stream);
+
+      // min-rating filter + theme/star color on stream cards
+      var shown = 0;
+      cards.forEach(function (c) {
+        var pass = (+c.getAttribute("data-rating")) >= state.min;
+        c.classList.toggle("hidden", !pass);
+        if (pass) shown++;
+        var av = c.querySelector(".pv-avatar"); if (av) av.style.background = state.color;
+        var starRow = c.querySelector(".leading-none"); if (starRow) starRow.style.color = state.star;
+      });
+      pvMore.textContent = "Showing " + shown + " of 214 reviews · the rest load on scroll";
+      var agg = pvStream.querySelector("#pv-aggregate .leading-none"); if (agg) agg.style.color = state.star;
+    }
+
+    // Background presets
+    var bgWrap = document.getElementById("cfg-bg-presets");
+    bgWrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-bg]"); if (!b) return;
+      state.bg = b.getAttribute("data-bg");
+      [].slice.call(bgWrap.querySelectorAll("[data-bg]")).forEach(function (x) {
+        var on = x === b; x.classList.toggle("ring-2", on); x.classList.toggle("ring-offset-2", on); x.classList.toggle("ring-gray-900", on);
+      });
+      applyPreview();
+    });
+    document.getElementById("cfg-bg-file").addEventListener("change", function () {
+      OggvoShell.toast("Background uploaded (signed S3)", "primary");
+    });
+
+    // Headline + subtext
+    document.getElementById("cfg-headline").addEventListener("input", function (e) {
+      document.getElementById("pv-headline").textContent = e.target.value || "You're invited to review";
+    });
+    document.getElementById("cfg-subtext").addEventListener("input", function (e) {
+      document.getElementById("pv-subtext").textContent = e.target.value || "";
+    });
+
+    // Review-stream switch
+    var streamSw = document.querySelector('[data-switch="stream"]');
+    function setSwitch(btn, on) {
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+      btn.classList.toggle("bg-primary-500", on);
+      btn.classList.toggle("bg-gray-300", !on);
+      var knob = btn.querySelector("span");
+      knob.classList.toggle("translate-x-5", on);
+      knob.classList.toggle("translate-x-0.5", !on);
+    }
+    streamSw.addEventListener("click", function () {
+      state.stream = streamSw.getAttribute("aria-checked") !== "true";
+      setSwitch(streamSw, state.stream);
+      applyPreview();
+    });
+    document.getElementById("cfg-min").addEventListener("change", function (e) {
+      state.min = parseInt(e.target.value, 10) || 0; applyPreview();
+    });
+
+    // CTA label + destination
+    document.getElementById("cfg-cta-label").addEventListener("input", function (e) {
+      pvCta.textContent = e.target.value || "Rate Your Experience";
+    });
+    document.getElementById("cfg-cta-dest").addEventListener("change", function (e) {
+      OggvoShell.toast("CTA destination: " + e.target.value, "primary");
+    });
+
+    // Theme color — swatches + hex
+    var swatches  = document.getElementById("cfg-swatches");
+    var colorText = document.getElementById("cfg-color-text");
+    var colorPrev = document.getElementById("cfg-color-preview");
+    function setColor(hex) {
+      state.color = hex;
+      colorText.value = hex.toUpperCase();
+      colorPrev.style.background = hex;
+      [].slice.call(swatches.querySelectorAll("[data-color]")).forEach(function (b) {
+        var on = b.getAttribute("data-color").toLowerCase() === hex.toLowerCase();
+        b.classList.toggle("ring-2", on); b.classList.toggle("ring-offset-2", on); b.classList.toggle("ring-gray-900", on);
+      });
+      applyPreview();
+    }
+    swatches.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-color]"); if (b) setColor(b.getAttribute("data-color"));
+    });
+    colorText.addEventListener("input", function () {
+      var v = colorText.value.trim(); if (/^#[0-9a-fA-F]{6}$/.test(v)) setColor(v);
+    });
+
+    // Star color
+    var starWrap = document.getElementById("cfg-star-swatches");
+    function setStar(hex) {
+      state.star = hex;
+      [].slice.call(starWrap.querySelectorAll("[data-star]")).forEach(function (b) {
+        var on = b.getAttribute("data-star").toLowerCase() === hex.toLowerCase();
+        b.classList.toggle("ring-2", on); b.classList.toggle("ring-offset-2", on); b.classList.toggle("ring-gray-900", on);
+      });
+      applyPreview();
+    }
+    starWrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-star]"); if (b) setStar(b.getAttribute("data-star"));
+    });
+
+    // Done
+    var done = document.querySelector("[data-done]");
+    if (done) done.addEventListener("click", function () { OggvoShell.toast("Landing page saved", "success"); });
+
+    // init
+    [].slice.call(bgWrap.querySelectorAll("[data-bg]"))[0].click();
+    setColor(state.color);
+    setStar(state.star);
+    applyPreview();
+  })();
+</script>
+</body>
+</html>

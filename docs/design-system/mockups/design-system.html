@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tailwind-config.js"></script>
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+  <div class="max-w-5xl mx-auto px-6 py-10">
+    <a href="index.html" class="text-sm text-primary-600 hover:underline">&larr; All mockups</a>
+    <h1 class="text-3xl font-semibold text-gray-900 mt-2 mb-1">Design System</h1>
+    <p class="text-gray-500 mb-10">Tokens &amp; components used by the contacts mockups.</p>
+
+    <!-- Colors -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Color tokens</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+        <div><div class="h-16 rounded-card bg-primary-500"></div><div class="text-xs mt-1">primary-500<br>#2e90fa</div></div>
+        <div><div class="h-16 rounded-card bg-primary-100"></div><div class="text-xs mt-1">primary-100</div></div>
+        <div><div class="h-16 rounded-card bg-success-500"></div><div class="text-xs mt-1">success-500<br>#12b76a</div></div>
+        <div><div class="h-16 rounded-card bg-warning-500"></div><div class="text-xs mt-1">warning-500<br>#f79009</div></div>
+        <div><div class="h-16 rounded-card bg-error-500"></div><div class="text-xs mt-1">error-500<br>#f04438</div></div>
+        <div><div class="h-16 rounded-card bg-gray-900"></div><div class="text-xs mt-1">gray-900</div></div>
+        <div><div class="h-16 rounded-card bg-gray-500"></div><div class="text-xs mt-1">gray-500</div></div>
+        <div><div class="h-16 rounded-card bg-gray-200 border"></div><div class="text-xs mt-1">gray-200</div></div>
+        <div><div class="h-16 rounded-card bg-google"></div><div class="text-xs mt-1">google</div></div>
+        <div><div class="h-16 rounded-card bg-linkedin"></div><div class="text-xs mt-1">linkedin</div></div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Typography — Inter</h2>
+      <div class="bg-white rounded-card border border-gray-200 p-6 space-y-2">
+        <p class="text-3xl font-semibold text-gray-900">Display / H1 30–24 semibold</p>
+        <p class="text-xl font-semibold text-gray-900">H2 20 semibold</p>
+        <p class="text-base font-semibold text-gray-900">H3 16 semibold</p>
+        <p class="text-sm text-gray-700">Body 14 — the default for tables and content.</p>
+        <p class="text-xs text-gray-500">Caption 12 — muted metadata.</p>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Button</h2>
+      <div class="bg-white rounded-card border border-gray-200 p-6 flex flex-wrap items-center gap-3">
+        <button class="inline-flex items-center justify-center gap-2 rounded-card font-medium h-10 px-4 text-sm bg-primary-500 text-white hover:bg-primary-600">Primary</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-card font-medium h-10 px-4 text-sm bg-white text-gray-900 border border-gray-300 hover:bg-gray-50">Secondary</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-card font-medium h-10 px-4 text-sm bg-transparent text-gray-700 hover:bg-gray-100">Ghost</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-card font-medium h-10 px-4 text-sm bg-error-500 text-white hover:bg-error-600">Danger</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-card font-medium h-10 px-4 text-sm bg-primary-500 text-white opacity-50 cursor-not-allowed" disabled>
+          <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg>
+          Loading
+        </button>
+        <span class="text-xs text-gray-400">· sizes sm/md/lg</span>
+      </div>
+    </section>
+
+    <!-- Badges + tags -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Badges &amp; tags</h2>
+      <div class="bg-white rounded-card border border-gray-200 p-6 flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Pending</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Inactive</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">All</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>In-progress</span>
+        <span class="mx-3 h-5 w-px bg-gray-200"></span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">vip</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">newsletter</span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">+3</span>
+      </div>
+    </section>
+
+    <!-- Inputs -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Form controls</h2>
+      <div class="bg-white rounded-card border border-gray-200 p-6 grid sm:grid-cols-2 gap-5">
+        <label class="block">
+          <span class="text-sm font-medium text-gray-700">Email address</span>
+          <input type="email" value="dana@acme.com" class="mt-1 w-full h-10 px-3 rounded-card border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm" />
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium text-gray-700">Phone (with error)</span>
+          <input type="text" value="abc" class="mt-1 w-full h-10 px-3 rounded-card border border-error-500 ring-1 ring-error-500 outline-none text-sm" />
+          <span class="text-xs text-error-600 mt-1 block">Phone must be a valid number.</span>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium text-gray-700">Note</span>
+          <textarea rows="3" class="mt-1 w-full px-3 py-2 rounded-card border border-gray-300 focus:ring-2 focus:ring-primary-500 outline-none text-sm">VIP customer, prefers SMS.</textarea>
+        </label>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-gray-700">Opted In</span>
+            <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span></span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-gray-400">Auto-deactivate (off)</span>
+            <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300"><span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow"></span></span>
+          </div>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Status</span>
+            <select class="mt-1 w-full h-10 px-3 rounded-card border border-gray-300 text-sm bg-white"><option>All</option><option>Active</option><option>Pending</option><option>Inactive</option></select>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Activity timeline</h2>
+      <div class="bg-white rounded-card border border-gray-200 p-6 max-w-md">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-gray-900">Reviews</h3>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700">Active</span>
+        </div>
+        <div class="space-y-4">
+          <div class="timeline-item"><span class="timeline-dot bg-success-500"></span><p class="text-sm font-medium text-gray-900">Review invite sent</p><p class="text-xs text-gray-500">SMS · Jun 20, 2026 · 9:00 AM</p></div>
+          <div class="timeline-item"><span class="timeline-dot bg-primary-500"></span><p class="text-sm font-medium text-gray-900">Email opened</p><p class="text-xs text-gray-500">Jun 21, 2026 · 2:14 PM</p></div>
+          <div class="timeline-item"><span class="timeline-dot bg-gray-300"></span><p class="text-sm font-medium text-gray-900">Funnel page viewed</p><p class="text-xs text-gray-500">Jun 21, 2026 · 2:15 PM</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal preview -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Modal</h2>
+      <div class="bg-gray-100 rounded-card border border-gray-200 p-8 grid place-items-center">
+        <div class="bg-white rounded-card shadow-lg w-full max-w-md">
+          <div class="p-5 border-b border-gray-200"><h3 class="text-lg font-semibold text-gray-900">Delete 3 contacts?</h3></div>
+          <div class="p-5 text-sm text-gray-600">This soft-deletes the selected contacts and unschedules pending sends. They can be restored by support.</div>
+          <div class="p-4 border-t border-gray-200 flex justify-end gap-2">
+            <button class="rounded-card font-medium h-10 px-4 text-sm bg-white text-gray-900 border border-gray-300 hover:bg-gray-50">Cancel</button>
+            <button class="rounded-card font-medium h-10 px-4 text-sm bg-error-500 text-white hover:bg-error-600">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="mock-note">Static mockup · illustrative components, not production code.</p>
+  </div>
+</body>
+</html>

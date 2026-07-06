@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Data deletion status</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-100 text-gray-700">
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+
+  <div class="min-h-screen grid place-items-center p-4">
+    <div class="w-full max-w-lg space-y-3">
+
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="text-sm text-primary-600 hover:underline">← All mockups</a>
+        <p class="mock-note">PUBLIC · /data-deletion-status · no portal shell</p>
+      </div>
+
+      <!-- Lookup + status card -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-8">
+        <!-- brand -->
+        <div class="flex flex-col items-center text-center">
+          <div class="h-11 w-11 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold text-lg">O</div>
+          <h1 class="text-xl font-semibold text-gray-900 mt-4">Data deletion status</h1>
+          <p class="text-sm text-gray-500 mt-1">Enter the confirmation code from your Facebook data-deletion request to see its status.</p>
+        </div>
+
+        <!-- lookup form -->
+        <form id="ddForm" class="mt-6 space-y-3" onsubmit="return false" novalidate>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Confirmation code</label>
+            <input id="ddCode" type="text" autocomplete="off" placeholder="e.g. a1b2c3d4e5"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 font-mono focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <p id="ddCodeErr" class="text-xs text-error-600 hidden"></p>
+          </div>
+          <button id="ddLookup" type="submit"
+            class="w-full h-11 rounded-card bg-primary-500 text-white font-medium hover:bg-primary-600 disabled:opacity-60">
+            Check status
+          </button>
+          <p class="text-xs text-gray-400 text-center">Try codes ending in <span class="font-mono">-received</span>, <span class="font-mono">-grace</span>, or <span class="font-mono">-purged</span> to preview each state.</p>
+        </form>
+
+        <!-- result -->
+        <div id="ddResult" class="mt-6 hidden">
+          <div class="rounded-card border border-gray-200 overflow-hidden">
+            <div class="flex flex-col items-center px-6 py-8 text-center">
+              <div id="ddIconWrap" class="h-14 w-14 rounded-full grid place-items-center">
+                <span id="ddIcon"></span>
+              </div>
+              <h2 id="ddTitle" class="text-lg font-semibold text-gray-900 mt-4"></h2>
+              <p id="ddMessage" class="text-sm leading-relaxed text-gray-500 mt-2"></p>
+            </div>
+            <div class="border-t border-gray-200 bg-gray-50 px-6 py-4 text-center">
+              <p class="text-xs font-medium uppercase tracking-wide text-gray-400">Confirmation code</p>
+              <p id="ddResultCode" class="mt-1 break-all font-mono text-sm text-gray-700"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mock-note">User-facing status page for the Meta Data Deletion Callback. GET /public/data-deletion?code=&lt;code&gt; → {status: received | pending | completed | cancelled | not_found, scheduledPurgeAt, completedAt}. 30-day grace before purge; reconnecting cancels it.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById('ddForm');
+      var codeInput = document.getElementById('ddCode');
+      var codeErr = document.getElementById('ddCodeErr');
+      var lookup = document.getElementById('ddLookup');
+      var result = document.getElementById('ddResult');
+      var iconWrap = document.getElementById('ddIconWrap');
+      var icon = document.getElementById('ddIcon');
+      var title = document.getElementById('ddTitle');
+      var message = document.getElementById('ddMessage');
+      var resultCode = document.getElementById('ddResultCode');
+
+      var CHECK = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+      var CLOCK = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>';
+      var TRASH = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m2 0l-.7 12a2 2 0 01-2 1.9H8.7a2 2 0 01-2-1.9L6 7"/></svg>';
+      var XMARK = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-6 6m0-6l6 6"/></svg>';
+      var WARN = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 4.3L2.6 18a2 2 0 001.7 3h15.4a2 2 0 001.7-3L13.7 4.3a2 2 0 00-3.4 0z"/></svg>';
+
+      // Derive a mock status from the code so each state is previewable.
+      function mockStatus(code) {
+        var c = code.toLowerCase();
+        if (c.indexOf('received') !== -1) return 'received';
+        if (c.indexOf('grace') !== -1 || c.indexOf('pending') !== -1) return 'pending';
+        if (c.indexOf('purged') !== -1 || c.indexOf('complete') !== -1) return 'completed';
+        if (c.indexOf('cancel') !== -1) return 'cancelled';
+        return 'pending';
+      }
+
+      var VIEWS = {
+        received: {
+          html: CHECK, tint: 'bg-primary-100 text-primary-700',
+          title: 'Request received',
+          message: 'We received your Facebook data-deletion request and it is queued for processing. You can check back here anytime for updates.'
+        },
+        pending: {
+          html: CLOCK, tint: 'bg-warning-100 text-warning-700',
+          title: 'Deletion scheduled',
+          message: 'Your data is in a 30-day grace period and is scheduled for permanent deletion. Reconnecting your account before then will cancel this.'
+        },
+        completed: {
+          html: TRASH, tint: 'bg-success-100 text-success-700',
+          title: 'Data deleted',
+          message: 'Your Facebook data has been permanently purged from OGGVO. Nothing further is required.'
+        },
+        cancelled: {
+          html: XMARK, tint: 'bg-gray-100 text-gray-500',
+          title: 'Deletion cancelled',
+          message: 'This request was cancelled — you reconnected your account, so your data has been retained.'
+        },
+        not_found: {
+          html: WARN, tint: 'bg-error-100 text-error-700',
+          title: 'Request not found',
+          message: "We couldn't find a deletion request for that code. Double-check the code from Facebook and try again."
+        }
+      };
+
+      function render(code, status) {
+        var v = VIEWS[status] || VIEWS.not_found;
+        iconWrap.className = 'h-14 w-14 rounded-full grid place-items-center ' + v.tint;
+        icon.innerHTML = v.html;
+        title.textContent = v.title;
+        message.textContent = v.message;
+        resultCode.textContent = code;
+        result.classList.remove('hidden');
+      }
+
+      codeInput.addEventListener('input', function () {
+        codeErr.classList.add('hidden');
+        codeInput.classList.remove('border-error-500');
+      });
+
+      form.addEventListener('submit', function () {
+        var code = codeInput.value.trim();
+        if (!code) {
+          codeErr.textContent = 'Enter the confirmation code from your request.';
+          codeErr.classList.remove('hidden');
+          codeInput.classList.add('border-error-500');
+          result.classList.add('hidden');
+          return;
+        }
+        lookup.disabled = true;
+        var original = lookup.textContent;
+        lookup.textContent = 'Checking…';
+        setTimeout(function () {
+          render(code, mockStatus(code));
+          lookup.disabled = false;
+          lookup.textContent = original;
+        }, 700);
+      });
+
+      // Deep-link support: ?code= renders immediately (matches the v1 query param).
+      var initial = new URLSearchParams(window.location.search).get('code');
+      if (initial) {
+        codeInput.value = initial;
+        render(initial, mockStatus(initial));
+      }
+    })();
+  </script>
+</body>
+</html>

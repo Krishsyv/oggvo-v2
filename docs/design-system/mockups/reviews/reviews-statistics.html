@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Review Statistics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Review Statistics</h1>
+      <p class="text-sm text-gray-500 mt-1">Performance across all connected platforms.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+        Last 12 months
+        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <a href="../contacts/contacts-settings.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add New Platform
+      </a>
+    </div>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6" data-story="US-R5.1" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Total Reviews</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">2,841</div>
+      <div class="text-xs text-success-600 mt-1">▲ 38 this week</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Average Rating</div>
+      <div class="mt-1 flex items-end gap-2"><span class="text-2xl font-semibold text-gray-900">4.6</span><span class="text-warning-500 mb-0.5">★★★★★</span></div>
+      <div class="text-xs text-success-600 mt-1">▲ 0.2 vs last month</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="text-xs font-medium text-gray-500">Review Platforms</div>
+      <div class="mt-1 text-2xl font-semibold text-gray-900">5</div>
+      <div class="text-xs text-gray-400 mt-1">4 active · 1 inactive</div>
+    </div>
+  </div>
+
+  <!-- Chart card -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 mb-6" data-story="US-R5.1" data-ac="AC2">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-sm font-semibold text-gray-900">Reviews per month</h2>
+        <p class="text-xs text-gray-400 mt-0.5">Last 12 months</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 text-xs text-gray-500"><span class="inline-block h-2 w-2 rounded-full bg-primary-500"></span>New reviews</span>
+    </div>
+    <svg viewBox="0 0 600 180" class="w-full h-auto" preserveAspectRatio="none" role="img" aria-label="Reviews per month area chart">
+      <!-- gridlines -->
+      <line x1="0" y1="30" x2="600" y2="30" stroke="#f3f4f6" stroke-width="1" />
+      <line x1="0" y1="75" x2="600" y2="75" stroke="#f3f4f6" stroke-width="1" />
+      <line x1="0" y1="120" x2="600" y2="120" stroke="#f3f4f6" stroke-width="1" />
+      <line x1="0" y1="165" x2="600" y2="165" stroke="#e5e7eb" stroke-width="1" />
+      <!-- filled area -->
+      <polygon
+        fill="rgba(46,144,250,0.12)"
+        points="20,120 72,108 124,128 176,96 228,104 280,72 332,84 384,58 436,66 488,44 540,52 588,36 588,165 20,165" />
+      <!-- line -->
+      <polyline
+        fill="none" stroke="#2e90fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        points="20,120 72,108 124,128 176,96 228,104 280,72 332,84 384,58 436,66 488,44 540,52 588,36" />
+      <!-- markers -->
+      <g fill="#fff" stroke="#2e90fa" stroke-width="2">
+        <circle cx="20" cy="120" r="3" /><circle cx="72" cy="108" r="3" /><circle cx="124" cy="128" r="3" />
+        <circle cx="176" cy="96" r="3" /><circle cx="228" cy="104" r="3" /><circle cx="280" cy="72" r="3" />
+        <circle cx="332" cy="84" r="3" /><circle cx="384" cy="58" r="3" /><circle cx="436" cy="66" r="3" />
+        <circle cx="488" cy="44" r="3" /><circle cx="540" cy="52" r="3" /><circle cx="588" cy="36" r="3" />
+      </g>
+    </svg>
+    <div class="flex justify-between mt-2 px-1 text-[11px] text-gray-400">
+      <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+      <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+    </div>
+  </div>
+
+  <!-- Review Platforms table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-R5.1" data-ac="AC1">
+    <div class="px-4 py-3 border-b border-gray-200">
+      <h2 class="text-sm font-semibold text-gray-900">Review Platforms</h2>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Platform</th>
+            <th class="px-4 py-3 font-medium">Avg Rating</th>
+            <th class="px-4 py-3 font-medium">Total Reviews</th>
+            <th class="px-4 py-3 font-medium">30 Days</th>
+            <th class="px-4 py-3 font-medium">60 Days</th>
+            <th class="px-4 py-3 font-medium">90 Days</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="w-12 px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <!-- Google -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-lg bg-google grid place-items-center text-sm font-semibold text-white">G</span>
+                <span><span class="block font-semibold text-gray-900">Google</span><span class="block text-xs text-gray-400">@oggvo-realty</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="text-warning-500">★★★★★</span> <span class="text-gray-700 font-medium">4.8</span></td>
+            <td class="px-4 py-3 text-gray-700 font-medium">1,240</td>
+            <td class="px-4 py-3 text-gray-600">86</td>
+            <td class="px-4 py-3 text-gray-600">171</td>
+            <td class="px-4 py-3 text-gray-600">258</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-right"><button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+          </tr>
+          <!-- Facebook -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-lg bg-linkedin grid place-items-center text-sm font-semibold text-white">F</span>
+                <span><span class="block font-semibold text-gray-900">Facebook</span><span class="block text-xs text-gray-400">@oggvorealty</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="text-warning-500">★★★★☆</span> <span class="text-gray-700 font-medium">4.5</span></td>
+            <td class="px-4 py-3 text-gray-700 font-medium">612</td>
+            <td class="px-4 py-3 text-gray-600">41</td>
+            <td class="px-4 py-3 text-gray-600">79</td>
+            <td class="px-4 py-3 text-gray-600">122</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-right"><button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+          </tr>
+          <!-- Yelp -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-lg bg-error-600 grid place-items-center text-sm font-semibold text-white">Y</span>
+                <span><span class="block font-semibold text-gray-900">Yelp</span><span class="block text-xs text-gray-400">@oggvo-realty-grp</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="text-warning-500">★★★★☆</span> <span class="text-gray-700 font-medium">3.9</span></td>
+            <td class="px-4 py-3 text-gray-700 font-medium">388</td>
+            <td class="px-4 py-3 text-gray-600">22</td>
+            <td class="px-4 py-3 text-gray-600">47</td>
+            <td class="px-4 py-3 text-gray-600">71</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-right"><button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+          </tr>
+          <!-- Zillow -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-lg bg-primary-600 grid place-items-center text-sm font-semibold text-white">Z</span>
+                <span><span class="block font-semibold text-gray-900">Zillow</span><span class="block text-xs text-gray-400">@oggvo.realty</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="text-warning-500">★★★★★</span> <span class="text-gray-700 font-medium">4.7</span></td>
+            <td class="px-4 py-3 text-gray-700 font-medium">410</td>
+            <td class="px-4 py-3 text-gray-600">29</td>
+            <td class="px-4 py-3 text-gray-600">58</td>
+            <td class="px-4 py-3 text-gray-600">88</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-right"><button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+          </tr>
+          <!-- Realtor.com -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-lg bg-gray-400 grid place-items-center text-sm font-semibold text-white">R</span>
+                <span><span class="block font-semibold text-gray-900">Realtor.com</span><span class="block text-xs text-gray-400">@oggvo-realty</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="text-warning-500">★★★★★</span> <span class="text-gray-700 font-medium">4.6</span></td>
+            <td class="px-4 py-3 text-gray-700 font-medium">191</td>
+            <td class="px-4 py-3 text-gray-600">0</td>
+            <td class="px-4 py-3 text-gray-600">7</td>
+            <td class="px-4 py-3 text-gray-600">19</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Inactive</span></td>
+            <td class="px-4 py-3 text-right"><button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /reviews/statistics + /reviews/chart. Mobile: KPI cards + per-platform cards (table collapses).</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "reviews", storyDomain: "reviews", back: { href: "reviews-list.html", label: "Back to Reviews" }, route: "/reviews/statistics", search: "Search reviews…" });
+</script>
+</body>
+</html>

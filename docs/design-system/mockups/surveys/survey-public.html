@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Satisfaction Q2 · Acme Co</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-100 text-gray-700">
+
+  <!-- Floating theme toggle (standalone page — no portal shell) -->
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+
+  <div class="max-w-md mx-auto px-4 py-10 space-y-4">
+
+    <!-- Page meta -->
+    <div class="space-y-2">
+      <p class="mock-note">PUBLIC PAGE · /s/csat-q2 · no portal shell · SSR from <span class="font-mono">GET /public/s/:slug</span> · themed by <span class="font-mono">survey_style</span> · steps are live — Start ▸ questions ▸ Thank-You</p>
+      <a href="../index.html" class="text-sm text-primary-600 hover:underline">← All mockups</a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- The themed survey card (single card, steps swap in place)     -->
+    <!-- ============================================================ -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+
+      <!-- header -->
+      <div style="background:#7A5AF8" class="text-white px-5 py-3 flex items-center gap-3">
+        <span class="h-8 w-8 rounded-full bg-white/20 grid place-items-center text-sm font-semibold">A</span>
+        <span class="font-semibold">Acme Co</span>
+      </div>
+
+      <!-- progress bar (hidden on welcome + thank-you) -->
+      <div data-progress-wrap class="h-1.5 bg-gray-100" hidden><div data-progress class="h-1.5 transition-all" style="width:0%;background:#7A5AF8"></div></div>
+
+      <!-- STEP · WELCOME -->
+      <div data-step="welcome" class="p-7 text-center space-y-4">
+        <div class="h-16 w-16 rounded-full grid place-items-center text-2xl font-bold mx-auto text-white" style="background:#7A5AF8">A</div>
+        <h1 class="text-xl font-semibold text-gray-900">Customer Satisfaction Q2</h1>
+        <p class="text-sm text-gray-600">We'd love your feedback on your recent experience. It takes about a minute.</p>
+        <button type="button" data-next class="w-full rounded-card py-2.5 font-medium text-white" style="background:#7A5AF8">Start Survey</button>
+      </div>
+
+      <!-- STEP · Q1 star rating -->
+      <div data-step="q1" hidden class="p-7 space-y-5">
+        <div>
+          <div class="text-xs font-medium text-gray-400">Question 1 of 3</div>
+          <h2 class="mt-1 text-lg font-semibold text-gray-900">How would you rate your overall experience?</h2>
+        </div>
+        <div data-stars class="flex items-center justify-center gap-2 text-4xl text-amber-400 select-none">
+          <span data-star="1" class="cursor-pointer hover:scale-110 transition-transform">☆</span>
+          <span data-star="2" class="cursor-pointer hover:scale-110 transition-transform">☆</span>
+          <span data-star="3" class="cursor-pointer hover:scale-110 transition-transform">☆</span>
+          <span data-star="4" class="cursor-pointer hover:scale-110 transition-transform">☆</span>
+          <span data-star="5" class="cursor-pointer hover:scale-110 transition-transform">☆</span>
+        </div>
+        <p data-error hidden class="text-center text-sm text-error-600">Please fill out all the required fields!</p>
+        <div class="flex items-center justify-between pt-1">
+          <button type="button" data-back class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-600 hover:bg-gray-50" aria-label="Previous Question">Back</button>
+          <button type="button" data-next data-require="stars" class="h-10 px-5 rounded-card text-sm font-medium text-white" style="background:#7A5AF8" aria-label="Next Question">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP · Q2 multiple choice -->
+      <div data-step="q2" hidden class="p-7 space-y-5">
+        <div>
+          <div class="text-xs font-medium text-gray-400">Question 2 of 3</div>
+          <h2 class="mt-1 text-lg font-semibold text-gray-900">Which features do you use most?</h2>
+          <p class="text-xs text-gray-500 mt-0.5">Select all that apply.</p>
+        </div>
+        <div class="space-y-2.5">
+          <label class="flex items-center gap-3 rounded-card border border-gray-300 px-4 py-2.5 cursor-pointer hover:bg-gray-50"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600" /> <span class="text-sm text-gray-700">Reviews</span></label>
+          <label class="flex items-center gap-3 rounded-card border border-gray-300 px-4 py-2.5 cursor-pointer hover:bg-gray-50"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600" /> <span class="text-sm text-gray-700">SMS Campaigns</span></label>
+          <label class="flex items-center gap-3 rounded-card border border-gray-300 px-4 py-2.5 cursor-pointer hover:bg-gray-50"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600" /> <span class="text-sm text-gray-700">Social Posting</span></label>
+          <label class="flex items-center gap-3 rounded-card border border-gray-300 px-4 py-2.5 cursor-pointer hover:bg-gray-50"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600" /> <span class="text-sm text-gray-700">Surveys</span></label>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <button type="button" data-back class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-600 hover:bg-gray-50" aria-label="Previous Question">Back</button>
+          <button type="button" data-next class="h-10 px-5 rounded-card text-sm font-medium text-white" style="background:#7A5AF8" aria-label="Next Question">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP · Q3 short text -->
+      <div data-step="q3" hidden class="p-7 space-y-5">
+        <div>
+          <div class="text-xs font-medium text-gray-400">Question 3 of 3</div>
+          <h2 class="mt-1 text-lg font-semibold text-gray-900">What could we do better?</h2>
+        </div>
+        <textarea rows="4" placeholder="Type your answer…" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"></textarea>
+        <div class="flex items-center justify-between pt-1">
+          <button type="button" data-back class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-600 hover:bg-gray-50" aria-label="Previous Question">Back</button>
+          <button type="button" data-next class="h-10 px-5 rounded-card text-sm font-medium text-white" style="background:#7A5AF8">Submit</button>
+        </div>
+      </div>
+
+      <!-- STEP · THANK YOU -->
+      <div data-step="thankyou" hidden class="p-9 text-center space-y-3">
+        <div class="h-14 w-14 rounded-full bg-success-100 text-success-600 grid place-items-center mx-auto">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h1 class="text-xl font-semibold text-gray-900">Thank You for Your Time!</h1>
+        <p class="text-sm text-gray-600">Your response has been recorded.</p>
+        <p class="text-xs text-gray-400">You will be redirected in 5 second(s), <a href="#" class="text-primary-600 hover:underline">take me there now</a>.</p>
+        <button type="button" data-restart class="text-sm text-gray-500 hover:text-gray-700 underline">Restart preview</button>
+      </div>
+
+      <!-- footer -->
+      <div style="background:#7A5AF8" class="text-center text-white text-[11px] py-2">Powered by OGGVO</div>
+    </div>
+
+    <p class="mock-note">Submit each answer → <span class="font-mono">POST /public/s/:slug/submit</span> {id, tracker_id, …per-type fields}. Load/track via <span class="font-mono">GET /public/s/:slug</span> (logs Opened, bumps ViewsCount). <span class="font-mono">?demo=true</span> short-circuits saving (builder Preview). Inactive/missing slug → 404.</p>
+
+  </div>
+
+  <script>
+    (function () {
+      var order = ["welcome", "q1", "q2", "q3", "thankyou"];
+      var progressByStep = { welcome: null, q1: 33, q2: 66, q3: 100, thankyou: null };
+      var idx = 0;
+      var stars = 0;
+      var wrap = document.querySelector("[data-progress-wrap]");
+      var bar = document.querySelector("[data-progress]");
+
+      function steps() { return document.querySelectorAll("[data-step]"); }
+      function render() {
+        var key = order[idx];
+        [].slice.call(steps()).forEach(function (s) { s.hidden = s.getAttribute("data-step") !== key; });
+        var pct = progressByStep[key];
+        if (pct == null) { wrap.hidden = true; }
+        else { wrap.hidden = false; bar.style.width = pct + "%"; }
+        window.scrollTo({ top: 0 });
+      }
+      function go(n) {
+        idx = Math.max(0, Math.min(order.length - 1, n));
+        render();
+      }
+
+      // Star rating
+      var starWrap = document.querySelector("[data-stars]");
+      if (starWrap) starWrap.addEventListener("click", function (e) {
+        var s = e.target.closest("[data-star]"); if (!s) return;
+        stars = parseInt(s.getAttribute("data-star"), 10);
+        [].slice.call(starWrap.querySelectorAll("[data-star]")).forEach(function (st) {
+          st.textContent = parseInt(st.getAttribute("data-star"), 10) <= stars ? "★" : "☆";
+        });
+        var err = document.querySelector("[data-error]"); if (err) err.hidden = true;
+      });
+
+      // Nav
+      document.addEventListener("click", function (e) {
+        if (e.target.closest("[data-back]")) { go(idx - 1); return; }
+        var next = e.target.closest("[data-next]");
+        if (next) {
+          if (next.getAttribute("data-require") === "stars" && stars === 0) {
+            var err = document.querySelector("[data-error]"); if (err) err.hidden = false; return;
+          }
+          go(idx + 1); return;
+        }
+        if (e.target.closest("[data-restart]")) { stars = 0;
+          [].slice.call(document.querySelectorAll("[data-star]")).forEach(function (st) { st.textContent = "☆"; });
+          go(0); return;
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

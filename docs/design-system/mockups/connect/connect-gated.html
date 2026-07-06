@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Connect · Gated states</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Connect — gated states</h1>
+    <p class="text-sm text-gray-500 mt-1">The two screens shown before the inbox renders, depending on plan + activation.</p>
+  </div>
+
+  <!-- STATE A: has sms feature but not active -->
+  <p class="mock-note mb-2">State A · has the <span class="font-mono">sms</span> feature but <span class="font-mono">isConnectActive == false</span> → <span class="font-mono">ChatActivateConnect</span>. The button only renders for <span class="font-mono">account_type == 4</span>.</p>
+  <section class="bg-white border border-gray-200 rounded-card shadow-card p-10 mb-8" data-story="US-M7.9" data-ac="AC1">
+    <div class="max-w-md mx-auto text-center space-y-4">
+      <span class="mx-auto grid place-items-center h-14 w-14 rounded-full bg-primary-50 text-primary-600">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg>
+      </span>
+      <div>
+        <h2 class="text-xl font-semibold text-gray-900">Oops!</h2>
+        <p class="text-sm text-gray-500 mt-1">Connect is not activated yet</p>
+      </div>
+      <button data-activate="Activating Connect…" class="inline-flex items-center gap-2 h-10 px-5 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Activate Connect</button>
+      <p class="mock-note">GET /messaging/activate → sets isConnectActive. Error: "Failed to activate connect, Please try again!"</p>
+    </div>
+  </section>
+
+  <!-- STATE B: no sms feature → request-to-activate gate -->
+  <p class="mock-note mb-2">State B · no <span class="font-mono">sms</span> feature → <span class="font-mono">UpgradePlanModal</span> (a request-to-activate gate — no pricing). Closing it redirects to <span class="font-mono">/dashboard</span>.</p>
+  <section class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden max-w-2xl" data-story="US-M7.8" data-ac="AC1">
+    <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900">Oggvo Connect</h2>
+        <p class="text-xs text-gray-500">What is included?</p>
+      </div>
+      <a href="../dashboard/dashboard-funnel.html" class="text-gray-400 hover:text-gray-600" aria-label="Close (redirects to dashboard)"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></a>
+    </div>
+    <div class="p-5 grid sm:grid-cols-2 gap-4">
+      <div class="rounded-card border border-gray-200 p-4">
+        <h3 class="text-sm font-semibold text-gray-900">SMS Scheduler</h3>
+        <p class="text-xs text-gray-500 mt-1">Protect your bottom line by staying top of mind and minimizing missed appointments with scheduled text reminders and notifications.</p>
+      </div>
+      <div class="rounded-card border border-gray-200 p-4">
+        <h3 class="text-sm font-semibold text-gray-900">AI Responder</h3>
+        <p class="text-xs text-gray-500 mt-1">Deliver immediate customer response times by instantly delivering text responses to new inquiries based on their action or other automated criteria.</p>
+      </div>
+      <div class="rounded-card border border-gray-200 p-4">
+        <h3 class="text-sm font-semibold text-gray-900">QR Code to SMS Generator</h3>
+        <p class="text-xs text-gray-500 mt-1">Connects your online and offline marketing to easily engage potential customers, provide instant information, request reviews, and share contact details — all through the mobile phone.</p>
+      </div>
+      <div class="rounded-card border border-gray-200 p-4">
+        <h3 class="text-sm font-semibold text-gray-900">Chat Widget</h3>
+        <p class="text-xs text-gray-500 mt-1">A small pop-up chat window on your site to support visitors around the clock for improved customer engagement, web conversions, and increased sales.</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+      <button id="request-btn" data-activate="Request Submitted" class="inline-flex items-center gap-2 h-10 px-5 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Activate</button>
+    </div>
+    <p class="mock-note px-5 pb-4">POST /requests/activate → toast "Request Submitted · Your dedicated manager will reach out to you." Button then reads "Request Already Sent".</p>
+  </section>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "connect", storyDomain: "messaging", back: { href: "../index.html", label: "All mockups" }, route: "/connect (gated)", search: "Search…" });
+</script>
+<script>
+  (function () {
+    [].slice.call(document.querySelectorAll("[data-activate]")).forEach(function (b) {
+      b.addEventListener("click", function () {
+        OggvoShell.toast(b.getAttribute("data-activate"), "success");
+        if (b.id === "request-btn") { b.textContent = "Request Already Sent"; b.disabled = true; b.classList.add("opacity-50", "cursor-not-allowed"); }
+      });
+    });
+  })();
+</script>
+</body>
+</html>

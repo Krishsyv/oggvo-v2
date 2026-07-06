@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Dashboard · Profile Optimization</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. PAGE HEADER -->
+  <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Your Overview</h1>
+      <p class="mt-1 text-sm text-gray-500">Acme Co</p>
+    </div>
+    <button class="inline-flex items-center gap-2 rounded-card border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-3.5-7.1L21 4v5h-5"/></svg>
+      Contact Advisor
+    </button>
+  </div>
+
+  <!-- 2. DASHBOARD TAB NAV -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="dashboard-funnel.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Review Funnel</a>
+    <a href="dashboard-social.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Social Media</a>
+    <a href="dashboard-connect.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Oggvo Connect</a>
+    <a href="dashboard-activity.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Activity</a>
+    <a href="dashboard-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="dashboard-profiles.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Profile Optimization</a>
+    <a href="analytics-google.html" class="pb-3 -mb-px text-gray-400 hover:text-gray-600 whitespace-nowrap ml-auto inline-flex items-center gap-1">Analytics ↗</a>
+  </nav>
+
+  <!-- 3. WARNING NOTE BAR -->
+  <div class="bg-warning-100 text-warning-700 rounded-card px-3 py-2 text-sm mb-4">
+    Disabled in v1 — Status/action columns have no clear backing source (parity risk).
+  </div>
+
+  <!-- 4. SECTION HEADER -->
+  <div class="mb-4" data-story="US-D6.1">
+    <h2 class="text-lg font-medium text-gray-900">Profiles</h2>
+    <p class="text-sm text-gray-500">List of social profiles of your business</p>
+  </div>
+
+  <!-- 5. TABLE CARD -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-D6.1">
+    <table class="min-w-full">
+      <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+        <tr>
+          <th class="w-3/4 px-6 py-3 text-left font-medium tracking-wide">Profiles</th>
+          <th class="px-6 py-3 text-left font-medium tracking-wide">Status</th>
+          <th class="px-6 py-3 text-right font-medium tracking-wide"><span class="sr-only">Action</span></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+
+        <!-- Google Business · Optimized -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white" style="background-color:#dc4e41">G</span>
+              <div>
+                <div class="text-sm font-medium text-gray-900">Acme Plumbing</div>
+                <div class="text-sm text-gray-500">Google Business</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Optimized</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button class="text-sm font-medium text-primary-700 hover:text-primary-800">Optimize More</button>
+          </td>
+        </tr>
+
+        <!-- Facebook · In Progress -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white" style="background-color:#1877f2">F</span>
+              <div>
+                <div class="text-sm font-medium text-gray-900">Acme Plumbing</div>
+                <div class="text-sm text-gray-500">Facebook</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>In Progress</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button class="text-sm font-medium text-primary-700 hover:text-primary-800">Optimize More</button>
+          </td>
+        </tr>
+
+        <!-- Instagram · Error -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white" style="background-color:#c13584">IG</span>
+              <div>
+                <div class="text-sm font-medium text-gray-900">@acmeplumbing</div>
+                <div class="text-sm text-gray-500">Instagram</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Error</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button class="text-sm font-medium text-error-700 hover:text-error-800">Contact Us</button>
+          </td>
+        </tr>
+
+        <!-- LinkedIn · Optimized -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white" style="background-color:#0077b5">in</span>
+              <div>
+                <div class="text-sm font-medium text-gray-900">Acme Plumbing LLC</div>
+                <div class="text-sm text-gray-500">LinkedIn</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Optimized</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button class="text-sm font-medium text-primary-700 hover:text-primary-800">Optimize More</button>
+          </td>
+        </tr>
+
+        <!-- Yelp · In Progress -->
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-600">Y</span>
+              <div>
+                <div class="text-sm font-medium text-gray-900">Acme Plumbing</div>
+                <div class="text-sm text-gray-500">Yelp</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>In Progress</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button class="text-sm font-medium text-primary-700 hover:text-primary-800">Optimize More</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. MOCK NOTE -->
+  <p class="mock-note">GET /socials/get. v1 status/action fields appear unbacked — decide implement or drop in v2.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "dashboard", storyDomain: "analytics", back: { href: "../index.html", label: "All mockups" }, route: "/dashboard/profiles", search: "Search…" });</script>
+</body>
+</html>

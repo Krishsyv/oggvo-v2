@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Surveys</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div>
+      <h1 class="text-xl font-semibold text-gray-900">Surveys</h1>
+      <p class="text-sm text-gray-500 mt-0.5">Build, publish and measure branded multi-step surveys.</p>
+    </div>
+    <button type="button" data-open="m-create" class="inline-flex items-center gap-1.5 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14" /></svg>
+      Create Survey
+    </button>
+  </div>
+
+  <!-- Toolbar: search + status filter -->
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <div class="relative flex-1 min-w-[220px] max-w-md" data-story="US-1.3">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input data-search type="text" placeholder="Search surveys…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <div data-status-tabs data-story="US-1.2" class="inline-flex items-center gap-1 p-1 rounded-card bg-gray-100 text-sm">
+      <button type="button" data-value="all" class="h-8 px-3 rounded-card font-medium bg-white text-gray-900 shadow-sm">All</button>
+      <button type="button" data-value="active" class="h-8 px-3 rounded-card font-medium text-gray-500 hover:text-gray-700">Active</button>
+      <button type="button" data-value="inactive" class="h-8 px-3 rounded-card font-medium text-gray-500 hover:text-gray-700">Inactive</button>
+    </div>
+  </div>
+
+  <!-- Table card -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-1.1" data-ac="AC2">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 text-xs uppercase text-gray-500 text-left">
+            <th class="px-4 py-3 font-medium">Name</th>
+            <th class="px-4 py-3 font-medium">Type</th>
+            <th class="px-4 py-3 font-medium text-right">Responses</th>
+            <th class="px-4 py-3 font-medium">Completion</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="px-4 py-3 font-medium">Updated</th>
+            <th class="px-4 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+
+          <!-- Row -->
+          <tr data-row data-name="customer satisfaction q2" data-status="active" class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <a href="survey-results.html" class="font-medium text-gray-900 hover:text-primary-600">Customer Satisfaction Q2</a>
+              <div class="text-xs text-gray-500 truncate max-w-xs">Post-purchase NPS + open feedback</div>
+            </td>
+            <td class="px-4 py-3 text-gray-600">Feedback</td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">486</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden"><div class="h-1.5 rounded-full bg-primary-500" style="width:78%"></div></div>
+                <span class="text-xs tabular-nums text-gray-600">78%</span>
+              </div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-gray-500">Jun 22, 2026</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="survey-results.html" title="Overview" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></a>
+                <a href="survey-builder.html" title="Edit Design" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a>
+                <button type="button" data-act="duplicate" title="Duplicate" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                <button type="button" data-act="delete" title="Delete" class="text-gray-400 hover:text-red-600 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row -->
+          <tr data-row data-name="onboarding pulse" data-status="active" class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <a href="survey-results.html" class="font-medium text-gray-900 hover:text-primary-600">Onboarding Pulse</a>
+              <div class="text-xs text-gray-500 truncate max-w-xs">First-week experience check-in</div>
+            </td>
+            <td class="px-4 py-3 text-gray-600">Pulse</td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">132</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden"><div class="h-1.5 rounded-full bg-primary-500" style="width:64%"></div></div>
+                <span class="text-xs tabular-nums text-gray-600">64%</span>
+              </div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-gray-500">Jun 18, 2026</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="survey-results.html" title="Overview" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></a>
+                <a href="survey-builder.html" title="Edit Design" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a>
+                <button type="button" data-act="duplicate" title="Duplicate" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                <button type="button" data-act="delete" title="Delete" class="text-gray-400 hover:text-red-600 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row · inactive -->
+          <tr data-row data-name="event feedback — spring expo" data-status="inactive" class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <a href="survey-results.html" class="font-medium text-gray-900 hover:text-primary-600">Event Feedback — Spring Expo</a>
+              <div class="text-xs text-gray-500 truncate max-w-xs">Booth + session ratings</div>
+            </td>
+            <td class="px-4 py-3 text-gray-600">Feedback</td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">58</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden"><div class="h-1.5 rounded-full bg-primary-500" style="width:91%"></div></div>
+                <span class="text-xs tabular-nums text-gray-600">91%</span>
+              </div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Inactive</span></td>
+            <td class="px-4 py-3 text-gray-500">May 30, 2026</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="survey-results.html" title="Overview" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></a>
+                <a href="survey-builder.html" title="Edit Design" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a>
+                <button type="button" data-act="duplicate" title="Duplicate" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                <button type="button" data-act="delete" title="Delete" class="text-gray-400 hover:text-red-600 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row -->
+          <tr data-row data-name="product research — new feature" data-status="active" class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <a href="survey-results.html" class="font-medium text-gray-900 hover:text-primary-600">Product Research — New Feature</a>
+              <div class="text-xs text-gray-500 truncate max-w-xs">Ranking + multiple-choice priorities</div>
+            </td>
+            <td class="px-4 py-3 text-gray-600">Research</td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">274</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden"><div class="h-1.5 rounded-full bg-primary-500" style="width:52%"></div></div>
+                <span class="text-xs tabular-nums text-gray-600">52%</span>
+              </div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+            <td class="px-4 py-3 text-gray-500">Jun 11, 2026</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="survey-results.html" title="Overview" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></a>
+                <a href="survey-builder.html" title="Edit Design" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a>
+                <button type="button" data-act="duplicate" title="Duplicate" class="text-gray-400 hover:text-gray-700 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                <button type="button" data-act="delete" title="Delete" class="text-gray-400 hover:text-red-600 p-1"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Empty state (no matches) -->
+          <tr data-empty hidden>
+            <td colspan="7" class="px-4 py-12 text-center">
+              <svg class="h-8 w-8 mx-auto text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 11h6M9 15h4"/></svg>
+              <div class="mt-2 text-sm font-medium text-gray-900">No Surveys</div>
+              <div class="text-xs text-gray-500">Get started by adding a new survey.</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 text-sm text-gray-500">
+      <span data-count>4 of 4 surveys</span>
+      <div class="flex items-center gap-1">
+        <button class="h-8 px-3 rounded-card border border-gray-300 bg-white text-gray-400" disabled>Prev</button>
+        <button class="h-8 w-8 rounded-card bg-primary-500 text-white">1</button>
+        <button class="h-8 px-3 rounded-card border border-gray-300 bg-white text-gray-400" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- States note (empty + loading) -->
+  <div class="grid sm:grid-cols-2 gap-4 mt-6">
+    <div class="bg-white border border-dashed border-gray-300 rounded-card p-6 text-center">
+      <svg class="h-8 w-8 mx-auto text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 11h6M9 15h4"/></svg>
+      <div class="mt-2 text-sm font-medium text-gray-900">No surveys</div>
+      <div class="text-xs text-gray-500">Empty state — clipboard icon + "Create Survey" CTA.</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card p-4 space-y-2">
+      <div class="skeleton h-4 w-2/3"></div>
+      <div class="skeleton h-4 w-1/2"></div>
+      <div class="skeleton h-4 w-3/4"></div>
+      <div class="text-xs text-gray-400 mt-1">Loading state — 5 skeleton rows.</div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-4">List: GET /surveys?page,q,status (10/pg, sort createdAt desc). Create modal → POST /surveys; row actions → POST /surveys/:id/duplicate, PATCH /surveys/:id {active}, DELETE /surveys/:id.</p>
+
+  <!-- ============ Create Survey modal ============ -->
+  <div data-modal="m-create" data-story="US-1.4" data-ac="AC1" class="hidden fixed inset-0 z-50 grid place-items-center p-4">
+    <div data-close class="absolute inset-0 bg-gray-900/50"></div>
+    <div class="relative w-full max-w-md bg-white border border-gray-200 rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h2 class="text-base font-semibold text-gray-900">Create New Survey</h2>
+        <button type="button" data-close class="text-gray-400 hover:text-gray-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-gray-700">Title</label>
+          <input type="text" placeholder="e.g. Customer Satisfaction" class="mt-1 w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+        <div>
+          <label class="text-sm font-medium text-gray-700">Type</label>
+          <select class="mt-1 w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option>Feedback</option><option>Pulse</option><option>Research</option><option>Event</option>
+          </select>
+        </div>
+        <p class="mock-note">v1 deviation: v1 <span class="font-mono">CreateModal</span> has only Title + Description (no Type); Continue → POST /surveys then navigates to the new survey's builder.</p>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-700 hover:bg-gray-50">Cancel</button>
+        <a href="survey-builder.html" data-toast="Survey Created successfully!" data-tone="success" class="inline-flex items-center h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Create</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Delete Survey modal ============ -->
+  <div data-modal="m-delete" data-story="US-1.7" data-ac="AC1" class="hidden fixed inset-0 z-50 grid place-items-center p-4">
+    <div data-close class="absolute inset-0 bg-gray-900/50"></div>
+    <div class="relative w-full max-w-md bg-white border border-gray-200 rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h2 class="text-base font-semibold text-gray-900">Delete Survey</h2>
+        <button type="button" data-close class="text-gray-400 hover:text-gray-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="p-5">
+        <p class="text-sm text-gray-600">Are you sure you want to delete <span data-delete-name class="font-medium text-gray-900">this survey</span>?</p>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-confirm-delete class="h-10 px-4 rounded-card bg-red-600 text-white text-sm font-medium hover:bg-red-700">Delete</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "surveys", storyDomain: "surveys", back: { href: "../index.html", label: "All mockups" }, route: "/surveys", search: "Search surveys…" });</script>
+<script>
+  (function () {
+    var rows = function () { return [].slice.call(document.querySelectorAll("[data-row]")); };
+    var emptyRow = document.querySelector("[data-empty]");
+    var countEl = document.querySelector("[data-count]");
+    var searchEl = document.querySelector("[data-search]");
+    var status = "all";
+    var query = "";
+
+    function applyFilter() {
+      var shown = 0, all = rows();
+      all.forEach(function (r) {
+        var okStatus = status === "all" || r.getAttribute("data-status") === status;
+        var okQuery = !query || r.getAttribute("data-name").indexOf(query) !== -1;
+        var show = okStatus && okQuery;
+        r.hidden = !show;
+        if (show) shown++;
+      });
+      if (emptyRow) emptyRow.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + " of " + all.length + " surveys";
+    }
+
+    // Status segmented control
+    var tabs = document.querySelector("[data-status-tabs]");
+    if (tabs && window.OggvoShell) {
+      OggvoShell.buttonGroup(tabs, {
+        active: "bg-white text-gray-900 shadow-sm",
+        inactive: "text-gray-500 hover:text-gray-700",
+        onChange: function (v) { status = v; applyFilter(); },
+      });
+    }
+    // Search
+    if (searchEl) searchEl.addEventListener("input", function () { query = searchEl.value.trim().toLowerCase(); applyFilter(); });
+
+    // ---- Modals ----
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    function open(id) { var m = document.querySelector('[data-modal="' + id + '"]'); if (m) m.classList.remove("hidden"); }
+    document.addEventListener("click", function (e) {
+      var openBtn = e.target.closest("[data-open]");
+      if (openBtn) { open(openBtn.getAttribute("data-open")); return; }
+      if (e.target.closest("[data-close]")) { closeAll(); return; }
+      var toastEl = e.target.closest("[data-toast]");
+      if (toastEl) { OggvoShell.toast(toastEl.getAttribute("data-toast"), toastEl.getAttribute("data-tone") || "gray"); closeAll(); return; }
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+
+    // ---- Row actions (delegated) ----
+    var pendingDeleteRow = null;
+    document.addEventListener("click", function (e) {
+      var act = e.target.closest("[data-act]");
+      if (!act) return;
+      var row = act.closest("[data-row]");
+      var kind = act.getAttribute("data-act");
+      if (kind === "duplicate") {
+        OggvoShell.toast("Survey Duplicated successfully!", "success");
+      } else if (kind === "delete") {
+        pendingDeleteRow = row;
+        var label = row.querySelector("a").textContent;
+        var nameEl = document.querySelector("[data-delete-name]");
+        if (nameEl) nameEl.textContent = label;
+        open("m-delete");
+      }
+    });
+    var confirmDel = document.querySelector("[data-confirm-delete]");
+    if (confirmDel) confirmDel.addEventListener("click", function () {
+      if (pendingDeleteRow) { pendingDeleteRow.remove(); pendingDeleteRow = null; }
+      closeAll();
+      applyFilter();
+      OggvoShell.toast("Survey deleted successfully!", "success");
+    });
+
+    applyFilter();
+  })();
+</script>
+</body>
+</html>

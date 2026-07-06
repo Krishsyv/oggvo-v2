@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Contact Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+      <!-- 1. PAGE HEADER -->
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between mb-6">
+        <div class="flex items-start gap-4" data-story="US-2.4" data-ac="AC1">
+          <div class="h-14 w-14 shrink-0 rounded-full bg-gray-200 grid place-items-center text-lg font-semibold text-gray-600">DM</div>
+          <div>
+            <h1 class="text-2xl font-semibold text-gray-900 leading-tight">Dana Moore</h1>
+            <p class="text-sm text-gray-500 mt-0.5">Uploaded on Jun 12, 2026 · #4821</p>
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">vip</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">newsletter</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">repeat-customer</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0" data-story="US-2.4" data-ac="AC2">
+          <button class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" title="Routes to /connect">Send Message</button>
+          <button id="reset-btn" class="hidden h-10 px-3 rounded-card text-sm font-medium text-gray-500 hover:bg-gray-100" title="Only shown when there are unsaved changes">Reset</button>
+          <button id="save-btn" disabled class="h-10 px-5 rounded-card bg-primary-500 text-white text-sm font-medium opacity-50 cursor-not-allowed">Save</button>
+        </div>
+      </div>
+      <p class="-mt-3 mb-6 text-xs text-gray-400">Save is disabled until a field changes · Reset appears only when there are unsaved changes.</p>
+
+      <!-- 2. TWO-COLUMN GRID -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- 3. FORM CARD (LEFT, spans 2) -->
+        <section id="contact-form" class="lg:col-span-2">
+          <div class="bg-white rounded-card border border-gray-200 shadow-card p-6" data-story="US-2.1" data-ac="AC1">
+            <h2 class="text-base font-semibold text-gray-900 mb-5">Contact details</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
+              <!-- First / Last -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">First Name</label>
+                <input type="text" value="Dana" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Last Name</label>
+                <input type="text" value="Moore" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+              </div>
+
+              <!-- Phone (with copy) -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
+                <div class="relative">
+                  <input type="text" value="(415) 555-0192" class="w-full h-10 pl-3 pr-10 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <button type="button" title="Copy" class="absolute right-1.5 top-1/2 -translate-y-1/2 h-7 w-7 grid place-items-center rounded-card text-gray-400 hover:bg-gray-100 hover:text-gray-600">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Email (inline error example) -->
+              <div data-story="US-2.1" data-ac="AC4">
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+                <input type="email" value="dana@acme.com" class="w-full h-10 px-3 rounded-card border border-error-500 focus:outline-none focus:ring-2 focus:ring-error-500" />
+                <p class="mt-1.5 text-xs text-error-600">This email is already used by another contact (#3990).</p>
+              </div>
+
+              <!-- Photo (full width) -->
+              <div class="sm:col-span-2" data-story="US-2.2" data-ac="AC1">
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Photo</label>
+                <div class="flex items-center gap-4">
+                  <div class="h-12 w-12 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">DM</div>
+                  <button type="button" data-toast="Photo updated" class="h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Update</button>
+                  <button type="button" data-toast="Photo removed" class="h-9 px-3 rounded-card text-sm font-medium text-gray-500 hover:bg-gray-100">Delete</button>
+                </div>
+                <p class="mt-1.5 text-xs text-gray-400">Accepts image/* · preview shown before upload.</p>
+              </div>
+
+              <!-- Tags combobox (full width) -->
+              <div class="sm:col-span-2" data-story="US-2.3" data-ac="AC1">
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Tags</label>
+                <div id="tag-wrap" class="min-h-10 w-full px-2 py-1.5 rounded-card border border-gray-300 flex flex-wrap items-center gap-2 focus-within:ring-2 focus-within:ring-primary-500">
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">vip <button type="button" class="hover:text-primary-500" title="Remove">&times;</button></span>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">newsletter <button type="button" class="hover:text-primary-500" title="Remove">&times;</button></span>
+                  <input type="text" id="tag-input" placeholder="type to add…" class="flex-1 min-w-[8rem] h-7 px-1 text-sm bg-transparent focus:outline-none placeholder:text-gray-400" />
+                </div>
+                <p class="mt-1.5 text-xs text-gray-400">Free-create new tags or pick suggestions from GET /contacts/tags.</p>
+              </div>
+
+              <!-- Note (full width) -->
+              <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Note</label>
+                <textarea rows="5" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500">Prefers SMS. Bought twice in 2025.</textarea>
+              </div>
+
+              <!-- Birthday / Anniversary -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Birthday</label>
+                <input type="date" value="1990-04-12" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Anniversary</label>
+                <input type="date" value="" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+              </div>
+
+              <!-- Opted In switch (full width) -->
+              <div class="sm:col-span-2 flex items-start gap-3 pt-1">
+                <button type="button" data-switch role="switch" aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-primary-500 transition">
+                  <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition"></span>
+                </button>
+                <div class="leading-tight">
+                  <span class="block text-sm font-medium text-gray-700">Opted In</span>
+                  <span class="block text-xs text-gray-500">Certifies recipient consent.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. ACTIVITY PIPELINE SIDEBAR (RIGHT, 1 col) -->
+        <aside class="lg:col-span-1" data-story="US-4.1" data-ac="AC1">
+          <h2 class="text-base font-semibold text-gray-900 mb-3">Activity</h2>
+          <div class="flex flex-col gap-4">
+
+            <!-- Card 1: Reviews -->
+            <div class="bg-white rounded-card border border-gray-200 shadow-card p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-900">Reviews</h3>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span>
+              </div>
+              <div class="space-y-0">
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-success-500"></span>
+                  <div class="text-sm font-medium text-gray-900">Review invite sent</div>
+                  <div class="text-xs text-gray-500">SMS · Jun 20, 2026 · 9:00 AM</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-success-500"></span>
+                  <div class="text-sm font-medium text-gray-900">5-star Google review</div>
+                  <div class="text-xs text-gray-500">Published · Jun 21, 2026 · 2:14 PM</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-success-500"></span>
+                  <div class="text-sm font-medium text-gray-900">Thank-you reply posted</div>
+                  <div class="text-xs text-gray-500">Auto · Jun 21, 2026 · 2:20 PM</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Newsletters -->
+            <div class="bg-white rounded-card border border-gray-200 shadow-card p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-900">Newsletters</h3>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>History</span>
+              </div>
+              <div class="space-y-0">
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-primary-500"></span>
+                  <div class="text-sm font-medium text-gray-900">Spring Promo delivered</div>
+                  <div class="text-xs text-gray-500">Email · May 03, 2026 · 8:00 AM</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-primary-500"></span>
+                  <div class="text-sm font-medium text-gray-900">Opened &amp; clicked</div>
+                  <div class="text-xs text-gray-500">Email · May 03, 2026 · 11:42 AM</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Birthday -->
+            <div class="bg-white rounded-card border border-gray-200 shadow-card p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-900">Birthday</h3>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Scheduled</span>
+              </div>
+              <div class="space-y-0">
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-gray-300"></span>
+                  <div class="text-sm font-medium text-gray-900">Birthday offer queued</div>
+                  <div class="text-xs text-gray-500">SMS · Apr 12, 2027 · 9:00 AM</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot bg-gray-300"></span>
+                  <div class="text-sm font-medium text-gray-900">Last sent</div>
+                  <div class="text-xs text-gray-500">SMS · Apr 12, 2026 · 9:00 AM</div>
+                </div>
+              </div>
+            </div>
+
+            <p class="mock-note">Pipelines ordered: campaign_history, reviews, newsletters, birthday, anniversary, thankyou, other · GET /contacts/:id/activity</p>
+            <p class="text-xs text-gray-400">Empty state shows "No pipeline activity yet."</p>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+  <script src="../assets/shell.js"></script>
+  <script>
+    OggvoShell.mount({
+      active: "contacts",
+      storyDomain: "contacts",
+      back: { href: "contacts-list.html", label: "Back to Contacts" },
+      route: "/contacts/4821",
+      search: "Search contacts, imports, settings…",
+    });
+  </script>
+  <script>
+    (function () {
+      var save = document.getElementById("save-btn");
+      var reset = document.getElementById("reset-btn");
+      var form = document.getElementById("contact-form");
+      var dirty = false;
+      function markDirty() {
+        if (dirty) return; dirty = true;
+        save.disabled = false; save.classList.remove("opacity-50", "cursor-not-allowed");
+        reset.classList.remove("hidden");
+      }
+      function clean() {
+        dirty = false; save.disabled = true; save.classList.add("opacity-50", "cursor-not-allowed");
+        reset.classList.add("hidden");
+      }
+      function toggleSwitch(btn) {
+        var on = btn.getAttribute("aria-checked") !== "true";
+        btn.setAttribute("aria-checked", on ? "true" : "false");
+        btn.classList.toggle("bg-primary-500", on); btn.classList.toggle("bg-gray-300", !on);
+        var knob = btn.querySelector("span");
+        knob.classList.toggle("translate-x-5", on); knob.classList.toggle("translate-x-0.5", !on);
+      }
+
+      form.addEventListener("input", markDirty);
+      form.addEventListener("click", function (e) {
+        var sw = e.target.closest("[data-switch]");
+        if (sw) { toggleSwitch(sw); markDirty(); return; }
+        var t = e.target.closest("[data-toast]");
+        if (t) OggvoShell.toast(t.getAttribute("data-toast"), "success");
+      });
+
+      var wrap = document.getElementById("tag-wrap");
+      var input = document.getElementById("tag-input");
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          var v = input.value.trim(); if (!v) return;
+          var span = document.createElement("span");
+          span.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700";
+          span.innerHTML = v + ' <button type="button" class="hover:text-primary-500" title="Remove">&times;</button>';
+          wrap.insertBefore(span, input); input.value = ""; markDirty();
+        }
+      });
+      wrap.addEventListener("click", function (e) {
+        var b = e.target.closest('button[title="Remove"]');
+        if (b) { b.parentNode.remove(); markDirty(); }
+      });
+
+      save.addEventListener("click", function () { if (save.disabled) return; OggvoShell.toast("Contact saved", "success"); clean(); });
+      reset.addEventListener("click", function () { OggvoShell.toast("Changes discarded", "gray"); clean(); });
+    })();
+  </script>
+</body>
+</html>

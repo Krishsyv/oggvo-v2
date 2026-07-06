@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Analytics · Google</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. PageHeader -->
+  <div class="flex items-start justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Analytics</h1>
+      <p class="text-sm text-gray-500 mt-1">Acme Co</p>
+    </div>
+    <button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-card hover:bg-gray-50">
+      Contact Advisor
+    </button>
+  </div>
+
+  <!-- 2. Analytics tab nav (Google active) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 text-sm">
+    <a href="dashboard-funnel.html" class="pb-3 -mb-px text-gray-400 hover:text-gray-600 inline-flex items-center gap-1">← Dashboard</a>
+    <a href="analytics-google.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Google</a>
+    <a href="analytics-keywords.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Keywords</a>
+  </nav>
+
+  <!-- 3. Section header + date range -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+    <h2 class="text-lg font-medium text-gray-900">Google Analytics</h2>
+    <div class="flex items-center gap-3">
+      <span class="text-sm text-gray-500">May 25, 2026 - Jun 24, 2026</span>
+      <button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-card hover:bg-gray-50">
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Date range
+      </button>
+    </div>
+  </div>
+
+  <!-- 4. Reconnect info bar -->
+  <div class="bg-primary-50 border border-primary-100 rounded-card px-4 py-3 mb-5 flex items-center gap-2 text-sm" data-story="US-A1.1" data-ac="AC2">
+    <svg class="w-5 h-5 text-primary-600 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <span class="text-gray-700">Reconnect your Google My Business account to enable this chart.</span>
+    <a href="../settings/integrations.html" class="ml-auto text-primary-700 font-medium hover:underline shrink-0">Reconnect →</a>
+  </div>
+
+  <!-- 5. Metric selector -->
+  <div id="metric-group" class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-5" data-story="US-A1.1" data-ac="AC1">
+    <button data-value="searches" class="bg-white rounded-card shadow-card text-left px-4 py-4 hover:bg-gray-50 border border-gray-200 border-b-2 border-b-primary-700">
+      <div class="text-base font-medium text-gray-900">Shown in Searches</div>
+      <div class="text-3xl font-semibold text-gray-900 mt-1">12,480</div>
+    </button>
+    <button data-value="maps" class="bg-white rounded-card shadow-card text-left px-4 py-4 hover:bg-gray-50 border border-gray-200 border-b-2 border-b-transparent">
+      <div class="text-base font-medium text-gray-500">Shown in Maps</div>
+      <div class="text-3xl font-semibold text-gray-900 mt-1">8,210</div>
+    </button>
+    <button data-value="website" class="bg-white rounded-card shadow-card text-left px-4 py-4 hover:bg-gray-50 border border-gray-200 border-b-2 border-b-transparent">
+      <div class="text-base font-medium text-gray-500">Clicked Website</div>
+      <div class="text-3xl font-semibold text-gray-900 mt-1">1,940</div>
+    </button>
+    <button data-value="phone" class="bg-white rounded-card shadow-card text-left px-4 py-4 hover:bg-gray-50 border border-gray-200 border-b-2 border-b-transparent">
+      <div class="text-base font-medium text-gray-500">Clicked Phone</div>
+      <div class="text-3xl font-semibold text-gray-900 mt-1">612</div>
+    </button>
+    <button data-value="directions" class="bg-white rounded-card shadow-card text-left px-4 py-4 hover:bg-gray-50 border border-gray-200 border-b-2 border-b-transparent">
+      <div class="text-base font-medium text-gray-500">Got Directions</div>
+      <div class="text-3xl font-semibold text-gray-900 mt-1">388</div>
+    </button>
+  </div>
+
+  <!-- 6. Chart card for active metric -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 mb-5" data-story="US-A1.1" data-ac="AC1">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h3 id="metric-caption" class="text-sm font-medium text-gray-900">Shown in Searches · 12,480</h3>
+        <p class="text-xs text-gray-400 mt-0.5">Impressions in Google Search, by device</p>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-gray-500">
+        <span class="inline-flex items-center gap-1.5"><span class="w-3 h-0.5 rounded-full" style="background:#1570EF"></span>Desktop</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-3 h-0.5 rounded-full" style="background:#53B1FD"></span>Mobile</span>
+      </div>
+    </div>
+
+    <div class="h-72">
+      <svg viewBox="0 0 760 280" class="w-full h-full" preserveAspectRatio="none" role="img" aria-label="Line chart of search impressions by device over time">
+        <!-- gridlines + y labels -->
+        <g stroke="#EAECF0" stroke-width="1">
+          <line x1="48" y1="30"  x2="740" y2="30"/>
+          <line x1="48" y1="80"  x2="740" y2="80"/>
+          <line x1="48" y1="130" x2="740" y2="130"/>
+          <line x1="48" y1="180" x2="740" y2="180"/>
+          <line x1="48" y1="230" x2="740" y2="230"/>
+        </g>
+        <g fill="#98A2B3" font-size="11" font-family="sans-serif" text-anchor="end">
+          <text x="40" y="34">800</text>
+          <text x="40" y="84">600</text>
+          <text x="40" y="134">400</text>
+          <text x="40" y="184">200</text>
+          <text x="40" y="234">0</text>
+        </g>
+
+        <!-- filled area under primary (Desktop) line -->
+        <path d="M48,150 L150,120 L252,135 L354,95 L456,110 L558,70 L660,85 L740,55 L740,230 L48,230 Z"
+              fill="rgba(46,144,250,0.10)" stroke="none"/>
+
+        <!-- Desktop series -->
+        <polyline points="48,150 150,120 252,135 354,95 456,110 558,70 660,85 740,55"
+                  fill="none" stroke="#1570EF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#1570EF">
+          <circle cx="48"  cy="150" r="3"/><circle cx="150" cy="120" r="3"/><circle cx="252" cy="135" r="3"/>
+          <circle cx="354" cy="95"  r="3"/><circle cx="456" cy="110" r="3"/><circle cx="558" cy="70"  r="3"/>
+          <circle cx="660" cy="85"  r="3"/><circle cx="740" cy="55"  r="3"/>
+        </g>
+
+        <!-- Mobile series -->
+        <polyline points="48,195 150,185 252,170 354,165 456,150 558,140 660,128 740,118"
+                  fill="none" stroke="#53B1FD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#53B1FD">
+          <circle cx="48"  cy="195" r="3"/><circle cx="150" cy="185" r="3"/><circle cx="252" cy="170" r="3"/>
+          <circle cx="354" cy="165" r="3"/><circle cx="456" cy="150" r="3"/><circle cx="558" cy="140" r="3"/>
+          <circle cx="660" cy="128" r="3"/><circle cx="740" cy="118" r="3"/>
+        </g>
+
+        <!-- x-axis labels (by week) -->
+        <g fill="#98A2B3" font-size="11" font-family="sans-serif" text-anchor="middle">
+          <text x="48"  y="252">May 25</text>
+          <text x="201" y="252">Jun 1</text>
+          <text x="354" y="252">Jun 8</text>
+          <text x="507" y="252">Jun 15</text>
+          <text x="660" y="252">Jun 22</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 7. mock-note -->
+  <p class="mock-note">GET /analytics/insights/google?from=&to=. Metric keys: BUSINESS_IMPRESSIONS_{DESKTOP,MOBILE}_{SEARCH,MAPS}, WEBSITE_CLICKS, CALL_CLICKS, BUSINESS_DIRECTION_REQUESTS. Connect/Reconnect gate via has_google/new_google.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "dashboard", storyDomain: "analytics", back: { href: "../index.html", label: "All mockups" }, route: "/analytics", search: "Search…" });</script>
+<script>
+  (function () {
+    var META = {
+      searches:   { label: "Shown in Searches", count: "12,480" },
+      maps:       { label: "Shown in Maps",     count: "8,210" },
+      website:    { label: "Clicked Website",   count: "1,940" },
+      phone:      { label: "Clicked Phone",     count: "612" },
+      directions: { label: "Got Directions",    count: "388" }
+    };
+    var cap = document.getElementById("metric-caption");
+    var group = document.getElementById("metric-group");
+    if (!group) return;
+    OggvoShell.buttonGroup(group, {
+      active: "border-b-primary-700",
+      inactive: "border-b-transparent",
+      onChange: function (v) {
+        var m = META[v]; if (!m) return;
+        if (cap) cap.textContent = m.label + " · " + m.count;
+        OggvoShell.toast("Showing " + m.label, "primary");
+      }
+    });
+  })();
+</script>
+</body>
+</html>

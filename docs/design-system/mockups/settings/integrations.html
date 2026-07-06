@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Integrations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex items-start justify-between gap-6 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Integrations</h1>
+      <p class="mt-1 text-sm text-gray-500">Connect the accounts OGGVO uses to publish, take payments, and harvest contacts.</p>
+    </div>
+    <span class="shrink-0 inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-success-100 text-success-700 text-xs font-medium">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      3 connected
+    </span>
+  </div>
+
+  <!-- Vault banner -->
+  <aside data-story="US-1.1" data-ac="AC5" class="flex items-start gap-3 bg-primary-50 rounded-card border border-primary-200 p-4 mb-6 max-w-4xl">
+    <svg class="h-5 w-5 shrink-0 text-primary-600 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+    <div>
+      <div class="text-sm font-semibold text-gray-900">Your tokens are encrypted at rest</div>
+      <p class="mt-0.5 text-sm text-gray-600">Every access &amp; refresh token is stored AES-GCM encrypted in the integrations vault — never in plaintext, never returned to the browser. Disconnecting a provider revokes its tokens and tears down its webhooks.</p>
+    </div>
+  </aside>
+
+  <!-- Filter toolbar -->
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <div data-cat-group class="inline-flex items-center rounded-card border border-gray-200 bg-white p-0.5 gap-0.5 shadow-card">
+      <button type="button" data-value="all" aria-selected="true" class="px-3 h-8 rounded-[7px] text-sm font-medium bg-primary-500 text-white">All</button>
+      <button type="button" data-value="reviews-social" aria-selected="false" class="px-3 h-8 rounded-[7px] text-sm font-medium text-gray-600 hover:bg-gray-50">Reviews &amp; Social</button>
+      <button type="button" data-value="payments" aria-selected="false" class="px-3 h-8 rounded-[7px] text-sm font-medium text-gray-600 hover:bg-gray-50">Payments</button>
+      <button type="button" data-value="crm" aria-selected="false" class="px-3 h-8 rounded-[7px] text-sm font-medium text-gray-600 hover:bg-gray-50">CRM &amp; Lending</button>
+      <button type="button" data-value="listings" aria-selected="false" class="px-3 h-8 rounded-[7px] text-sm font-medium text-gray-600 hover:bg-gray-50">Listings</button>
+    </div>
+    <select data-status-filter class="h-9 px-3 text-sm bg-white border border-gray-200 rounded-card text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-200">
+      <option value="all">All statuses</option>
+      <option value="connected">Connected</option>
+      <option value="needs-reauth">Needs re-auth</option>
+      <option value="error">Error</option>
+      <option value="not-connected">Not connected</option>
+    </select>
+    <div class="relative ml-auto w-full sm:w-64">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input data-filter-search type="text" placeholder="Filter integrations…" class="w-full h-9 pl-9 pr-3 text-sm bg-white border border-gray-200 rounded-card placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+  </div>
+
+  <!-- Empty state (shown when no cards match) -->
+  <div data-empty-state class="hidden text-center py-16 border border-dashed border-gray-200 rounded-card bg-white mb-6">
+    <span class="mx-auto grid place-items-center h-12 w-12 rounded-full bg-gray-100 text-gray-400 mb-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+    <div class="text-sm font-semibold text-gray-900">No integrations match your filters</div>
+    <p class="mt-1 text-sm text-gray-500">Try a different category, status, or search term.</p>
+    <button type="button" data-clear-filters class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Clear filters</button>
+  </div>
+
+  <!-- ===================== Reviews & Social ===================== -->
+  <section data-cat-section data-category="reviews-social" data-story="US-1.1" data-ac="AC2" class="mb-8">
+    <h2 class="text-sm font-semibold text-gray-900 mb-3">Reviews &amp; Social</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
+      <!-- Google Business — Connected -->
+      <article data-integration data-name="Google Business" data-provider="google" data-category="reviews-social" data-status="connected" data-auth="oauth" data-synced="2h ago" data-scopes="business.manage,userinfo.profile" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#dc4e41">G</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Google Business</div>
+            <p class="mt-0.5 text-sm text-gray-500">Reply to reviews and publish local posts on Business Profile.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+          <span class="text-xs text-gray-400">Last synced 2h ago</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Manage</button>
+      </article>
+
+      <!-- Meta / Facebook — Needs re-auth -->
+      <article data-integration data-name="Meta / Facebook" data-provider="facebook" data-category="reviews-social" data-status="needs-reauth" data-auth="oauth" data-synced="expired" data-scopes="pages_show_list,pages_read_engagement,pages_manage_posts,pages_manage_metadata,pages_read_user_content,pages_manage_engagement,pages_manage_ads" data-story="US-1.2" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#1877f2">f</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Meta / Facebook</div>
+            <p class="mt-0.5 text-sm text-gray-500">Publish to Pages and receive Messenger chats in the inbox.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Needs re-auth</span>
+          <span class="text-xs text-gray-400">Token expired</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center gap-2 h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Reconnect
+        </button>
+      </article>
+
+      <!-- Instagram — Connected -->
+      <article data-integration data-name="Instagram" data-provider="instagram" data-category="reviews-social" data-status="connected" data-auth="oauth" data-synced="18m ago" data-scopes="instagram_basic,instagram_content_publish" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)">I</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Instagram</div>
+            <p class="mt-0.5 text-sm text-gray-500">Receive IG direct messages. Connected through your Facebook Page.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+          <span class="text-xs text-gray-400">Last synced 18m ago</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Manage</button>
+      </article>
+
+      <!-- Twitter / X — Not connected -->
+      <article data-integration data-name="Twitter / X" data-provider="twitter" data-category="reviews-social" data-status="not-connected" data-auth="oauth" data-synced="—" data-scopes="tweet.write,users.read" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-gray-900 text-white font-semibold">X</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Twitter / X</div>
+            <p class="mt-0.5 text-sm text-gray-500">Publish posts to your X profile (OAuth 1.0a).</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+      <!-- LinkedIn — Connected -->
+      <article data-integration data-name="LinkedIn" data-provider="linkedin" data-category="reviews-social" data-status="connected" data-auth="oauth" data-synced="1d ago" data-scopes="r_liteprofile,w_member_social,w_organization_social,rw_organization_admin" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#0077b5">in</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">LinkedIn</div>
+            <p class="mt-0.5 text-sm text-gray-500">Publish to your member profile and admin'd organizations.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+          <span class="text-xs text-gray-400">Last synced 1d ago</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Manage</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== Payments & Commerce ===================== -->
+  <section data-cat-section data-category="payments" class="mb-8">
+    <h2 class="text-sm font-semibold text-gray-900 mb-3">Payments &amp; Commerce</h2>
+    <p class="mock-note mb-3">Square / Stripe / Clover connect as merchant accounts; their payment &amp; order webhooks are the primary source of harvested contacts. v2 ships current payment SDKs (fix-on-rebuild).</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
+      <!-- Square — Error -->
+      <article data-integration data-name="Square" data-provider="square" data-category="payments" data-status="error" data-auth="oauth" data-synced="—" data-scopes="PAYMENTS_READ,CUSTOMERS_READ,CUSTOMERS_WRITE,ORDERS_READ,MERCHANT_PROFILE_READ" data-story="US-2.5" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#1a1a1a">S</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Square</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import paying customers from Square payments and orders.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Error</span>
+          <span class="text-xs text-error-600">Webhook signature failing</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center gap-2 h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Reconnect
+        </button>
+      </article>
+
+      <!-- Stripe — Connected -->
+      <article data-integration data-name="Stripe" data-provider="stripe" data-category="payments" data-status="connected" data-auth="oauth" data-synced="5m ago" data-scopes="read_customers,read_payment_intents" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#635bff">S</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Stripe</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import customers on <code class="text-xs">payment_intent.succeeded</code> via Stripe Connect.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+          <span class="text-xs text-gray-400">Last synced 5m ago</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Manage</button>
+      </article>
+
+      <!-- Shopify — Not connected -->
+      <article data-integration data-name="Shopify" data-provider="shopify" data-category="payments" data-status="not-connected" data-auth="oauth" data-synced="—" data-scopes="read_customers,read_orders" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#95bf47">S</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Shopify</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import new store customers as contacts. HMAC-verified webhook.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== CRM & Lending ===================== -->
+  <section data-cat-section data-category="crm" class="mb-8">
+    <h2 class="text-sm font-semibold text-gray-900 mb-3">CRM &amp; Lending</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
+      <!-- Follow Up Boss — Not connected (API key) -->
+      <article data-integration data-name="Follow Up Boss" data-provider="followupboss" data-category="crm" data-status="not-connected" data-auth="apikey" data-synced="—" data-scopes="" data-story="US-2.4" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-primary-100 text-primary-700 font-semibold">F</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Follow Up Boss</div>
+            <p class="mt-0.5 text-sm text-gray-500">Paste an API key to sync people, calls, texts and deals.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+      <!-- Clio — Not connected -->
+      <article data-integration data-name="Clio" data-provider="clio" data-category="crm" data-status="not-connected" data-auth="oauth" data-synced="—" data-scopes="contacts,matters,bills" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-success-100 text-success-700 font-semibold">C</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Clio</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import contacts from new matters and bills (legal practice).</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+      <!-- QuickBooks — Not connected -->
+      <article data-integration data-name="QuickBooks" data-provider="quickbooks" data-category="crm" data-status="not-connected" data-auth="oauth" data-synced="—" data-scopes="com.intuit.quickbooks.accounting,com.intuit.quickbooks.payment" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#2ca01c">Q</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">QuickBooks</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import customers from invoices, payments and bills.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+      <!-- LionDesk — Not connected -->
+      <article data-integration data-name="LionDesk" data-provider="liondesk" data-category="crm" data-status="not-connected" data-auth="oauth" data-synced="—" data-scopes="contacts.read" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-warning-100 text-warning-700 font-semibold">L</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">LionDesk</div>
+            <p class="mt-0.5 text-sm text-gray-500">One-time bulk import of closed/inactive contacts.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+      <!-- Pre-Approve Me — Not connected -->
+      <article data-integration data-name="Pre-Approve Me" data-provider="pam" data-category="crm" data-status="not-connected" data-auth="token" data-synced="—" data-scopes="loan.status" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full bg-error-100 text-error-700 font-semibold">P</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Pre-Approve Me</div>
+            <p class="mt-0.5 text-sm text-gray-500">Import borrowers when a loan closes (mortgage).</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== Listings ===================== -->
+  <section data-cat-section data-category="listings" class="mb-6">
+    <h2 class="text-sm font-semibold text-gray-900 mb-3">Listings</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+
+      <!-- Zillow — Not connected (lookup only) -->
+      <article data-integration data-name="Zillow" data-provider="zillow" data-category="listings" data-status="not-connected" data-auth="lookup" data-synced="—" data-scopes="" class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex flex-col">
+        <div class="flex items-start gap-3">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-white font-semibold" style="background:#006aff">Z</span>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-gray-900">Zillow</div>
+            <p class="mt-0.5 text-sm text-gray-500">Link your Zillow profile by screen name or NMLS id to pull reviews.</p>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Not connected</span>
+        </div>
+        <button type="button" class="mt-4 inline-flex items-center justify-center h-9 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Connect</button>
+      </article>
+
+    </div>
+  </section>
+
+  <p class="mock-note">Catalog merges available providers with GET /integrations/connections. Connect → GET /integrations/:provider/authorize → provider → GET /integrations/:provider/callback (code exchange, AES-GCM token store). Disconnect → DELETE /integrations/connections/:id (provider teardown). Non-OAuth: POST /integrations/followupboss, POST /integrations/zillow.</p>
+
+  <!-- ===================== Connect / OAuth-confirm modal ===================== -->
+  <div data-modal="connect" data-story="US-2.1" data-ac="AC2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span data-mc-logo class="h-9 w-9 rounded-full grid place-items-center text-white font-semibold" style="background:#2e90fa">G</span>
+          <h3 class="text-lg font-semibold text-gray-900">Connect <span data-mc-name>Provider</span></h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <p data-mc-intro>You'll be redirected to <span data-mc-name class="font-medium text-gray-800">Provider</span> to authorize OGGVO.</p>
+        <div data-mc-scopes-wrap>
+          <div class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1.5">Requested scopes</div>
+          <div data-mc-scopes class="flex flex-wrap gap-1.5"></div>
+        </div>
+        <p class="text-xs text-gray-400 border-t border-gray-100 pt-3">Tokens returned by the provider are stored AES-GCM encrypted in the integrations vault — never in the browser.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-mc-confirm class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Continue to <span data-mc-name>Provider</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Manage modal (connected) ===================== -->
+  <div data-modal="manage" data-story="US-1.2" data-ac="AC1" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span data-mm-logo class="h-9 w-9 rounded-full grid place-items-center text-white font-semibold" style="background:#2e90fa">G</span>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Manage <span data-mm-name>Provider</span></h3>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Connected</span>
+          </div>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4 text-sm text-gray-600">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-500">Last synced</span>
+          <span data-mm-synced class="font-medium text-gray-800">2h ago</span>
+        </div>
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1.5">Granted scopes</div>
+          <div data-mm-scopes class="flex flex-wrap gap-1.5"></div>
+        </div>
+        <p class="text-xs text-gray-400 border-t border-gray-100 pt-3">Access &amp; refresh tokens are held AES-GCM encrypted; a scheduled job refreshes them before expiry.</p>
+      </div>
+      <div class="flex items-center justify-between gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-mm-disconnect class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-error-600 bg-white border border-error-200 rounded-card hover:bg-error-100">Disconnect</button>
+        <button data-mm-sync class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Sync now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Disconnect confirm modal (token revoke + cascade) ===================== -->
+  <div data-modal="disconnect" data-story="US-4.1" data-ac="AC2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="p-5 space-y-3">
+        <span class="grid place-items-center h-12 w-12 rounded-full bg-error-100 text-error-600"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.36 6.64A9 9 0 1112 3v9"/></svg></span>
+        <h3 class="text-lg font-semibold text-gray-900">Disconnect <span data-md-name>Provider</span>?</h3>
+        <p class="text-sm text-gray-500">Disconnecting <span data-md-name class="font-medium text-gray-700">Provider</span> <b class="font-medium text-gray-700">revokes its access &amp; refresh tokens</b> with the provider and tears down its registered webhooks.</p>
+        <div class="flex items-start gap-2.5 bg-warning-50 border border-warning-200 rounded-card p-3 text-sm text-warning-800">
+          <svg class="h-4 w-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/></svg>
+          <span>Child data harvested through this connection (reviews, posts, insights, messages, imported contacts) is <b>soft-deleted as a set</b> and hard-purged after a 30-day grace window. Reconnecting within the window restores it.</span>
+        </div>
+        <div data-md-meta class="hidden flex items-start gap-2.5 bg-primary-50 border border-primary-200 rounded-card p-3 text-sm text-primary-800">
+          <svg class="h-4 w-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span><b>Meta Data Deletion Callback:</b> this also records a <code class="text-xs">deletion_request</code> (30-day grace) so Facebook's Data Deletion Request callback is satisfied automatically — no manual purge emails.</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-md-confirm class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Disconnect &amp; revoke</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "settings", storyDomain: "integrations", back: { href: "settings.html", label: "Back to Settings" }, route: "/settings/integrations", search: "Search integrations…" });</script>
+<script>
+  (function () {
+    var articles = [].slice.call(document.querySelectorAll("[data-integration]"));
+    var sections = [].slice.call(document.querySelectorAll("[data-cat-section]"));
+    var emptyState = document.querySelector("[data-empty-state]");
+    var statusSel = document.querySelector("[data-status-filter]");
+    var searchInp = document.querySelector("[data-filter-search]");
+    var state = { cat: "all", status: "all", q: "" };
+
+    // ---- Live filtering ----
+    function applyFilter() {
+      var q = state.q.trim().toLowerCase();
+      var anyVisible = false;
+      sections.forEach(function (sec) {
+        var catMatch = state.cat === "all" || sec.getAttribute("data-category") === state.cat;
+        var secVisible = false;
+        [].slice.call(sec.querySelectorAll("[data-integration]")).forEach(function (a) {
+          var name = (a.getAttribute("data-name") || "").toLowerCase();
+          var prov = (a.getAttribute("data-provider") || "").toLowerCase();
+          var show = catMatch
+            && (state.status === "all" || a.getAttribute("data-status") === state.status)
+            && (!q || name.indexOf(q) !== -1 || prov.indexOf(q) !== -1);
+          a.classList.toggle("hidden", !show);
+          if (show) { secVisible = true; anyVisible = true; }
+        });
+        sec.classList.toggle("hidden", !secVisible);
+      });
+      emptyState.classList.toggle("hidden", anyVisible);
+    }
+
+    OggvoShell.buttonGroup(document.querySelector("[data-cat-group]"), {
+      active: "bg-primary-500 text-white",
+      inactive: "text-gray-600 hover:bg-gray-50",
+      onChange: function (v) { state.cat = v; applyFilter(); },
+    });
+    statusSel.addEventListener("change", function () { state.status = statusSel.value; applyFilter(); });
+    searchInp.addEventListener("input", function () { state.q = searchInp.value; applyFilter(); });
+    document.querySelector("[data-clear-filters]").addEventListener("click", function () {
+      state = { cat: "all", status: "all", q: "" };
+      statusSel.value = "all"; searchInp.value = "";
+      var allBtn = document.querySelector('[data-cat-group] [data-value="all"]');
+      if (allBtn) allBtn.click();
+      applyFilter();
+    });
+
+    // ---- Card visuals for modals ----
+    function iconOf(article) {
+      var span = article.querySelector("span.grid.place-items-center");
+      return { bg: (span && span.style.background) || "#2e90fa", glyph: (span && span.textContent.trim()) || "?" };
+    }
+    function scopeChips(scopes) {
+      if (!scopes) return '<span class="text-xs text-gray-400">No token scopes — lookup / API-key connection.</span>';
+      return scopes.split(",").map(function (s) {
+        return '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 font-mono">' + s.trim() + "</span>";
+      }).join("");
+    }
+
+    var current = null; // article driving the open modal
+    function setText(sel, root, text) { [].slice.call(root.querySelectorAll(sel)).forEach(function (el) { el.textContent = text; }); }
+    function openModal(name) { document.querySelector('[data-modal="' + name + '"]').classList.remove("hidden"); }
+    function closeModals() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+
+    function openConnect(article) {
+      current = article;
+      var name = article.getAttribute("data-name"), auth = article.getAttribute("data-auth"), ic = iconOf(article);
+      var modal = document.querySelector('[data-modal="connect"]');
+      setText("[data-mc-name]", modal, name);
+      var logo = modal.querySelector("[data-mc-logo]"); logo.style.background = ic.bg; logo.textContent = ic.glyph;
+      var intro = {
+        oauth: "You'll be redirected to " + name + " to authorize OGGVO on the provider's consent screen. We request only the scopes below.",
+        apikey: "Connect " + name + " by pasting your API key. OGGVO validates it and auto-registers the inbound webhooks — no redirect.",
+        token: name + " connects with a session token from your dashboard. OGGVO registers a loan-status webhook on your behalf.",
+        lookup: name + " is a lookup-only link — enter your screen name or NMLS id. No account authorization and no token is stored."
+      }[auth] || "You'll be redirected to " + name + " to authorize OGGVO.";
+      modal.querySelector("[data-mc-intro]").textContent = intro;
+      var scopesWrap = modal.querySelector("[data-mc-scopes-wrap]");
+      if (auth === "oauth") { scopesWrap.classList.remove("hidden"); modal.querySelector("[data-mc-scopes]").innerHTML = scopeChips(article.getAttribute("data-scopes")); }
+      else { scopesWrap.classList.add("hidden"); }
+      openModal("connect");
+    }
+
+    function openManage(article) {
+      current = article;
+      var name = article.getAttribute("data-name"), ic = iconOf(article);
+      var modal = document.querySelector('[data-modal="manage"]');
+      setText("[data-mm-name]", modal, name);
+      var logo = modal.querySelector("[data-mm-logo]"); logo.style.background = ic.bg; logo.textContent = ic.glyph;
+      modal.querySelector("[data-mm-synced]").textContent = article.getAttribute("data-synced") || "—";
+      modal.querySelector("[data-mm-scopes]").innerHTML = scopeChips(article.getAttribute("data-scopes"));
+      openModal("manage");
+    }
+
+    function openDisconnect(article) {
+      current = article;
+      var name = article.getAttribute("data-name"), prov = article.getAttribute("data-provider");
+      var modal = document.querySelector('[data-modal="disconnect"]');
+      setText("[data-md-name]", modal, name);
+      modal.querySelector("[data-md-meta]").classList.toggle("hidden", !(prov === "facebook" || prov === "instagram"));
+      openModal("disconnect");
+    }
+
+    // ---- Card action button: behaviour by state ----
+    document.addEventListener("click", function (e) {
+      var actionBtn = e.target.closest("[data-integration] button");
+      if (actionBtn) {
+        var article = actionBtn.closest("[data-integration]");
+        var status = article.getAttribute("data-status"), name = article.getAttribute("data-name");
+        if (status === "not-connected") openConnect(article);
+        else if (status === "connected") openManage(article);
+        else OggvoShell.toast("Reconnecting to " + name + "…", "primary"); // needs-reauth / error
+        return;
+      }
+
+      // Connect modal → confirm
+      if (e.target.closest("[data-mc-confirm]")) { OggvoShell.toast("Connecting to " + current.getAttribute("data-name") + "…", "primary"); closeModals(); return; }
+      // Manage modal → sync now
+      if (e.target.closest("[data-mm-sync]")) { OggvoShell.toast("Syncing " + current.getAttribute("data-name") + "…", "success"); return; }
+      // Manage modal → disconnect (hand off to confirm)
+      if (e.target.closest("[data-mm-disconnect]")) { openDisconnect(current); return; }
+      // Disconnect modal → confirm
+      if (e.target.closest("[data-md-confirm]")) { OggvoShell.toast(current.getAttribute("data-name") + " disconnected — tokens revoked, data scheduled for purge", "error"); closeModals(); return; }
+
+      // Overlay click or [data-close]
+      if (e.target.closest("[data-close]")) { closeModals(); return; }
+      var overlay = e.target.closest("[data-modal]");
+      if (overlay && e.target === overlay) closeModals();
+    });
+
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModals(); });
+  })();
+</script>
+</body>
+</html>

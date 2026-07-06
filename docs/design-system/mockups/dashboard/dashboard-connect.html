@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Dashboard · Oggvo Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PAGE HEADER -->
+  <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Your Overview</h1>
+      <p class="mt-1 text-sm text-gray-500">Acme Co</p>
+    </div>
+    <button class="inline-flex items-center gap-2 rounded-card border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+      <svg class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h9A2.5 2.5 0 0 1 17 6.5v5A2.5 2.5 0 0 1 14.5 14H8l-3.5 2.5V14h-.5A2.5 2.5 0 0 1 3 11.5v-5Z" stroke-linejoin="round"/></svg>
+      Contact Advisor
+    </button>
+  </div>
+
+  <!-- DASHBOARD TAB NAV -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="dashboard-funnel.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Review Funnel</a>
+    <a href="dashboard-social.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Social Media</a>
+    <a href="dashboard-connect.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Oggvo Connect</a>
+    <a href="dashboard-activity.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Activity</a>
+    <a href="dashboard-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="dashboard-profiles.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Profile Optimization</a>
+    <a href="analytics-google.html" class="pb-3 -mb-px text-gray-400 hover:text-gray-600 whitespace-nowrap ml-auto inline-flex items-center gap-1">Analytics ↗</a>
+  </nav>
+
+  <!-- GOALS HEADER -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4" data-story="US-D3.2" data-ac="AC1">
+    <h2 class="text-lg font-medium text-gray-900">Goals :</h2>
+    <div class="flex items-center gap-3">
+      <div class="inline-flex items-center gap-2 rounded-card border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700">
+        <svg class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M3 8h14M7 3v3M13 3v3" stroke-linecap="round"/></svg>
+        June 2026
+        <svg class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <button class="inline-flex items-center gap-2 rounded-card border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Modify Goals</button>
+    </div>
+  </div>
+
+  <!-- GOAL CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <!-- Connections -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-D3.2" data-ac="AC2">
+      <h3 class="text-base font-medium text-gray-500">Connections</h3>
+      <div class="mt-2 flex items-end gap-3">
+        <span class="text-3xl font-semibold text-gray-900">64<span class="text-xl text-gray-400">/100</span></span>
+        <span class="inline-flex items-center gap-0.5 text-sm font-medium text-success-700 pb-1">
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>
+          +8%
+        </span>
+      </div>
+      <div class="mt-4 h-2 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-primary-500" style="width:64%"></div></div>
+      <div class="mt-4 pt-3 border-t border-gray-100">
+        <a href="../connect/connect-inbox.html" class="inline-flex items-center gap-1 text-sm font-medium text-primary-700 hover:text-primary-800">
+          Check Messages
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <!-- AI Used -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-D3.2" data-ac="AC3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-medium text-gray-500">AI Used</h3>
+        <span class="text-[11px] text-gray-400">Placeholder metric (v1)</span>
+      </div>
+      <div class="mt-2">
+        <span class="text-3xl font-semibold text-gray-900">0%</span>
+      </div>
+      <div class="mt-4 h-2 rounded-full bg-gray-100"><div class="h-2 rounded-full" style="width:0%;background:#F79009"></div></div>
+      <div class="mt-4 pt-3 border-t border-gray-100">
+        <a href="../settings/settings.html" class="inline-flex items-center gap-1 text-sm font-medium text-primary-700 hover:text-primary-800">
+          Upgrade Plan
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OGGVO CONNECT STATS -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 mb-6">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <h2 class="text-lg font-medium text-gray-900">Oggvo Connect Stats</h2>
+        <p class="mt-0.5 text-sm text-gray-500">Mar 26 – Jun 26, 2026</p>
+      </div>
+      <div id="range-group" class="inline-flex items-center rounded-card border border-gray-200 bg-gray-50 p-0.5 text-sm">
+        <button data-value="1M" class="rounded-[0.5rem] px-3 py-1.5 font-medium text-gray-500 hover:text-gray-700">1M</button>
+        <button data-value="3M" class="rounded-[0.5rem] bg-white px-3 py-1.5 font-medium text-primary-700 shadow-sm">3M</button>
+        <button data-value="6M" class="rounded-[0.5rem] px-3 py-1.5 font-medium text-gray-500 hover:text-gray-700">6M</button>
+        <button data-value="1Y" class="rounded-[0.5rem] px-3 py-1.5 font-medium text-gray-500 hover:text-gray-700">1Y</button>
+      </div>
+    </div>
+
+    <!-- KPI TILES -->
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-5" data-story="US-D3.2" data-ac="AC4">
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4">
+        <p class="text-base font-medium text-gray-500">Connections</p>
+        <p class="mt-1 text-3xl font-semibold text-gray-900">64</p>
+        <p class="mt-1 inline-flex items-center gap-0.5 text-sm font-medium text-success-700"><svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>+8%</p>
+      </div>
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4">
+        <p class="text-base font-medium text-gray-500">Chat Sessions</p>
+        <p class="mt-1 text-3xl font-semibold text-gray-900">142</p>
+        <p class="mt-1 inline-flex items-center gap-0.5 text-sm font-medium text-success-700"><svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>+15%</p>
+      </div>
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4">
+        <p class="text-base font-medium text-gray-500">Messages Sent</p>
+        <p class="mt-1 text-3xl font-semibold text-gray-900">980</p>
+        <p class="mt-1 inline-flex items-center gap-0.5 text-sm font-medium text-success-700"><svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>+12%</p>
+      </div>
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4">
+        <p class="text-base font-medium text-gray-500">Messages Received</p>
+        <p class="mt-1 text-3xl font-semibold text-gray-900">845</p>
+        <p class="mt-1 inline-flex items-center gap-0.5 text-sm font-medium text-success-700"><svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>+10%</p>
+      </div>
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4">
+        <p class="text-base font-medium text-gray-500">Scheduled</p>
+        <p class="mt-1 text-3xl font-semibold text-gray-900">36</p>
+        <p class="mt-1 inline-flex items-center gap-0.5 text-sm font-medium text-success-700"><svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 5l5 6h-3v4H8v-4H5l5-6Z"/></svg>+4%</p>
+      </div>
+    </div>
+
+    <!-- STACKED BAR CHART -->
+    <div class="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div class="lg:col-span-3" data-story="US-D3.2" data-ac="AC5">
+        <svg viewBox="0 0 660 280" class="w-full" role="img" aria-label="Stacked bar chart of messages by channel over six months">
+          <!-- y axis label -->
+          <text x="14" y="140" transform="rotate(-90 14 140)" text-anchor="middle" fill="#98a2b3" font-size="12" font-family="Inter, sans-serif">Messages</text>
+          <!-- gridlines + y ticks -->
+          <g font-size="11" font-family="Inter, sans-serif" fill="#98a2b3">
+            <line x1="56" y1="40"  x2="640" y2="40"  stroke="#f2f4f7"/><text x="50" y="44"  text-anchor="end">1,200</text>
+            <line x1="56" y1="90"  x2="640" y2="90"  stroke="#f2f4f7"/><text x="50" y="94"  text-anchor="end">900</text>
+            <line x1="56" y1="140" x2="640" y2="140" stroke="#f2f4f7"/><text x="50" y="144" text-anchor="end">600</text>
+            <line x1="56" y1="190" x2="640" y2="190" stroke="#f2f4f7"/><text x="50" y="194" text-anchor="end">300</text>
+            <line x1="56" y1="240" x2="640" y2="240" stroke="#e4e7ec"/><text x="50" y="244" text-anchor="end">0</text>
+          </g>
+          <!-- bars: each month = SMS (#175CD3, bottom) + Web Chat (#2E90FA, top) -->
+          <!-- Jan: SMS 560 (h93 -> y147), Web 170 (h28 -> y119) -->
+          <g>
+            <rect x="80"  y="147" width="48" height="93"  fill="#175CD3"/>
+            <rect x="80"  y="119" width="48" height="28"  fill="#2E90FA"/>
+          </g>
+          <!-- Feb: SMS 640 (h107 y133), Web 195 (h32 y101) -->
+          <g>
+            <rect x="172" y="133" width="48" height="107" fill="#175CD3"/>
+            <rect x="172" y="101" width="48" height="32"  fill="#2E90FA"/>
+          </g>
+          <!-- Mar: SMS 700 (h117 y123), Web 210 (h35 y88) -->
+          <g>
+            <rect x="264" y="123" width="48" height="117" fill="#175CD3"/>
+            <rect x="264" y="88"  width="48" height="35"  fill="#2E90FA"/>
+          </g>
+          <!-- Apr: SMS 760 (h127 y113), Web 230 (h38 y75) -->
+          <g>
+            <rect x="356" y="113" width="48" height="127" fill="#175CD3"/>
+            <rect x="356" y="75"  width="48" height="38"  fill="#2E90FA"/>
+          </g>
+          <!-- May: SMS 820 (h137 y103), Web 245 (h41 y62) -->
+          <g>
+            <rect x="448" y="103" width="48" height="137" fill="#175CD3"/>
+            <rect x="448" y="62"  width="48" height="41"  fill="#2E90FA"/>
+          </g>
+          <!-- Jun: SMS 730 (h122 y118), Web 220 (h37 y81) -->
+          <g>
+            <rect x="540" y="118" width="48" height="122" fill="#175CD3"/>
+            <rect x="540" y="81"  width="48" height="37"  fill="#2E90FA"/>
+          </g>
+          <!-- x axis labels -->
+          <g font-size="11" font-family="Inter, sans-serif" fill="#667085" text-anchor="middle">
+            <text x="104" y="258">Jan</text>
+            <text x="196" y="258">Feb</text>
+            <text x="288" y="258">Mar</text>
+            <text x="380" y="258">Apr</text>
+            <text x="472" y="258">May</text>
+            <text x="564" y="258">Jun</text>
+          </g>
+        </svg>
+      </div>
+      <!-- LEGEND PANEL -->
+      <div class="rounded-card border border-gray-100 bg-gray-50/60 p-4 self-start">
+        <p class="text-xs font-semibold uppercase tracking-wide text-gray-400">Channel</p>
+        <div class="mt-3 space-y-3 text-sm">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 text-gray-700"><span class="h-2.5 w-2.5 rounded-full" style="background:#175CD3"></span>SMS</span>
+            <span class="font-semibold text-gray-900">4,210</span>
+          </div>
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 text-gray-700"><span class="h-2.5 w-2.5 rounded-full" style="background:#2E90FA"></span>Web Chat</span>
+            <span class="font-semibold text-gray-900">1,180</span>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-sm">
+          <span class="text-gray-500">Total</span>
+          <span class="font-semibold text-gray-900">5,390</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCKED / UPGRADE STATE (reference) -->
+  <p class="mock-note">Locked state (renders when the profile lacks the sms permission):</p>
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-10 mb-6" data-story="US-D3.1">
+    <div class="mx-auto max-w-md text-center">
+      <svg class="mx-auto h-12 w-12 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <rect x="5" y="11" width="14" height="9" rx="2"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke-linecap="round"/>
+        <circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none"/>
+      </svg>
+      <h3 class="mt-4 text-xl font-medium text-gray-900">Upgrade Plan</h3>
+      <p class="mt-2 text-gray-500">Please upgrade your plan to get access to Connect statistics.</p>
+      <button class="mt-5 inline-flex items-center gap-2 rounded-card bg-primary-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-600">Activate</button>
+    </div>
+  </div>
+
+  <p class="mock-note">GET /analytics/dashboard/connect?range= + …/connect/goals?date=. Gated by the sms permission. "AI Used" is a v1 placeholder — wire or remove in v2.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "dashboard", storyDomain: "analytics", back: { href: "../index.html", label: "All mockups" }, route: "/dashboard/connect", search: "Search…" });</script>
+<script>
+  (function () {
+    var group = document.getElementById("range-group");
+    if (!group || !window.OggvoShell) return;
+    OggvoShell.buttonGroup(group, {
+      active: "bg-white text-primary-700 shadow-sm",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (v) { OggvoShell.toast("Range: " + v, "primary"); }
+    });
+  })();
+</script>
+</body>
+</html>

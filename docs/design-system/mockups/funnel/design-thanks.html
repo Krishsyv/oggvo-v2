@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Funnel Designer · Thank You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+  <!-- CONTENT -->
+
+  <!-- 1. Header row -->
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Funnel Designer</h1>
+    <div class="flex items-center gap-3">
+      <div class="inline-flex items-center gap-2 bg-gray-100 rounded-card px-3 py-2 text-sm">
+        <span class="font-mono text-gray-700">oggvo.com/r/acme-co</span>
+        <button type="button" title="Copy link" class="text-gray-400 hover:text-gray-700">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <a href="funnel-public.html" class="inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+        View public funnel
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. In-page TabBar (Thank You active) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6">
+    <a href="design-main.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Main</a>
+    <a href="design-funnel.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Positive Review</a>
+    <a href="design-negative.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Negative Review</a>
+    <a href="design-thanks.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">Thank You</a>
+  </nav>
+
+  <!-- 3. Split editor -->
+  <div class="grid lg:grid-cols-5 gap-6" data-story="US-D1.4" data-ac="AC1">
+
+    <!-- LEFT: preview -->
+    <div class="lg:col-span-3" data-story="US-D1.4" data-ac="AC2">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden max-w-md mx-auto">
+        <!-- header bar -->
+        <div style="background:#1849A9" class="text-white px-4 py-3 flex items-center justify-between">
+          <span class="font-medium">Acme Co</span>
+          <span class="h-7 w-7 rounded-full bg-white/25 flex items-center justify-center text-xs font-semibold">AC</span>
+        </div>
+        <!-- body -->
+        <div class="p-8 text-center space-y-3">
+          <div class="h-14 w-14 rounded-full bg-success-100 text-success-600 grid place-items-center mx-auto">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <h2 id="preview-heading" class="text-lg font-semibold text-gray-900">Thank you!</h2>
+          <p id="preview-body" class="text-sm text-gray-600">Your feedback means a lot to us.</p>
+        </div>
+        <!-- footer bar -->
+        <div style="background:#1849A9" class="h-8 flex items-center justify-center">
+          <span class="text-white text-[11px]">Powered by OGGVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="lg:col-span-2" data-story="US-D1.4" data-ac="AC2">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-5">
+
+        <div class="border-b border-gray-100 pb-3">
+          <h2 class="text-base font-semibold text-gray-900">ThankYou Window</h2>
+          <p class="text-xs text-gray-500">This page will appear after submitting review</p>
+        </div>
+
+        <!-- Header textarea (ThankYouHeading) -->
+        <div>
+          <label class="text-sm font-medium text-gray-700" for="thanks-heading">Header</label>
+          <textarea id="thanks-heading" rows="2" placeholder="Write your thoughts here..." class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 mt-1.5">Thank you!</textarea>
+        </div>
+
+        <!-- Body textarea (ThankYouBody) -->
+        <div>
+          <label class="text-sm font-medium text-gray-700" for="thanks-body">Body</label>
+          <textarea id="thanks-body" rows="3" placeholder="Write your thoughts here..." class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 mt-1.5">Your feedback means a lot to us.</textarea>
+        </div>
+
+        <!-- Form footer -->
+        <div class="flex items-center justify-end gap-3 border-t border-gray-200 pt-4">
+          <button type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+          <button type="button" id="apply-btn" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. mock-note -->
+  <p class="mock-note mt-6">Thank-You page loads via GET /design and saves via POST /design/savecontent (ThankYouHeading / ThankYouBody fields). No platform links on this screen.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "design", storyDomain: "design-funnel", back: { href: "../index.html", label: "All mockups" }, route: "/design/thanks", search: "Search…" });
+</script>
+<script>
+  (function () {
+    var heading = document.getElementById("thanks-heading");
+    var body = document.getElementById("thanks-body");
+    var previewHeading = document.getElementById("preview-heading");
+    var previewBody = document.getElementById("preview-body");
+
+    heading.addEventListener("input", function () {
+      previewHeading.textContent = heading.value || "Thank you!";
+    });
+    body.addEventListener("input", function () {
+      previewBody.textContent = body.value || "Your feedback means a lot to us.";
+    });
+
+    document.getElementById("apply-btn").addEventListener("click", function () {
+      OggvoShell.toast("Data updated successfully!", "success");
+    });
+  })();
+</script>
+</body>
+</html>

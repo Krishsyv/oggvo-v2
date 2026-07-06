@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Template Editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6" data-story="US-A12.1" data-ac="AC1">
+    <div class="min-w-0">
+      <div class="flex items-center gap-2">
+        <span class="badge bg-success-100 text-success-700" id="tpl-status-badge"><span class="badge-dot"></span>Active</span>
+        <h1 id="tpl-title" class="text-2xl font-semibold text-gray-900 truncate">Monthly Newsletter — Spring</h1>
+      </div>
+      <p id="tpl-subject" class="text-sm text-gray-500 mt-1 truncate">Subject: What's new this month</p>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <a href="admin.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+        Templates
+      </a>
+      <button data-open="m-properties" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v2m0 12v2m8-8h-2M6 12H4m13.7-5.7l-1.4 1.4M7.7 16.3l-1.4 1.4m11.4 0l-1.4-1.4M7.7 7.7L6.3 6.3"/></svg>
+        Properties
+      </button>
+      <button id="test-btn" data-open="m-test" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+        Send a test
+      </button>
+      <button id="save-btn" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l14-7-5 14-2.5-5.5L5 12z"/></svg>
+        Save
+      </button>
+    </div>
+  </div>
+
+  <!-- Type switch -->
+  <div class="flex items-center gap-3 mb-4" data-story="US-A12.1" data-ac="AC2">
+    <span class="text-sm text-gray-500">Editing mode</span>
+    <div id="type-group" class="inline-flex items-center bg-gray-100 rounded-card p-0.5">
+      <button type="button" data-value="email" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] bg-white text-primary-700 shadow-card">Drag-drop (Email)</button>
+      <button type="button" data-value="sms" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">SMS</button>
+    </div>
+    <span class="text-xs text-gray-400">Non-SMS templates use the visual editor; SMS uses the plain composer.</span>
+  </div>
+
+  <!-- ============ DRAG-DROP EDITOR (email/newsletter) ============ -->
+  <div id="editor-email" class="flex flex-col lg:flex-row gap-4 items-start">
+
+    <!-- Blocks palette -->
+    <aside class="w-full lg:w-52 shrink-0 bg-white border border-gray-200 rounded-card shadow-card p-3">
+      <h3 class="text-xs uppercase tracking-wide text-gray-500 mb-2 px-1">Blocks</h3>
+      <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></svg>Text</button>
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path stroke-linecap="round" d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.3"/></svg>Image</button>
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="9" width="14" height="6" rx="3"/></svg>Button</button>
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 12h16"/></svg>Divider</button>
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="4" y="5" width="7" height="14" rx="1.5"/><rect x="13" y="5" width="7" height="14" rx="1.5"/></svg>Columns</button>
+        <button class="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-card border border-gray-200 hover:bg-gray-50 hover:border-gray-300"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="17" cy="18" r="2.4"/><path stroke-linecap="round" d="M8.3 10.9l6.4-3.5m0 9.2L8.3 13.1"/></svg>Social</button>
+      </div>
+      <p class="mock-note mt-3">Drag onto the canvas.</p>
+    </aside>
+
+    <!-- Canvas -->
+    <div class="flex-1 w-full">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-medium text-gray-900">Canvas</h3>
+          <div class="inline-flex items-center bg-gray-100 rounded-card p-0.5">
+            <button class="px-2.5 py-1 text-xs font-medium rounded-[0.5rem] bg-white text-primary-700 shadow-card">Desktop</button>
+            <button class="px-2.5 py-1 text-xs font-medium rounded-[0.5rem] text-gray-500">Mobile</button>
+          </div>
+        </div>
+        <div class="mx-auto max-w-xl border border-dashed border-gray-200 rounded-card p-4 space-y-3 bg-gray-50">
+          <!-- header block -->
+          <div class="group relative bg-white rounded-card border border-gray-200 p-4 text-center">
+            <div class="h-8 w-24 mx-auto rounded bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white">LOGO</div>
+          </div>
+          <!-- heading -->
+          <div class="group relative bg-white rounded-card border border-gray-200 p-4">
+            <div class="h-4 w-2/3 rounded bg-gray-200 mb-2"></div>
+            <div class="h-3 w-full rounded bg-gray-100 mb-1.5"></div>
+            <div class="h-3 w-5/6 rounded bg-gray-100"></div>
+          </div>
+          <!-- image -->
+          <div class="group relative bg-white rounded-card border border-gray-200 p-4">
+            <div class="aspect-[16/7] w-full rounded bg-gray-100 grid place-items-center text-gray-300"><svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path stroke-linecap="round" d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.3"/></svg></div>
+          </div>
+          <!-- button -->
+          <div class="group relative bg-white rounded-card border border-primary-300 ring-2 ring-primary-100 p-4 text-center">
+            <span class="inline-flex items-center px-5 py-2 rounded-card bg-primary-500 text-white text-sm font-medium">Read more</span>
+            <span class="absolute top-2 right-2 text-[10px] font-medium text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded">Selected</span>
+          </div>
+          <!-- drop hint -->
+          <div class="border border-dashed border-primary-300 rounded-card p-4 text-center text-xs font-medium text-primary-500 bg-primary-50/50">Drop a block here</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SMS COMPOSER ============ -->
+  <div id="editor-sms" class="hidden">
+    <div class="max-w-2xl bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-center justify-between mb-2">
+        <label for="sms-body" class="text-sm font-medium text-gray-700">Message</label>
+        <div class="relative">
+          <button id="ph-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            Add placeholder
+            <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="ph-menu" class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 z-30">
+            <button type="button" data-token="[[first_name]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[first_name]]</span><span class="text-xs text-gray-400">First name</span></button>
+            <button type="button" data-token="[[last_name]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[last_name]]</span><span class="text-xs text-gray-400">Last name</span></button>
+            <button type="button" data-token="[[profile_name]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[profile_name]]</span><span class="text-xs text-gray-400">Business</span></button>
+            <button type="button" data-token="[[profile_url]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[profile_url]]</span><span class="text-xs text-gray-400">Link</span></button>
+            <button type="button" data-token="[[profile_short_url]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[profile_short_url]]</span><span class="text-xs text-gray-400">Short link</span></button>
+          </div>
+        </div>
+      </div>
+      <textarea id="sms-body" rows="8" maxlength="1600" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y">Hi [[first_name]], it's [[profile_name]]! We'd love your feedback — leave us a quick review: [[profile_short_url]]</textarea>
+      <div class="flex items-center justify-between mt-1.5">
+        <span class="text-xs text-gray-400">Messages over 160 characters may be segmented on arrival.</span>
+        <span id="sms-count" class="text-xs text-gray-400">0/1600</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/templates/:id loads props + design JSON. Save → PUT /admin/templates/:id { Name, Subject, Body, DesignJson } (SMS) or the drag-drop editor payload (non-SMS). Test send → POST /admin/templates/:id/test (enqueued <code>email</code>). Thumbnail render → POST /admin/templates/:id/image (enqueued image-render job — off the request thread; use headless render with <code>--load-error-handling ignore</code> semantics so one 404 asset can't fail the whole image).</p>
+
+  <!-- ============ TEMPLATE CATEGORIES MANAGER ============ -->
+  <section class="mt-10" data-story="US-A12.2" data-ac="AC1">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900">Template categories</h2>
+        <p class="text-sm text-gray-500 mt-0.5">Group the shared template library so accounts can find vetted content.</p>
+      </div>
+      <button data-open="m-category" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add category
+      </button>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+            <tr class="text-left">
+              <th class="px-4 py-3 font-medium">Name</th>
+              <th class="px-4 py-3 font-medium">Type</th>
+              <th class="px-4 py-3 font-medium">Status</th>
+              <th class="px-4 py-3 font-medium text-center">Templates</th>
+              <th class="px-4 py-3 font-medium">Created</th>
+              <th class="w-16 px-4 py-3 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 font-semibold text-gray-900">Review</td>
+              <td class="px-4 py-3 text-gray-600">Email</td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 text-center tabular-nums text-gray-700">12</td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jan 14, 2024</td>
+              <td class="px-4 py-3 text-right relative"><button data-cat-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 font-semibold text-gray-900">Marketing</td>
+              <td class="px-4 py-3 text-gray-600">Newsletter</td>
+              <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+              <td class="px-4 py-3 text-center tabular-nums text-gray-700">8</td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">Mar 02, 2024</td>
+              <td class="px-4 py-3 text-right relative"><button data-cat-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 font-semibold text-gray-900">Lifecycle</td>
+              <td class="px-4 py-3 text-gray-600">Birthday</td>
+              <td class="px-4 py-3"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Inactive</span></td>
+              <td class="px-4 py-3 text-center tabular-nums text-gray-700">3</td>
+              <td class="px-4 py-3 whitespace-nowrap text-gray-600">May 19, 2024</td>
+              <td class="px-4 py-3 text-right relative"><button data-cat-menu title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="mock-note mt-4">GET /admin/template-categories?query,page,dates[] · CRUD via POST / PUT / DELETE /admin/template-categories[/:id]. Fix-on-rebuild: v1 <code>NewsletterCategory::delete</code> swallowed its error (missing <code>return</code> on <code>fail</code>) — v2 returns a proper status.</p>
+  </section>
+
+  <!-- Category actions menu -->
+  <div data-cat-row-menu class="hidden fixed z-40 w-44 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 text-sm">
+    <button data-open="m-category" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4 11.5-11.5Z"/></svg>Edit</button>
+    <button data-open="m-delete-cat" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-error-600 rounded-lg hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5h6v2m-8 0l1 12h8l1-12"/></svg>Delete</button>
+  </div>
+
+  <!-- Properties modal -->
+  <div id="m-properties" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Template properties</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Name</span><input id="prop-name" type="text" value="Monthly Newsletter — Spring" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Subject</span><input id="prop-subject" type="text" value="What's new this month" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="block font-medium text-gray-700 mb-1">Type</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>Newsletter</option><option>Email</option><option>SMS</option><option>Birthday</option><option>Anniversary</option><option>ThankYou</option></select></label>
+          <label class="block"><span class="block font-medium text-gray-700 mb-1">Category</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>Marketing</option><option>Review</option><option>Lifecycle</option></select></label>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-sm font-medium text-gray-700">Active</span>
+          <button id="prop-active" type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close id="prop-save" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save properties</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test send modal -->
+  <div id="m-test" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-A12.1" data-ac="AC3">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Send a test</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Recipient email</span><input type="email" value="alicia@oggvo.com" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <p class="text-xs text-gray-400">Merge tags render with sample data. The test is enqueued on the <code class="font-mono">email</code> queue, not sent inline.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Test send queued" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Send test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/edit category modal -->
+  <div id="m-category" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Template category</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Name</span><input type="text" placeholder="Seasonal" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Type</span><select class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"><option>Email</option><option>SMS</option><option>Newsletter</option><option>Birthday</option></select></label>
+        <div class="flex items-center justify-between pt-1"><span class="text-sm font-medium text-gray-700">Active</span>
+          <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Category saved" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save category</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete category confirm -->
+  <div id="m-delete-cat" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Delete category?</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-600">Templates in this category are not deleted — they become uncategorised. This can't be undone.</div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Category deleted" data-tone="error" class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "admin", storyDomain: "admin", back: { href: "admin.html", label: "Admin Console" }, route: "/admin/templates/:id", search: "Search templates…" });</script>
+<script>
+(function () {
+  // ---- editor type switch ----
+  OggvoShell.buttonGroup(document.getElementById("type-group"), {
+    active: "bg-white text-primary-700 shadow-card", inactive: "text-gray-500",
+    onChange: function (v) {
+      var sms = v === "sms";
+      document.getElementById("editor-email").classList.toggle("hidden", sms);
+      document.getElementById("editor-sms").classList.toggle("hidden", !sms);
+      document.getElementById("test-btn").classList.toggle("hidden", sms); // v1: test send hidden for SMS
+    }
+  });
+
+  // ---- sms char count ----
+  var body = document.getElementById("sms-body");
+  function count() { document.getElementById("sms-count").textContent = body.value.length + "/1600"; }
+  body.addEventListener("input", count); count();
+
+  // ---- placeholder menu ----
+  var phBtn = document.getElementById("ph-btn");
+  var phMenu = document.getElementById("ph-menu");
+  phBtn.addEventListener("click", function (e) { e.stopPropagation(); phMenu.classList.toggle("hidden"); });
+  phMenu.querySelectorAll(".ph-item").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var token = b.getAttribute("data-token");
+      var start = body.selectionStart || body.value.length;
+      body.value = body.value.slice(0, start) + token + body.value.slice(body.selectionEnd || start);
+      phMenu.classList.add("hidden"); body.focus(); count();
+    });
+  });
+
+  // ---- switches (properties + category modals) ----
+  function wireSwitch(sw) {
+    sw.addEventListener("click", function () {
+      var on = sw.getAttribute("aria-checked") === "true";
+      var knob = sw.querySelector(".ds-knob");
+      sw.setAttribute("aria-checked", on ? "false" : "true");
+      sw.classList.toggle("bg-primary-500", !on);
+      sw.classList.toggle("bg-gray-300", on);
+      knob.classList.toggle("translate-x-5", !on);
+      knob.classList.toggle("translate-x-0.5", on);
+    });
+  }
+  document.querySelectorAll(".ds-switch").forEach(wireSwitch);
+
+  // ---- category row menu ----
+  var catMenu = document.querySelector("[data-cat-row-menu]");
+  function closeCatMenu() { catMenu.classList.add("hidden"); }
+  document.querySelectorAll("[data-cat-menu]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var wasOpen = !catMenu.classList.contains("hidden");
+      closeCatMenu();
+      if (wasOpen) return;
+      var r = btn.getBoundingClientRect();
+      catMenu.classList.remove("hidden");
+      catMenu.style.top = (r.bottom + 6) + "px";
+      catMenu.style.left = Math.max(8, r.right - catMenu.offsetWidth) + "px";
+    });
+  });
+
+  // ---- modals ----
+  function closeModals() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+  document.addEventListener("click", function (e) {
+    var opener = e.target.closest("[data-open]");
+    if (opener) { var m = document.getElementById(opener.getAttribute("data-open")); if (m) { closeCatMenu(); m.classList.remove("hidden"); } return; }
+    if (e.target.closest("[data-close]")) {
+      var t = e.target.closest("[data-toast]");
+      if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+      closeModals();
+      return;
+    }
+    var t2 = e.target.closest("[data-toast]");
+    if (t2) OggvoShell.toast(t2.getAttribute("data-toast"), t2.getAttribute("data-tone") || "success");
+  });
+  [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+  });
+
+  // ---- properties save reflects to header ----
+  document.getElementById("prop-save").addEventListener("click", function () {
+    document.getElementById("tpl-title").textContent = document.getElementById("prop-name").value;
+    document.getElementById("tpl-subject").textContent = "Subject: " + document.getElementById("prop-subject").value;
+    var active = document.getElementById("prop-active").getAttribute("aria-checked") === "true";
+    var badge = document.getElementById("tpl-status-badge");
+    badge.className = "badge " + (active ? "bg-success-100 text-success-700" : "bg-error-100 text-error-700");
+    badge.innerHTML = '<span class="badge-dot"></span>' + (active ? "Active" : "Inactive");
+    OggvoShell.toast("Properties updated", "success");
+  });
+
+  // ---- save ----
+  document.getElementById("save-btn").addEventListener("click", function () { OggvoShell.toast("Template saved", "success"); });
+
+  // ---- dismiss ----
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("[data-cat-row-menu]") && !e.target.closest("[data-cat-menu]")) closeCatMenu();
+    if (!e.target.closest("#ph-menu") && !e.target.closest("#ph-btn")) phMenu.classList.add("hidden");
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeCatMenu(); closeModals(); phMenu.classList.add("hidden"); } });
+  window.addEventListener("scroll", closeCatMenu, true);
+})();
+</script>
+</body></html>

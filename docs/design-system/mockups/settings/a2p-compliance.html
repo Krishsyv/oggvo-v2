@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · A2P Compliance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex items-start justify-between gap-6 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Messaging Compliance</h1>
+      <p class="mt-1 text-sm text-gray-500">Complete A2P 10DLC registration (or toll-free verification) so US/Canada carriers deliver your business SMS instead of filtering it.</p>
+    </div>
+    <a href="#" data-path-fallback class="shrink-0 inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z"/></svg>
+      Need the toll-free fallback?
+    </a>
+  </div>
+
+  <div class="max-w-3xl space-y-5">
+
+    <!-- Compliance path toggle: A2P 10DLC vs Toll-Free -->
+    <section data-story="US-2.1" class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <div class="min-w-0">
+          <h2 class="text-sm font-semibold text-gray-900">Compliance path</h2>
+          <p data-path-desc class="mt-1 text-sm text-gray-500">A2P 10DLC is the primary path — a guided KYC wizard that registers your brand and campaign use-case with US carriers.</p>
+        </div>
+        <div data-path-toggle class="inline-flex shrink-0 rounded-card border border-gray-300 bg-gray-50 p-0.5">
+          <button type="button" data-value="10dlc" aria-selected="true" class="h-8 px-3 rounded-[6px] text-sm font-medium bg-white text-primary-700 shadow-card">A2P 10DLC</button>
+          <button type="button" data-value="tollfree" aria-selected="false" class="h-8 px-3 rounded-[6px] text-sm font-medium text-gray-500">Toll-Free</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stepper / progress -->
+    <section data-story="US-1.1" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <ol data-stepper class="flex items-center">
+        <!-- Step 1: Business Profile — completed -->
+        <li data-step="1" data-goto="1" class="flex items-center gap-3 cursor-pointer select-none">
+          <span data-step-marker class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-success-100 text-success-700">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div class="leading-tight">
+            <div data-step-title class="text-sm font-medium text-gray-900">Business Profile</div>
+            <span data-step-state class="inline-flex items-center text-xs font-medium text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500"></span>Completed</span>
+          </div>
+        </li>
+        <span class="mx-4 h-px flex-1 bg-gray-200"></span>
+
+        <!-- Step 2: Brand Registration — completed -->
+        <li data-step="2" data-goto="2" class="flex items-center gap-3 cursor-pointer select-none">
+          <span data-step-marker class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-success-100 text-success-700">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div class="leading-tight">
+            <div data-step-title class="text-sm font-medium text-gray-900">Brand Registration</div>
+            <span data-step-state class="inline-flex items-center text-xs font-medium text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500"></span>Approved</span>
+          </div>
+        </li>
+        <span class="mx-4 h-px flex-1 bg-gray-200"></span>
+
+        <!-- Step 3: Campaign Use-Case — current -->
+        <li data-step="3" data-goto="3" class="flex items-center gap-3 cursor-pointer select-none">
+          <span data-step-marker class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-primary-600 ring-2 ring-primary-500 text-sm font-semibold">3</span>
+          <div class="leading-tight">
+            <div data-step-title class="text-sm font-medium text-gray-900">Campaign Use-Case</div>
+            <span data-step-state class="inline-flex items-center text-xs font-medium text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500"></span>In progress</span>
+          </div>
+        </li>
+        <span class="mx-4 h-px flex-1 bg-gray-200"></span>
+
+        <!-- Step 4: Verification — pending -->
+        <li data-step="4" data-goto="4" class="flex items-center gap-3 cursor-pointer select-none">
+          <span data-step-marker class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-400 text-sm font-semibold">4</span>
+          <div class="leading-tight">
+            <div data-step-title class="text-sm font-medium text-gray-500">Verification</div>
+            <span data-step-state class="inline-flex items-center text-xs font-medium text-gray-500"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-300"></span>Pending</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Status summary card -->
+    <section data-story="US-1.7" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-sm font-semibold text-gray-900">Current verification</h2>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>In review</span>
+          </div>
+          <p class="mt-1.5 text-sm text-gray-500">Submitted <span class="font-medium text-gray-700">Jun 18, 2026</span> · brand approved, campaign use-case awaiting carrier review.</p>
+          <p class="mt-1 text-sm text-gray-500">Expected timeline: carrier vetting typically completes in <span class="font-medium text-gray-700">1–3 business days</span>. Statuses update automatically via Twilio webhooks — no need to refresh.</p>
+        </div>
+        <button type="button" data-toast="Refreshing status — statuses sync automatically via Twilio webhooks" data-tone="primary" class="shrink-0 inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          Refresh status
+        </button>
+      </div>
+
+      <!-- compact status grid -->
+      <dl class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3 border-t border-gray-200 pt-4">
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-400">Brand status</dt>
+          <dd class="mt-1"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500"></span>Approved</span></dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-400">Campaign status</dt>
+          <dd class="mt-1"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>In review</span></dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-400">Customer profile SID</dt>
+          <dd class="mt-1 text-sm font-mono text-gray-700">BU2e90fa…d4ce</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Step 1 panel: Business Profile -->
+    <section data-step-panel="1" data-story="US-1.3" data-ac="AC1" class="hidden bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Step 1 · Create your business profile</h2>
+        <p class="mt-1 text-sm text-gray-500">Twilio TrustHub KYC. Enter your legal business identity exactly as it appears on your EIN / CP575 letter.</p>
+      </div>
+      <form data-step-form data-toast-msg="Business profile saved" data-tone="success" data-next="2" class="p-5 space-y-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label for="bp_name" class="text-sm font-medium text-gray-700">Legal business name</label>
+            <input id="bp_name" type="text" value="Acme Auto Care LLC" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div>
+            <label for="bp_type" class="text-sm font-medium text-gray-700">Business type</label>
+            <select id="bp_type" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+              <option selected>Limited Liability Corporation</option>
+              <option>Corporation</option>
+              <option>Partnership</option>
+              <option>Co-operative</option>
+              <option>Non-profit Corporation</option>
+            </select>
+          </div>
+          <div>
+            <label for="bp_ein" class="text-sm font-medium text-gray-700">EIN / registration number</label>
+            <input id="bp_ein" type="text" value="84-1234567" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div>
+            <label for="bp_industry" class="text-sm font-medium text-gray-700">Industry</label>
+            <select id="bp_industry" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+              <option selected>AUTOMOTIVE</option>
+              <option>HEALTHCARE</option>
+              <option>TECHNOLOGY</option>
+              <option>BANKING</option>
+              <option>NOT_FOR_PROFIT</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="bp_web" class="text-sm font-medium text-gray-700">Website URL</label>
+            <input id="bp_web" type="url" value="https://acmeautocare.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="bp_street" class="text-sm font-medium text-gray-700">Street address</label>
+            <input id="bp_street" type="text" value="120 Main St" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div>
+            <label for="bp_city" class="text-sm font-medium text-gray-700">City</label>
+            <input id="bp_city" type="text" value="Austin" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="bp_region" class="text-sm font-medium text-gray-700">State</label>
+              <input id="bp_region" type="text" maxlength="2" value="TX" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+            <div>
+              <label for="bp_zip" class="text-sm font-medium text-gray-700">Postal code</label>
+              <input id="bp_zip" type="text" value="78701" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-3 border-t border-gray-200 pt-5">
+          <button type="button" data-toast="Verification reset — the wizard will restart from step 1" data-tone="error" class="inline-flex items-center gap-2 h-10 px-4 rounded-card text-sm font-medium text-error-700 hover:bg-error-100">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Reset verification
+          </button>
+          <div class="flex items-center gap-3">
+            <a href="settings.html" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
+            <button type="submit" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Save &amp; continue</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Step 2 panel: Brand Registration -->
+    <section data-step-panel="2" data-story="US-1.6" data-ac="AC1" class="hidden bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between gap-3">
+        <div>
+          <h2 class="text-sm font-semibold text-gray-900">Step 2 · Register your A2P brand</h2>
+          <p class="mt-1 text-sm text-gray-500">Brand registration is created together with your A2P trust product and vetted by The Campaign Registry.</p>
+        </div>
+        <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500"></span>Approved</span>
+      </div>
+      <form data-step-form data-toast-msg="Brand registration submitted" data-tone="success" data-next="3" class="p-5 space-y-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label for="br_brand" class="text-sm font-medium text-gray-700">Brand name</label>
+            <input id="br_brand" type="text" value="Acme Auto Care" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div>
+            <label for="br_company" class="text-sm font-medium text-gray-700">Company type</label>
+            <select id="br_company" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+              <option selected>Private</option>
+              <option>Public</option>
+              <option>Non-profit</option>
+              <option>Government</option>
+            </select>
+          </div>
+        </div>
+        <div class="rounded-card border border-gray-200 bg-gray-50 p-4 text-sm text-gray-500">
+          Brand SID <span class="font-mono text-gray-700">BN1a2b3c…9f0e</span> · vetting score <span class="font-medium text-gray-700">75</span>. Standard vetting complete — no secondary vetting required.
+        </div>
+        <div class="flex items-center justify-between gap-3 border-t border-gray-200 pt-5">
+          <button type="button" data-goto="1" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Back</button>
+          <div class="flex items-center gap-3">
+            <a href="settings.html" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
+            <button type="submit" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Save &amp; continue</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Step 3 panel: Campaign Use-Case -->
+    <section data-step-panel="3" data-story="US-1.8" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Step 3 · Register your campaign use-case</h2>
+        <p class="mt-1 text-sm text-gray-500">Describe how your business messages contacts. Carriers use this to approve your A2P traffic.</p>
+      </div>
+
+      <form data-step-form data-toast-msg="Campaign use-case submitted — pending review" data-tone="primary" data-next="4" class="p-5 space-y-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label for="business_name" class="text-sm font-medium text-gray-700">Business name</label>
+            <input id="business_name" type="text" value="Acme Auto Care" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+            <p class="mt-1 text-xs text-gray-400">Exact legal name as on your EIN / CP575 letter.</p>
+          </div>
+          <div>
+            <label for="ein" class="text-sm font-medium text-gray-700">EIN / Business registration number</label>
+            <input id="ein" type="text" value="84-1234567" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="website" class="text-sm font-medium text-gray-700">Website URL</label>
+            <input id="website" type="url" value="https://acmeautocare.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+          </div>
+          <div>
+            <label for="usecase" class="text-sm font-medium text-gray-700">Use case</label>
+            <select id="usecase" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+              <option>Customer care</option>
+              <option selected>Marketing</option>
+              <option>Account notification</option>
+              <option>Delivery notification</option>
+              <option>2FA</option>
+              <option>Low volume mixed</option>
+            </select>
+          </div>
+          <div>
+            <label for="volume" class="text-sm font-medium text-gray-700">Expected monthly volume</label>
+            <select id="volume" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+              <option>Up to 1,000</option>
+              <option selected>1,000 – 10,000</option>
+              <option>10,000 – 100,000</option>
+              <option>100,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="optin" class="text-sm font-medium text-gray-700">Opt-in description (how recipients consent)</label>
+          <textarea id="optin" rows="3" class="mt-1.5 w-full px-3 py-2 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">Customers opt in at checkout and on our website contact form by checking a consent box agreeing to receive service reminders and review requests via SMS. Confirmation message sent on sign-up.</textarea>
+          <p class="mt-1 text-xs text-gray-400">40–2048 characters.</p>
+        </div>
+
+        <div>
+          <label for="samples" class="text-sm font-medium text-gray-700">Sample messages</label>
+          <textarea id="samples" rows="4" class="mt-1.5 w-full px-3 py-2 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">1. Hi Jane, your oil change at Acme Auto Care is due. Reply YES to book or STOP to opt out.
+2. Thanks for visiting Acme Auto Care! Tap https://acme.co/rv to leave us a review. Reply STOP to opt out.</textarea>
+          <p class="mt-1 text-xs text-gray-400">Provide 2 real samples, 20–1024 chars each. Do not use template placeholders like [[name]] or {{name}}.</p>
+        </div>
+
+        <div class="flex items-center gap-6 pt-1">
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            Messages include embedded links
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            Messages include phone numbers
+          </label>
+        </div>
+
+        <div class="flex items-center justify-between gap-3 border-t border-gray-200 pt-5">
+          <div class="flex items-center gap-2" data-story="US-1.9" data-ac="AC1">
+            <button type="button" data-goto="2" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Back</button>
+            <button type="button" data-toast="Verification reset — the wizard will restart from step 1" data-tone="error" class="inline-flex items-center gap-2 h-10 px-4 rounded-card text-sm font-medium text-error-700 hover:bg-error-100">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Reset verification
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="settings.html" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
+            <button type="submit" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              Submit for review
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Step 4 panel: Verification / carrier review -->
+    <section data-step-panel="4" data-story="US-3.2" data-ac="AC1" class="hidden bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Step 4 · Carrier verification</h2>
+        <p class="mt-1 text-sm text-gray-500">Your campaign use-case is registered and awaiting carrier review. No further action is required.</p>
+      </div>
+      <div class="p-5 space-y-5">
+        <div class="flex items-start gap-3 rounded-card border border-warning-100 bg-warning-100/40 p-4">
+          <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-warning-100 text-warning-700">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/></svg>
+          </span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">Under carrier review</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500"></span>In review</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-500">Vetting typically completes in 1–3 business days. The status updates automatically via Twilio webhooks — you can leave this page.</p>
+          </div>
+        </div>
+        <dl class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div>
+            <dt class="text-xs uppercase tracking-wide text-gray-400">Campaign SID</dt>
+            <dd class="mt-1 text-sm font-mono text-gray-700">CM7f21ab…8c0d</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wide text-gray-400">Messaging service</dt>
+            <dd class="mt-1 text-sm font-mono text-gray-700">MG55d0…e19a</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wide text-gray-400">Submitted</dt>
+            <dd class="mt-1 text-sm text-gray-700">Jun 18, 2026</dd>
+          </div>
+        </dl>
+        <div class="flex items-center justify-between gap-3 border-t border-gray-200 pt-5">
+          <button type="button" data-goto="3" class="inline-flex items-center h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Back</button>
+          <div class="flex items-center gap-3">
+            <button type="button" data-toast="Refreshing status — statuses sync automatically via Twilio webhooks" data-tone="primary" class="inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+              Refresh status
+            </button>
+            <a href="../dashboard/dashboard-funnel.html" class="inline-flex items-center h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Go to dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="mock-note">Wizard state loads from GET /messaging/compliance (step ordinal). Campaign step submits POST /messaging/compliance/campaign; brand gating via GET /messaging/compliance/brand; reset via POST /messaging/compliance/reset. Brand/campaign and toll-free statuses update asynchronously via the verification-status webhook POST /integrations/twilio/tollfree/status (and the per-profile brand/campaign callback) — the UI is read-only over them.</p>
+
+  </div>
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "settings", storyDomain: "compliance", back: { href: "settings.html", label: "Back to Settings" }, route: "/settings/compliance", search: "Search…" });</script>
+<script>
+  (function () {
+    var CHECK = '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    var steps = [
+      { n: 1, done: true, doneLabel: "Completed" },
+      { n: 2, done: true, doneLabel: "Approved" },
+      { n: 3, done: false },
+      { n: 4, done: false },
+    ];
+    var current = 3;
+
+    function paintStepper() {
+      steps.forEach(function (s) {
+        var li = document.querySelector('[data-step="' + s.n + '"]');
+        if (!li) return;
+        var marker = li.querySelector("[data-step-marker]");
+        var title = li.querySelector("[data-step-title]");
+        var state = li.querySelector("[data-step-state]");
+        var isCurrent = s.n === current;
+        if (s.done) {
+          marker.className = "inline-flex h-8 w-8 items-center justify-center rounded-full bg-success-100 text-success-700" + (isCurrent ? " ring-2 ring-primary-500" : "");
+          marker.innerHTML = CHECK;
+          title.className = "text-sm font-medium text-gray-900";
+          state.className = "inline-flex items-center text-xs font-medium text-success-700";
+          state.innerHTML = '<span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500"></span>' + s.doneLabel;
+        } else if (isCurrent) {
+          marker.className = "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-primary-600 ring-2 ring-primary-500 text-sm font-semibold";
+          marker.textContent = s.n;
+          title.className = "text-sm font-medium text-gray-900";
+          state.className = "inline-flex items-center text-xs font-medium text-primary-700";
+          state.innerHTML = '<span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500"></span>In progress';
+        } else {
+          marker.className = "inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-400 text-sm font-semibold";
+          marker.textContent = s.n;
+          title.className = "text-sm font-medium text-gray-500";
+          state.className = "inline-flex items-center text-xs font-medium text-gray-500";
+          state.innerHTML = '<span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-300"></span>Pending';
+        }
+      });
+    }
+
+    function showStep(n) {
+      current = n;
+      [].slice.call(document.querySelectorAll("[data-step-panel]")).forEach(function (p) {
+        p.classList.toggle("hidden", p.getAttribute("data-step-panel") !== String(n));
+      });
+      paintStepper();
+    }
+
+    // Stepper items + Back/Continue buttons (delegated)
+    document.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-goto]");
+      if (g) { e.preventDefault(); showStep(parseInt(g.getAttribute("data-goto"), 10)); return; }
+      var t = e.target.closest("[data-toast]");
+      if (t) { e.preventDefault(); OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success"); }
+    });
+
+    // Form submits (capture — submit does not bubble)
+    document.addEventListener("submit", function (e) {
+      var form = e.target.closest("[data-step-form]");
+      if (!form) return;
+      e.preventDefault();
+      OggvoShell.toast(form.getAttribute("data-toast-msg"), form.getAttribute("data-tone") || "success");
+      var next = form.getAttribute("data-next");
+      if (next) setTimeout(function () { showStep(parseInt(next, 10)); }, 400);
+    }, true);
+
+    // Compliance path segmented toggle (10DLC vs Toll-Free)
+    var desc = document.querySelector("[data-path-desc]");
+    var pathCopy = {
+      "10dlc": "A2P 10DLC is the primary path — a guided KYC wizard that registers your brand and campaign use-case with US carriers.",
+      "tollfree": "Toll-Free verification is the fallback path — a Twilio-hosted compliance form for a dedicated toll-free number, used when 10DLC is blocked.",
+    };
+    var pathGroup = OggvoShell.buttonGroup(document.querySelector("[data-path-toggle]"), {
+      active: "bg-white text-primary-700 shadow-card",
+      inactive: "text-gray-500",
+      onChange: function (v) {
+        if (desc) desc.textContent = pathCopy[v] || "";
+        OggvoShell.toast(v === "tollfree" ? "Switched to Toll-Free verification path" : "Switched to A2P 10DLC path", "primary");
+      },
+    });
+
+    // Header "Need the toll-free fallback?" → select toll-free path
+    var fallback = document.querySelector("[data-path-fallback]");
+    if (fallback) fallback.addEventListener("click", function (e) { e.preventDefault(); pathGroup.select("tollfree"); });
+
+    showStep(current);
+  })();
+</script>
+</body>
+</html>

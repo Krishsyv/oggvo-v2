@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin Notifications</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-semibold text-gray-900">Notifications</h1>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+          OGGVO_ADMIN
+        </span>
+      </div>
+      <p class="text-sm text-gray-500 mt-1">Platform-wide announcements and broadcasts across every account you oversee.</p>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <a href="admin.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+        Admin Console
+      </a>
+      <button data-open="m-broadcast" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        New broadcast
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. KPI row -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-story="US-A9.1" data-ac="AC1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between"><span class="text-xs uppercase tracking-wide text-gray-500">Sent (30d)</span><span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l14-7-5 14-2.5-5.5L5 12z"/></svg></span></div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">48</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between"><span class="text-xs uppercase tracking-wide text-gray-500">Scheduled</span><span class="inline-grid place-items-center h-8 w-8 rounded-card bg-warning-100 text-warning-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l2.5 2"/></svg></span></div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">6</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between"><span class="text-xs uppercase tracking-wide text-gray-500">Recipients reached</span><span class="inline-grid place-items-center h-8 w-8 rounded-card bg-success-100 text-success-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 14a4 4 0 10-8 0m12.5 4a3.5 3.5 0 00-3-3.4m-11 3.4a3.5 3.5 0 013-3.4"/></svg></span></div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">18.4k</div>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between"><span class="text-xs uppercase tracking-wide text-gray-500">Registered devices</span><span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path stroke-linecap="round" d="M11 18h2"/></svg></span></div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2">9,271</div>
+    </div>
+  </div>
+
+  <!-- 2. Search + filters -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4" data-story="US-A9.1" data-ac="AC2">
+    <div class="relative flex-1 max-w-sm">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="notif-search" type="text" placeholder="Search broadcasts by name or title…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="notif-channel" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All channels</option>
+      <option value="Push">Push</option>
+      <option value="Email">Email</option>
+      <option value="In-app">In-app</option>
+    </select>
+    <select id="notif-status" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All statuses</option>
+      <option value="sent">Sent</option>
+      <option value="scheduled">Scheduled</option>
+      <option value="draft">Draft</option>
+    </select>
+  </div>
+
+  <!-- 3. Notifications table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-A9.1" data-ac="AC3">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Broadcast</th>
+            <th class="px-4 py-3 font-medium">Channel</th>
+            <th class="px-4 py-3 font-medium">Audience</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="px-4 py-3 font-medium text-right">Recipients</th>
+            <th class="px-4 py-3 font-medium">When</th>
+            <th class="w-16 px-4 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="notif-tbody" class="divide-y divide-gray-100">
+
+          <tr class="hover:bg-gray-50" data-channel="Push" data-status="sent">
+            <td class="px-4 py-3 align-top"><span class="block font-semibold text-gray-900">New review widgets released</span><span class="block text-xs text-gray-500">Check out the refreshed widget gallery</span></td>
+            <td class="px-4 py-3 align-top"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Push</span></td>
+            <td class="px-4 py-3 align-top text-gray-600">All accounts</td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Sent</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">9,102</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jun 28, 2026 · 9:00 AM</td>
+            <td class="px-4 py-3 align-top text-right relative"><button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-channel="Email" data-status="scheduled">
+            <td class="px-4 py-3 align-top"><span class="block font-semibold text-gray-900">Scheduled maintenance window</span><span class="block text-xs text-gray-500">Portal read-only Sat 02:00–04:00 ET</span></td>
+            <td class="px-4 py-3 align-top"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Email</span></td>
+            <td class="px-4 py-3 align-top text-gray-600">Growth &amp; Enterprise</td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Scheduled</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">431</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jul 11, 2026 · 8:00 AM</td>
+            <td class="px-4 py-3 align-top text-right relative"><button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-channel="In-app" data-status="sent">
+            <td class="px-4 py-3 align-top"><span class="block font-semibold text-gray-900">Toll-free verification now live</span><span class="block text-xs text-gray-500">Provision a compliant SMS sender</span></td>
+            <td class="px-4 py-3 align-top"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">In-app</span></td>
+            <td class="px-4 py-3 align-top text-gray-600">Active accounts</td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Sent</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-700">1,047</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jun 20, 2026 · 1:30 PM</td>
+            <td class="px-4 py-3 align-top text-right relative"><button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-channel="Push" data-status="draft">
+            <td class="px-4 py-3 align-top"><span class="block font-semibold text-gray-900">Summer referral bonus</span><span class="block text-xs text-gray-500">Draft — audience not finalised</span></td>
+            <td class="px-4 py-3 align-top"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Push</span></td>
+            <td class="px-4 py-3 align-top text-gray-600">—</td>
+            <td class="px-4 py-3 align-top"><span class="badge bg-gray-100 text-gray-600"><span class="badge-dot"></span>Draft</span></td>
+            <td class="px-4 py-3 align-top text-right tabular-nums text-gray-400">—</td>
+            <td class="px-4 py-3 align-top whitespace-nowrap text-gray-600">Jun 30, 2026</td>
+            <td class="px-4 py-3 align-top text-right relative"><button data-menu-btn title="Actions" class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button></td>
+          </tr>
+
+          <tr id="notif-empty" class="hidden">
+            <td colspan="7" class="px-4 py-14 text-center">
+              <span class="inline-grid place-items-center h-11 w-11 rounded-card bg-gray-100 text-gray-400 mb-3"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+              <p class="text-sm font-medium text-gray-700">No broadcasts match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Try a different search term, channel or status.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–4 of 54</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/notifications?query,channel,status,page (perPage 10) — platform broadcast log. New broadcast → POST /admin/notifications; resend/cancel/duplicate via row actions. FCM push enqueues on the <code>push</code> queue, email on the <code>email</code> queue — never inline. Gated to OGGVO_ADMIN / @Roles(ACCOUNT_MANAGER)+.</p>
+
+  <!-- Shared row actions menu -->
+  <div data-row-menu class="hidden fixed z-40 w-52 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 text-sm">
+    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.5 12S5.5 5.5 12 5.5 21.5 12 21.5 12 18.5 18.5 12 18.5 2.5 12 2.5 12z"/></svg>View details</a>
+    <button data-open="m-broadcast" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8m-8 5h8M7 4h10a1 1 0 011 1v14l-3-2-3 2-3-2-3 2V5a1 1 0 011-1z"/></svg>Duplicate</button>
+    <button data-notif-toast="Broadcast re-sent" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-gray-700 rounded-lg hover:bg-gray-100"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l14-7-5 14-2.5-5.5L5 12z"/></svg>Resend</button>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-notif-toast="Broadcast cancelled" data-notif-tone="error" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-error-600 rounded-lg hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>Cancel broadcast</button>
+  </div>
+
+  <!-- New broadcast modal -->
+  <div id="m-broadcast" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-A9.2" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">New broadcast</h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4 text-sm text-gray-600 overflow-y-auto">
+
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Name</span><input type="text" placeholder="Summer referral bonus" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Title</span><input type="text" placeholder="New feature: refreshed widgets" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+
+        <!-- Channel -->
+        <div data-story="US-A9.2" data-ac="AC2">
+          <span class="block font-medium text-gray-700 mb-1.5">Channel</span>
+          <div id="chan-group" class="inline-flex items-center bg-gray-100 rounded-card p-0.5">
+            <button type="button" data-value="Push" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] bg-white text-primary-700 shadow-card">Push</button>
+            <button type="button" data-value="Email" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">Email</button>
+            <button type="button" data-value="In-app" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">In-app</button>
+          </div>
+        </div>
+
+        <!-- Audience -->
+        <label class="block" data-story="US-A9.2" data-ac="AC2">
+          <span class="block font-medium text-gray-700 mb-1">Audience</span>
+          <select id="bc-audience" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option value="all">All accounts</option>
+            <option value="active">Active accounts only</option>
+            <option value="plan">By plan (Growth &amp; Enterprise)</option>
+            <option value="specific">Specific profiles…</option>
+          </select>
+          <span id="bc-audience-hint" class="block text-xs text-gray-400 mt-1">Resolves ~1,047 recipients across matching profiles.</span>
+        </label>
+
+        <!-- Message -->
+        <label class="block" data-story="US-A9.2" data-ac="AC3">
+          <span class="block font-medium text-gray-700 mb-1">Message</span>
+          <textarea id="bc-message" rows="3" maxlength="160" placeholder="Type the broadcast body…" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y">Check out the refreshed widget gallery in Widgets → Gallery.</textarea>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-xs text-gray-400">Kept ≤160 chars for push compatibility.</span>
+            <span id="bc-count" class="text-xs text-gray-400">62 / 160</span>
+          </div>
+        </label>
+
+        <label class="block"><span class="block font-medium text-gray-700 mb-1">Action link <span class="text-gray-400 font-normal">(optional)</span></span><input type="url" placeholder="https://portal.oggvo.com/widgets" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></label>
+
+        <!-- Schedule -->
+        <div data-story="US-A9.2" data-ac="AC4">
+          <span class="block font-medium text-gray-700 mb-1.5">Schedule</span>
+          <div id="when-group" class="inline-flex items-center bg-gray-100 rounded-card p-0.5 mb-3">
+            <button type="button" data-value="now" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] bg-white text-primary-700 shadow-card">Send now</button>
+            <button type="button" data-value="schedule" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">Schedule</button>
+          </div>
+          <div id="schedule-fields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div><label class="text-xs font-medium text-gray-600 block mb-1">Date</label><input id="bc-date" type="date" value="2026-07-11" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+            <div><label class="text-xs font-medium text-gray-600 block mb-1">Time</label><input id="bc-time" type="time" value="08:00" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+            <p class="mock-note sm:col-span-2">Stored in your profile timezone (America/New_York); rendered per viewer TZ.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Draft saved" data-tone="gray" class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Save draft</button>
+        <button id="bc-send" data-close class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Send broadcast</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "admin", storyDomain: "admin", back: { href: "../index.html", label: "All mockups" }, route: "/admin/notifications", search: "Search broadcasts…" });</script>
+<script>
+(function () {
+  // ---- table filters ----
+  var search = document.getElementById("notif-search");
+  var chan = document.getElementById("notif-channel");
+  var stat = document.getElementById("notif-status");
+  var empty = document.getElementById("notif-empty");
+  var rows = [].slice.call(document.getElementById("notif-tbody").querySelectorAll("tr")).filter(function (r) { return r !== empty; });
+  function filter() {
+    var q = (search.value || "").trim().toLowerCase(), c = chan.value, s = stat.value, any = false;
+    rows.forEach(function (r) {
+      var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) &&
+                 (!c || r.getAttribute("data-channel") === c) &&
+                 (!s || r.getAttribute("data-status") === s);
+      r.classList.toggle("hidden", !show);
+      if (show) any = true;
+    });
+    empty.classList.toggle("hidden", any);
+  }
+  search.addEventListener("input", filter);
+  chan.addEventListener("change", filter);
+  stat.addEventListener("change", filter);
+
+  // ---- row actions menu ----
+  var menu = document.querySelector("[data-row-menu]");
+  function closeMenu() { menu.classList.add("hidden"); }
+  document.querySelectorAll("[data-menu-btn]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var wasOpen = !menu.classList.contains("hidden");
+      closeMenu();
+      if (wasOpen) return;
+      var r = btn.getBoundingClientRect();
+      menu.classList.remove("hidden");
+      menu.style.top = (r.bottom + 6) + "px";
+      menu.style.left = Math.max(8, r.right - menu.offsetWidth) + "px";
+    });
+  });
+  menu.querySelectorAll("[data-notif-toast]").forEach(function (b) {
+    b.addEventListener("click", function () { closeMenu(); OggvoShell.toast(b.getAttribute("data-notif-toast"), b.getAttribute("data-notif-tone") || "success"); });
+  });
+
+  // ---- modal open/close ----
+  function closeModals() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+  document.addEventListener("click", function (e) {
+    var opener = e.target.closest("[data-open]");
+    if (opener) { var m = document.getElementById(opener.getAttribute("data-open")); if (m) { closeMenu(); m.classList.remove("hidden"); } return; }
+    var t = e.target.closest("[data-toast]");
+    if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+    if (e.target.closest("[data-close]")) closeModals();
+  });
+  [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+  });
+
+  // ---- channel segmented ----
+  var channel = "Push";
+  OggvoShell.buttonGroup(document.getElementById("chan-group"), {
+    active: "bg-white text-primary-700 shadow-card", inactive: "text-gray-500",
+    onChange: function (v) { channel = v; }
+  });
+
+  // ---- audience hint ----
+  var HINTS = {
+    all: "Resolves ~9,271 devices across every account.",
+    active: "Resolves ~1,047 recipients on active accounts.",
+    plan: "Resolves ~431 recipients on Growth & Enterprise plans.",
+    specific: "Pick one or more profiles to target explicitly."
+  };
+  var aud = document.getElementById("bc-audience");
+  aud.addEventListener("change", function () { document.getElementById("bc-audience-hint").textContent = HINTS[aud.value]; });
+
+  // ---- message char count ----
+  var msg = document.getElementById("bc-message");
+  function count() { document.getElementById("bc-count").textContent = msg.value.length + " / 160"; }
+  msg.addEventListener("input", count); count();
+
+  // ---- schedule toggle ----
+  var when = "now";
+  OggvoShell.buttonGroup(document.getElementById("when-group"), {
+    active: "bg-white text-primary-700 shadow-card", inactive: "text-gray-500",
+    onChange: function (v) { when = v; document.getElementById("schedule-fields").classList.toggle("hidden", v !== "schedule"); document.getElementById("bc-send").textContent = v === "schedule" ? "Schedule broadcast" : "Send broadcast"; }
+  });
+
+  // ---- send ----
+  document.getElementById("bc-send").addEventListener("click", function () {
+    if (when === "schedule") {
+      OggvoShell.toast("Scheduled " + channel + " broadcast for " + document.getElementById("bc-date").value + " " + document.getElementById("bc-time").value + " (ET)", "primary");
+    } else {
+      OggvoShell.toast(channel + " broadcast queued for send", "success");
+    }
+  });
+
+  // ---- global dismiss ----
+  document.addEventListener("click", function (e) { if (!e.target.closest("[data-row-menu]") && !e.target.closest("[data-menu-btn]")) closeMenu(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeMenu(); closeModals(); } });
+  window.addEventListener("scroll", closeMenu, true);
+})();
+</script>
+</body></html>

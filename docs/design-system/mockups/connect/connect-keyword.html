@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Keyword Auto-Responder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <div class="max-w-2xl space-y-6">
+
+    <!-- 1. Page header -->
+    <div class="flex items-center justify-between gap-4">
+      <h1 class="text-2xl font-semibold text-gray-900">Edit keyword</h1>
+      <div class="flex items-center gap-2">
+        <button data-open="m-qr" class="inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><path d="M14 14h3v3M21 14v.01M17 21v-3M21 17h.01M21 21h.01" />
+          </svg>
+          QR code
+        </button>
+        <button data-toast="Keyword updated successfully!" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-sm font-medium text-white hover:bg-primary-600 shadow-card">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Details -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-4" data-story="US-M4.2" data-ac="AC2">
+      <h2 class="text-sm font-semibold text-gray-900">Details</h2>
+      <div class="space-y-1.5">
+        <label class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" value="PRICING" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+      <div class="space-y-1.5">
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <input type="text" value="Replies with our pricing link" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+    </section>
+
+    <!-- 3. Trigger keywords -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-3" data-story="US-M4.2" data-ac="AC1">
+      <div>
+        <h2 class="text-sm font-semibold text-gray-900">Trigger keywords</h2>
+        <p class="text-sm text-gray-500 mt-0.5">Exact match, case-insensitive. Max 5.</p>
+      </div>
+      <div id="kw-wrap" class="flex flex-wrap items-center gap-2 px-2 py-2 rounded-card border border-gray-300">
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 rounded-full px-2.5 py-1 text-sm">
+          price
+          <button class="inline-flex items-center justify-center h-4 w-4 rounded-full hover:bg-primary-200" aria-label="Remove price">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </span>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 rounded-full px-2.5 py-1 text-sm">
+          cost
+          <button class="inline-flex items-center justify-center h-4 w-4 rounded-full hover:bg-primary-200" aria-label="Remove cost">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </span>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 rounded-full px-2.5 py-1 text-sm">
+          quote
+          <button class="inline-flex items-center justify-center h-4 w-4 rounded-full hover:bg-primary-200" aria-label="Remove quote">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </span>
+        <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 rounded-full px-2.5 py-1 text-sm">
+          how much
+          <button class="inline-flex items-center justify-center h-4 w-4 rounded-full hover:bg-primary-200" aria-label="Remove how much">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </span>
+        <input type="text" id="kw-input" placeholder="Type and hit enter to save" class="flex-1 min-w-[12rem] h-8 px-1 text-sm bg-transparent focus:outline-none" />
+      </div>
+      <p id="kw-count" class="text-sm text-gray-500">4 / 5 keywords</p>
+    </section>
+
+    <!-- 4. Response -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-3" data-story="US-M4.2" data-ac="AC1">
+      <h2 class="text-sm font-semibold text-gray-900">Response</h2>
+      <div class="space-y-1.5">
+        <textarea id="resp" rows="4" maxlength="160" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">Thanks for asking! Here's our pricing: [[review_us_url]]</textarea>
+        <p class="text-sm text-gray-500 text-right"><span id="resp-count">58</span> / 160</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" data-ph class="font-mono text-xs bg-gray-100 text-gray-600 rounded-md px-2 py-1 hover:bg-gray-200">[[recipient_number]]</button>
+        <button type="button" data-ph class="font-mono text-xs bg-gray-100 text-gray-600 rounded-md px-2 py-1 hover:bg-gray-200">[[profile_name]]</button>
+        <button type="button" data-ph class="font-mono text-xs bg-gray-100 text-gray-600 rounded-md px-2 py-1 hover:bg-gray-200">[[review_us_url]]</button>
+      </div>
+      <div class="flex items-center gap-3 pt-1">
+        <button class="inline-flex items-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.5-3.5L5 21" /></svg>
+          Add media (max 6)
+        </button>
+        <div class="relative h-16 w-16 bg-gray-100 rounded-lg">
+          <button type="button" data-media-del class="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-700 text-white shadow" aria-label="Remove media">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+        <div class="relative h-16 w-16 bg-gray-100 rounded-lg">
+          <button type="button" data-media-del class="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-700 text-white shadow" aria-label="Remove media">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Response timing -->
+    <section class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-4" data-story="US-M4.2" data-ac="AC1">
+      <h2 class="text-sm font-semibold text-gray-900">Response timing</h2>
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-medium text-gray-700">Only respond during set hours</span>
+        <button id="timing-switch" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500" role="switch" aria-checked="true">
+          <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+        </button>
+      </div>
+      <div id="timing-fields" class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="block text-sm font-medium text-gray-700">Start time</label>
+          <input type="text" value="09:00 AM" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+        <div class="space-y-1.5">
+          <label class="block text-sm font-medium text-gray-700">End time</label>
+          <input type="text" value="06:00 PM" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+      </div>
+      <p class="text-sm text-gray-500">Outside these hours, no auto-reply is sent.</p>
+    </section>
+
+    <p class="mock-note">POST /messaging/keywords/update (create uses /create). Prefilled via GET /messaging/keywords/:id. Edit page adds a QR-code modal.</p>
+
+  </div>
+
+  <!-- QR-code modal -->
+  <div id="m-qr" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-M7.5" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-sm">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">PRICING</h3><p class="text-xs text-gray-500">Scan to preview content</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="p-5 space-y-3">
+        <div class="mx-auto h-44 w-44 rounded-card bg-gray-100 grid place-items-center text-gray-300">
+          <svg class="h-24 w-24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path stroke-linecap="round" d="M14 14h3v3M21 14v.01M17 21v-3M21 17h.01M21 21h.01"/></svg>
+        </div>
+        <div class="flex flex-wrap justify-center gap-1.5">
+          <span class="bg-gray-100 text-gray-700 rounded-full px-2 py-0.5 text-xs">price</span>
+          <span class="bg-gray-100 text-gray-700 rounded-full px-2 py-0.5 text-xs">cost</span>
+          <span class="bg-gray-100 text-gray-700 rounded-full px-2 py-0.5 text-xs">quote</span>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1">Pre-written Message</label>
+          <input type="text" maxlength="160" placeholder="Text to include in the message..." value="price" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          <p class="text-xs text-warning-700 mt-1">Make sure to include keyword(s) in the text</p>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Close</button>
+        <button data-close data-toast="QR downloaded" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Download</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "connect", storyDomain: "messaging", back: { href: "connect-preference.html", label: "Back to Preferences" }, route: "/connect/preference/keywords/3", search: "Search…" });
+</script>
+<script>
+  (function () {
+    // Keyword chips (max 5)
+    var wrap = document.getElementById("kw-wrap");
+    var input = document.getElementById("kw-input");
+    var countEl = document.getElementById("kw-count");
+    function chips() { return [].slice.call(wrap.querySelectorAll("span")); }
+    function refresh() {
+      var n = chips().length;
+      countEl.textContent = n + " / 5 keywords";
+      input.disabled = n >= 5;
+      input.placeholder = n >= 5 ? "Max 5 keywords reached" : "Type and hit enter to save";
+    }
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        var v = input.value.trim(); if (!v || chips().length >= 5) return;
+        var span = document.createElement("span");
+        span.className = "inline-flex items-center gap-1 bg-primary-100 text-primary-700 rounded-full px-2.5 py-1 text-sm";
+        span.innerHTML = '<span class="kw-text"></span> <button type="button" class="inline-flex items-center justify-center h-4 w-4 rounded-full hover:bg-primary-200" aria-label="Remove"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
+        span.querySelector(".kw-text").textContent = v;
+        wrap.insertBefore(span, input); input.value = ""; refresh();
+      }
+    });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (b && b.parentNode.tagName === "SPAN") { b.parentNode.remove(); refresh(); }
+    });
+    refresh();
+
+    // Response counter
+    var resp = document.getElementById("resp"), respCount = document.getElementById("resp-count");
+    function rc() { respCount.textContent = resp.value.length; }
+    resp.addEventListener("input", rc); rc();
+
+    // Placeholder insert
+    [].slice.call(document.querySelectorAll("[data-ph]")).forEach(function (b) {
+      b.addEventListener("click", function () { resp.value += b.textContent.trim(); resp.focus(); rc(); });
+    });
+
+    // Response-timing switch reveals/hides start+end fields
+    var tsw = document.getElementById("timing-switch"), tfields = document.getElementById("timing-fields");
+    tsw.addEventListener("click", function () {
+      var on = tsw.getAttribute("aria-checked") !== "true";
+      tsw.setAttribute("aria-checked", on ? "true" : "false");
+      tsw.classList.toggle("bg-primary-500", on); tsw.classList.toggle("bg-gray-300", !on);
+      var k = tsw.querySelector("span"); k.classList.toggle("translate-x-5", on); k.classList.toggle("translate-x-0.5", !on);
+      tfields.classList.toggle("hidden", !on);
+    });
+
+    // Media thumbnails removable
+    [].slice.call(document.querySelectorAll("[data-media-del]")).forEach(function (b) {
+      b.addEventListener("click", function () { b.parentNode.remove(); });
+    });
+
+    // Modals
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var o = e.target.closest("[data-open]");
+      if (o) { var m = document.getElementById(o.getAttribute("data-open")); if (m) m.classList.remove("hidden"); return; }
+      if (e.target.closest("[data-close]")) closeAll();
+      var t = e.target.closest("[data-toast]");
+      if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+    });
+    [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Activity History</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <p class="mock-note mb-3">Mobile recipient-activity detail (v1 <code>/dashboard/activity-history</code>, <code>min-[480px]:hidden</code>) — opened from an Activity row; reads recipient from the route query. Consolidate with <code>/dashboard/activity</code> in v2.</p>
+
+  <div class="max-w-md mx-auto space-y-5">
+    <a href="dashboard-activity.html" class="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:underline">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Back to Activity
+    </a>
+
+    <!-- Recipient header -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-D4.1">
+      <div class="flex items-start gap-3">
+        <div class="h-12 w-12 shrink-0 rounded-full bg-gray-200 grid place-items-center text-base font-semibold text-gray-600">DM</div>
+        <div class="min-w-0 flex-1">
+          <h1 class="text-2xl font-medium text-gray-900 leading-tight">Dana Moore</h1>
+          <p class="text-sm text-gray-500">(415) 555-0192</p>
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Member</span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Final Request</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-5">
+        <a href="../contacts/contact-form.html" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path stroke-linecap="round" stroke-linejoin="round" d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4z"/></svg>
+          Edit Contact
+        </a>
+        <a href="../connect/connect-inbox.html" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-sm font-medium text-white hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg>
+          Send SMS
+        </a>
+      </div>
+    </div>
+
+    <!-- Latest event -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-D4.1">
+      <div class="flex items-start gap-3">
+        <span class="h-9 w-9 shrink-0 rounded-full bg-error-100 text-error-600 grid place-items-center">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M4 7l8 5 8-5M4 7h16"/></svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Final Request Sent</p>
+          <p class="text-sm text-gray-500">via Email</p>
+          <p class="text-sm text-gray-500 mt-1">June 22, 2026 · 9:14 AM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- History timeline -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-D4.1" data-ac="AC1">
+      <h2 class="text-sm font-semibold text-gray-900 mb-4">History</h2>
+      <div class="space-y-4">
+        <div class="timeline-item"><span class="timeline-dot bg-error-500"></span><p class="text-sm font-medium text-gray-900">Final Request sent</p><p class="text-xs text-gray-500">Email · June 22, 2026 · 9:14 AM</p></div>
+        <div class="timeline-item"><span class="timeline-dot bg-primary-500"></span><p class="text-sm font-medium text-gray-900">Email opened</p><p class="text-xs text-gray-500">June 18, 2026 · 2:31 PM</p></div>
+        <div class="timeline-item"><span class="timeline-dot bg-success-500"></span><p class="text-sm font-medium text-gray-900">Follow-up Request sent</p><p class="text-xs text-gray-500">SMS · June 17, 2026 · 9:00 AM</p></div>
+        <div class="timeline-item"><span class="timeline-dot bg-primary-500"></span><p class="text-sm font-medium text-gray-900">SMS delivered</p><p class="text-xs text-gray-500">June 12, 2026 · 9:01 AM</p></div>
+        <div class="timeline-item"><span class="timeline-dot bg-gray-300"></span><p class="text-sm font-medium text-gray-900">Initial Request sent</p><p class="text-xs text-gray-500">Email · June 10, 2026 · 9:00 AM</p></div>
+      </div>
+    </div>
+
+    <p class="mock-note">GET /analytics/activity (single recipient). v1 reads firstName/lastName/recipientDetail/source/date from the route query; the historical timeline was commented out in v1.</p>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "dashboard", storyDomain: "analytics", back: { href: "dashboard-activity.html", label: "Back to Activity" }, route: "/dashboard/activity-history", search: "Search…" });
+</script>
+</body>
+</html>

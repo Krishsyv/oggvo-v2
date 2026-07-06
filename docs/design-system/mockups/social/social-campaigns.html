@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Social · Content Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Content Planner</h1>
+      <p class="text-sm text-gray-500 mt-1">Automated testimonial drip campaigns from your review backlog.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button data-open-modal="m-create" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        Add Campaign
+      </button>
+    </div>
+  </div>
+
+  <!-- In-page social tab nav (Campaigns active) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+
+  <!-- Status TabBar -->
+  <div class="border-b border-gray-200 mb-4" data-story="US-4.2" data-ac="AC2">
+    <nav class="flex items-center gap-6 text-sm overflow-x-auto">
+      <a href="?status=" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">All <span class="ml-1 text-xs text-gray-400">42</span></a>
+      <a href="?status=generating" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Generating <span class="ml-1 text-xs text-gray-400">2</span></a>
+      <a href="?status=running" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Running <span class="ml-1 text-xs text-gray-400">6</span></a>
+      <a href="?status=completed" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Completed <span class="ml-1 text-xs text-gray-400">31</span></a>
+      <a href="?status=cancelled" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Cancelled <span class="ml-1 text-xs text-gray-400">3</span></a>
+    </nav>
+  </div>
+
+  <!-- Campaign table card -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-4.2" data-ac="AC1">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 text-xs uppercase text-gray-500 text-left">
+            <th class="px-5 py-3 font-medium">#</th>
+            <th class="px-5 py-3 font-medium">Date</th>
+            <th class="px-5 py-3 font-medium">Status</th>
+            <th class="px-5 py-3 font-medium text-right">Posts</th>
+            <th class="px-5 py-3 font-medium w-48">Progress</th>
+            <th class="px-5 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+
+          <!-- Row 1: Running -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="social-campaigns.html#" class="font-mono text-xs font-semibold text-gray-900 hover:text-primary-600">#a3f9c20b4e7d1f88</a>
+            </td>
+            <td class="px-5 py-3 text-gray-700">Jun 22, 2026</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Running</span>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">18 / 24</td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-2 flex-1 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-primary-500" style="width:75%"></div></div>
+                <span class="text-xs tabular-nums text-gray-500 w-9 text-right">75%</span>
+              </div>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="social-campaigns.html#" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+                  <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                  Browse Posts
+                </a>
+                <button data-open-modal="m-cancel" class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-error-100 hover:text-error-600" aria-label="Cancel campaign" title="Cancel campaign">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2: Generating -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="social-campaigns.html#" class="font-mono text-xs font-semibold text-gray-900 hover:text-primary-600">#7b1e0d49a2c6f035</a>
+            </td>
+            <td class="px-5 py-3 text-gray-700">Jun 25, 2026</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>Generating</span>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">4 / 36</td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-2 flex-1 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-primary-500" style="width:11%"></div></div>
+                <span class="text-xs tabular-nums text-gray-500 w-9 text-right">11%</span>
+              </div>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="social-campaigns.html#" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+                  <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                  Browse Posts
+                </a>
+                <button data-open-modal="m-cancel" class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-error-100 hover:text-error-600" aria-label="Cancel campaign" title="Cancel campaign">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3: Completed -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="social-campaigns.html#" class="font-mono text-xs font-semibold text-gray-900 hover:text-primary-600">#1c8a6f2e9b4d7a51</a>
+            </td>
+            <td class="px-5 py-3 text-gray-700">May 30, 2026</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Completed</span>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">48 / 48</td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-2 flex-1 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-primary-500" style="width:100%"></div></div>
+                <span class="text-xs tabular-nums text-gray-500 w-9 text-right">100%</span>
+              </div>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="social-campaigns.html#" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+                  <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                  Browse Posts
+                </a>
+                <button data-open-modal="m-cancel" class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-error-100 hover:text-error-600" aria-label="Delete campaign" title="Delete campaign">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 4: Running -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="social-campaigns.html#" class="font-mono text-xs font-semibold text-gray-900 hover:text-primary-600">#e509b73c1a8f24d6</a>
+            </td>
+            <td class="px-5 py-3 text-gray-700">Jun 10, 2026</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Running</span>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">9 / 30</td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-2 flex-1 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-primary-500" style="width:30%"></div></div>
+                <span class="text-xs tabular-nums text-gray-500 w-9 text-right">30%</span>
+              </div>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="social-campaigns.html#" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+                  <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                  Browse Posts
+                </a>
+                <button data-open-modal="m-cancel" class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-error-100 hover:text-error-600" aria-label="Cancel campaign" title="Cancel campaign">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 5: Cancelled -->
+          <tr class="hover:bg-gray-50/60">
+            <td class="px-5 py-3">
+              <a href="social-campaigns.html#" class="font-mono text-xs font-semibold text-gray-900 hover:text-primary-600">#f042ab98c7e361d5</a>
+            </td>
+            <td class="px-5 py-3 text-gray-700">Apr 18, 2026</td>
+            <td class="px-5 py-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Cancelled</span>
+            </td>
+            <td class="px-5 py-3 text-right tabular-nums text-gray-700">6 / 20</td>
+            <td class="px-5 py-3">
+              <div class="flex items-center gap-2">
+                <div class="h-2 flex-1 rounded-full bg-gray-100"><div class="h-2 rounded-full bg-gray-400" style="width:30%"></div></div>
+                <span class="text-xs tabular-nums text-gray-400 w-9 text-right">30%</span>
+              </div>
+            </td>
+            <td class="px-5 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <a href="social-campaigns.html#" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+                  <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                  Browse Posts
+                </a>
+                <button data-open-modal="m-cancel" class="inline-grid place-items-center h-8 w-8 text-gray-400 rounded-card hover:bg-error-100 hover:text-error-600" aria-label="Delete campaign" title="Delete campaign">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination -->
+    <div class="flex items-center justify-between gap-3 px-5 py-3 border-t border-gray-100">
+      <span class="text-xs text-gray-400">Showing 1&ndash;5 of 42 campaigns</span>
+      <nav class="inline-flex items-center gap-1">
+        <button class="inline-grid place-items-center h-8 w-8 rounded-card border border-gray-300 text-gray-400 hover:bg-gray-50" aria-label="Previous page" disabled>
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="inline-grid place-items-center h-8 min-w-8 px-2 rounded-card text-sm font-medium text-white bg-primary-500">1</button>
+        <button class="inline-grid place-items-center h-8 min-w-8 px-2 rounded-card text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50">2</button>
+        <button class="inline-grid place-items-center h-8 min-w-8 px-2 rounded-card text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50">3</button>
+        <button class="inline-grid place-items-center h-8 w-8 rounded-card border border-gray-300 text-gray-500 hover:bg-gray-50" aria-label="Next page">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <p class="mock-note mt-4" data-story="US-4.3" data-ac="AC1">Clicking a row (or Browse Posts) opens the scoped campaign timeline <code class="font-mono normal-case tracking-normal">/social/content-planner/[id]</code> &mdash; like the Planner timeline but scoped &amp; read-only, with info tags: Total Posts 24 &middot; Frequency 2&times;/weekday &middot; Period Jun 22 &ndash; Jul 20 &middot; Days 28 &middot; Platforms Facebook, Instagram, Google.</p>
+  <p class="mock-note mt-1.5">GET /social/campaigns?status=&amp;page= &mdash; status: generating | running | completed | cancelled. UUID short rendered from a 16-hex id (/^[a-f0-9]{16}$/). Progress = processed/total.</p>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · m-create — New Campaign (automated testimonial drip) -->
+  <!-- ============================================================ -->
+  <div id="m-create" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-4.1" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-3xl max-h-[90vh] flex flex-col">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200 shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-primary-50 text-primary-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 9v4a1 1 0 001 1h2l4.5 4V4L7 8H5a1 1 0 00-1 1zm12.5-1a4 4 0 010 6"/></svg></span>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">New Campaign</h3>
+            <p class="text-xs text-gray-500">Auto-schedule testimonial posts from your review backlog.</p>
+          </div>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+
+      <div class="px-5 py-4 space-y-5 overflow-y-auto">
+
+        <!-- Posting-time Preset -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Posting-time preset</label>
+          <select id="cc-preset" class="h-10 px-3 w-full rounded-card border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option value="recommended">Recommended — Weekdays 9am &amp; 3pm</option>
+            <option value="mornings">Mornings — Weekdays 9am</option>
+            <option value="afternoons">Afternoons — Weekdays 3pm</option>
+            <option value="daily">Daily — Every day 10am</option>
+            <option value="custom">Custom…</option>
+          </select>
+          <p class="mock-note mt-1.5">GET /social/presets &mdash; preset drives slots-per-weekday for the schedule.</p>
+        </div>
+
+        <!-- Campaign Duration -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Campaign duration</label>
+          <div class="flex flex-wrap items-center gap-2 mb-2" id="cc-range-chips">
+            <button type="button" data-range="1wk" class="cc-chip px-3 py-1.5 text-xs font-medium rounded-card border border-gray-300 text-gray-600 hover:bg-gray-50">1 week</button>
+            <button type="button" data-range="1mo" class="cc-chip px-3 py-1.5 text-xs font-medium rounded-card border border-primary-500 bg-primary-50 text-primary-700">1 month</button>
+            <button type="button" data-range="3mo" class="cc-chip px-3 py-1.5 text-xs font-medium rounded-card border border-gray-300 text-gray-600 hover:bg-gray-50">3 months</button>
+            <button type="button" data-range="1yr" class="cc-chip px-3 py-1.5 text-xs font-medium rounded-card border border-gray-300 text-gray-600 hover:bg-gray-50">1 year</button>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-gray-500 block mb-1">Start</label>
+              <input id="cc-start" type="date" value="2026-06-27" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 block mb-1">End</label>
+              <input id="cc-end" type="date" value="2026-07-27" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Platforms -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Platforms</label>
+          <div id="cc-platforms" class="flex flex-wrap gap-2">
+            <button type="button" data-platform="Facebook" class="cc-plat inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border border-primary-500 bg-primary-50 text-primary-700" aria-pressed="true">
+              <span class="grid place-items-center h-5 w-5 rounded-full text-[10px] font-bold text-white" style="background:#1877f2">f</span>Facebook
+            </button>
+            <button type="button" data-platform="Instagram" class="cc-plat inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border border-primary-500 bg-primary-50 text-primary-700" aria-pressed="true">
+              <span class="grid place-items-center h-5 w-5 rounded-full text-[10px] font-bold text-white" style="background:#E1306C">ig</span>Instagram
+            </button>
+            <button type="button" data-platform="Google" class="cc-plat inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50" aria-pressed="false">
+              <span class="grid place-items-center h-5 w-5 rounded-full text-[10px] font-bold text-white" style="background:#dc4e41">G</span>Google
+            </button>
+            <button type="button" data-platform="LinkedIn" class="cc-plat inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50" aria-pressed="false">
+              <span class="grid place-items-center h-5 w-5 rounded-full text-[10px] font-bold text-white" style="background:#0077b5">in</span>LinkedIn
+            </button>
+            <button type="button" data-platform="Twitter" class="cc-plat inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50" aria-pressed="false">
+              <span class="grid place-items-center h-5 w-5 rounded-full text-[10px] font-bold text-white" style="background:#000">X</span>Twitter
+            </button>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <textarea id="cc-desc" rows="3" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y">New Review! ⭐ [[rating]] on [[platform]] for [[page]] — [[link]]</textarea>
+          <div class="flex flex-wrap items-center gap-1.5 mt-2">
+            <span class="text-xs text-gray-400 mr-1">Insert:</span>
+            <button type="button" data-token="[[link]]" class="cc-token px-2 py-0.5 rounded font-mono text-xs text-primary-700 bg-primary-50 hover:bg-primary-100">[[link]]</button>
+            <button type="button" data-token="[[rating]]" class="cc-token px-2 py-0.5 rounded font-mono text-xs text-primary-700 bg-primary-50 hover:bg-primary-100">[[rating]]</button>
+            <button type="button" data-token="[[platform]]" class="cc-token px-2 py-0.5 rounded font-mono text-xs text-primary-700 bg-primary-50 hover:bg-primary-100">[[platform]]</button>
+            <button type="button" data-token="[[page]]" class="cc-token px-2 py-0.5 rounded font-mono text-xs text-primary-700 bg-primary-50 hover:bg-primary-100">[[page]]</button>
+          </div>
+        </div>
+
+        <!-- Minimum Rating -->
+        <div data-story="US-4.1" data-ac="AC1">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Minimum rating</label>
+          <div class="flex items-center gap-3">
+            <div id="cc-stars" class="text-2xl tracking-wide select-none" role="radiogroup" aria-label="Minimum rating">
+              <button type="button" data-star="1" class="cc-star text-warning-500" aria-label="1 star">&#9733;</button>
+              <button type="button" data-star="2" class="cc-star text-warning-500" aria-label="2 stars">&#9733;</button>
+              <button type="button" data-star="3" class="cc-star text-warning-500" aria-label="3 stars">&#9733;</button>
+              <button type="button" data-star="4" class="cc-star text-warning-500" aria-label="4 stars">&#9733;</button>
+              <button type="button" data-star="5" class="cc-star text-gray-300" aria-label="5 stars">&#9733;</button>
+            </div>
+            <span id="cc-min-label" class="text-sm text-gray-500">4&#9733; &amp; up</span>
+          </div>
+          <p id="cc-min-warn" class="text-xs text-warning-700 mt-1.5 inline-flex items-center gap-1">
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9l-7.4 12.8A1.5 1.5 0 004.2 19h15.6a1.5 1.5 0 001.3-2.3L13.7 3.9a1.5 1.5 0 00-2.6 0z"/></svg>
+            Reviews below 4&#9733; are excluded.
+          </p>
+        </div>
+
+        <!-- Compact style-params -->
+        <div class="rounded-card border border-gray-200 bg-gray-50/60 p-4 space-y-4">
+          <h4 class="text-sm font-medium text-gray-900">Image style</h4>
+
+          <!-- Version swatches -->
+          <div>
+            <label class="text-xs font-medium text-gray-600 block mb-1.5">Version <span class="text-gray-400 font-normal">(color theme)</span></label>
+            <div id="cc-version" class="flex flex-wrap items-center gap-2">
+              <button type="button" data-version="blue" data-color="#417D7A" title="Viridian Green" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-primary-500" style="background:#417D7A"></button>
+              <button type="button" data-version="aquamarine" data-color="#82DBD8" title="Deep Aquamarine" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#82DBD8"></button>
+              <button type="button" data-version="rose" data-color="#AC7D88" title="Turkish Rose" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#AC7D88"></button>
+              <button type="button" data-version="yellow" data-color="#EC994B" title="Royal Orange" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#EC994B"></button>
+              <button type="button" data-version="green" data-color="#A3CD61" title="Green Yellow" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#A3CD61"></button>
+              <button type="button" data-version="red" data-color="#F24A72" title="Infra Red" class="cc-swatch h-8 w-8 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#F24A72"></button>
+            </div>
+          </div>
+
+          <!-- Testimonial style type-1..5 -->
+          <div>
+            <label class="text-xs font-medium text-gray-600 block mb-1.5">Testimonial style</label>
+            <div id="cc-types" class="grid grid-cols-5 gap-2">
+              <button type="button" data-type="1" class="cc-type rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white py-1.5 text-xs font-medium text-gray-700">Type 1</button>
+              <button type="button" data-type="2" class="cc-type rounded-card border-2 border-gray-200 bg-white py-1.5 text-xs font-medium text-gray-700 hover:border-gray-300">Type 2</button>
+              <button type="button" data-type="3" class="cc-type rounded-card border-2 border-gray-200 bg-white py-1.5 text-xs font-medium text-gray-700 hover:border-gray-300">Type 3</button>
+              <button type="button" data-type="4" class="cc-type rounded-card border-2 border-gray-200 bg-white py-1.5 text-xs font-medium text-gray-700 hover:border-gray-300">Type 4</button>
+              <button type="button" data-type="5" class="cc-type rounded-card border-2 border-gray-200 bg-white py-1.5 text-xs font-medium text-gray-700 hover:border-gray-300">Type 5</button>
+            </div>
+          </div>
+
+          <!-- Toggles (compact) -->
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-gray-600 block mb-0.5">Elements</label>
+            <div class="cc-toggle flex items-center justify-between py-1.5">
+              <span class="text-sm text-gray-700">Brand Logo</span>
+              <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+            </div>
+            <div class="cc-toggle flex items-center justify-between py-1.5">
+              <span class="text-sm text-gray-700">Source Logo</span>
+              <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+            </div>
+            <div class="cc-toggle flex items-center justify-between py-1.5">
+              <span class="text-sm text-gray-700">Reviewer Name</span>
+              <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample review preview + Change Review -->
+        <div class="rounded-card border border-gray-200 bg-white p-4" data-story="US-4.1" data-ac="AC2">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium text-gray-600">Sample review</span>
+            <button id="cc-change-review" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6M20 20v-6h-6M20 9a8 8 0 00-14.9-3M4 15a8 8 0 0014.9 3"/></svg>
+              Change Review
+            </button>
+          </div>
+          <div class="flex items-start gap-3">
+            <div id="cc-sr-avatar" class="h-9 w-9 shrink-0 rounded-full bg-gray-200 grid place-items-center text-xs font-semibold text-gray-600">MR</div>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <span id="cc-sr-name" class="font-medium text-gray-900 text-sm">Marcus Reyes</span>
+                <span id="cc-sr-stars" class="text-warning-500 text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span id="cc-sr-src" class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-600">Google</span>
+              </div>
+              <p id="cc-sr-text" class="text-sm text-gray-600 mt-1.5">Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule.</p>
+            </div>
+          </div>
+          <p class="mock-note mt-3">GET /reviews/random &mdash; preview pulls a qualifying review (rating &ge; minimum) to show the rendered style.</p>
+        </div>
+
+        <p class="mock-note">POST /social/campaigns { socials[], description, dates[], preset, range, min_rating, type, version, brand_logo, source_logo, reviewer_name } &mdash; postsToSchedule = dates.length &times; platforms.length.</p>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 px-5 py-4 border-t border-gray-200 shrink-0">
+        <span class="text-sm text-gray-600">This will schedule <span id="cc-count" class="font-semibold text-gray-900">24</span> posts</span>
+        <div class="flex items-center gap-2">
+          <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+          <button id="cc-create" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+            Create campaign
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · m-cancel — Cancel campaign (confirm)                  -->
+  <!-- ============================================================ -->
+  <div id="m-cancel" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-4.4" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-error-100 text-error-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9l-7.4 12.8A1.5 1.5 0 004.2 19h15.6a1.5 1.5 0 001.3-2.3L13.7 3.9a1.5 1.5 0 00-2.6 0z"/></svg></span>
+          <h3 class="text-lg font-semibold text-gray-900">Cancel campaign</h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 text-sm text-gray-600">
+        <p>This cancels the campaign and deletes its queued posts. You won't be able to revert this.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="cc-cancel-confirm" data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Cancel campaign</button>
+      </div>
+      <p class="mock-note px-5 pb-4">DELETE /social/campaigns/{uuid} &mdash; idempotent; deletes queued posts and frees their schedule slots.</p>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "../index.html", label: "All mockups" }, route: "/social/content-planner", search: "Search social…" });</script>
+<script>
+(function () {
+  // ---- shared modal open/close (matches reviews-list idiom) ----
+  function closeAll() {
+    [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) { m.classList.add("hidden"); });
+  }
+  function open(id) {
+    var m = document.getElementById(id);
+    if (m) m.classList.remove("hidden");
+  }
+  document.addEventListener("click", function (e) {
+    var opener = e.target.closest("[data-open-modal]");
+    if (opener) { e.preventDefault(); open(opener.getAttribute("data-open-modal")); return; }
+    var closer = e.target.closest("[data-close]");
+    if (closer) { closeAll(); }
+  });
+  [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+
+  // ---- create modal state ----
+  var state = { platforms: ["Facebook", "Instagram"], minRating: 4, version: "blue", color: "#417D7A", type: 1 };
+
+  // SAMPLE_REVIEWS for the Change Review button (mimics GET /reviews/random)
+  var SAMPLE_REVIEWS = [
+    { initials: "MR", name: "Marcus Reyes", stars: 5, src: "Google", text: "Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule." },
+    { initials: "PT", name: "The Patels", stars: 5, src: "Facebook", text: "Could not have asked for a smoother experience. Highly recommend to anyone buying their first home." },
+    { initials: "JD", name: "Jordan Diaz", stars: 4, src: "Google", text: "Professional and responsive throughout. A couple small hiccups but they were resolved quickly." },
+    { initials: "SK", name: "Sara Kim", stars: 5, src: "Facebook", text: "They went above and beyond — staging advice alone got us multiple offers over asking." }
+  ];
+  var sampleIdx = 0;
+
+  function starsString(n) {
+    var s = "";
+    for (var i = 0; i < 5; i++) s += (i < n ? "★" : "");
+    return s;
+  }
+
+  // ---- chips: duration shortcuts ----
+  var END_DAYS = { "1wk": 7, "1mo": 30, "3mo": 90, "1yr": 365 };
+  function selectChip(btn) {
+    [].slice.call(document.querySelectorAll(".cc-chip")).forEach(function (c) {
+      var on = c === btn;
+      c.classList.toggle("border-primary-500", on);
+      c.classList.toggle("bg-primary-50", on);
+      c.classList.toggle("text-primary-700", on);
+      c.classList.toggle("border-gray-300", !on);
+      c.classList.toggle("text-gray-600", !on);
+    });
+    var start = document.getElementById("cc-start");
+    var end = document.getElementById("cc-end");
+    var days = END_DAYS[btn.getAttribute("data-range")] || 30;
+    var base = new Date(start.value || "2026-06-27");
+    base.setDate(base.getDate() + days);
+    end.value = base.toISOString().slice(0, 10);
+    recompute();
+  }
+  document.getElementById("cc-range-chips").addEventListener("click", function (e) {
+    var btn = e.target.closest(".cc-chip");
+    if (btn) selectChip(btn);
+  });
+  document.getElementById("cc-start").addEventListener("change", recompute);
+  document.getElementById("cc-end").addEventListener("change", recompute);
+
+  // ---- platforms multi-select ----
+  document.getElementById("cc-platforms").addEventListener("click", function (e) {
+    var btn = e.target.closest(".cc-plat");
+    if (!btn) return;
+    var plat = btn.getAttribute("data-platform");
+    var on = btn.getAttribute("aria-pressed") === "true";
+    on = !on;
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.classList.toggle("border-primary-500", on);
+    btn.classList.toggle("bg-primary-50", on);
+    btn.classList.toggle("text-primary-700", on);
+    btn.classList.toggle("border-gray-300", !on);
+    btn.classList.toggle("text-gray-600", !on);
+    var idx = state.platforms.indexOf(plat);
+    if (on && idx === -1) state.platforms.push(plat);
+    if (!on && idx !== -1) state.platforms.splice(idx, 1);
+    recompute();
+  });
+
+  // ---- description tokens ----
+  var desc = document.getElementById("cc-desc");
+  [].slice.call(document.querySelectorAll(".cc-token")).forEach(function (b) {
+    b.addEventListener("click", function () {
+      var token = b.getAttribute("data-token");
+      var start = desc.selectionStart || desc.value.length;
+      desc.value = desc.value.slice(0, start) + token + desc.value.slice(desc.selectionEnd || start);
+      desc.focus();
+    });
+  });
+
+  // ---- minimum rating stars ----
+  function paintStars(n) {
+    [].slice.call(document.querySelectorAll(".cc-star")).forEach(function (s) {
+      var v = parseInt(s.getAttribute("data-star"), 10);
+      s.classList.toggle("text-warning-500", v <= n);
+      s.classList.toggle("text-gray-300", v > n);
+    });
+    document.getElementById("cc-min-label").innerHTML = n + "★ &amp; up";
+    var warn = document.getElementById("cc-min-warn");
+    warn.innerHTML = '<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9l-7.4 12.8A1.5 1.5 0 004.2 19h15.6a1.5 1.5 0 001.3-2.3L13.7 3.9a1.5 1.5 0 00-2.6 0z"/></svg> Reviews below ' + n + "★ are excluded.";
+  }
+  document.getElementById("cc-stars").addEventListener("click", function (e) {
+    var s = e.target.closest(".cc-star");
+    if (!s) return;
+    state.minRating = parseInt(s.getAttribute("data-star"), 10);
+    paintStars(state.minRating);
+  });
+
+  // ---- version swatches ----
+  document.getElementById("cc-version").addEventListener("click", function (e) {
+    var s = e.target.closest(".cc-swatch");
+    if (!s) return;
+    state.version = s.getAttribute("data-version");
+    state.color = s.getAttribute("data-color");
+    [].slice.call(document.querySelectorAll(".cc-swatch")).forEach(function (sw) {
+      var on = sw === s;
+      sw.classList.toggle("ring-primary-500", on);
+      sw.classList.toggle("ring-transparent", !on);
+    });
+  });
+
+  // ---- testimonial style types ----
+  document.getElementById("cc-types").addEventListener("click", function (e) {
+    var t = e.target.closest(".cc-type");
+    if (!t) return;
+    state.type = parseInt(t.getAttribute("data-type"), 10);
+    [].slice.call(document.querySelectorAll(".cc-type")).forEach(function (tt) {
+      var on = tt === t;
+      tt.classList.toggle("border-primary-500", on);
+      tt.classList.toggle("ring-2", on);
+      tt.classList.toggle("ring-primary-100", on);
+      tt.classList.toggle("border-gray-200", !on);
+    });
+  });
+
+  // ---- compact toggles ----
+  [].slice.call(document.querySelectorAll(".cc-toggle .ds-switch")).forEach(function (sw) {
+    sw.addEventListener("click", function () {
+      var on = sw.getAttribute("aria-checked") === "true";
+      on = !on;
+      var knob = sw.querySelector(".ds-knob");
+      sw.setAttribute("aria-checked", on ? "true" : "false");
+      sw.classList.toggle("bg-primary-500", on);
+      sw.classList.toggle("bg-gray-300", !on);
+      knob.classList.toggle("translate-x-5", on);
+      knob.classList.toggle("translate-x-0.5", !on);
+    });
+  });
+
+  // ---- Change Review (GET /reviews/random) ----
+  document.getElementById("cc-change-review").addEventListener("click", function () {
+    sampleIdx = (sampleIdx + 1) % SAMPLE_REVIEWS.length;
+    var r = SAMPLE_REVIEWS[sampleIdx];
+    document.getElementById("cc-sr-avatar").textContent = r.initials;
+    document.getElementById("cc-sr-name").textContent = r.name;
+    document.getElementById("cc-sr-stars").textContent = starsString(r.stars);
+    document.getElementById("cc-sr-src").textContent = r.src;
+    document.getElementById("cc-sr-text").textContent = r.text;
+  });
+
+  // ---- computed: postsToSchedule = dates.length × platforms.length ----
+  function dateCount() {
+    // approximate "dates" as weekdays in the range × slots-per-day from preset
+    var start = new Date(document.getElementById("cc-start").value || "2026-06-27");
+    var end = new Date(document.getElementById("cc-end").value || "2026-07-27");
+    if (end < start) return 0;
+    var weekdays = 0;
+    var d = new Date(start);
+    while (d <= end) {
+      var day = d.getDay();
+      if (day !== 0 && day !== 6) weekdays++;
+      d.setDate(d.getDate() + 1);
+    }
+    var preset = document.getElementById("cc-preset").value;
+    var slots = preset === "recommended" ? 2 : 1;
+    // clamp to a representative sample so the demo number stays readable
+    return Math.max(1, Math.min(weekdays * slots, 240));
+  }
+  function recompute() {
+    var dates = dateCount();
+    var posts = dates * state.platforms.length;
+    document.getElementById("cc-count").textContent = posts;
+  }
+  document.getElementById("cc-preset").addEventListener("change", recompute);
+
+  // ---- create ----
+  document.getElementById("cc-create").addEventListener("click", function () {
+    if (!state.platforms.length) { OggvoShell.toast("Select at least one platform", "error"); return; }
+    closeAll();
+    OggvoShell.toast("Campaign created — generating posts", "success");
+  });
+
+  // ---- cancel confirm ----
+  document.getElementById("cc-cancel-confirm").addEventListener("click", function () {
+    OggvoShell.toast("Campaign cancelled", "error");
+  });
+
+  // ---- init ----
+  paintStars(state.minRating);
+  recompute();
+})();
+</script>
+</body></html>

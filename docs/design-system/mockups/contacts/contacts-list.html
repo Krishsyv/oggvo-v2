@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Contacts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+      <!-- 1. PageHeader -->
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-900">Contacts</h1>
+          <p class="text-sm text-gray-500 mt-1">1,248 contacts</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+            Import
+          </button>
+          <button data-open="m-export" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l4-4m-4 4l-4-4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+            Export
+          </button>
+          <a href="contacts-settings.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-600 rounded-card hover:bg-gray-100">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 4.3a1 1 0 011.4 0l.6.6a1 1 0 00.9.3l.8-.1a1 1 0 011 .7l.3.8a1 1 0 00.6.6l.8.3a1 1 0 01.7 1l-.1.8a1 1 0 00.3.9l.6.6a1 1 0 010 1.4l-.6.6a1 1 0 00-.3.9l.1.8a1 1 0 01-.7 1l-.8.3a1 1 0 00-.6.6l-.3.8a1 1 0 01-1 .7l-.8-.1a1 1 0 00-.9.3l-.6.6a1 1 0 01-1.4 0l-.6-.6a1 1 0 00-.9-.3l-.8.1a1 1 0 01-1-.7l-.3-.8a1 1 0 00-.6-.6l-.8-.3a1 1 0 01-.7-1l.1-.8a1 1 0 00-.3-.9l-.6-.6a1 1 0 010-1.4l.6-.6a1 1 0 00.3-.9l-.1-.8a1 1 0 01.7-1l.8-.3a1 1 0 00.6-.6l.3-.8a1 1 0 011-.7l.8.1a1 1 0 00.9-.3l.6-.6z"/><circle cx="12" cy="12" r="2.5"/></svg>
+            Configuration
+          </a>
+          <a href="contact-form.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+            Add Contact
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Campaign status banner -->
+      <div class="bg-white border border-gray-200 border-l-4 border-l-success-500 rounded-card px-5 py-4 mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3" data-story="US-7.2" data-ac="AC1">
+        <div class="flex items-center gap-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-success-500 shrink-0"></span>
+          <p class="text-sm text-gray-700"><span class="font-medium text-gray-900">Campaigns active</span> &mdash; Active contacts in cadence: <span class="font-medium text-gray-900">312</span></p>
+        </div>
+        <button data-open="m-pause" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+          <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 8h2v8H9zm4 0h2v8h-2z"/></svg>
+          Pause Campaigns
+        </button>
+      </div>
+      <p class="mock-note mb-6">Banner state derives from CampaignsPaused / AutoActivateRecipients / active count</p>
+
+      <!-- 3. Filter row -->
+      <div class="flex flex-col gap-4 mb-4">
+        <div class="border-b border-gray-200">
+          <nav id="status-tabs" class="flex items-center gap-6 text-sm" data-story="US-1.2" data-ac="AC1">
+            <button type="button" data-value="all" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500">All</button>
+            <button type="button" data-value="active" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Active</button>
+            <button type="button" data-value="pending" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Pending</button>
+            <button type="button" data-value="inactive" class="pb-3 -mb-px text-gray-500 hover:text-gray-700">Inactive</button>
+          </nav>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="relative md:w-56 shrink-0" data-story="US-1.3">
+            <select class="w-full appearance-none pl-3 pr-9 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option>Date added: Anytime</option>
+              <option>Last 7 days</option>
+              <option>Last 30 days</option>
+              <option>Last 90 days</option>
+            </select>
+            <svg class="h-4 w-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="relative flex-1" data-story="US-1.4" data-ac="AC1">
+            <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+            <input type="text" id="contact-search" placeholder="Search over 1,248 contacts by name, email, phone or tags" class="w-full pl-9 pr-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Bulk action bar -->
+      <div id="bulk-bar" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-primary-50 border border-primary-100 rounded-card px-4 py-2.5 mb-4" data-story="US-3.5" data-ac="AC1">
+        <div class="flex flex-wrap items-center gap-2">
+          <span id="bulk-count" class="text-sm font-medium text-primary-700 mr-1">3 selected</span>
+          <button data-status-action="Activate" class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Activate</button>
+          <button data-status-action="Deactivate" class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Deactivate</button>
+          <button data-open="m-delete" class="px-3 py-1.5 text-sm font-medium text-error-700 bg-white border border-error-100 rounded-card hover:bg-error-100">Delete</button>
+          <button data-open="m-delete" class="px-3 py-1.5 text-sm font-medium text-error-700 bg-white border border-error-100 rounded-card hover:bg-error-100">Delete All</button>
+        </div>
+        <a href="#" id="bulk-clear" class="text-sm text-gray-500 hover:text-gray-700">Clear</a>
+      </div>
+
+      <!-- 5. Table -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="US-1.1" data-ac="AC2">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+              <tr class="text-left">
+                <th class="w-12 px-4 py-3">
+                  <input type="checkbox" id="select-all" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+                </th>
+                <th class="px-4 py-3 font-medium">
+                  <span class="inline-flex items-center gap-1 text-gray-700">Name
+                    <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+                  </span>
+                </th>
+                <th class="px-4 py-3 font-medium">Status</th>
+                <th class="px-4 py-3 font-medium">Phone</th>
+                <th class="px-4 py-3 font-medium">Email address</th>
+                <th class="px-4 py-3 font-medium">Tags</th>
+                <th class="px-4 py-3 font-medium">
+                  <span class="inline-flex items-center gap-1">Date Added
+                    <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+                  </span>
+                </th>
+                <th class="px-4 py-3 font-medium">
+                  <span class="inline-flex items-center gap-1">Recent Activity
+                    <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+                  </span>
+                </th>
+                <th class="w-12 px-4 py-3"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+
+              <!-- Row 1 (checked) -->
+              <tr class="bg-primary-50/40 hover:bg-primary-50">
+                <td class="px-4 py-3"><input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">SM</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Sarah Mitchell</span>
+                      <span class="block text-xs text-gray-500">(212) 555-0142</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+                <td class="px-4 py-3 text-gray-600">(212) 555-0142</td>
+                <td class="px-4 py-3 text-gray-600">sarah.mitchell@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">VIP</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Newsletter</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 18, 2026 · 9:14 AM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Review invite sent — Jun 20</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 2 (checked) -->
+              <tr class="bg-primary-50/40 hover:bg-primary-50">
+                <td class="px-4 py-3"><input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">JD</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">James Donovan</span>
+                      <span class="block text-xs text-gray-500">(415) 555-0198</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Pending</span></td>
+                <td class="px-4 py-3 text-gray-600">(415) 555-0198</td>
+                <td class="px-4 py-3 text-gray-600">james.donovan@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Lead</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 17, 2026 · 2:48 PM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Imported via CSV — Jun 17</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 3 (checked) -->
+              <tr class="bg-primary-50/40 hover:bg-primary-50">
+                <td class="px-4 py-3"><input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">PR</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Priya Raman</span>
+                      <span class="block text-xs text-gray-500">(305) 555-0173</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+                <td class="px-4 py-3 text-gray-600">(305) 555-0173</td>
+                <td class="px-4 py-3 text-gray-600">priya.raman@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">VIP</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Repeat</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Promo</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">+2</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 15, 2026 · 11:02 AM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Left 5★ review — Jun 19</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">MO</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Marcus Owens</span>
+                      <span class="block text-xs text-gray-500">(773) 555-0120</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Inactive</span></td>
+                <td class="px-4 py-3 text-gray-600">(773) 555-0120</td>
+                <td class="px-4 py-3 text-gray-600">marcus.owens@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Unsubscribed</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 12, 2026 · 4:30 PM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Opted out — Jun 14</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">EC</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Elena Castillo</span>
+                      <span class="block text-xs text-gray-500">(602) 555-0166</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+                <td class="px-4 py-3 text-gray-600">(602) 555-0166</td>
+                <td class="px-4 py-3 text-gray-600">elena.castillo@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Newsletter</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">SMS</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 11, 2026 · 8:05 AM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">SMS delivered — Jun 18</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">TN</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Thomas Nguyen</span>
+                      <span class="block text-xs text-gray-500">(206) 555-0184</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-warning-500 align-middle"></span>Pending</span></td>
+                <td class="px-4 py-3 text-gray-600">(206) 555-0184</td>
+                <td class="px-4 py-3 text-gray-600">thomas.nguyen@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No tags</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 10, 2026 · 1:22 PM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Added manually — Jun 10</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" /></td>
+                <td class="px-4 py-3">
+                  <a href="contact-form.html" class="flex items-center gap-3 group">
+                    <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-xs font-medium text-gray-600 shrink-0">AW</span>
+                    <span class="leading-tight">
+                      <span class="block font-semibold text-gray-900 group-hover:text-primary-600">Aisha Williams</span>
+                      <span class="block text-xs text-gray-500">(617) 555-0109</span>
+                    </span>
+                  </a>
+                </td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Active</span></td>
+                <td class="px-4 py-3 text-gray-600">(617) 555-0109</td>
+                <td class="px-4 py-3 text-gray-600">aisha.williams@example.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex gap-1 flex-wrap">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">VIP</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Repeat</span>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">+1</span>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Jun 09, 2026 · 10:41 AM</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">Campaign reply — Jun 17</td>
+                <td class="px-4 py-3 text-right">
+                  <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-card hover:bg-gray-100"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+                </td>
+              </tr>
+
+              <tr id="empty-row" class="hidden"><td colspan="9" class="px-4 py-12 text-center text-sm text-gray-500">No contacts match your filters.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 6. Pagination footer -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white" data-story="US-1.1" data-ac="AC5">
+          <div class="flex items-center gap-3 text-sm text-gray-500">
+            <label class="flex items-center gap-2">
+              <span>Rows per page</span>
+              <div class="relative">
+                <select class="appearance-none pl-3 pr-8 py-1.5 text-sm text-gray-700 bg-white border border-gray-300 rounded-card focus:outline-none focus:ring-2 focus:ring-primary-200">
+                  <option>10</option>
+                  <option selected>25</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+                <svg class="h-4 w-4 text-gray-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </div>
+            </label>
+            <span class="hidden sm:inline text-gray-300">|</span>
+            <span>Showing 1–25 of 1,248</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+            <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">3</button>
+            <span class="px-2 text-sm text-gray-400">…</span>
+            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">50</button>
+            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. State notes + skeleton sample -->
+      <div class="mt-6 space-y-3">
+        <p class="mock-note">Empty state: UserGroup icon + “No contacts” + Add Contact CTA</p>
+        <p class="mock-note">Loading: 5 skeleton rows (sample below)</p>
+        <div class="bg-white border border-gray-200 rounded-card shadow-card p-4 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="skeleton h-9 w-9 rounded-full"></div>
+            <div class="flex-1 space-y-2">
+              <div class="skeleton h-3 w-40"></div>
+              <div class="skeleton h-2.5 w-24"></div>
+            </div>
+            <div class="skeleton h-5 w-16 rounded-full"></div>
+            <div class="skeleton h-3 w-28 hidden md:block"></div>
+            <div class="skeleton h-3 w-20 hidden md:block"></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="skeleton h-9 w-9 rounded-full"></div>
+            <div class="flex-1 space-y-2">
+              <div class="skeleton h-3 w-32"></div>
+              <div class="skeleton h-2.5 w-24"></div>
+            </div>
+            <div class="skeleton h-5 w-16 rounded-full"></div>
+            <div class="skeleton h-3 w-28 hidden md:block"></div>
+            <div class="skeleton h-3 w-20 hidden md:block"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Modals ===== -->
+      <!-- Delete confirm -->
+      <div id="m-delete" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+        <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Delete contacts?</h3>
+            <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="px-5 py-4 text-sm text-gray-600">This permanently deletes the selected contacts and removes them from all campaigns. This can't be undone.</div>
+          <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+            <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+            <button data-close data-toast="Contacts deleted" data-tone="error" class="px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+          </div>
+        </div>
+      </div>
+      <!-- Change status confirm (Activate / Deactivate) -->
+      <div id="m-status" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+        <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900"><span id="status-verb">Activate</span> contacts?</h3>
+            <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="px-5 py-4 text-sm text-gray-600"><span id="status-verb2">Activate</span> the selected contacts? Activated contacts re-enter the daily review-request cadence; deactivated contacts are removed from it.</div>
+          <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+            <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+            <button data-close data-toast="Status updated for selected contacts" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Confirm</button>
+          </div>
+        </div>
+      </div>
+      <!-- Pause campaigns confirm -->
+      <div id="m-pause" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+        <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Pause campaigns?</h3>
+            <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="px-5 py-4 text-sm text-gray-600">All active contacts stop receiving the review-request cadence until you resume. No new contacts are auto-activated while paused.</div>
+          <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+            <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+            <button data-close data-toast="Campaigns paused" data-tone="primary" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Pause campaigns</button>
+          </div>
+        </div>
+      </div>
+      <!-- Export -->
+      <div id="m-export" data-modal class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+        <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Export contacts</h3>
+            <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+            <label class="flex items-center gap-2"><input type="radio" name="export-fmt" checked class="text-primary-500 focus:ring-primary-200" /> CSV (.csv)</label>
+            <label class="flex items-center gap-2"><input type="radio" name="export-fmt" class="text-primary-500 focus:ring-primary-200" /> Excel (.xlsx)</label>
+            <p class="text-xs text-gray-400">Exports all contacts matching the current filters. Large exports are emailed when ready.</p>
+          </div>
+          <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+            <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+            <button data-close data-toast="Export started — we'll email you the file" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Export</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  <script src="../assets/shell.js"></script>
+  <script>
+    OggvoShell.mount({
+      active: "contacts",
+      storyDomain: "contacts",
+      back: { href: "../index.html", label: "All mockups" },
+      route: "/contacts",
+      search: "Search contacts, imports, settings…",
+    });
+  </script>
+  <script>
+    (function () {
+      var tbody = document.querySelector("table tbody");
+      var emptyRow = document.getElementById("empty-row");
+      var rows = [].slice.call(tbody.querySelectorAll("tr")).filter(function (r) { return r !== emptyRow; });
+      var search = document.getElementById("contact-search");
+      var bulkBar = document.getElementById("bulk-bar");
+      var bulkCount = document.getElementById("bulk-count");
+      var selectAll = document.getElementById("select-all");
+      var current = "all";
+
+      function statusOf(r) {
+        if (r.querySelector(".bg-success-100")) return "active";
+        if (r.querySelector(".bg-warning-100")) return "pending";
+        if (r.querySelector(".bg-error-100")) return "inactive";
+        return "";
+      }
+      function cb(r) { return r.querySelector('input[type="checkbox"]'); }
+      function visible() { return rows.filter(function (r) { return !r.classList.contains("hidden"); }); }
+
+      function applyFilter() {
+        var q = (search.value || "").trim().toLowerCase();
+        var any = false;
+        rows.forEach(function (r) {
+          var okStatus = current === "all" || statusOf(r) === current;
+          var okSearch = !q || r.textContent.toLowerCase().indexOf(q) !== -1;
+          var show = okStatus && okSearch;
+          r.classList.toggle("hidden", !show);
+          if (show) any = true;
+        });
+        emptyRow.classList.toggle("hidden", any);
+        updateBulk();
+      }
+      function updateBulk() {
+        var checked = visible().filter(function (r) { return cb(r).checked; });
+        if (checked.length) { bulkBar.classList.remove("hidden"); bulkCount.textContent = checked.length + " selected"; }
+        else { bulkBar.classList.add("hidden"); }
+        var vis = visible();
+        var vc = vis.filter(function (r) { return cb(r).checked; });
+        selectAll.checked = vis.length > 0 && vc.length === vis.length;
+        selectAll.indeterminate = vc.length > 0 && vc.length < vis.length;
+      }
+
+      OggvoShell.buttonGroup(document.getElementById("status-tabs"), {
+        active: "font-medium text-primary-600 border-b-2 border-primary-500",
+        inactive: "text-gray-500 hover:text-gray-700",
+        onChange: function (v) { current = v; applyFilter(); },
+      });
+      search.addEventListener("input", applyFilter);
+      tbody.addEventListener("change", function (e) { if (e.target.matches('input[type="checkbox"]')) updateBulk(); });
+      selectAll.addEventListener("change", function () { visible().forEach(function (r) { cb(r).checked = selectAll.checked; }); updateBulk(); });
+      document.getElementById("bulk-clear").addEventListener("click", function (e) { e.preventDefault(); rows.forEach(function (r) { cb(r).checked = false; }); updateBulk(); });
+
+      // Modals
+      function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+      document.addEventListener("click", function (e) {
+        var o = e.target.closest("[data-open]");
+        if (o) { var m = document.getElementById(o.getAttribute("data-open")); if (m) m.classList.remove("hidden"); return; }
+        var s = e.target.closest("[data-status-action]");
+        if (s) { var verb = s.getAttribute("data-status-action"); document.getElementById("status-verb").textContent = verb; document.getElementById("status-verb2").textContent = verb; document.getElementById("m-status").classList.remove("hidden"); return; }
+        if (e.target.closest("[data-close]")) closeAll();
+        var t = e.target.closest("[data-toast]");
+        if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+      });
+      [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); }); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+
+      applyFilter();
+    })();
+  </script>
+</body>
+</html>

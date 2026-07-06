@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Social · Timeline</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Social</h1>
+      <p class="text-sm text-gray-500 mt-1">128 posts &middot; 4 platforms</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <a href="social-statistics.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 16v-5m4 5V8m4 8v-3"/></svg>
+        Statistics
+      </a>
+      <a href="social-campaigns.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M4 11h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+        Content Planner
+      </a>
+      <a href="social-composer.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card hover:bg-primary-600">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+        New Post
+      </a>
+    </div>
+  </div>
+
+  <!-- Shared in-page tab nav (Timeline ACTIVE) -->
+  <nav class="flex items-center gap-6 border-b border-gray-200 mb-6 overflow-x-auto text-sm">
+    <a href="social-accounts.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Accounts</a>
+    <a href="social-timeline.html" class="pb-3 -mb-px font-medium text-primary-600 border-b-2 border-primary-500 whitespace-nowrap">Timeline</a>
+    <a href="social-composer.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Composer</a>
+    <a href="social-planner.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Planner</a>
+    <a href="social-campaigns.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Campaigns</a>
+    <a href="social-statistics.html" class="pb-3 -mb-px text-gray-500 hover:text-gray-700 whitespace-nowrap">Statistics</a>
+  </nav>
+
+  <!-- 2. Sticky filter bar -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-3 mb-4 flex flex-wrap gap-3 items-center sticky top-16 z-10" data-story="US-3.1" data-ac="AC2">
+    <div class="relative flex-1 min-w-[16rem]">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.3-4.3M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+      <input type="text" placeholder="Search 128 posts by content…" class="w-full pl-9 pr-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-card placeholder-gray-400 focus:bg-white focus:border-primary-400 focus:ring-2 focus:ring-primary-100" />
+    </div>
+    <button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3v3m8-3v3M4 8h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+      Jun 1 &ndash; Jun 26
+    </button>
+    <select class="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 focus:border-primary-400 focus:ring-2 focus:ring-primary-100" aria-label="Status">
+      <option>All statuses</option>
+      <option>Failed</option>
+      <option>Pending</option>
+      <option>Published</option>
+      <option>Scheduled</option>
+    </select>
+    <select class="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 focus:border-primary-400 focus:ring-2 focus:ring-primary-100" aria-label="Platform">
+      <option>All platforms</option>
+      <option>Facebook</option>
+      <option>Google</option>
+      <option>Instagram</option>
+      <option>LinkedIn</option>
+      <option>Twitter</option>
+    </select>
+    <div class="ml-auto inline-flex items-center bg-gray-100 rounded-card p-0.5">
+      <button id="view-list" class="inline-grid place-items-center h-8 w-8 rounded-[0.6rem] bg-primary-50 text-primary-700" aria-label="List view">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+      </button>
+      <button id="view-grid" class="inline-grid place-items-center h-8 w-8 rounded-[0.6rem] text-gray-500 hover:text-gray-700" aria-label="Grid view">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Feed -->
+  <div id="feed" class="space-y-4" data-story="US-3.1" data-ac="AC3">
+
+    <!-- (a) Facebook · Published · 5★ testimonial image -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-sm font-bold text-white" style="background:#1877f2">f</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Oggvo Realty Group</div>
+            <div class="text-xs text-gray-400">Facebook Page</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 shrink-0"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Published</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">⭐️⭐️⭐️⭐️⭐️ "Absolutely seamless from start to finish — closed two weeks ahead of schedule!" Thank you Marcus for the kind words. Thinking of selling this spring? Let's talk. #realestate #oggvorealty</p>
+      <div class="grid grid-cols-2 gap-2 mt-3 max-w-md">
+        <div class="aspect-[4/3] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+        <div class="aspect-[4/3] rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Published Jun 24, 2026 · 9:30 AM</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-edit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            Edit
+          </button>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (b) Google · Scheduled (future) -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-sm font-bold text-white" style="background:#dc4e41">G</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Oggvo Realty — Main St</div>
+            <div class="text-xs text-gray-400">Google Business Profile</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 shrink-0"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary-500 align-middle"></span>Scheduled</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Open house this Saturday 11–2 at 482 Maple Ave. Refreshments, easy parking, and a chance to tour one of the neighborhood's best-kept Craftsman homes. See you there! 🏡</p>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3v3m8-3v3M4 8h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+          <span>Scheduled for Jun 28, 2026 · 10:00 AM</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-edit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            Edit
+          </button>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (c) Instagram · Pending (queued, ≥1 media) -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-sm font-bold text-white bg-gradient-to-br from-warning-500 to-error-600">ig</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">@oggvorealty</div>
+            <div class="text-xs text-gray-400">Instagram Business</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 align-middle"></span>Pending</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">New listing alert 🔑 4 bed / 3 bath modern farmhouse, walkable to downtown. Swipe for the full tour. Link in bio to book a private showing. #justlisted #dreamhome</p>
+      <div class="grid grid-cols-3 gap-2 mt-3 max-w-md">
+        <div class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+        <div class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+        <div class="aspect-square rounded-lg bg-gray-100 grid place-items-center text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 21"/></svg></div>
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Queued Jun 26, 2026 · publishing soon</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-edit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            Edit
+          </button>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (d) LinkedIn · Published · text post -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-sm font-bold text-white" style="background:#0077b5">in</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">Oggvo Realty Group</div>
+            <div class="text-xs text-gray-400">LinkedIn Company Page</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 shrink-0"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Published</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Q2 in review: our team closed 41 transactions and welcomed two new agents to the brokerage. Grateful for every client who trusted us with one of life's biggest decisions. Here's to a strong second half. 📈</p>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Published Jun 21, 2026 · 8:00 AM</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-edit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            Edit
+          </button>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (e) Twitter / X · Failed (with FailureReason + Retry) -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-2.4" data-ac="AC1">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="grid place-items-center h-10 w-10 shrink-0 rounded-full text-sm font-bold text-white" style="background:#000">X</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-gray-900 truncate">@oggvorealty</div>
+            <div class="text-xs text-gray-400">Twitter / X</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700 shrink-0"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Failed</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-3">Mortgage rates dipped again this week 📉 If you've been waiting on the sidelines, now's a great time to get pre-approved. DM us and we'll connect you with a trusted lender. #mortgagerates #homebuying</p>
+      <div class="flex items-start gap-2 mt-3 rounded-card bg-error-100 px-3 py-2 text-xs text-error-700">
+        <svg class="h-4 w-4 shrink-0 mt-px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <span><span class="font-semibold">Failed to publish:</span> Twitter/X access token expired (HTTP 401). Reconnect the account, then retry.</span>
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+          <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Last attempted Jun 25, 2026 · 2:14 PM</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button data-open-modal="m-edit" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            Edit
+          </button>
+          <button data-retry class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0118.9 7.6M18.5 15A7 7 0 015.1 16.4"/></svg>
+            Retry
+          </button>
+          <button data-row-menu class="inline-grid place-items-center h-9 w-9 text-gray-500 rounded-card hover:bg-gray-100" aria-label="More">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 4. Infinite-scroll + states note, then one skeleton card -->
+  <p class="mock-note mt-6 mb-3">Infinite scroll appends pages while page &lt; pages. Empty: megaphone icon + 'No posts' + New Post CTA. Loading: skeleton cards.</p>
+
+  <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+    <div class="flex items-start gap-3">
+      <div class="skeleton h-10 w-10 rounded-full shrink-0"></div>
+      <div class="flex-1 space-y-2">
+        <div class="skeleton h-3.5 w-40"></div>
+        <div class="skeleton h-3 w-24"></div>
+      </div>
+      <div class="skeleton h-5 w-20 rounded-full"></div>
+    </div>
+    <div class="space-y-2 mt-4">
+      <div class="skeleton h-3 w-full"></div>
+      <div class="skeleton h-3 w-11/12"></div>
+      <div class="skeleton h-3 w-2/3"></div>
+    </div>
+  </div>
+
+  <!-- 5. Shared per-card ⋯ menu (repositioned under the clicked button) -->
+  <div id="row-menu" class="hidden fixed z-40 w-44 bg-white border border-gray-200 rounded-card shadow-pop py-1 text-sm">
+    <button data-open-modal="m-edit" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>Edit</button>
+    <a href="#" class="w-full flex items-center gap-2.5 px-3 py-2 text-gray-700 hover:bg-gray-50"><svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5m0-5l-7 7M10 5H6a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-4"/></svg>View</a>
+    <div class="my-1 border-t border-gray-100"></div>
+    <button data-open-modal="m-delete" class="w-full flex items-center gap-2.5 px-3 py-2 text-error-600 hover:bg-error-100"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg>Delete</button>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · Delete post — DELETE /social/posts/:id                -->
+  <!-- ============================================================ -->
+  <div id="m-delete" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-2.5" data-ac="AC1">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-error-100 text-error-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0v12a1 1 0 001 1h6a1 1 0 001-1V7"/></svg></span>
+          <h3 class="text-lg font-semibold text-gray-900">Delete post</h3>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <p class="font-medium text-gray-900">This removes the post from Oggvo regardless of its upstream status on the platform.</p>
+        <p>Published posts already live on the platform are not deleted there — only their record in Oggvo is removed.</p>
+        <p class="italic text-gray-500">Instagram posts can't be removed from the platform — the post is only removed from Oggvo.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-toast="Post deleted" data-toast-tone="error" data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-error-500 rounded-card hover:bg-error-600">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL · Edit post (stands in for /social/edit/[id]) — PUT /social/posts/:id -->
+  <!-- ============================================================ -->
+  <div id="m-edit" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4" data-story="US-2.3" data-ac="AC2">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-lg">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center h-9 w-9 rounded-full bg-primary-50 text-primary-600"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Edit post</h3>
+            <p class="text-xs text-gray-500">Saving re-queues the post for publishing.</p>
+          </div>
+        </div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Platform</label>
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-gray-50 text-gray-600">
+            <span class="h-5 w-5 rounded grid place-items-center text-[10px] font-bold text-white" style="background:#1877f2">f</span>
+            Facebook — platform can't be changed
+          </span>
+        </div>
+        <div>
+          <label for="edit-msg" class="block text-sm font-medium text-gray-700 mb-1.5">Message</label>
+          <textarea id="edit-msg" rows="6" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">⭐️⭐️⭐️⭐️⭐️ "Absolutely seamless from start to finish — closed two weeks ahead of schedule!" Thank you Marcus for the kind words. Thinking of selling this spring? Let's talk.</textarea>
+          <div class="mt-2 flex items-center justify-between">
+            <p class="text-xs text-warning-700 inline-flex items-center gap-1">
+              <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+              Keep it under the platform limit to avoid truncation.
+            </p>
+            <span class="text-xs text-gray-400">196 / 280 <span class="text-gray-300">(Twitter limit)</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-toast="Post re-queued" data-close class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save &amp; re-queue</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /social/posts (filters: status / platform / date / query). Retry: POST /social/posts/:id/retry. Delete: DELETE /social/posts/:id. Edit: PUT /social/posts/:id. Rows are social_posts (one per platform); fix-on-rebuild: business hours honour per-profile timezone, not hardcoded Pacific.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "social", storyDomain: "social", back: { href: "../index.html", label: "All mockups" }, route: "/social", search: "Search social…" });</script>
+<script>
+  (function () {
+    // ---- List / Grid view toggle ----
+    var feed = document.getElementById("feed");
+    var bList = document.getElementById("view-list");
+    var bGrid = document.getElementById("view-grid");
+    var onCls = ["bg-primary-50", "text-primary-700"];
+    var offCls = ["text-gray-500", "hover:text-gray-700"];
+    function setActive(active, idle) {
+      onCls.forEach(function (c) { active.classList.add(c); idle.classList.remove(c); });
+      offCls.forEach(function (c) { idle.classList.add(c); active.classList.remove(c); });
+    }
+    function setView(v) {
+      var cards = [].slice.call(feed.children);
+      if (v === "grid") {
+        feed.className = "columns-1 sm:columns-2 gap-4";
+        cards.forEach(function (c) { c.classList.add("mb-4", "break-inside-avoid"); });
+        setActive(bGrid, bList);
+      } else {
+        feed.className = "space-y-4";
+        cards.forEach(function (c) { c.classList.remove("mb-4", "break-inside-avoid"); });
+        setActive(bList, bGrid);
+      }
+    }
+    bList.addEventListener("click", function () { setView("list"); });
+    bGrid.addEventListener("click", function () { setView("grid"); });
+
+    // ---- Shared per-card ⋯ menu ----
+    var menu = document.getElementById("row-menu");
+    function closeMenu() { menu.classList.add("hidden"); }
+    [].slice.call(document.querySelectorAll("[data-row-menu]")).forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var r = btn.getBoundingClientRect();
+        menu.style.top = (r.bottom + 6) + "px";
+        menu.style.left = Math.max(8, r.right - 176) + "px";
+        menu.classList.toggle("hidden");
+      });
+    });
+
+    // ---- Retry buttons ----
+    [].slice.call(document.querySelectorAll("[data-retry]")).forEach(function (btn) {
+      btn.addEventListener("click", function () { OggvoShell.toast("Post re-queued for publishing", "success"); });
+    });
+
+    // ---- Modal open/close (shared) ----
+    function open(id) { closeMenu(); var m = document.getElementById(id); if (m) m.classList.remove("hidden"); }
+    function closeAll() { [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var opener = e.target.closest("[data-open-modal]");
+      if (opener) { e.preventDefault(); open(opener.getAttribute("data-open-modal")); return; }
+      var closer = e.target.closest("[data-close]");
+      if (closer) { closeAll(); }
+      var t = e.target.closest("[data-toast]");
+      if (t) { OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-toast-tone") || "success"); }
+      if (!e.target.closest("#row-menu") && !e.target.closest("[data-row-menu]")) closeMenu();
+    });
+    [].slice.call(document.querySelectorAll(".fixed.inset-0.z-50")).forEach(function (m) {
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeAll(); closeMenu(); } });
+  })();
+</script>
+</body></html>

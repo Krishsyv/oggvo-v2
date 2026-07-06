@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Help Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- Hero -->
+  <div class="rounded-card overflow-hidden mb-6 relative" data-story="US-S1.1" style="background:linear-gradient(135deg,#1849a9,#2e90fa)">
+    <div class="px-6 py-10 sm:py-12 text-center relative">
+      <h1 class="text-2xl sm:text-3xl font-semibold text-white">How can we help?</h1>
+      <p class="text-sm text-primary-100 mt-1.5">Search the knowledge base or browse by topic.</p>
+      <div class="relative max-w-xl mx-auto mt-5">
+        <svg class="h-5 w-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+        <input id="kb-search" type="text" placeholder="Search articles… e.g. “share a review”" class="w-full h-12 pl-11 pr-3 text-sm bg-white rounded-card shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/60" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Browse by topic -->
+  <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Browse by topic</h2>
+  <div id="topic-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8" data-story="US-S1.2">
+    <a href="article.html" data-topic="Getting Started" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.5 5 5.5.8-4 3.9 1 5.5L12 15.9 7.5 18.2l1-5.5-4-3.9L10 8z"/></svg></span><span class="font-semibold text-gray-900">Getting Started</span></div>
+      <p class="text-sm text-gray-500">Set up your profile, funnel, and first campaign. <span class="text-gray-400">· 8 articles</span></p>
+    </a>
+    <a href="article.html" data-topic="Reviews & Funnel" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.5 4.5l2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5L5 9.2l4.5-.6z"/></svg></span><span class="font-semibold text-gray-900">Reviews &amp; Funnel</span></div>
+      <p class="text-sm text-gray-500">Collect, respond to, and share reviews. <span class="text-gray-400">· 12 articles</span></p>
+    </a>
+    <a href="article.html" data-topic="Campaigns" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 9v4a1 1 0 001 1h2l4.5 4V4L7 8H5a1 1 0 00-1 1zm12.5-1a4 4 0 010 6"/></svg></span><span class="font-semibold text-gray-900">Campaigns &amp; SMS</span></div>
+      <p class="text-sm text-gray-500">Newsletters, review requests, and test sends. <span class="text-gray-400">· 9 articles</span></p>
+    </a>
+    <a href="article.html" data-topic="Contacts" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 14a4 4 0 10-8 0m12.5 4a3.5 3.5 0 00-3-3.4m-11 3.4a3.5 3.5 0 013-3.4"/></svg></span><span class="font-semibold text-gray-900">Contacts &amp; Imports</span></div>
+      <p class="text-sm text-gray-500">Upload, tag, activate, and pause contacts. <span class="text-gray-400">· 7 articles</span></p>
+    </a>
+    <a href="article.html" data-topic="Connect" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg></span><span class="font-semibold text-gray-900">Connect (2-way SMS)</span></div>
+      <p class="text-sm text-gray-500">Keywords, QR codes, and A2P compliance. <span class="text-gray-400">· 6 articles</span></p>
+    </a>
+    <a href="article.html" data-topic="Social & Widgets" class="topic-card block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+      <div class="flex items-center gap-3 mb-1.5"><span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.2"/><circle cx="17" cy="6" r="2.2"/><circle cx="17" cy="18" r="2.2"/><path stroke-linecap="round" d="M8.3 10.9l6.4-3.5m0 9.2L8.3 13.1"/></svg></span><span class="font-semibold text-gray-900">Social &amp; Widgets</span></div>
+      <p class="text-sm text-gray-500">Post, schedule, and embed review widgets. <span class="text-gray-400">· 10 articles</span></p>
+    </a>
+  </div>
+
+  <!-- Popular articles + contact -->
+  <div class="flex flex-col lg:flex-row gap-6 items-start">
+    <div class="w-full lg:w-3/5 bg-white border border-gray-200 rounded-card shadow-card" data-story="US-S1.3">
+      <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-sm font-semibold text-gray-900">Popular articles</h3>
+        <span id="kb-count" class="text-xs text-gray-400">6 articles</span>
+      </div>
+      <div id="kb-list" class="p-2 space-y-0.5"></div>
+      <div id="kb-empty" class="hidden px-4 py-10 text-center text-sm text-gray-500">No articles match your search.</div>
+    </div>
+
+    <div class="w-full lg:w-2/5 space-y-4" data-story="US-S1.4">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <h3 class="text-base font-medium text-gray-900">Still need help?</h3>
+        <p class="text-sm text-gray-500 mt-1 mb-4">Our team typically replies within a few hours.</p>
+        <a href="#" class="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600 mb-2">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 4V6a1 1 0 011-1z"/></svg>
+          Start a chat
+        </a>
+        <a href="#" class="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+          <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          Email support
+        </a>
+      </div>
+      <a href="../tutorials/tutorials.html" class="block bg-white border border-gray-200 rounded-card shadow-card p-5 hover:border-primary-300 transition">
+        <div class="flex items-center gap-3">
+          <span class="h-9 w-9 rounded-card bg-primary-100 text-primary-600 grid place-items-center"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5v14l11-7z"/></svg></span>
+          <div><div class="font-semibold text-gray-900 text-sm">Prefer video?</div><div class="text-xs text-gray-500">Watch the tutorials →</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">v1 <code>/support</code> + <code>/support/knowledgebase</code>. v2: <code>GET /support/articles</code> (topic + search); article detail → <a href="article.html" class="text-primary-600 hover:underline">article.html</a>.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "support", storyDomain: "support", back: { href: "../index.html", label: "All mockups" }, route: "/support", search: "Search…" });</script>
+<script>
+(function () {
+  var ARTICLES = [
+    { t:"How to share a review to social", topic:"Reviews & Funnel", read:"3 min" },
+    { t:"Import contacts from a CSV", topic:"Contacts", read:"4 min" },
+    { t:"Set up a review-request campaign", topic:"Campaigns", read:"5 min" },
+    { t:"Connect your Google Business Profile", topic:"Getting Started", read:"2 min" },
+    { t:"Add a keyword auto-reply with a QR code", topic:"Connect", read:"4 min" },
+    { t:"Embed the review stream widget", topic:"Social & Widgets", read:"3 min" }
+  ];
+  var list = document.getElementById("kb-list"), empty = document.getElementById("kb-empty"), count = document.getElementById("kb-count");
+  function render(q) {
+    q = (q || "").toLowerCase();
+    var shown = 0;
+    list.innerHTML = ARTICLES.map(function (a) {
+      return '<a href="article.html" data-t="' + a.t.toLowerCase() + '" class="kb-row flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-gray-50">' +
+        '<span class="min-w-0"><span class="block text-sm font-medium text-gray-800 truncate">' + a.t + '</span>' +
+        '<span class="block text-xs text-gray-400 mt-0.5">' + a.topic + ' · ' + a.read + ' read</span></span>' +
+        '<svg class="h-4 w-4 text-gray-300 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9 6l6 6-6 6"/></svg></a>';
+    }).join("");
+    [].slice.call(list.querySelectorAll(".kb-row")).forEach(function (el) {
+      var show = !q || el.getAttribute("data-t").indexOf(q) !== -1;
+      el.style.display = show ? "" : "none"; if (show) shown++;
+    });
+    empty.classList.toggle("hidden", shown > 0);
+    count.textContent = shown + " article" + (shown === 1 ? "" : "s");
+  }
+  document.getElementById("kb-search").addEventListener("input", function (e) { render(e.target.value); });
+  render("");
+})();
+</script>
+</body></html>

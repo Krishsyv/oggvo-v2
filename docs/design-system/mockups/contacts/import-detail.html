@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Import Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+      <!-- 1. PageHeader -->
+      <div class="flex items-start justify-between gap-4 flex-wrap mb-6">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-900">June Leads</h1>
+          <p class="text-sm text-gray-500 mt-1">4,210 Rows</p>
+        </div>
+        <div class="flex flex-col items-end gap-1">
+          <div class="flex items-center gap-2">
+            <button class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh List
+            </button>
+            <button data-story="US-5.3" data-ac="AC4" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download File
+            </button>
+          </div>
+          <p class="text-xs text-gray-400">Exports the original rows as an .xlsx file.</p>
+        </div>
+      </div>
+
+      <!-- 2. Status tabs -->
+      <div class="border-b border-gray-200 mb-5">
+        <nav id="detail-tabs" class="flex gap-6 text-sm font-medium" data-story="US-5.3" data-ac="AC1">
+          <button type="button" data-value="imported" class="flex items-center gap-2 py-3 text-primary-600 border-b-2 border-primary-500">
+            Imported
+            <span class="inline-flex items-center justify-center min-w-[1.5rem] px-1.5 py-0.5 text-xs font-semibold rounded-full bg-success-100 text-success-700">3,980</span>
+          </button>
+          <button type="button" data-value="duplicate" class="flex items-center gap-2 py-3 text-gray-500 hover:text-gray-700">
+            Duplicate
+            <span class="inline-flex items-center justify-center min-w-[1.5rem] px-1.5 py-0.5 text-xs font-semibold rounded-full bg-warning-100 text-warning-700">198</span>
+          </button>
+          <button type="button" data-value="failed" class="flex items-center gap-2 py-3 text-gray-500 hover:text-gray-700">
+            Failed
+            <span class="inline-flex items-center justify-center min-w-[1.5rem] px-1.5 py-0.5 text-xs font-semibold rounded-full bg-error-100 text-error-700">32</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- 3. Search row -->
+      <div class="mb-3" data-story="US-5.3" data-ac="AC3">
+        <div class="flex items-end gap-3 flex-wrap">
+          <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Search by</label>
+            <div class="relative">
+              <select id="searchby" class="appearance-none pl-3 pr-9 py-2 text-sm bg-white border border-gray-300 rounded-card text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                <option>Select a field…</option>
+                <option>First Name</option>
+                <option>Last Name</option>
+                <option>Email</option>
+                <option>Phone</option>
+              </select>
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[240px]">
+            <label class="block text-xs font-medium text-gray-500 mb-1">Search term</label>
+            <div id="search-term-wrap" class="relative opacity-60">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="search-term" disabled placeholder="Search…" class="w-full pl-9 pr-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-card cursor-not-allowed" />
+            </div>
+            <p id="search-hint" class="text-xs text-gray-400 mt-1">Select a field to search</p>
+          </div>
+        </div>
+        <p class="mock-note mt-2">When searching, a Status column is added to the results table.</p>
+      </div>
+
+      <!-- 4. Imported table -->
+      <div id="card-imported" class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden mb-2" data-story="US-5.3" data-ac="AC2">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+              <tr>
+                <th class="text-left font-medium px-4 py-3">First Name</th>
+                <th class="text-left font-medium px-4 py-3">Last Name</th>
+                <th class="text-left font-medium px-4 py-3">Tags</th>
+                <th class="text-left font-medium px-4 py-3">Email Address</th>
+                <th class="text-left font-medium px-4 py-3">Phone</th>
+                <th class="text-left font-medium px-4 py-3">Birthday</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Olivia</td>
+                <td class="px-4 py-3 text-gray-900">Bennett</td>
+                <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-primary-50 text-primary-700">VIP</span></td>
+                <td class="px-4 py-3 text-gray-600">olivia.bennett@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">(212) 555-0148</td>
+                <td class="px-4 py-3 text-gray-600">Mar 14</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Marcus</td>
+                <td class="px-4 py-3 text-gray-900">Hwang</td>
+                <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">Lead</span></td>
+                <td class="px-4 py-3 text-gray-600">m.hwang@outlook.com</td>
+                <td class="px-4 py-3 text-gray-600">(415) 555-0223</td>
+                <td class="px-4 py-3 text-gray-600">Jul 02</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Priya</td>
+                <td class="px-4 py-3 text-gray-900">Nair</td>
+                <td class="px-4 py-3 flex flex-wrap gap-1"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-primary-50 text-primary-700">VIP</span><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">June</span></td>
+                <td class="px-4 py-3 text-gray-600">priya.nair@yahoo.com</td>
+                <td class="px-4 py-3 text-gray-600">(312) 555-0190</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">James</td>
+                <td class="px-4 py-3 text-gray-900">O'Connor</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">james.oconnor@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">(617) 555-0102</td>
+                <td class="px-4 py-3 text-gray-600">Nov 28</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Sofia</td>
+                <td class="px-4 py-3 text-gray-900">Reyes</td>
+                <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">Lead</span></td>
+                <td class="px-4 py-3 text-gray-600">sofia.reyes@icloud.com</td>
+                <td class="px-4 py-3 text-gray-600">(305) 555-0177</td>
+                <td class="px-4 py-3 text-gray-600">Jan 09</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Daniel</td>
+                <td class="px-4 py-3 text-gray-900">Foster</td>
+                <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">June</span></td>
+                <td class="px-4 py-3 text-gray-600">daniel.foster@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">(206) 555-0134</td>
+                <td class="px-4 py-3 text-gray-600">Aug 17</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Amara</td>
+                <td class="px-4 py-3 text-gray-900">Okafor</td>
+                <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 text-xs rounded-full bg-primary-50 text-primary-700">VIP</span></td>
+                <td class="px-4 py-3 text-gray-600">amara.okafor@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">(404) 555-0166</td>
+                <td class="px-4 py-3 text-gray-600">May 21</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Liam</td>
+                <td class="px-4 py-3 text-gray-900">Schmidt</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">liam.schmidt@web.de</td>
+                <td class="px-4 py-3 text-gray-600">(702) 555-0119</td>
+                <td class="px-4 py-3 text-gray-600">Oct 03</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mb-8">Empty state shows <span class="font-medium text-gray-500">"No Data"</span>; while loading, skeleton rows render (sample below).</p>
+
+      <!-- 5. Failed tab example -->
+      <p id="note-failed" class="mock-note mb-2 hidden">Failed-tab layout — same columns as Imported plus a <span class="font-medium">Reason</span> column explaining why each row could not be imported.</p>
+      <div id="card-failed" class="hidden bg-white border border-gray-200 rounded-card shadow-card overflow-hidden mb-2" data-story="US-5.3" data-ac="AC2">
+        <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/60">
+          <span class="text-sm font-semibold text-gray-700">Failed tab — example</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+              <tr>
+                <th class="text-left font-medium px-4 py-3">First Name</th>
+                <th class="text-left font-medium px-4 py-3">Last Name</th>
+                <th class="text-left font-medium px-4 py-3">Tags</th>
+                <th class="text-left font-medium px-4 py-3">Email Address</th>
+                <th class="text-left font-medium px-4 py-3">Phone</th>
+                <th class="text-left font-medium px-4 py-3">Birthday</th>
+                <th class="text-left font-medium px-4 py-3">Reason</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Ethan</td>
+                <td class="px-4 py-3 text-gray-900">Park</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">ethan.park@@gmail</td>
+                <td class="px-4 py-3 text-gray-600">(213) 555-0144</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center gap-1 text-xs text-error-600" title="The email address is not a valid format.">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Invalid email
+                  </span>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">noname@example.com</td>
+                <td class="px-4 py-3 text-gray-600">(786) 555-0188</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center gap-1 text-xs text-error-600" title="First and last name are both empty.">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Missing name
+                  </span>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Chloe</td>
+                <td class="px-4 py-3 text-gray-900">Martin</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">chloe.martin@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">(415) 555-0223</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center gap-1 text-xs text-error-600" title="Phone number already exists on another contact in this import.">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Duplicate phone
+                  </span>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-gray-900">Noah</td>
+                <td class="px-4 py-3 text-gray-900">Vance</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3 text-gray-600">noah.vance@gmail.com</td>
+                <td class="px-4 py-3 text-gray-600">555-12</td>
+                <td class="px-4 py-3 text-gray-400">—</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center gap-1 text-xs text-error-600" title="Phone number is too short to be valid.">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Invalid phone
+                  </span>
+                </td>
+              </tr>
+              <!-- Skeleton sample row (loading state) -->
+              <tr>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-16 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-16 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-10 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-40 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-24 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-12 rounded"></div></td>
+                <td class="px-4 py-3"><div class="skeleton h-4 w-20 rounded"></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 6. Infinite scroll affordance -->
+      <div class="flex flex-col items-center gap-3 py-6">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <svg class="animate-spin h-4 w-4 text-primary-500" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.37 0 0 5.37 0 12h4z"/></svg>
+          Loading more…
+        </div>
+        <button data-toast="Loaded 25 more rows" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Load more</button>
+      </div>
+      <p class="mock-note text-center">DynamoDB-style key-cursor pagination (infinite scroll); switching tab/search resets rows + cursor. Schema gap: per-row outcomes need a <span class="font-mono">contact_import_rows</span> table in v2.</p>
+
+    </main>
+  <script src="../assets/shell.js"></script>
+  <script>
+    OggvoShell.mount({
+      active: "contacts",
+      storyDomain: "contacts",
+      back: { href: "imports-list.html", label: "Back to Imports" },
+      route: "/contacts/imports/318",
+      search: "Search contacts, imports, settings…",
+    });
+  </script>
+  <script>
+    (function () {
+      var cardImported = document.getElementById("card-imported");
+      var cardFailed = document.getElementById("card-failed");
+      var noteFailed = document.getElementById("note-failed");
+      OggvoShell.buttonGroup(document.getElementById("detail-tabs"), {
+        active: "text-primary-600 border-b-2 border-primary-500",
+        inactive: "text-gray-500 hover:text-gray-700",
+        onChange: function (v) {
+          var failed = v === "failed";
+          cardImported.classList.toggle("hidden", failed);
+          cardFailed.classList.toggle("hidden", !failed);
+          noteFailed.classList.toggle("hidden", !failed);
+        },
+      });
+
+      var sb = document.getElementById("searchby");
+      var inp = document.getElementById("search-term");
+      var wrap = document.getElementById("search-term-wrap");
+      var hint = document.getElementById("search-hint");
+      sb.addEventListener("change", function () {
+        var on = sb.value.indexOf("Select a field") === -1;
+        inp.disabled = !on;
+        wrap.classList.toggle("opacity-60", !on);
+        inp.classList.toggle("cursor-not-allowed", !on);
+        inp.classList.toggle("bg-gray-50", !on);
+        inp.classList.toggle("bg-white", on);
+        hint.textContent = on ? "Searching adds a Status column to the results." : "Select a field to search";
+      });
+
+      document.addEventListener("click", function (e) {
+        var t = e.target.closest("[data-toast]");
+        if (t) OggvoShell.toast(t.getAttribute("data-toast"), "success");
+      });
+    })();
+  </script>
+</body>
+</html>

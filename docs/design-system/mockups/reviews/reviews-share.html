@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Share Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-2">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Share Review</h1>
+      <p class="text-sm text-gray-500 mt-1">Generate a branded review image and publish or schedule it to your social pages.</p>
+      <p class="mock-note mt-2">Same flow as the Social <a href="../social/social-testimonial.html" class="text-primary-600 hover:underline">New Testimonial</a> composer (v1: <code>/social/create/testimonial?review=:id</code>).</p>
+    </div>
+    <a href="reviews-list.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+      Back to Reviews
+    </a>
+  </div>
+  <p class="text-xs text-gray-400 mb-6 flex items-center gap-1.5">
+    <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.5 4.5l2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5L5 9.2l4.5-.6 2-4.1z"/></svg>
+    Sharing review from <span class="font-medium text-gray-600">Marcus Reyes</span> &middot; Google &middot; 5&#9733;
+  </p>
+
+  <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+    <!-- ============ LEFT: composer form (~3/5) ============ -->
+    <div class="w-full lg:w-3/5 space-y-5">
+
+      <!-- Card A — Source review (read-only) -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R4.1">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-base font-medium text-gray-900">Source review</h2>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">Read-only</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">MR</div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="font-semibold text-gray-900">Marcus Reyes</span>
+                <div class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Google</span>
+                <span class="text-xs text-gray-500 whitespace-nowrap">Jun 22, 2026</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-700 mt-2">Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule.</p>
+          </div>
+        </div>
+        <p class="mock-note mt-4">Maps to readonly fields Testimonial / First Name / Rating / Profile Picture.</p>
+      </section>
+
+      <!-- Card B — Image style (ReviewStyleParams) -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R4.1">
+        <h2 class="text-base font-medium text-gray-900 mb-1">Image style</h2>
+        <p class="text-xs text-gray-500 mb-4">Configure the 1080&#215;1080 branded review image.</p>
+
+        <!-- Testimonial style -->
+        <div class="mb-6" data-story="US-R4.1" data-ac="AC2">
+          <label class="text-sm font-medium text-gray-700 block mb-2">Testimonial style</label>
+          <div id="type-tiles" class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+            <button type="button" data-type="1" class="type-tile relative rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white p-2 text-left focus:outline-none">
+              <svg viewBox="0 0 60 60" class="w-full h-12 rounded mb-1.5"><rect width="60" height="60" rx="4" fill="#eef7ff"/><rect x="8" y="10" width="44" height="6" rx="2" fill="#84caff"/><rect x="8" y="22" width="36" height="4" rx="2" fill="#bce0ff"/><rect x="8" y="30" width="40" height="4" rx="2" fill="#bce0ff"/><circle cx="13" cy="48" r="4" fill="#59afff"/><rect x="22" y="46" width="22" height="4" rx="2" fill="#bce0ff"/></svg>
+              <span class="text-xs font-medium text-gray-700 block text-center">Type 1</span>
+            </button>
+            <button type="button" data-type="2" class="type-tile relative rounded-card border-2 border-gray-200 bg-white p-2 text-left hover:border-gray-300 focus:outline-none">
+              <svg viewBox="0 0 60 60" class="w-full h-12 rounded mb-1.5"><rect width="60" height="60" rx="4" fill="#f2f4f7"/><circle cx="44" cy="44" r="12" fill="#a3cd61"/><circle cx="44" cy="38" r="4" fill="#fff"/><rect x="8" y="10" width="34" height="5" rx="2" fill="#d0d5dd"/><rect x="8" y="20" width="28" height="4" rx="2" fill="#e4e7ec"/></svg>
+              <span class="text-xs font-medium text-gray-700 block text-center">Type 2</span>
+            </button>
+            <button type="button" data-type="3" class="type-tile relative rounded-card border-2 border-gray-200 bg-white p-2 text-left hover:border-gray-300 focus:outline-none">
+              <svg viewBox="0 0 60 60" class="w-full h-12 rounded mb-1.5"><rect width="60" height="60" rx="4" fill="#ac7d88"/><circle cx="30" cy="16" r="6" fill="#fff"/><rect x="14" y="30" width="32" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="18" y="40" width="24" height="4" rx="2" fill="#fff" opacity=".6"/></svg>
+              <span class="text-xs font-medium text-gray-700 block text-center">Type 3</span>
+            </button>
+            <button type="button" data-type="4" class="type-tile relative rounded-card border-2 border-gray-200 bg-white p-2 text-left hover:border-gray-300 focus:outline-none">
+              <svg viewBox="0 0 60 60" class="w-full h-12 rounded mb-1.5"><rect width="60" height="60" rx="4" fill="#ec994b"/><rect x="10" y="12" width="40" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="10" y="22" width="32" height="4" rx="2" fill="#fff" opacity=".6"/><rect x="16" y="42" width="28" height="9" rx="4" fill="#fff"/></svg>
+              <span class="text-xs font-medium text-gray-700 block text-center">Type 4</span>
+            </button>
+            <button type="button" data-type="5" class="type-tile relative rounded-card border-2 border-gray-200 bg-white p-2 text-left hover:border-gray-300 focus:outline-none">
+              <svg viewBox="0 0 60 60" class="w-full h-12 rounded mb-1.5"><rect width="60" height="60" rx="4" fill="#417d7a"/><circle cx="14" cy="14" r="5" fill="#fff"/><rect x="24" y="11" width="24" height="4" rx="2" fill="#fff" opacity=".8"/><rect x="10" y="26" width="40" height="4" rx="2" fill="#fff" opacity=".55"/><rect x="16" y="44" width="28" height="9" rx="4" fill="#82dbd8"/></svg>
+              <span class="text-xs font-medium text-gray-700 block text-center">Type 5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Version (color theme) -->
+        <div class="mb-6" data-story="US-R4.1" data-ac="AC3">
+          <label class="text-sm font-medium text-gray-700 block mb-2">Version <span class="text-gray-400 font-normal">(color theme)</span></label>
+          <div id="version-swatches" class="flex flex-wrap items-center gap-2.5">
+            <button type="button" data-version="blue" data-color="#417D7A" title="Viridian Green" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-primary-500" style="background:#417D7A"></button>
+            <button type="button" data-version="aquamarine" data-color="#82DBD8" title="Deep Aquamarine" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#82DBD8"></button>
+            <button type="button" data-version="rose" data-color="#AC7D88" title="Turkish Rose" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#AC7D88"></button>
+            <button type="button" data-version="yellow" data-color="#EC994B" title="Royal Orange" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#EC994B"></button>
+            <button type="button" data-version="green" data-color="#A3CD61" title="Green Yellow" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#A3CD61"></button>
+            <button type="button" data-version="red" data-color="#F24A72" title="Infra Red" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#F24A72"></button>
+            <button type="button" data-version="custom" data-color="#2E90FA" title="Custom" class="version-swatch h-10 w-10 rounded-card ring-2 ring-offset-2 ring-transparent grid place-items-center text-gray-500 border border-dashed border-gray-300 bg-white">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/></svg>
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span id="version-name" class="text-xs text-gray-500">Viridian Green</span>
+            <span class="text-xs text-gray-300">&middot;</span>
+            <span id="version-hex" class="text-xs font-mono text-gray-500">#417D7A</span>
+          </div>
+          <div id="custom-color-wrap" class="hidden mt-3 flex items-center gap-2">
+            <input id="custom-color" type="color" value="#2E90FA" class="h-10 w-12 rounded-card border border-gray-300 bg-white p-1 cursor-pointer" />
+            <input id="custom-hex" type="text" value="#2E90FA" maxlength="7" class="h-10 px-3 w-32 rounded-card border border-gray-300 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+        </div>
+
+        <!-- Person / avatar illustration -->
+        <div class="mb-6" id="person-wrap" data-story="US-R4.1" data-ac="AC4">
+          <div class="flex items-center justify-between mb-2">
+            <label class="text-sm font-medium text-gray-700">Person / avatar illustration</label>
+            <span id="person-hint" class="text-[11px] font-medium text-gray-400 inline-flex items-center gap-1">
+              <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8h.01M11 12h1v4h1"/></svg>
+              Type 2 only
+            </span>
+          </div>
+          <div id="person-row" class="grid grid-cols-3 sm:grid-cols-6 gap-2 opacity-50 pointer-events-none">
+            <button type="button" data-person="guy1" class="person-opt rounded-card border-2 border-primary-500 bg-white py-2 text-xs font-medium text-gray-700">Guy 1</button>
+            <button type="button" data-person="guy2" class="person-opt rounded-card border-2 border-gray-200 bg-white py-2 text-xs font-medium text-gray-700 hover:border-gray-300">Guy 2</button>
+            <button type="button" data-person="guy3" class="person-opt rounded-card border-2 border-gray-200 bg-white py-2 text-xs font-medium text-gray-700 hover:border-gray-300">Guy 3</button>
+            <button type="button" data-person="girl1" class="person-opt rounded-card border-2 border-gray-200 bg-white py-2 text-xs font-medium text-gray-700 hover:border-gray-300">Girl 1</button>
+            <button type="button" data-person="girl2" class="person-opt rounded-card border-2 border-gray-200 bg-white py-2 text-xs font-medium text-gray-700 hover:border-gray-300">Girl 2</button>
+            <button type="button" data-person="girl3" class="person-opt rounded-card border-2 border-gray-200 bg-white py-2 text-xs font-medium text-gray-700 hover:border-gray-300">Girl 3</button>
+          </div>
+        </div>
+
+        <!-- Toggles -->
+        <div class="space-y-1" data-story="US-R4.1" data-ac="AC2">
+          <label class="text-sm font-medium text-gray-700 block mb-1">Elements</label>
+          <!-- Brand Logo -->
+          <div class="toggle-row flex items-center justify-between py-2.5 border-b border-gray-100" data-toggle="brand_logo" data-types="1,2">
+            <div>
+              <span class="text-sm text-gray-700">Brand Logo</span>
+              <span class="toggle-avail text-[11px] text-gray-400 ml-2">Type 1 &amp; 2</span>
+            </div>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+          <!-- Source Logo -->
+          <div class="toggle-row flex items-center justify-between py-2.5 border-b border-gray-100" data-toggle="source_logo" data-types="1,2">
+            <div>
+              <span class="text-sm text-gray-700">Source Logo</span>
+              <span class="toggle-avail text-[11px] text-gray-400 ml-2">Type 1 &amp; 2</span>
+            </div>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+          <!-- Reviewer Name -->
+          <div class="toggle-row flex items-center justify-between py-2.5 border-b border-gray-100" data-toggle="reviewer_name" data-types="1,2,3,4,5">
+            <div>
+              <span class="text-sm text-gray-700">Reviewer Name</span>
+              <span class="toggle-avail text-[11px] text-gray-400 ml-2">Type 1&ndash;5</span>
+            </div>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+          <!-- Reviewer Image -->
+          <div class="toggle-row flex items-center justify-between py-2.5 border-b border-gray-100" data-toggle="reviewer_image" data-types="1,3,4,5">
+            <div>
+              <span class="text-sm text-gray-700">Reviewer Image</span>
+              <span class="toggle-avail text-[11px] text-gray-400 ml-2">Type 1, 3, 4, 5</span>
+            </div>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+          <!-- Action Button -->
+          <div class="toggle-row flex items-center justify-between py-2.5" data-toggle="action_button" data-types="4,5">
+            <div>
+              <span class="text-sm text-gray-700">Action Button <span class="text-gray-400">&ldquo;Learn More&rdquo;</span></span>
+              <span class="toggle-avail text-[11px] text-gray-400 ml-2">Type 4 &amp; 5</span>
+            </div>
+            <button type="button" role="switch" aria-checked="true" class="ds-switch relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="ds-knob inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button>
+          </div>
+        </div>
+
+        <p class="mock-note mt-4">GET /reviews/:id/image?type&amp;version&amp;custom_color&amp;brand_logo&amp;source_logo&amp;reviewer_name&amp;reviewer_image&amp;action_button&amp;person &mdash; BF-004: custom_color must be normalized once server-side so /image, /single and /share share one cache hash.</p>
+      </section>
+
+      <!-- Card C — Message -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R4.2">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-base font-medium text-gray-900">Message</h2>
+          <div class="relative">
+            <button id="placeholder-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              Insert placeholder
+              <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="placeholder-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-card shadow-pop p-1.5 z-30">
+              <button type="button" data-token="[[platform]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[platform]]</span><span class="text-xs text-gray-400">Google, Facebook…</span></button>
+              <button type="button" data-token="[[page]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[page]]</span><span class="text-xs text-gray-400">connected account</span></button>
+              <button type="button" data-token="[[rating]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[rating]]</span><span class="text-xs text-gray-400">e.g. 5</span></button>
+              <button type="button" data-token="[[link]]" class="ph-item w-full flex items-center justify-between gap-2 px-3 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100"><span class="font-mono text-xs text-primary-700">[[link]]</span><span class="text-xs text-gray-400">link to review</span></button>
+            </div>
+          </div>
+        </div>
+        <textarea id="message" rows="3" class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y">New Review! Go check it out! [[link]]</textarea>
+        <div class="flex items-center justify-between mt-1.5">
+          <span class="text-xs text-gray-400">Default when empty: &ldquo;New Review!&rdquo;</span>
+          <span id="char-count" class="text-xs text-gray-400">36 chars</span>
+        </div>
+      </section>
+
+      <!-- Card D — Platforms -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R4.3" data-ac="AC1">
+        <h2 class="text-base font-medium text-gray-900 mb-3">Platforms</h2>
+        <div class="space-y-1">
+          <label class="plat-row flex items-center justify-between py-2.5 border-b border-gray-100 cursor-pointer">
+            <span class="inline-flex items-center gap-2.5">
+              <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#1877f2">F</span>
+              <span class="text-sm text-gray-700">Facebook</span>
+            </span>
+            <input type="checkbox" class="plat-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" data-platform="Facebook" checked />
+          </label>
+          <label class="plat-row flex items-center justify-between py-2.5 border-b border-gray-100 cursor-pointer">
+            <span class="inline-flex items-center gap-2.5">
+              <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#E1306C">I</span>
+              <span class="text-sm text-gray-700">Instagram</span>
+            </span>
+            <input type="checkbox" class="plat-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" data-platform="Instagram" checked />
+          </label>
+          <label class="plat-row flex items-center justify-between py-2.5 border-b border-gray-100 cursor-pointer">
+            <span class="inline-flex items-center gap-2.5">
+              <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#dc4e41">G</span>
+              <span class="text-sm text-gray-700">Google</span>
+            </span>
+            <input type="checkbox" class="plat-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" data-platform="Google" />
+          </label>
+          <label class="plat-row flex items-center justify-between py-2.5 border-b border-gray-100 opacity-60 cursor-not-allowed">
+            <span class="inline-flex items-center gap-2.5">
+              <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#0077b5">in</span>
+              <span class="text-sm text-gray-700">LinkedIn <span class="text-[11px] text-gray-400 ml-1">Requires completed page setup</span></span>
+            </span>
+            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-500" data-platform="LinkedIn" disabled />
+          </label>
+          <label class="plat-row flex items-center justify-between py-2.5 cursor-pointer">
+            <span class="inline-flex items-center gap-2.5">
+              <span class="grid place-items-center h-7 w-7 rounded-full text-[11px] font-bold text-white" style="background:#000">X</span>
+              <span class="text-sm text-gray-700">Twitter</span>
+            </span>
+            <input type="checkbox" class="plat-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" data-platform="Twitter" />
+          </label>
+        </div>
+      </section>
+
+      <!-- Card E — Schedule & publish -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="US-R4.3">
+        <h2 class="text-base font-medium text-gray-900 mb-3">Schedule &amp; publish</h2>
+        <div id="when-group" class="inline-flex items-center bg-gray-100 rounded-card p-0.5 mb-4" data-story="US-R4.3" data-ac="AC4">
+          <button type="button" data-value="now" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] bg-white text-primary-700 shadow-card">Post now</button>
+          <button type="button" data-value="schedule" class="px-4 py-1.5 text-sm font-medium rounded-[0.6rem] text-gray-500">Schedule</button>
+        </div>
+
+        <div id="schedule-fields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1">Date</label>
+            <input id="sched-date" type="date" value="2026-06-27" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1">Time</label>
+            <input id="sched-time" type="time" value="09:30" class="h-10 px-3 w-full rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <p class="mock-note sm:col-span-2">Stored in your profile timezone (America/New_York). Past times (&lt; now &minus; 2 min) are rejected.</p>
+        </div>
+
+        <div class="flex items-center justify-between gap-2 pt-1" data-story="US-R4.3" data-ac="AC3">
+          <button id="reset-btn" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Reset</button>
+          <button id="post-btn" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l14-7-5 14-2.5-5.5L5 12z"/></svg>
+            <span id="post-btn-label">Post Now</span>
+          </button>
+        </div>
+        <p class="mock-note mt-4">POST /reviews/:id/share { image_params, message, platforms[], scheduled_at? } &mdash; honours per-profile timezone.</p>
+      </section>
+
+    </div>
+
+    <!-- ============ RIGHT: sticky live preview (~2/5) ============ -->
+    <div class="w-full lg:w-2/5 lg:sticky lg:top-20 space-y-4">
+
+      <!-- 1080x1080 preview -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-medium text-gray-900">Live preview</h3>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-success-500 align-middle"></span>Ready</span>
+        </div>
+        <div id="preview-card" class="aspect-square w-full rounded-card overflow-hidden relative grid place-items-center text-center p-8" style="background:#417D7A">
+          <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(0,0,0,.18))"></div>
+          <div class="relative flex flex-col items-center gap-4 text-white w-full">
+            <span id="pv-brand" class="absolute -top-2 left-0 inline-flex items-center px-2.5 py-1 rounded-card bg-white/90 text-[11px] font-bold text-gray-800">ACME</span>
+            <span id="pv-source" class="absolute -top-2 right-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-card bg-white/90 text-[11px] font-bold" style="color:#dc4e41">G&nbsp;Google</span>
+            <div class="text-warning-300 text-2xl tracking-wide mt-6" style="color:#FACA15">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="text-base sm:text-lg font-medium leading-snug max-w-[18rem]">&ldquo;Absolutely seamless from start to finish. The team kept me updated at every step and closed two weeks ahead of schedule.&rdquo;</p>
+            <div class="flex items-center gap-2.5 mt-1">
+              <span id="pv-avatar" class="h-9 w-9 rounded-full bg-white/90 grid place-items-center text-sm font-semibold text-gray-700">MR</span>
+              <span id="pv-name" class="text-sm font-semibold">Marcus Reyes</span>
+            </div>
+            <button id="pv-action" type="button" class="mt-2 inline-flex items-center px-4 py-1.5 rounded-full bg-white text-sm font-semibold" style="color:#417D7A">Learn More</button>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-2 text-center">1080 &#215; 1080 &middot; JPG</p>
+      </div>
+
+      <!-- Loading + error states (annotated examples) -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white border border-gray-200 rounded-card shadow-card p-3">
+          <div class="skeleton aspect-square w-full rounded-card mb-2"></div>
+          <p class="mock-note text-center">Loading state</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-card shadow-card p-3">
+          <div class="aspect-square w-full rounded-card bg-error-100 grid place-items-center mb-2">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700"><span class="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-error-500 align-middle"></span>Render failed &middot; Retry</span>
+          </div>
+          <p class="mock-note text-center">Error state</p>
+        </div>
+      </div>
+
+      <!-- Per-platform mini social-card preview -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+        <h3 class="text-sm font-medium text-gray-900 mb-3">Facebook preview</h3>
+        <div class="border border-gray-200 rounded-card overflow-hidden">
+          <div class="flex items-center gap-2.5 p-3">
+            <span class="h-8 w-8 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-[11px] font-semibold text-white">AC</span>
+            <div class="leading-tight">
+              <div class="text-sm font-semibold text-gray-900">Acme Co</div>
+              <div class="text-xs text-gray-400">Just now &middot; <span class="inline-block">&#127758;</span></div>
+            </div>
+          </div>
+          <p id="fb-message" class="px-3 pb-3 text-sm text-gray-700">New Review! Go check it out! https://oggv.co/r/8fa2</p>
+          <div class="aspect-square w-full" style="background:#417D7A" id="fb-thumb"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "reviews", storyDomain: "reviews", back: { href: "reviews-list.html", label: "Reviews" }, route: "/reviews/share", search: "Search reviews…" });</script>
+<script>
+(function () {
+  var VERSIONS = {
+    blue: { name: "Viridian Green", color: "#417D7A" },
+    aquamarine: { name: "Deep Aquamarine", color: "#82DBD8" },
+    rose: { name: "Turkish Rose", color: "#AC7D88" },
+    yellow: { name: "Royal Orange", color: "#EC994B" },
+    green: { name: "Green Yellow", color: "#A3CD61" },
+    red: { name: "Infra Red", color: "#F24A72" },
+    custom: { name: "Custom", color: "#2E90FA" }
+  };
+  // toggle (data-toggle) -> array of types it is available for
+  var AVAIL = {
+    brand_logo: [1, 2],
+    source_logo: [1, 2],
+    reviewer_name: [1, 2, 3, 4, 5],
+    reviewer_image: [1, 3, 4, 5],
+    action_button: [4, 5]
+  };
+
+  var state = { type: 1, version: "blue", color: "#417D7A", person: "guy1", whenMode: "now" };
+
+  // ---- helpers ----
+  function setSwitch(btn, on) {
+    var knob = btn.querySelector(".ds-knob");
+    btn.setAttribute("aria-checked", on ? "true" : "false");
+    btn.classList.toggle("bg-primary-500", on);
+    btn.classList.toggle("bg-gray-300", !on);
+    knob.classList.toggle("translate-x-5", on);
+    knob.classList.toggle("translate-x-0.5", !on);
+  }
+  function rowIsOn(row) {
+    return row.querySelector(".ds-switch").getAttribute("aria-checked") === "true";
+  }
+  function toggleVal(name) {
+    var row = document.querySelector('[data-toggle="' + name + '"]');
+    if (!row) return false;
+    var available = AVAIL[name].indexOf(state.type) !== -1;
+    return available && rowIsOn(row);
+  }
+
+  // ---- preview update ----
+  function updatePreview() {
+    var card = document.getElementById("preview-card");
+    var thumb = document.getElementById("fb-thumb");
+    card.style.background = state.color;
+    thumb.style.background = state.color;
+    document.getElementById("pv-action").style.color = state.color;
+
+    var brand = document.getElementById("pv-brand");
+    var source = document.getElementById("pv-source");
+    var name = document.getElementById("pv-name");
+    var avatar = document.getElementById("pv-avatar");
+    var action = document.getElementById("pv-action");
+
+    brand.style.display = toggleVal("brand_logo") ? "" : "none";
+    source.style.display = toggleVal("source_logo") ? "" : "none";
+    name.style.display = toggleVal("reviewer_name") ? "" : "none";
+    avatar.style.display = toggleVal("reviewer_image") ? "" : "none";
+    action.style.display = toggleVal("action_button") ? "" : "none";
+  }
+
+  // ---- type availability matrix applied to controls ----
+  function applyTypeAvailability() {
+    document.querySelectorAll(".toggle-row").forEach(function (row) {
+      var name = row.getAttribute("data-toggle");
+      var available = AVAIL[name].indexOf(state.type) !== -1;
+      row.classList.toggle("opacity-40", !available);
+      row.classList.toggle("pointer-events-none", !available);
+      var sw = row.querySelector(".ds-switch");
+      sw.disabled = !available;
+    });
+    // person row only for type 2
+    var personRow = document.getElementById("person-row");
+    var personHint = document.getElementById("person-hint");
+    var isType2 = state.type === 2;
+    personRow.classList.toggle("opacity-50", !isType2);
+    personRow.classList.toggle("pointer-events-none", !isType2);
+    personHint.style.display = isType2 ? "none" : "";
+  }
+
+  // ---- type tiles ----
+  document.getElementById("type-tiles").addEventListener("click", function (e) {
+    var tile = e.target.closest(".type-tile");
+    if (!tile) return;
+    state.type = parseInt(tile.getAttribute("data-type"), 10);
+    document.querySelectorAll(".type-tile").forEach(function (t) {
+      var on = t === tile;
+      t.classList.toggle("border-primary-500", on);
+      t.classList.toggle("ring-2", on);
+      t.classList.toggle("ring-primary-100", on);
+      t.classList.toggle("border-gray-200", !on);
+    });
+    applyTypeAvailability();
+    updatePreview();
+  });
+
+  // ---- version swatches ----
+  function selectVersion(key) {
+    state.version = key;
+    var v = VERSIONS[key];
+    if (key === "custom") {
+      v.color = document.getElementById("custom-hex").value || "#2E90FA";
+    }
+    state.color = v.color;
+    document.querySelectorAll(".version-swatch").forEach(function (s) {
+      var on = s.getAttribute("data-version") === key;
+      s.classList.toggle("ring-primary-500", on);
+      s.classList.toggle("ring-transparent", !on);
+    });
+    document.getElementById("version-name").textContent = v.name;
+    document.getElementById("version-hex").textContent = v.color.toUpperCase();
+    document.getElementById("custom-color-wrap").classList.toggle("hidden", key !== "custom");
+    updatePreview();
+  }
+  document.getElementById("version-swatches").addEventListener("click", function (e) {
+    var s = e.target.closest(".version-swatch");
+    if (!s) return;
+    selectVersion(s.getAttribute("data-version"));
+  });
+  function syncCustom(hex) {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+    document.getElementById("custom-color").value = hex;
+    document.getElementById("custom-hex").value = hex;
+    if (state.version === "custom") { state.color = hex; selectVersion("custom"); }
+  }
+  document.getElementById("custom-color").addEventListener("input", function (e) { syncCustom(e.target.value); });
+  document.getElementById("custom-hex").addEventListener("input", function (e) { syncCustom(e.target.value); });
+
+  // ---- person options ----
+  document.getElementById("person-row").addEventListener("click", function (e) {
+    var opt = e.target.closest(".person-opt");
+    if (!opt) return;
+    state.person = opt.getAttribute("data-person");
+    document.querySelectorAll(".person-opt").forEach(function (p) {
+      var on = p === opt;
+      p.classList.toggle("border-primary-500", on);
+      p.classList.toggle("border-gray-200", !on);
+    });
+  });
+
+  // ---- toggles ----
+  document.querySelectorAll(".toggle-row .ds-switch").forEach(function (sw) {
+    sw.addEventListener("click", function () {
+      if (sw.disabled) return;
+      var on = sw.getAttribute("aria-checked") === "true";
+      setSwitch(sw, !on);
+      updatePreview();
+    });
+  });
+
+  // ---- message + char count ----
+  var message = document.getElementById("message");
+  function refreshMessage() {
+    document.getElementById("char-count").textContent = message.value.length + " chars";
+    var rendered = message.value
+      .replace(/\[\[platform\]\]/g, "Facebook")
+      .replace(/\[\[page\]\]/g, "Acme Co")
+      .replace(/\[\[rating\]\]/g, "5")
+      .replace(/\[\[link\]\]/g, "https://oggv.co/r/8fa2");
+    document.getElementById("fb-message").textContent = rendered || "New Review!";
+  }
+  message.addEventListener("input", refreshMessage);
+
+  // ---- placeholder dropdown ----
+  var phBtn = document.getElementById("placeholder-btn");
+  var phMenu = document.getElementById("placeholder-menu");
+  phBtn.addEventListener("click", function (e) { e.stopPropagation(); phMenu.classList.toggle("hidden"); });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("#placeholder-menu") && !e.target.closest("#placeholder-btn")) phMenu.classList.add("hidden");
+  });
+  phMenu.querySelectorAll(".ph-item").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var token = b.getAttribute("data-token");
+      var start = message.selectionStart || message.value.length;
+      message.value = message.value.slice(0, start) + token + message.value.slice(message.selectionEnd || start);
+      phMenu.classList.add("hidden");
+      message.focus();
+      refreshMessage();
+    });
+  });
+
+  // ---- platforms (refresh fb preview brand on toggle) ----
+  document.querySelectorAll(".plat-check").forEach(function (c) {
+    c.addEventListener("change", refreshMessage);
+  });
+  function selectedPlatforms() {
+    var out = [];
+    document.querySelectorAll(".plat-check").forEach(function (c) { if (c.checked) out.push(c.getAttribute("data-platform")); });
+    return out;
+  }
+
+  // ---- when group (Post now / Schedule) ----
+  OggvoShell.buttonGroup(document.getElementById("when-group"), {
+    active: "bg-white text-primary-700 shadow-card",
+    inactive: "text-gray-500",
+    onChange: function (val) {
+      state.whenMode = val;
+      document.getElementById("schedule-fields").classList.toggle("hidden", val !== "schedule");
+      document.getElementById("post-btn-label").textContent = val === "schedule" ? "Schedule" : "Post Now";
+    }
+  });
+
+  // ---- post / reset ----
+  document.getElementById("post-btn").addEventListener("click", function () {
+    var plats = selectedPlatforms();
+    if (!plats.length) { OggvoShell.toast("Select at least one platform", "error"); return; }
+    if (state.whenMode === "schedule") {
+      var d = document.getElementById("sched-date").value;
+      var t = document.getElementById("sched-time").value;
+      OggvoShell.toast("Scheduled for " + d + " " + t + " (ET)", "primary");
+    } else {
+      OggvoShell.toast("Posted to " + plats.join(", "), "success");
+    }
+  });
+  document.getElementById("reset-btn").addEventListener("click", function () {
+    OggvoShell.toast("Composer reset", "gray");
+  });
+
+  // ---- init ----
+  applyTypeAvailability();
+  updatePreview();
+  refreshMessage();
+})();
+</script>
+</body></html>

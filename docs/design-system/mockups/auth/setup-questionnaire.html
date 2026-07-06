@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Onboarding — Questionnaire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-100 text-gray-700">
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+
+  <div class="min-h-screen grid place-items-center p-4">
+    <div class="w-full max-w-xl space-y-3">
+
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="text-sm text-primary-600 hover:underline">← All mockups</a>
+        <p class="mock-note">/setup/questionnaire · onboarding step · no portal shell</p>
+      </div>
+
+      <!-- Wizard card -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-8">
+        <!-- brand -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-10 w-10 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold">O</div>
+          <div>
+            <h1 class="text-lg font-semibold text-gray-900">Set up your workspace</h1>
+            <p class="text-sm text-gray-500">A few quick questions so we can tailor OGGVO to your business.</p>
+          </div>
+        </div>
+
+        <!-- step indicator (Questionnaire = step 2) -->
+        <ol class="flex items-center mb-8">
+          <li class="flex items-center">
+            <span class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold shrink-0 bg-success-500 text-white"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="ml-2 text-sm hidden sm:inline font-medium text-gray-700">Business info</span>
+          </li>
+          <span class="mx-3 h-px flex-1 bg-success-500"></span>
+          <li class="flex items-center">
+            <span class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold shrink-0 bg-primary-500 text-white ring-4 ring-primary-100">2</span>
+            <span class="ml-2 text-sm hidden sm:inline font-semibold text-primary-700">Questionnaire</span>
+          </li>
+          <span class="mx-3 h-px flex-1 bg-gray-200"></span>
+          <li class="flex items-center">
+            <span class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold shrink-0 bg-gray-100 text-gray-400">3</span>
+            <span class="ml-2 text-sm hidden sm:inline text-gray-400">Automation</span>
+          </li>
+          <span class="mx-3 h-px flex-1 bg-gray-200"></span>
+          <li class="flex items-center">
+            <span class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold shrink-0 bg-gray-100 text-gray-400">4</span>
+            <span class="ml-2 text-sm hidden sm:inline text-gray-400">Done</span>
+          </li>
+        </ol>
+
+        <div class="space-y-6">
+          <div>
+            <h2 class="text-base font-semibold text-gray-900">Tell us about your clients &amp; market</h2>
+            <p class="text-sm text-gray-500 mt-1">All optional — it just helps us pre-fill campaigns and prioritise your local presence. You can edit any of it later.</p>
+          </div>
+
+          <!-- Client base / tools -->
+          <div class="rounded-card border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-200 bg-gray-50">
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-semibold text-gray-900">Client base</h3>
+                <span class="text-[11px] font-medium text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">Optional</span>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">Which system, CRM, or tools do you store your client lists in? (e.g. names, emails, dates of service)</p>
+            </div>
+            <div class="p-4 space-y-3">
+              <div id="toolList" class="space-y-3">
+                <input type="text" placeholder="e.g. HubSpot, Jobber, a spreadsheet…"
+                  class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+              <button id="addTool" type="button" class="inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m7-7H5"/></svg>
+                Add another
+              </button>
+            </div>
+          </div>
+
+          <!-- Top cities -->
+          <div class="rounded-card border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-200 bg-gray-50">
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-semibold text-gray-900">Top cities</h3>
+                <span class="text-[11px] font-medium text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">Optional</span>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">What are your top 5 cities to prioritise for growing your online presence?</p>
+            </div>
+            <div class="p-4 space-y-3">
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-0 w-10 grid place-items-center text-gray-400"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-5.686-7-11a7 7 0 1114 0c0 5.314-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                <input type="text" placeholder="City 1" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-0 w-10 grid place-items-center text-gray-400"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-5.686-7-11a7 7 0 1114 0c0 5.314-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                <input type="text" placeholder="City 2" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-0 w-10 grid place-items-center text-gray-400"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-5.686-7-11a7 7 0 1114 0c0 5.314-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                <input type="text" placeholder="City 3" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-0 w-10 grid place-items-center text-gray-400"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-5.686-7-11a7 7 0 1114 0c0 5.314-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                <input type="text" placeholder="City 4" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+              <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-0 w-10 grid place-items-center text-gray-400"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-5.686-7-11a7 7 0 1114 0c0 5.314-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                <input type="text" placeholder="City 5" class="w-full h-10 pl-10 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+              </div>
+            </div>
+          </div>
+
+          <p id="qStatus" class="hidden rounded-card px-3 py-2 text-sm text-center bg-success-100 text-success-700"></p>
+        </div>
+
+        <!-- nav -->
+        <div class="flex items-center justify-between mt-8 pt-5 border-t border-gray-200">
+          <a href="auth-onboarding.html" class="h-11 px-5 leading-[2.75rem] rounded-card border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50">Back</a>
+          <div class="flex items-center gap-3">
+            <button id="qSkip" type="button" class="text-sm text-gray-500 hover:text-primary-600">Skip for now</button>
+            <button id="qContinue" type="button" class="h-11 px-6 rounded-card bg-primary-500 text-white font-medium hover:bg-primary-600 disabled:opacity-60">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="mock-note">Persists on Continue (resumable) via PATCH /profiles/me setup fields — client-base tools + top cities land on the profile / onboarding record (v1's setup/* wizard was an unwired static mockup; schema gap — questionnaire answers need an owning table).</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var list = document.getElementById('toolList');
+      var addTool = document.getElementById('addTool');
+      var cont = document.getElementById('qContinue');
+      var skip = document.getElementById('qSkip');
+      var status = document.getElementById('qStatus');
+
+      addTool.addEventListener('click', function () {
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'e.g. HubSpot, Jobber, a spreadsheet…';
+        input.className = 'w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200';
+        list.appendChild(input);
+        input.focus();
+      });
+
+      function persist(msg) {
+        cont.disabled = true;
+        var original = cont.textContent;
+        cont.textContent = 'Saving…';
+        setTimeout(function () {
+          status.textContent = msg;
+          status.classList.remove('hidden');
+          cont.disabled = false;
+          cont.textContent = original;
+        }, 700);
+      }
+      cont.addEventListener('click', function () {
+        persist('Saved — PATCH /profiles/me persisted this step. Next: Automation preferences. (mockup, no navigation)');
+      });
+      skip.addEventListener('click', function () {
+        status.textContent = 'Skipped — advancing without writing optional answers. (mockup)';
+        status.classList.remove('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>

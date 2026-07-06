@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Widget Editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <div class="max-w-6xl space-y-6">
+
+    <!-- 1. PageHeader -->
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-2xl font-semibold text-gray-900">Homepage Review Stream</h1>
+          <span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Live</span>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Widget <span class="font-mono">#12</span> · auto-saves on every change.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-xs text-gray-500"><svg class="h-3.5 w-3.5 text-success-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>All changes saved</span>
+        <button type="button" data-done class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Done
+        </button>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-6 items-start" data-story="US-2.1" data-ac="AC1">
+
+      <!-- 2. LEFT — config panel -->
+      <section class="lg:col-span-2 bg-white border border-gray-200 rounded-card shadow-card divide-y divide-gray-100" data-story="US-2.2" data-ac="AC1">
+        <div class="px-5 py-4">
+          <h2 class="text-sm font-semibold text-gray-900">Configuration</h2>
+        </div>
+
+        <!-- Widget type -->
+        <div class="p-5 space-y-1.5">
+          <label class="text-sm font-medium text-gray-700">Widget type</label>
+          <select id="cfg-type" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option selected>Review Stream</option>
+            <option>Carousel</option>
+            <option>Grid Wall</option>
+            <option>Floating Badge</option>
+            <option>Review Splash</option>
+          </select>
+        </div>
+
+        <!-- Theme color -->
+        <div class="p-5 space-y-2">
+          <label class="text-sm font-medium text-gray-700">Theme color</label>
+          <div id="cfg-swatches" class="flex flex-wrap items-center gap-2.5">
+            <button type="button" data-color="#2e90fa" style="background:#2e90fa" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Blue"></button>
+            <button type="button" data-color="#175cd3" style="background:#175cd3" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Navy"></button>
+            <button type="button" data-color="#12b76a" style="background:#12b76a" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Green"></button>
+            <button type="button" data-color="#f79009" style="background:#f79009" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Amber"></button>
+            <button type="button" data-color="#f04438" style="background:#f04438" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Red"></button>
+            <button type="button" data-color="#7a5af8" style="background:#7a5af8" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Violet"></button>
+            <button type="button" data-color="#0e9384" style="background:#0e9384" class="h-7 w-7 rounded-full ring-offset-2 ring-gray-900" aria-label="Teal"></button>
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <span id="cfg-color-preview" class="h-10 w-10 rounded-card border border-gray-300 shrink-0" style="background:#2e90fa"></span>
+            <input id="cfg-color-text" type="text" value="#2E90FA" class="flex-1 h-10 px-3 rounded-card border border-gray-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+        </div>
+
+        <!-- Layout -->
+        <div class="p-5 space-y-1.5">
+          <label class="text-sm font-medium text-gray-700">Layout</label>
+          <div id="cfg-layout" class="inline-flex w-full rounded-card border border-gray-200 p-0.5 bg-gray-50">
+            <button type="button" data-value="stream" class="flex-1 h-8 rounded-[7px] text-sm font-medium bg-primary-50 text-primary-700 border border-primary-200">Stream</button>
+            <button type="button" data-value="carousel" class="flex-1 h-8 rounded-[7px] text-sm font-medium text-gray-500 hover:text-gray-700">Carousel</button>
+            <button type="button" data-value="grid" class="flex-1 h-8 rounded-[7px] text-sm font-medium text-gray-500 hover:text-gray-700">Grid</button>
+          </div>
+        </div>
+
+        <!-- Max reviews + Min rating -->
+        <div class="p-5 grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Max reviews</label>
+            <select id="cfg-max" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option>5</option><option>10</option><option selected>25</option><option>50</option><option>100</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Minimum rating</label>
+            <select id="cfg-min" class="w-full h-10 px-3 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option value="0">Any</option><option value="2">2★ &amp; up</option><option value="3">3★ &amp; up</option><option value="4" selected>4★ &amp; up</option><option value="5">5★ only</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Switches -->
+        <div class="divide-y divide-gray-100">
+          <!-- Show avatar ON -->
+          <div class="flex items-center justify-between gap-4 px-5 py-3.5">
+            <span class="text-sm font-medium text-gray-900">Show avatar</span>
+            <button type="button" role="switch" data-switch="avatar" aria-checked="true" class="shrink-0 relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+          <!-- Show date ON -->
+          <div class="flex items-center justify-between gap-4 px-5 py-3.5">
+            <span class="text-sm font-medium text-gray-900">Show date</span>
+            <button type="button" role="switch" data-switch="date" aria-checked="true" class="shrink-0 relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+          <!-- Show aggregate ON -->
+          <div class="flex items-center justify-between gap-4 px-5 py-3.5">
+            <span class="text-sm font-medium text-gray-900">Show aggregate rating</span>
+            <button type="button" role="switch" data-switch="aggregate" aria-checked="true" class="shrink-0 relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+          <!-- Autoplay OFF -->
+          <div class="flex items-center justify-between gap-4 px-5 py-3.5">
+            <div>
+              <span class="text-sm font-medium text-gray-900">Autoplay</span>
+              <p class="text-xs text-gray-500">Carousel layout only</p>
+            </div>
+            <button type="button" role="switch" data-switch="autoplay" aria-checked="false" class="shrink-0 relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
+              <span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. RIGHT — live preview + embed -->
+      <div class="lg:col-span-3 space-y-6">
+
+        <!-- Live preview -->
+        <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-4.1" data-ac="AC1">
+          <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between gap-4">
+            <h2 class="text-sm font-semibold text-gray-900">Live preview</h2>
+            <span class="mock-note">Updates on every config change</span>
+          </div>
+          <div class="p-5 bg-gray-50 rounded-b-card">
+            <!-- aggregate header -->
+            <div id="pv-aggregate" class="flex items-center gap-2 mb-3">
+              <span class="text-warning-500 text-lg leading-none">★★★★★</span>
+              <span id="pv-agg-score" class="text-sm font-semibold text-gray-900">4.8</span>
+              <span class="text-sm text-gray-500">· 214 reviews</span>
+            </div>
+
+            <div id="pv-cards">
+              <!-- review card 1 -->
+              <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4 mb-3" data-rating="5">
+                <div class="flex items-center gap-3">
+                  <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#2e90fa">JD</span>
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold text-gray-900">Jordan D.</div>
+                    <div class="text-warning-500 text-sm leading-none">★★★★★</div>
+                  </div>
+                  <span class="pv-date ml-auto text-xs text-gray-400">Jun 18, 2026</span>
+                </div>
+                <p class="mt-2.5 text-sm text-gray-600">Absolutely fantastic service from start to finish. The team was responsive and the work was spotless. Highly recommend.</p>
+              </div>
+
+              <!-- review card 2 -->
+              <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4 mb-3" data-rating="4">
+                <div class="flex items-center gap-3">
+                  <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#2e90fa">MR</span>
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold text-gray-900">Maria R.</div>
+                    <div class="text-warning-500 text-sm leading-none">★★★★<span class="text-gray-300">★</span></div>
+                  </div>
+                  <span class="pv-date ml-auto text-xs text-gray-400">Jun 15, 2026</span>
+                </div>
+                <p class="mt-2.5 text-sm text-gray-600">Great experience overall. Quick turnaround and friendly staff — would use again.</p>
+              </div>
+
+              <!-- review card 3 -->
+              <div class="pv-card bg-white border border-gray-200 rounded-card shadow-card p-4 mb-3" data-rating="5">
+                <div class="flex items-center gap-3">
+                  <span class="pv-avatar h-9 w-9 rounded-full grid place-items-center text-xs font-semibold text-white shrink-0" style="background:#2e90fa">TS</span>
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold text-gray-900">Tom S.</div>
+                    <div class="text-warning-500 text-sm leading-none">★★★★★</div>
+                  </div>
+                  <span class="pv-date ml-auto text-xs text-gray-400">Jun 12, 2026</span>
+                </div>
+                <p class="mt-2.5 text-sm text-gray-600">Couldn't be happier. Professional, on time, and fairly priced.</p>
+              </div>
+            </div>
+
+            <!-- carousel dots (shown in carousel layout) -->
+            <div id="pv-dots" class="hidden items-center justify-center gap-1.5 mt-1">
+              <span class="h-1.5 w-4 rounded-full bg-primary-500"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-gray-300"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-gray-300"></span>
+            </div>
+            <p id="pv-auto" class="hidden mt-2 text-center text-xs text-gray-400">Auto-rotating every 5s</p>
+
+            <!-- lazy-load footer (stream / grid) -->
+            <p id="pv-more" class="mt-3 text-center text-xs text-gray-400">Showing 3 of 25 reviews · the rest load on scroll</p>
+          </div>
+        </section>
+
+        <!-- Embed code -->
+        <section class="bg-white border border-gray-200 rounded-card shadow-card" data-story="US-3.1" data-ac="AC1">
+          <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-sm font-semibold text-gray-900">Embed code</h2>
+              <p class="text-xs text-gray-500">Paste this into your site's HTML where the widget should appear.</p>
+            </div>
+            <button type="button" data-copy-btn class="inline-flex items-center gap-2 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path stroke-linecap="round" d="M5 15V5a2 2 0 012-2h10"/></svg>
+              <span data-copy-label>Copy</span>
+            </button>
+          </div>
+          <div class="p-5">
+            <pre class="bg-gray-900 text-gray-100 rounded-card p-4 text-xs overflow-x-auto"><code data-copy-src>&lt;script src="https://widgets.oggvo.com/embed.js" data-widget="12"&gt;&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- Mock note -->
+        <p class="mock-note">Config auto-saves to widgets.properties via PUT /widgets/12 (scoped to profileId; single row per widgetType, no profile-wide mutation). The embed loads an origin-checked iframe from GET /public/widgets/:profileId/stream (SSR HTML + postMessage resize). Snippet uses an absolute CDN URL — never a relative /widget/ path.</p>
+
+      </div>
+    </div>
+  </div>
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "widgets", storyDomain: "widgets", back: { href: "widgets-list.html", label: "Back to Widgets" }, route: "/widgets/12", search: "Search widgets…" });
+
+  // Copy-to-clipboard for the embed block
+  document.querySelectorAll("[data-copy-btn]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var src = btn.closest("section").querySelector("[data-copy-src]");
+      var text = src ? src.textContent : "";
+      var label = btn.querySelector("[data-copy-label]");
+      function done() {
+        if (label) label.textContent = "Copied!";
+        OggvoShell.toast("Embed code copied", "success");
+        setTimeout(function () { if (label) label.textContent = "Copy"; }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else { done(); }
+    });
+  });
+
+  // ---- Config panel drives the live preview ----
+  (function () {
+    var state = { color: "#2e90fa", layout: "stream", max: 25, min: 4, avatar: true, date: true, aggregate: true, autoplay: false };
+
+    var pvAgg      = document.getElementById("pv-aggregate");
+    var pvAggScore = document.getElementById("pv-agg-score");
+    var pvCards    = document.getElementById("pv-cards");
+    var pvDots     = document.getElementById("pv-dots");
+    var pvAuto     = document.getElementById("pv-auto");
+    var pvMore     = document.getElementById("pv-more");
+    var cards      = [].slice.call(pvCards.querySelectorAll(".pv-card"));
+
+    function applyPreview() {
+      var carousel = state.layout === "carousel";
+      pvAgg.classList.toggle("hidden", !state.aggregate);
+      pvAggScore.style.color = state.color;
+      pvCards.className = state.layout === "grid" ? "grid grid-cols-2 gap-3" : "";
+
+      var passCount = 0, shownFirst = false;
+      cards.forEach(function (c) {
+        var pass = (+c.getAttribute("data-rating")) >= state.min;
+        if (pass) passCount++;
+        var visible = pass && (!carousel || !shownFirst);
+        if (visible && carousel) shownFirst = true;
+        c.classList.toggle("hidden", !visible);
+        var av = c.querySelector(".pv-avatar");
+        if (av) { av.classList.toggle("hidden", !state.avatar); av.style.background = state.color; }
+        var dt = c.querySelector(".pv-date");
+        if (dt) dt.classList.toggle("hidden", !state.date);
+      });
+
+      pvDots.classList.toggle("hidden", !carousel);
+      pvDots.classList.toggle("flex", carousel);
+      pvAuto.classList.toggle("hidden", !(carousel && state.autoplay));
+      pvMore.classList.toggle("hidden", carousel);
+      pvMore.textContent = "Showing " + Math.min(passCount, state.max) + " of " + state.max + " reviews · the rest load on scroll";
+    }
+
+    // Theme color — swatches + hex input
+    var swatches  = document.getElementById("cfg-swatches");
+    var colorText = document.getElementById("cfg-color-text");
+    var colorPrev = document.getElementById("cfg-color-preview");
+    function setColor(hex) {
+      state.color = hex;
+      colorText.value = hex.toUpperCase();
+      colorPrev.style.background = hex;
+      [].slice.call(swatches.querySelectorAll("[data-color]")).forEach(function (b) {
+        var on = b.getAttribute("data-color").toLowerCase() === hex.toLowerCase();
+        b.classList.toggle("ring-2", on); b.classList.toggle("ring-offset-2", on); b.classList.toggle("ring-gray-900", on);
+      });
+      applyPreview();
+    }
+    swatches.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-color]");
+      if (b) setColor(b.getAttribute("data-color"));
+    });
+    colorText.addEventListener("input", function () {
+      var v = colorText.value.trim();
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) setColor(v);
+    });
+
+    // Layout segmented control
+    var layoutGroup = OggvoShell.buttonGroup(document.getElementById("cfg-layout"), {
+      active: "bg-primary-50 text-primary-700 border border-primary-200",
+      inactive: "text-gray-500 hover:text-gray-700",
+      onChange: function (v) { state.layout = v; applyPreview(); }
+    });
+
+    // Widget type → drives layout
+    var TYPE_LAYOUT = { "Review Stream": "stream", "Carousel": "carousel", "Grid Wall": "grid", "Floating Badge": "stream", "Review Splash": "stream" };
+    var typeSel = document.getElementById("cfg-type");
+    typeSel.addEventListener("change", function () {
+      layoutGroup.select(TYPE_LAYOUT[typeSel.value] || "stream");
+      OggvoShell.toast("Widget type set to " + typeSel.value, "primary");
+    });
+
+    // Max reviews / min rating
+    document.getElementById("cfg-max").addEventListener("change", function (e) {
+      state.max = parseInt(e.target.value, 10) || 25; applyPreview();
+    });
+    document.getElementById("cfg-min").addEventListener("change", function (e) {
+      state.min = parseInt(e.target.value, 10) || 0; applyPreview();
+    });
+
+    // Switches
+    function setSwitch(btn, on) {
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+      btn.classList.toggle("bg-primary-500", on);
+      btn.classList.toggle("bg-gray-300", !on);
+      var knob = btn.querySelector("span");
+      knob.classList.toggle("translate-x-5", on);
+      knob.classList.toggle("translate-x-0.5", !on);
+    }
+    [].slice.call(document.querySelectorAll("[data-switch]")).forEach(function (sw) {
+      sw.addEventListener("click", function () {
+        var on = sw.getAttribute("aria-checked") !== "true";
+        setSwitch(sw, on);
+        state[sw.getAttribute("data-switch")] = on;
+        applyPreview();
+      });
+    });
+
+    // Save
+    var done = document.querySelector("[data-done]");
+    if (done) done.addEventListener("click", function () { OggvoShell.toast("Widget saved", "success"); });
+
+    setColor(state.color);
+    layoutGroup.select("stream");
+    applyPreview();
+  })();
+</script>
+</body>
+</html>

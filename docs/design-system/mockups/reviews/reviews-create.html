@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Add Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. PAGE HEADER -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Add Review Manually</h1>
+    <p class="text-sm text-gray-500 mt-1">Record a review received on an unlisted platform.</p>
+  </div>
+
+  <!-- 2. FORM CARD -->
+  <form class="max-w-2xl bg-white border border-gray-200 rounded-card shadow-card p-6" data-story="US-R2.1">
+    <div class="space-y-5" data-story="US-R2.1" data-ac="AC1">
+
+      <!-- Date -->
+      <div>
+        <label for="rv-date" class="block text-sm font-medium text-gray-700 mb-1.5">Date</label>
+        <input id="rv-date" type="date" value="2026-06-24"
+               class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+
+      <!-- Reviewer name -->
+      <div>
+        <label for="rv-name" class="block text-sm font-medium text-gray-700 mb-1.5">Reviewer name</label>
+        <input id="rv-name" type="text" value="Jordan Avery"
+               class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+      </div>
+
+      <!-- Photo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1.5">Photo</label>
+        <div class="flex items-center gap-3">
+          <div class="h-12 w-12 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">JA</div>
+          <button type="button"
+                  class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M12 3v13"/><path d="m7 8 5-5 5 5"/></svg>
+            Upload
+          </button>
+          <button type="button" class="px-3 py-2 text-sm font-medium text-gray-500 rounded-card hover:bg-gray-100">Remove</button>
+        </div>
+        <p class="mt-1.5 text-xs text-gray-400">Optional — defaults to a placeholder avatar.</p>
+      </div>
+
+      <!-- Review -->
+      <div>
+        <label for="rv-body" class="block text-sm font-medium text-gray-700 mb-1.5">Review</label>
+        <textarea id="rv-body" rows="5"
+                  class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                  placeholder="Paste or type the review exactly as the customer wrote it…">Quick, friendly, and thorough from start to finish. The team kept us updated the whole time and the final result exceeded what we expected. Would recommend.</textarea>
+        <div class="mt-1.5 text-right text-xs text-gray-400">126 / 1000</div>
+      </div>
+
+      <!-- Platform -->
+      <div>
+        <label for="rv-platform" class="block text-sm font-medium text-gray-700 mb-1.5">Platform</label>
+        <select id="rv-platform"
+                class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200">
+          <option value="">Search platforms…</option>
+          <optgroup label="Search">
+            <option>Google</option>
+            <option>Facebook</option>
+            <option>Yelp</option>
+            <option>Zillow</option>
+            <option>Realtor.com</option>
+            <option>Instagram</option>
+            <option>BBB</option>
+            <option>TripAdvisor</option>
+          </optgroup>
+        </select>
+        <p class="mt-1.5 text-xs text-gray-400">Pick the platform this review came from.</p>
+      </div>
+
+      <!-- Rating -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1.5">Rating</label>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1 text-2xl leading-none">
+            <button type="button" class="text-warning-500 hover:scale-110 transition" title="1 star">&#9733;</button>
+            <button type="button" class="text-warning-500 hover:scale-110 transition" title="2 stars">&#9733;</button>
+            <button type="button" class="text-warning-500 hover:scale-110 transition" title="3 stars">&#9733;</button>
+            <button type="button" class="text-warning-500 hover:scale-110 transition" title="4 stars">&#9733;</button>
+            <button type="button" class="text-warning-500 hover:scale-110 transition" title="5 stars">&#9733;</button>
+          </div>
+          <span class="text-sm font-medium text-gray-700">5 / 5</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. FOOTER ACTIONS -->
+    <div class="mt-6 pt-5 border-t border-gray-200 flex items-center justify-end gap-2" data-story="US-R2.1" data-ac="AC2">
+      <a href="reviews-list.html"
+         class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</a>
+      <button type="submit"
+              class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M20 6 9 17l-5-5"/></svg>
+        Save review
+      </button>
+    </div>
+  </form>
+
+  <!-- 4. ANNOTATION -->
+  <p class="mock-note mt-4 max-w-2xl">POST /reviews (multipart) &rarr; redirect to /reviews on success. Field errors render inline.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "reviews", storyDomain: "reviews", back: { href: "reviews-list.html", label: "Back to Reviews" }, route: "/reviews/create", search: "Search reviews…" });
+</script>
+</body>
+</html>

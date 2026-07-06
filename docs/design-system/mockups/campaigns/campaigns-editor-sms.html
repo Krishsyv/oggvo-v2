@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Campaign Editor · SMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- 1. EDITOR HEADER ROW -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-5" data-story="US-C3.1" data-ac="AC1">
+    <div>
+      <div class="flex items-center gap-2">
+        <span id="camp-name" contenteditable="true" spellcheck="false" class="text-xl font-semibold text-gray-900 rounded px-0.5 focus:outline-none focus:ring-2 focus:ring-primary-200">SMS Review Invite</span>
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">SMS</span>
+        <svg class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-8.5 8.5a1 1 0 01-.45.263l-3 .857a.5.5 0 01-.618-.618l.857-3a1 1 0 01.263-.45l8.5-8.5z" />
+        </svg>
+      </div>
+      <p class="text-sm text-gray-500 mt-0.5">Sent from <span class="font-medium text-gray-700">(415) 555-0100</span></p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button type="button" data-open="m-sendtest"
+              class="h-10 px-4 inline-flex items-center gap-2 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
+        Send a test
+      </button>
+      <button type="button" id="save-btn"
+              class="h-10 px-4 inline-flex items-center gap-2 rounded-card bg-primary-500 text-sm font-medium text-white hover:bg-primary-600">
+        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h9l3 3v11a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" stroke-linejoin="round" /><path d="M6 3v4h6V3M7 17v-4h6v4" stroke-linejoin="round" /></svg>
+        Save
+      </button>
+    </div>
+  </div>
+  <p class="mock-note mb-4">SMS body is stored in the same field as the email HTML (v1 <span class="font-mono">EmailHTML</span>). The Email editor is the <a href="campaigns-editor.html" class="text-primary-600 hover:underline">Unlayer canvas variant</a>. v1 hides Send-a-test in the SMS editor; shown here for parity.</p>
+
+  <!-- 2. EDITOR GRID -->
+  <div class="grid lg:grid-cols-3 gap-6">
+
+    <!-- LEFT: SMS body composer -->
+    <div class="lg:col-span-2" data-story="US-C3.3" data-ac="AC1">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <label for="sms-body" class="text-sm font-semibold text-gray-900">Message</label>
+          <!-- Add placeholder dropdown -->
+          <div class="relative">
+            <button id="ph-btn" type="button" class="inline-flex items-center gap-2 h-9 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+              Add placeholder
+              <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="ph-menu" class="hidden absolute right-0 mt-1 w-52 bg-white border border-gray-200 rounded-card shadow-pop py-1 text-sm z-20">
+              <button data-ph="[[first_name]]" class="w-full text-left px-3 py-2 hover:bg-gray-50">First Name <span class="font-mono text-xs text-gray-400">[[first_name]]</span></button>
+              <button data-ph="[[last_name]]" class="w-full text-left px-3 py-2 hover:bg-gray-50">Last Name <span class="font-mono text-xs text-gray-400">[[last_name]]</span></button>
+              <button data-ph="[[profile_name]]" class="w-full text-left px-3 py-2 hover:bg-gray-50">Profile Name <span class="font-mono text-xs text-gray-400">[[profile_name]]</span></button>
+              <button data-ph="[[profile_url]]" class="w-full text-left px-3 py-2 hover:bg-gray-50">Profile url <span class="font-mono text-xs text-gray-400">[[profile_url]]</span></button>
+              <button data-ph="[[profile_short_url]]" class="w-full text-left px-3 py-2 hover:bg-gray-50">Profile short url <span class="font-mono text-xs text-gray-400">[[profile_short_url]]</span></button>
+            </div>
+          </div>
+        </div>
+        <textarea id="sms-body" rows="10" placeholder="Add your message..."
+                  class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200">Hi [[first_name]], thanks for visiting [[profile_name]]! Mind leaving us a quick review? [[profile_short_url]]</textarea>
+        <div class="mt-2 flex items-center justify-between text-xs">
+          <p class="text-gray-400">Messages over 160 characters may be segmented on arrival.</p>
+          <span class="text-gray-500"><span id="sms-count">0</span>/1600 · <span id="sms-segs">1</span> segment</span>
+        </div>
+
+        <!-- MMS / image picker -->
+        <div class="mt-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">MMS image <span class="text-gray-400 font-normal">(optional)</span></label>
+          <button id="mms-tile" type="button" class="w-40 aspect-[4/3] rounded-card border-2 border-dashed border-gray-300 grid place-items-center text-gray-400 hover:border-primary-300 hover:text-primary-500">
+            <span class="text-center">
+              <svg class="h-7 w-7 mx-auto" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m-5 5 5-5 5 5M5 20h14"/></svg>
+              <span class="block text-xs mt-1">Click to upload</span>
+            </span>
+          </button>
+          <p class="text-xs text-gray-400 mt-1">JPG/PNG up to 5 MB — sent as MMS.</p>
+        </div>
+      </div>
+
+      <!-- Phone preview -->
+      <div class="mt-4 bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <p class="mock-note mb-3">Preview</p>
+        <div class="mx-auto max-w-[18rem] rounded-3xl border border-gray-300 bg-gray-50 p-4">
+          <div class="text-center text-xs text-gray-400 mb-2">Acme Co</div>
+          <div class="bg-primary-500 text-white text-sm rounded-2xl rounded-bl-sm px-3 py-2 inline-block">
+            Hi Dana, thanks for visiting Acme Co! Mind leaving us a quick review? ogg.vo/r/acme
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: options panel -->
+    <div class="lg:col-span-1" data-story="US-C3.4" data-ac="AC1">
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 space-y-5">
+        <h3 class="text-sm font-semibold text-gray-900">Delivery options</h3>
+
+        <!-- Status -->
+        <div class="flex items-center justify-between" data-story="US-C6.5" data-ac="AC1">
+          <span class="text-sm font-medium text-gray-700">Status</span>
+          <div class="flex items-center gap-2">
+            <span id="status-label" class="text-sm text-gray-500">Active</span>
+            <button type="button" id="status-switch" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500" aria-pressed="true">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Send on weekends -->
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-700">Send on weekends</span>
+          <button type="button" data-switch class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300" aria-pressed="false">
+            <span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow"></span>
+          </button>
+        </div>
+
+        <!-- Delay -->
+        <div>
+          <label for="delay" class="block text-sm font-medium text-gray-700 mb-1.5">Delay</label>
+          <select id="delay" class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <option selected>Immediately</option>
+            <option>Next Day</option>
+            <option>In 2 Days</option>
+            <option>In 3 Days</option>
+            <option>In 7 Days</option>
+            <option>In 14 Days</option>
+            <option>In 30 Days</option>
+          </select>
+        </div>
+
+        <!-- Target tags -->
+        <div data-story="US-C6.5" data-ac="AC3">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Target tags</label>
+          <div data-tags class="min-h-10 flex flex-wrap items-center gap-1.5 px-2 py-1.5 rounded-card border border-gray-300 focus-within:ring-2 focus-within:ring-primary-200">
+            <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">sms-opt-in <button type="button" class="hover:text-primary-500" title="Remove">&times;</button></span>
+            <input type="text" data-tag-input placeholder="type to add…" class="flex-1 min-w-[6rem] h-6 px-1 text-sm bg-transparent focus:outline-none placeholder:text-gray-400" />
+          </div>
+        </div>
+
+        <!-- Exclude tags -->
+        <div data-story="US-C6.5" data-ac="AC2">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Exclude tags</label>
+          <div data-tags class="min-h-10 flex flex-wrap items-center gap-1.5 px-2 py-1.5 rounded-card border border-gray-300 focus-within:ring-2 focus-within:ring-primary-200">
+            <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">unsubscribed <button type="button" class="hover:text-primary-500" title="Remove">&times;</button></span>
+            <input type="text" data-tag-input placeholder="type to add…" class="flex-1 min-w-[6rem] h-6 px-1 text-sm bg-transparent focus:outline-none placeholder:text-gray-400" />
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-gray-200 space-y-3">
+          <p class="text-xs text-gray-400">Created Jun 2, 2026 &middot; Updated Jun 22, 2026</p>
+          <button type="button" data-toast="Data saved successfully!" class="w-full h-10 rounded-card bg-primary-500 text-sm font-medium text-white hover:bg-primary-600">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MERGE TAGS HELPER -->
+  <div class="mt-6 bg-white border border-gray-200 rounded-card shadow-card p-5">
+    <p class="mock-note mb-3">Available placeholders</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="bg-gray-100 text-gray-600 font-mono text-xs rounded px-1.5 py-0.5">[[first_name]]</span>
+      <span class="bg-gray-100 text-gray-600 font-mono text-xs rounded px-1.5 py-0.5">[[last_name]]</span>
+      <span class="bg-gray-100 text-gray-600 font-mono text-xs rounded px-1.5 py-0.5">[[profile_name]]</span>
+      <span class="bg-gray-100 text-gray-600 font-mono text-xs rounded px-1.5 py-0.5">[[profile_url]]</span>
+      <span class="bg-gray-100 text-gray-600 font-mono text-xs rounded px-1.5 py-0.5">[[profile_short_url]]</span>
+    </div>
+  </div>
+
+  <!-- Modal · Send a Test (SMS / phone) -->
+  <div id="m-sendtest" data-modal data-story="US-C6.2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">Send a Test</h3><p class="text-xs text-gray-500">Campaign: SMS Review Invite</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label><input type="text" placeholder="(415) 555-0123" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">First Name</label><input type="text" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label><input type="text" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button data-close data-toast="Campaign sent successfully!" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal · Campaign Schedule (activation) -->
+  <div id="m-schedule" data-modal data-story="US-C6.6" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-start justify-between px-5 py-4 border-b border-gray-200">
+        <div><h3 class="text-lg font-semibold text-gray-900">Campaign Schedule</h3><p class="text-xs text-gray-500">Update schedule date in order to activate this campaign</p></div>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Schedule Date</label><input id="schedule-date" type="date" min="2026-06-27" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" /></div>
+        <p class="text-xs text-warning-700 inline-flex items-start gap-1.5"><svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v5m0 3h.01"/></svg>If you keep the current schedule date, the campaign will remain inactive.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="schedule-update" disabled class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card opacity-50 cursor-not-allowed">Update</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "campaigns", storyDomain: "campaigns", back: { href: "campaigns-list.html", label: "Back to Campaigns" }, route: "/campaigns/editor/8843", search: "Search…" });
+</script>
+<script>
+  (function () {
+    // Contenteditable name → Enter blurs + toast
+    var name = document.getElementById("camp-name");
+    name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); name.blur(); } });
+    name.addEventListener("blur", function () { OggvoShell.toast("Saved", "success"); });
+    document.getElementById("save-btn").addEventListener("click", function () { OggvoShell.toast("Data saved successfully!", "success"); });
+
+    // SMS counter + segments
+    var body = document.getElementById("sms-body"), count = document.getElementById("sms-count"), segs = document.getElementById("sms-segs");
+    function recount() {
+      var n = body.value.length;
+      count.textContent = n;
+      segs.textContent = Math.max(1, Math.ceil(n / 160));
+    }
+    body.addEventListener("input", recount);
+    recount();
+
+    // Add-placeholder dropdown → insert token (leading space per v1)
+    var phBtn = document.getElementById("ph-btn"), phMenu = document.getElementById("ph-menu");
+    phBtn.addEventListener("click", function (e) { e.stopPropagation(); phMenu.classList.toggle("hidden"); });
+    document.addEventListener("click", function (e) { if (!e.target.closest("#ph-menu") && !e.target.closest("#ph-btn")) phMenu.classList.add("hidden"); });
+    [].slice.call(phMenu.querySelectorAll("[data-ph]")).forEach(function (b) {
+      b.addEventListener("click", function () {
+        body.value = body.value + " " + b.getAttribute("data-ph");
+        phMenu.classList.add("hidden"); body.focus(); recount();
+      });
+    });
+    document.getElementById("mms-tile").addEventListener("click", function () { OggvoShell.toast("Media library — pick an MMS image", "primary"); });
+
+    // Switches
+    function flip(btn, on) {
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.classList.toggle("bg-primary-500", on); btn.classList.toggle("bg-gray-300", !on);
+      var k = btn.querySelector("span"); k.classList.toggle("translate-x-5", on); k.classList.toggle("translate-x-0.5", !on);
+    }
+    [].slice.call(document.querySelectorAll("[data-switch]")).forEach(function (sw) {
+      sw.addEventListener("click", function () { flip(sw, sw.getAttribute("aria-pressed") !== "true"); });
+    });
+    var status = document.getElementById("status-switch"), statusLabel = document.getElementById("status-label"), schedule = document.getElementById("m-schedule");
+    status.addEventListener("click", function () {
+      var on = status.getAttribute("aria-pressed") !== "true";
+      flip(status, on); statusLabel.textContent = on ? "Active" : "Paused";
+      if (on) schedule.classList.remove("hidden");
+    });
+    var sd = document.getElementById("schedule-date"), su = document.getElementById("schedule-update");
+    sd.addEventListener("input", function () {
+      var ok = !!sd.value && sd.value >= sd.min;
+      su.disabled = !ok; su.classList.toggle("opacity-50", !ok); su.classList.toggle("cursor-not-allowed", !ok);
+    });
+    su.addEventListener("click", function () { if (su.disabled) return; schedule.classList.add("hidden"); OggvoShell.toast("Campaign Status Updated", "success"); });
+
+    // Tag comboboxes
+    [].slice.call(document.querySelectorAll("[data-tags]")).forEach(function (wrap) {
+      var input = wrap.querySelector("[data-tag-input]");
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          var v = input.value.trim(); if (!v) return;
+          var span = document.createElement("span");
+          span.className = "inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium";
+          span.innerHTML = v + ' <button type="button" class="hover:text-primary-500" title="Remove">&times;</button>';
+          wrap.insertBefore(span, input); input.value = "";
+        }
+      });
+      wrap.addEventListener("click", function (e) { var b = e.target.closest('button[title="Remove"]'); if (b) b.parentNode.remove(); });
+    });
+
+    // Modals
+    function closeAll() { [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.classList.add("hidden"); }); }
+    document.addEventListener("click", function (e) {
+      var o = e.target.closest("[data-open]");
+      if (o) { var m = document.getElementById(o.getAttribute("data-open")); if (m) m.classList.remove("hidden"); return; }
+      if (e.target.closest("[data-close]")) closeAll();
+      var t = e.target.closest("[data-toast]");
+      if (t) OggvoShell.toast(t.getAttribute("data-toast"), t.getAttribute("data-tone") || "success");
+    });
+    [].slice.call(document.querySelectorAll("[data-modal]")).forEach(function (m) { m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+  })();
+</script>
+</body>
+</html>
