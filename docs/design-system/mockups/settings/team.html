@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Team</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex items-start justify-between gap-6 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Team</h1>
+      <p class="mt-1 text-sm text-gray-500">Who can work in the <span class="font-medium text-gray-700">Acme Roofing Co.</span> profile, and what they're allowed to do.</p>
+    </div>
+    <button type="button" data-invite-open data-story="TEAM-1.1" data-ac="AC1" class="shrink-0 inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+      Invite member
+    </button>
+  </div>
+
+  <div class="max-w-4xl space-y-6">
+
+    <!-- Members table -->
+    <section data-story="TEAM-1.3" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Members</h2>
+        <p class="mt-0.5 text-xs text-gray-500">4 people have access to this profile. Role changes take effect on their next request.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-200">
+              <th class="px-5 py-2.5 font-medium">Member</th>
+              <th class="px-5 py-2.5 font-medium">Role</th>
+              <th class="px-5 py-2.5 font-medium">Joined</th>
+              <th class="px-5 py-2.5 font-medium">Last active</th>
+              <th class="px-5 py-2.5 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+
+            <!-- Owner row — last owner, demote/remove disabled -->
+            <tr data-member-row data-name="Sarah Mitchell">
+              <td class="px-5 py-3">
+                <div class="flex items-center gap-3">
+                  <span class="h-9 w-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-[11px] font-semibold text-white shrink-0">SM</span>
+                  <span class="leading-tight"><span class="block font-medium text-gray-900">Sarah Mitchell</span><span class="block text-xs text-gray-500">sarah@acmeroofing.com</span></span>
+                </div>
+              </td>
+              <td class="px-5 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Owner</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Jan 14, 2024</td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Today, 09:12</td>
+              <td class="px-5 py-3 text-right" data-story="TEAM-1.3" data-ac="AC1">
+                <div class="inline-flex items-center justify-end gap-2" title="You can't demote or remove the last owner of a profile">
+                  <select disabled class="h-9 px-2 rounded-card border border-gray-200 text-xs text-gray-400 bg-gray-50 cursor-not-allowed">
+                    <option selected>Owner</option>
+                  </select>
+                  <button type="button" disabled class="h-9 px-2.5 rounded-card text-xs font-medium text-gray-300 cursor-not-allowed">Remove</button>
+                </div>
+                <p class="mt-1 text-[11px] text-gray-400">Last owner — can't be demoted or removed</p>
+              </td>
+            </tr>
+
+            <!-- Admin row -->
+            <tr data-member-row data-name="Jordan Lee">
+              <td class="px-5 py-3">
+                <div class="flex items-center gap-3">
+                  <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600 shrink-0">JL</span>
+                  <span class="leading-tight"><span class="block font-medium text-gray-900">Jordan Lee</span><span class="block text-xs text-gray-500">jordan@acmeroofing.com</span></span>
+                </div>
+              </td>
+              <td class="px-5 py-3"><span data-role-pill class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700">Admin</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Mar 03, 2025</td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Today, 08:47</td>
+              <td class="px-5 py-3 text-right">
+                <div class="inline-flex items-center justify-end gap-2">
+                  <select data-role-select data-story="TEAM-1.3" data-ac="AC3" class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                    <option selected>Admin</option><option>Member</option>
+                  </select>
+                  <button type="button" data-member-remove data-story="TEAM-1.3" data-ac="AC2" class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-100">Remove</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Member rows -->
+            <tr data-member-row data-name="Priya Menon">
+              <td class="px-5 py-3">
+                <div class="flex items-center gap-3">
+                  <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600 shrink-0">PM</span>
+                  <span class="leading-tight"><span class="block font-medium text-gray-900">Priya Menon</span><span class="block text-xs text-gray-500">priya@acmeroofing.com</span></span>
+                </div>
+              </td>
+              <td class="px-5 py-3"><span data-role-pill class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Member</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Nov 21, 2025</td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Yesterday, 17:05</td>
+              <td class="px-5 py-3 text-right">
+                <div class="inline-flex items-center justify-end gap-2">
+                  <select data-role-select data-story="TEAM-1.3" data-ac="AC3" class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                    <option>Admin</option><option selected>Member</option>
+                  </select>
+                  <button type="button" data-member-remove data-story="TEAM-1.3" data-ac="AC2" class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-100">Remove</button>
+                </div>
+              </td>
+            </tr>
+
+            <tr data-member-row data-name="Sam Rivera">
+              <td class="px-5 py-3">
+                <div class="flex items-center gap-3">
+                  <span class="h-9 w-9 rounded-full bg-gray-200 grid place-items-center text-[11px] font-semibold text-gray-600 shrink-0">SR</span>
+                  <span class="leading-tight"><span class="block font-medium text-gray-900">Sam Rivera</span><span class="block text-xs text-gray-500">sam.rivera@acmeroofing.com</span></span>
+                </div>
+              </td>
+              <td class="px-5 py-3"><span data-role-pill class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Member</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Feb 09, 2026</td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Jul 02, 2026</td>
+              <td class="px-5 py-3 text-right">
+                <div class="inline-flex items-center justify-end gap-2">
+                  <select data-role-select data-story="TEAM-1.3" data-ac="AC3" class="h-9 px-2 rounded-card border border-gray-300 text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
+                    <option>Admin</option><option selected>Member</option>
+                  </select>
+                  <button type="button" data-member-remove data-story="TEAM-1.3" data-ac="AC2" class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-100">Remove</button>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="mock-note">GET /profiles/current/members · role change PATCH /profiles/current/members/{userId} (guard reads DB on next request, not JWT claims — TEAM-1.3 AC3) · remove DELETE /profiles/current/members/{userId} revokes that user's auth_sessions for this profile. Last-owner demote/remove returns 409. UI hides what the API forbids, never the reverse (TEAM-1.4 AC2).</p>
+
+    <!-- Pending invites -->
+    <section data-story="TEAM-1.1" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Pending invites</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Invite links are valid for 7 days. Resending replaces the previous token — the old link stops working.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-200">
+              <th class="px-5 py-2.5 font-medium">Email</th>
+              <th class="px-5 py-2.5 font-medium">Role</th>
+              <th class="px-5 py-2.5 font-medium">Sent</th>
+              <th class="px-5 py-2.5 font-medium">Expires in</th>
+              <th class="px-5 py-2.5 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr data-invite-row data-email="marco@acmeroofing.com">
+              <td class="px-5 py-3 text-gray-900">marco@acmeroofing.com</td>
+              <td class="px-5 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700">Admin</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Jul 4, 2026</td>
+              <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-warning-500"></span>5 days</span></td>
+              <td class="px-5 py-3 text-right">
+                <div class="inline-flex items-center justify-end gap-2">
+                  <button type="button" data-invite-resend class="h-9 px-3 rounded-card border border-gray-300 bg-white text-xs font-medium text-gray-700 hover:bg-gray-50">Resend</button>
+                  <button type="button" data-invite-revoke class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-100">Revoke</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-invite-row data-email="dana.frost@gmail.com">
+              <td class="px-5 py-3 text-gray-900">dana.frost@gmail.com</td>
+              <td class="px-5 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Member</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Jun 29, 2026</td>
+              <td class="px-5 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-error-600"><span class="h-2 w-2 rounded-full bg-error-500"></span>7 hours</span></td>
+              <td class="px-5 py-3 text-right">
+                <div class="inline-flex items-center justify-end gap-2">
+                  <button type="button" data-invite-resend class="h-9 px-3 rounded-card border border-gray-300 bg-white text-xs font-medium text-gray-700 hover:bg-gray-50">Resend</button>
+                  <button type="button" data-invite-revoke class="h-9 px-2.5 rounded-card text-xs font-medium text-error-600 hover:bg-error-100">Revoke</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="mock-note">Invite creates a pending user_profiles row + emailed accept link (verification token, 7-day TTL) via POST /profiles/current/members/invitations. Every invite email writes a delivery-ledger row (PF-6). Resend → POST …/invitations/{id}/resend (rotates the token) · Revoke → DELETE …/invitations/{id}.</p>
+
+  </div>
+
+  <!-- Invite member modal -->
+  <div data-invite-modal data-story="TEAM-1.1" data-ac="AC1" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="w-full max-w-md bg-white rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-sm font-semibold text-gray-900">Invite member</h3>
+        <button type="button" data-invite-close class="text-gray-400 hover:text-gray-600" aria-label="Close">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-gray-700">Email address</label>
+          <input type="email" data-invite-email placeholder="teammate@acmeroofing.com" class="mt-1.5 w-full h-10 px-3 rounded-card border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400" />
+        </div>
+        <fieldset>
+          <legend class="text-sm font-medium text-gray-700">Role</legend>
+          <div class="mt-1.5 space-y-2">
+            <label class="flex items-start gap-3 rounded-card border border-gray-300 p-3 cursor-pointer has-[:checked]:border-primary-400 has-[:checked]:bg-primary-50">
+              <input type="radio" name="invite-role" value="Admin" class="mt-0.5 h-4 w-4 border-gray-300 text-primary-500 focus:ring-primary-200" />
+              <span class="min-w-0">
+                <span class="block text-sm font-medium text-gray-900">Admin</span>
+                <span class="block text-xs text-gray-500 mt-0.5">Everything except deleting the profile: manage the team, billing, campaigns, contacts, reviews and integrations.</span>
+              </span>
+            </label>
+            <label class="flex items-start gap-3 rounded-card border border-gray-300 p-3 cursor-pointer has-[:checked]:border-primary-400 has-[:checked]:bg-primary-50">
+              <input type="radio" name="invite-role" value="Member" checked class="mt-0.5 h-4 w-4 border-gray-300 text-primary-500 focus:ring-primary-200" />
+              <span class="min-w-0">
+                <span class="block text-sm font-medium text-gray-900">Member</span>
+                <span class="block text-xs text-gray-500 mt-0.5">Day-to-day work: reviews, contacts, campaigns and messaging. No billing, team management or profile deletion.</span>
+              </span>
+            </label>
+          </div>
+          <p class="mt-2 flex items-start gap-1.5 text-xs text-gray-500" data-story="TEAM-1.5" data-ac="AC1">
+            <svg class="h-3.5 w-3.5 mt-px shrink-0 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+            Reps with the Admin role can activate Connect and SMS for this profile — it isn't owner-only.
+          </p>
+        </fieldset>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-invite-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-invite-send class="h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Send invite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remove member confirm modal -->
+  <div data-remove-modal data-story="TEAM-1.3" data-ac="AC2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-card shadow-pop">
+      <div class="p-5">
+        <div class="flex items-start gap-3">
+          <span class="h-9 w-9 shrink-0 rounded-full bg-error-100 text-error-600 grid place-items-center">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/></svg>
+          </span>
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900">Remove member</h3>
+            <p class="mt-1 text-sm text-gray-600">Remove <span data-remove-name class="font-medium text-gray-900">this member</span> from Acme Roofing Co.? Their sessions for this profile end immediately, and the profile disappears from their switcher.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-remove-cancel class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+        <button type="button" data-remove-ok class="h-10 px-4 rounded-card bg-error-500 text-white text-sm font-medium hover:bg-error-600">Remove member</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "settings", storyDomain: "team", back: { href: "settings.html", label: "Back to Settings" }, route: "/settings/team", search: "Search…" });</script>
+<script>
+  (function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+    // ---- Role change on member rows ---------------------------------------
+    var roleTone = { Admin: "bg-success-100 text-success-700", Member: "bg-gray-100 text-gray-600" };
+    $$("[data-role-select]").forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        var row = sel.closest("[data-member-row]");
+        var pill = row && row.querySelector("[data-role-pill]");
+        if (pill) {
+          pill.textContent = sel.value;
+          pill.className = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium " + roleTone[sel.value];
+        }
+        OggvoShell.toast((row ? row.getAttribute("data-name") : "Member") + " is now " + sel.value + " — applies on their next request", "success");
+      });
+    });
+
+    // ---- Invite modal ------------------------------------------------------
+    var inviteModal = $("[data-invite-modal]");
+    var inviteEmail = $("[data-invite-email]");
+    function closeInvite() { inviteModal.classList.add("hidden"); }
+    $$("[data-invite-open]").forEach(function (b) { b.addEventListener("click", function () { inviteModal.classList.remove("hidden"); inviteEmail.focus(); }); });
+    $$("[data-invite-close]").forEach(function (b) { b.addEventListener("click", closeInvite); });
+    $("[data-invite-send]").addEventListener("click", function () {
+      var email = (inviteEmail.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { OggvoShell.toast("Enter a valid email address", "error"); return; }
+      var role = ($("input[name=invite-role]:checked") || {}).value || "Member";
+      OggvoShell.toast("Invite sent to " + email + " as " + role + " — link expires in 7 days", "success");
+      inviteEmail.value = "";
+      closeInvite();
+    });
+
+    // ---- Pending invites: Resend / Revoke ---------------------------------
+    $$("[data-invite-resend]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var row = btn.closest("[data-invite-row]");
+        OggvoShell.toast("Invite re-sent to " + row.getAttribute("data-email") + " — previous link replaced", "primary");
+      });
+    });
+    $$("[data-invite-revoke]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var row = btn.closest("[data-invite-row]");
+        var email = row.getAttribute("data-email");
+        row.remove();
+        OggvoShell.toast("Invite for " + email + " revoked", "gray");
+      });
+    });
+
+    // ---- Remove member confirm --------------------------------------------
+    var removeModal = $("[data-remove-modal]");
+    var removeName = $("[data-remove-name]");
+    var pendingRow = null;
+    function closeRemove() { removeModal.classList.add("hidden"); pendingRow = null; }
+    $$("[data-member-remove]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        pendingRow = btn.closest("[data-member-row]");
+        removeName.textContent = pendingRow.getAttribute("data-name");
+        removeModal.classList.remove("hidden");
+      });
+    });
+    $("[data-remove-cancel]").addEventListener("click", closeRemove);
+    $("[data-remove-ok]").addEventListener("click", function () {
+      if (pendingRow) {
+        var name = pendingRow.getAttribute("data-name");
+        pendingRow.remove();
+        OggvoShell.toast(name + " removed — their sessions for this profile were revoked", "gray");
+      }
+      closeRemove();
+    });
+
+    // ---- Overlay click + Escape close -------------------------------------
+    [inviteModal, removeModal].forEach(function (m) {
+      m.addEventListener("click", function (e) { if (e.target === m) m.classList.add("hidden"); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeInvite(); closeRemove(); } });
+  })();
+</script>
+</body>
+</html>

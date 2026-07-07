@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Dashboard · Get set up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Get set up</h1>
+      <p class="text-sm text-gray-500 mt-1">Built from your questionnaire goals — get more reviews and answer every text. Finish these six and the funnel runs itself.</p>
+    </div>
+    <button id="dismissChecklist" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+      Dismiss checklist
+    </button>
+  </div>
+
+  <div id="checklistWrap" data-story="ONBD-1.3">
+
+    <!-- Progress card -->
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 mb-6">
+      <div class="flex items-center gap-5">
+        <!-- progress ring: 3 of 6 = 50%; r=26, C≈163.4 -->
+        <svg viewBox="0 0 64 64" class="h-16 w-16 shrink-0" role="img" aria-label="Setup progress: 3 of 6 steps complete">
+          <circle cx="32" cy="32" r="26" fill="none" stroke-width="7" class="text-gray-100" stroke="currentColor"/>
+          <circle id="ringDone" cx="32" cy="32" r="26" fill="none" stroke-width="7" stroke-linecap="round" class="text-primary-500" stroke="currentColor" stroke-dasharray="81.7 163.4" transform="rotate(-90 32 32)"/>
+          <text id="ringLabel" x="32" y="36" text-anchor="middle" class="fill-current text-gray-900" font-size="13" font-weight="600">3/6</text>
+        </svg>
+        <div class="min-w-0">
+          <div class="text-base font-semibold text-gray-900"><span id="progressText">3 of 6 complete</span> — halfway there</div>
+          <p class="text-sm text-gray-500 mt-0.5">Your funnel is live and contacts are in. The next three steps turn that into a steady stream of review requests.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checklist cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+      <!-- Done: Publish your review funnel -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-success-500 text-white shrink-0"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900 line-through decoration-gray-300">Publish your review funnel</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 shrink-0">Done</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Your public review page is where every request lands — happy customers go to Google, unhappy ones come to you first.</p>
+          <a href="../funnel/design-funnel.html" class="text-sm font-medium text-primary-600 hover:text-primary-700 mt-2 inline-block">View funnel design</a>
+        </div>
+      </div>
+
+      <!-- Done: Import contacts -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-success-500 text-white shrink-0"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900 line-through decoration-gray-300">Import contacts</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 shrink-0">Done</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">248 contacts imported — campaigns can only ask people you've added, so this is the fuel for everything below.</p>
+          <a href="../contacts/imports-list.html" class="text-sm font-medium text-primary-600 hover:text-primary-700 mt-2 inline-block">See imports</a>
+        </div>
+      </div>
+
+      <!-- Done: Connect Google -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-success-500 text-white shrink-0"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900 line-through decoration-gray-300">Connect Google</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 shrink-0">Done</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Linked — your Google reviews now sync automatically and new ones show up in the Reviews tab within the hour.</p>
+          <a href="../social/social-accounts.html" class="text-sm font-medium text-primary-600 hover:text-primary-700 mt-2 inline-block">Manage accounts</a>
+        </div>
+      </div>
+
+      <!-- Todo: Activate your first campaign -->
+      <div class="bg-white border border-primary-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-primary-100 text-primary-700 text-sm font-semibold shrink-0">4</span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900">Activate your first campaign</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 shrink-0">Next up</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Campaigns do the asking for you — an active campaign texts or emails each new contact a review request automatically.</p>
+          <a href="../campaigns/campaigns-list.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 mt-2">
+            Activate a campaign
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Todo: Set up Connect SMS -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-gray-100 text-gray-500 text-sm font-semibold shrink-0">5</span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900">Set up Connect SMS</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500 shrink-0">To do</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">A dedicated text line lets customers reply to requests and message you directly — texts get answered 10× faster than email.</p>
+          <a href="../settings/a2p-compliance.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 mt-2">
+            Set up your number
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Todo: Add the review widget -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5 flex items-start gap-4">
+        <span class="h-8 w-8 rounded-full grid place-items-center bg-gray-100 text-gray-500 text-sm font-semibold shrink-0">6</span>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-gray-900">Add the review widget</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500 shrink-0">To do</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Embed your best reviews on your website — visitors who see fresh reviews convert noticeably better than those who don't.</p>
+          <a href="../widgets/widgets-list.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 mt-2">
+            Get the embed code
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- dismissed state (hidden until dismiss) -->
+  <div id="dismissedNote" class="hidden bg-white border border-gray-200 rounded-card shadow-card p-5 text-sm text-gray-500 flex items-center justify-between gap-3">
+    <span>Checklist dismissed — it stays available under Dashboard until all six steps are complete.</span>
+    <button id="restoreChecklist" class="text-sm font-medium text-primary-600 hover:text-primary-700 shrink-0">Show again</button>
+  </div>
+
+  <p class="mock-note mt-6">GET /onboarding/checklist — items derived from questionnaire goals (profile_onboarding) + live completion signals (funnel published, contacts count, Google stream, active campaign, SMS number, widget install ping). Dismiss → PATCH /onboarding/checklist { dismissed: true } (per-user, reversible).</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "dashboard", storyDomain: "onboarding", back: { href: "../index.html", label: "All mockups" }, route: "/dashboard/get-set-up", search: "Search…" });</script>
+<script>
+  (function () {
+    var wrap = document.getElementById('checklistWrap');
+    var note = document.getElementById('dismissedNote');
+    document.getElementById('dismissChecklist').addEventListener('click', function () {
+      wrap.classList.add('hidden');
+      note.classList.remove('hidden');
+      OggvoShell.toast('Checklist dismissed — restore it anytime', 'gray');
+    });
+    document.getElementById('restoreChecklist').addEventListener('click', function () {
+      note.classList.add('hidden');
+      wrap.classList.remove('hidden');
+    });
+  })();
+</script>
+</body>
+</html>

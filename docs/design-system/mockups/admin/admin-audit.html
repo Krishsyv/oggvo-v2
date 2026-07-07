@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin · Audit Trail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Audit Trail</h1>
+      <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+        OGGVO_ADMIN
+      </span>
+    </div>
+    <button type="button" data-export data-story="AUDIT-1.4" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      Export CSV
+    </button>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="flex flex-col lg:flex-row lg:items-center gap-3 mb-4" data-story="AUDIT-1.4">
+    <select id="au-profile" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All profiles</option>
+      <option value="bright-smile-dental">Bright Smile Dental</option>
+      <option value="bloom-florist">Bloom Florist</option>
+      <option value="maple-tree">Maple Tree Realty</option>
+      <option value="urban-cuts">Urban Cuts Barbershop</option>
+    </select>
+    <div class="relative flex-1 max-w-xs">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-3.3 3.6-5 8-5s8 1.7 8 5"/></svg>
+      <input id="au-actor" type="text" placeholder="Actor (user, staff or system)…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm" />
+    </div>
+    <select id="au-action" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All actions</option>
+      <option value="create">create</option>
+      <option value="update">update</option>
+      <option value="delete">delete</option>
+      <option value="login">login</option>
+      <option value="impersonate">impersonate</option>
+      <option value="send">send</option>
+      <option value="connect">connect</option>
+      <option value="disconnect">disconnect</option>
+    </select>
+    <div class="relative flex-1 max-w-xs">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path stroke-linecap="round" d="M9 9h6M9 13h6M9 17h3"/></svg>
+      <input id="au-entity" type="text" placeholder="Entity ref (e.g. contact #4127)…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm" />
+    </div>
+    <select id="au-dates" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option>Last 24 hours</option>
+      <option selected>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>Custom range…</option>
+    </select>
+  </div>
+
+  <!-- Results table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="AUDIT-1.4">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Time</th>
+            <th class="px-4 py-3 font-medium">Actor</th>
+            <th class="px-4 py-3 font-medium">Action</th>
+            <th class="px-4 py-3 font-medium">Entity</th>
+            <th class="px-4 py-3 font-medium">IP</th>
+            <th class="w-10 px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody id="au-tbody" class="divide-y divide-gray-100">
+
+          <!-- Row 1 — staff edit under impersonation, expandable diff -->
+          <tr data-au-row data-action="update" data-profile="bright-smile-dental" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 09:41 AM</td>
+            <td class="px-4 py-3">
+              <span class="block font-semibold text-gray-900">Sarah K. <span class="font-normal text-gray-500">(staff)</span></span>
+              <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-3.3 3.6-5 8-5s8 1.7 8 5"/></svg>
+                as Bright Smile Dental
+              </span>
+            </td>
+            <td class="px-4 py-3"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>update</span></td>
+            <td class="px-4 py-3 text-gray-700">contact <a href="#" class="text-primary-600 hover:underline">#4127 · Dana Whitfield</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">74.125.10.18</td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-au-detail class="hidden bg-gray-50">
+            <td colspan="6" class="px-4 py-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Changed fields</p>
+                  <dl class="space-y-2.5 text-xs">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <dt class="w-16 text-gray-500">status</dt>
+                      <dd class="flex items-center gap-1.5">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-error-100 text-error-700 line-through">pending</span>
+                        <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16m0 0l-5-5m5 5l-5 5"/></svg>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-success-100 text-success-700">activated</span>
+                      </dd>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <dt class="w-16 text-gray-500">phone</dt>
+                      <dd class="flex items-center gap-1.5">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-error-100 text-error-700 line-through tabular-nums">+1 555 0100</span>
+                        <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16m0 0l-5-5m5 5l-5 5"/></svg>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-success-100 text-success-700 tabular-nums">+1 555 0199</span>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Context</p>
+                  <dl class="space-y-1.5 text-xs">
+                    <div class="flex gap-2"><dt class="w-28 text-gray-500">Audit id</dt><dd class="text-gray-900 font-medium">aud_01JA0C7K2M</dd></div>
+                    <div class="flex gap-2"><dt class="w-28 text-gray-500">Impersonation</dt><dd class="text-gray-900">real actor Sarah K. (staff #12) acting as Bright Smile Dental owner — both identities stored, never conflated</dd></div>
+                    <div class="flex gap-2"><dt class="w-28 text-gray-500">Session</dt><dd class="text-gray-900">imp_8802 · started 09:38 AM · reason "support ticket #5124"</dd></div>
+                    <div class="flex gap-2"><dt class="w-28 text-gray-500">User agent</dt><dd class="text-gray-900">Chrome 137 · Linux</dd></div>
+                  </dl>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2 — impersonation start -->
+          <tr data-au-row data-action="impersonate" data-profile="bright-smile-dental" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 09:38 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Sarah K. <span class="font-normal text-gray-500">(staff)</span></span></td>
+            <td class="px-4 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>impersonate</span></td>
+            <td class="px-4 py-3 text-gray-700">profile <a href="#" class="text-primary-600 hover:underline">Bright Smile Dental</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">74.125.10.18</td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-au-detail class="hidden bg-gray-50">
+            <td colspan="6" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Context</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Audit id</dt><dd class="text-gray-900 font-medium">aud_01JA0C51QX</dd></div>
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Reason</dt><dd class="text-gray-900">"support ticket #5124 — owner reports contact stuck in pending" (required field)</dd></div>
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Session</dt><dd class="text-gray-900">imp_8802 · ended 09:47 AM · every action inside it carries the dual actor</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3 — user login -->
+          <tr data-au-row data-action="login" data-profile="bloom-florist" class="hover:bg-gray-50">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 08:12 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Hannah Beck <span class="font-normal text-gray-500">(user)</span></span><span class="block text-xs text-gray-500">Bloom Florist · owner</span></td>
+            <td class="px-4 py-3"><span class="badge bg-gray-100 text-gray-600"><span class="badge-dot"></span>login</span></td>
+            <td class="px-4 py-3 text-gray-700">auth session <span class="text-gray-400">ses_01JA09X4</span></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">99.34.210.77</td>
+            <td class="px-4 py-3"></td>
+          </tr>
+
+          <!-- Row 4 — campaign email sent (system) -->
+          <tr data-au-row data-action="send" data-profile="bright-smile-dental" class="hover:bg-gray-50">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 5, 2026 · 04:15 PM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">System <span class="font-normal text-gray-500">(campaign sender)</span></span></td>
+            <td class="px-4 py-3"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>send</span></td>
+            <td class="px-4 py-3 text-gray-700">campaign email → contact <a href="#" class="text-primary-600 hover:underline">#4127 · Dana Whitfield</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-400">—</td>
+            <td class="px-4 py-3"></td>
+          </tr>
+
+          <!-- Row 5 — social connect -->
+          <tr data-au-row data-action="connect" data-profile="maple-tree" class="hover:bg-gray-50">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 5, 2026 · 11:03 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Alicia Reyes <span class="font-normal text-gray-500">(user)</span></span><span class="block text-xs text-gray-500">Maple Tree Realty · admin</span></td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>connect</span></td>
+            <td class="px-4 py-3 text-gray-700">integration <a href="#" class="text-primary-600 hover:underline">Facebook Page "Maple Tree Realty"</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">64.233.180.4</td>
+            <td class="px-4 py-3"></td>
+          </tr>
+
+          <!-- Row 6 — social disconnect -->
+          <tr data-au-row data-action="disconnect" data-profile="urban-cuts" class="hover:bg-gray-50">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 4, 2026 · 03:28 PM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Tom Adeyemi <span class="font-normal text-gray-500">(user)</span></span><span class="block text-xs text-gray-500">Urban Cuts Barbershop · owner</span></td>
+            <td class="px-4 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>disconnect</span></td>
+            <td class="px-4 py-3 text-gray-700">integration <a href="#" class="text-primary-600 hover:underline">Google Business Profile</a> · token revoked, 30-day grace started</td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">172.58.101.9</td>
+            <td class="px-4 py-3"></td>
+          </tr>
+
+          <!-- Row 7 — campaign delete, expandable -->
+          <tr data-au-row data-action="delete" data-profile="bloom-florist" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 4, 2026 · 10:51 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Hannah Beck <span class="font-normal text-gray-500">(user)</span></span><span class="block text-xs text-gray-500">Bloom Florist · owner</span></td>
+            <td class="px-4 py-3"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>delete</span></td>
+            <td class="px-4 py-3 text-gray-700">campaign <a href="#" class="text-primary-600 hover:underline">#310 · "Spring promo follow-up"</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-500">99.34.210.77</td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-au-detail class="hidden bg-gray-50">
+            <td colspan="6" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Context</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Audit id</dt><dd class="text-gray-900 font-medium">aud_01J9WQ8R3F</dd></div>
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Effect</dt><dd class="text-gray-900">soft delete (deleted_at set) · 42 unsent schedules cancelled · restorable for 30 days</dd></div>
+                  <div class="flex gap-2"><dt class="w-28 text-gray-500">Snapshot</dt><dd class="text-gray-900">full pre-delete row stored in the audit payload for forensics</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 8 — CSV import create (system) -->
+          <tr data-au-row data-action="create" data-profile="bright-smile-dental" class="hover:bg-gray-50">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jun 15, 2026 · 02:09 PM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">System <span class="font-normal text-gray-500">(import job #482)</span></span><span class="block text-xs text-gray-500">initiated by Maria Lopez</span></td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>create</span></td>
+            <td class="px-4 py-3 text-gray-700">214 contacts · <a href="#" class="text-primary-600 hover:underline">import #482 · june-clients.csv</a></td>
+            <td class="px-4 py-3 whitespace-nowrap font-mono text-xs text-gray-400">—</td>
+            <td class="px-4 py-3"></td>
+          </tr>
+
+          <!-- Empty state -->
+          <tr id="au-empty" class="hidden">
+            <td colspan="6" class="px-4 py-14 text-center">
+              <span class="inline-grid place-items-center h-11 w-11 rounded-card bg-gray-100 text-gray-400 mb-3"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+              <p class="text-sm font-medium text-gray-700">No audit events match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Widen the date range or clear a filter.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination footer -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–8 of 412,306</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">3</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Retention footnote -->
+  <div data-story="AUDIT-1.5" class="mt-4 flex items-start gap-2 rounded-card border border-gray-200 bg-white shadow-card p-4 text-sm text-gray-600">
+    <svg class="h-4 w-4 mt-0.5 shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>
+    <span><span class="font-medium text-gray-900">Retention: 24 months hot, then archived to S3.</span> Rows older than the hot window move to partitioned Parquet in S3 Glacier; this search covers the hot window, archived ranges are restorable on request. Audit rows are append-only — no update or delete path exists, even for staff.</span>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/audit-events?profile,actor,action[],entity,dates[],page → audit_events (append-only, PF-19 / AUDIT-1.4). Every row stores actor id + type (user/staff/system), the impersonated profile when applicable (dual identity, never conflated), action verb, entity ref, IP/user-agent and a before/after field diff for updates. Action badge tones: create/connect→success · update/send→primary · delete→error · impersonate/disconnect→warning · login→gray. Export CSV streams the current filter set. Gated to @Roles(STAFF_MANAGER)+.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "admin", storyDomain: "audit", back: { href: "../index.html", label: "All mockups" }, route: "/admin/audit", search: "Search audit events…" });
+
+  (function () {
+    var $ = function (s) { return document.querySelector(s); };
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+    // ---- Row expand → changed-fields diff ----------------------------------
+    $$("[data-au-row]").forEach(function (row) {
+      var detail = row.nextElementSibling;
+      if (!detail || !detail.hasAttribute("data-au-detail")) return;
+      row.addEventListener("click", function () {
+        var open = detail.classList.toggle("hidden");
+        var chev = row.querySelector("[data-chev]");
+        if (chev) chev.classList.toggle("rotate-180", !open);
+      });
+    });
+
+    // ---- Filters (live) ----------------------------------------------------
+    var profile = $("#au-profile");
+    var actor = $("#au-actor");
+    var action = $("#au-action");
+    var entity = $("#au-entity");
+    var empty = $("#au-empty");
+    var rows = $$("[data-au-row]");
+    function applyFilters() {
+      var pf = profile.value;
+      var ac = action.value;
+      var aq = (actor.value || "").trim().toLowerCase();
+      var eq = (entity.value || "").trim().toLowerCase();
+      var any = false;
+      rows.forEach(function (r) {
+        var text = r.textContent.toLowerCase();
+        var show = (!pf || r.getAttribute("data-profile") === pf) &&
+                   (!ac || r.getAttribute("data-action") === ac) &&
+                   (!aq || text.indexOf(aq) !== -1) &&
+                   (!eq || text.indexOf(eq) !== -1);
+        r.classList.toggle("hidden", !show);
+        var detail = r.nextElementSibling;
+        if (detail && detail.hasAttribute("data-au-detail") && !show) {
+          detail.classList.add("hidden");
+          var c = r.querySelector("[data-chev]"); if (c) c.classList.remove("rotate-180");
+        }
+        if (show) any = true;
+      });
+      empty.classList.toggle("hidden", any);
+    }
+    profile.addEventListener("change", applyFilters);
+    action.addEventListener("change", applyFilters);
+    actor.addEventListener("input", applyFilters);
+    entity.addEventListener("input", applyFilters);
+    $("#au-dates").addEventListener("change", function (e) {
+      OggvoShell.toast("Range: " + e.target.value, "gray");
+    });
+
+    // ---- Export CSV --------------------------------------------------------
+    $("[data-export]").addEventListener("click", function () {
+      OggvoShell.toast("Export queued — CSV of the current filter set will be emailed to you", "primary");
+    });
+  })();
+</script>
+</body>
+</html>

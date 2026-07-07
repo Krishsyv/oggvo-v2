@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Share Templates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6" data-story="AI-1.1">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Share templates</h1>
+      <p class="text-sm text-gray-500 mt-1">Manage the branded 1080×1080 layouts used when reviews are shared to social — stock or your own.</p>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700" title="Renders consume the monthly image-render entitlement">
+        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 15l-5-5L5 21"/></svg>
+        Template renders this month: 44 / 100
+      </span>
+      <a href="reviews-list.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+        Back to Reviews
+      </a>
+    </div>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-6 items-start" data-story="AI-1.1">
+
+    <!-- ============ LEFT: template library (~3/5) ============ -->
+    <div class="w-full lg:w-3/5 space-y-5">
+
+      <!-- Round-robin note -->
+      <div class="bg-primary-50 border border-primary-100 rounded-card px-4 py-2.5 text-sm flex items-center gap-3" data-ac="AC3">
+        <svg class="h-4 w-4 text-primary-600 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.6 9A7.5 7.5 0 0119 8m-.6 7A7.5 7.5 0 015 16"/></svg>
+        <span class="text-primary-800">Auto-share rotates through your selected templates — tick the ones you want in the rotation.</span>
+      </div>
+
+      <!-- Stock templates -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center justify-between mb-1">
+          <h2 class="text-base font-medium text-gray-900">Stock templates</h2>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">5 layouts</span>
+        </div>
+        <p class="text-xs text-gray-500 mb-4">The five built-in testimonial layouts — same set as the Share Review composer.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <label class="rr-card rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white p-2.5 cursor-pointer">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#eef7ff"/><rect x="8" y="10" width="44" height="6" rx="2" fill="#84caff"/><rect x="8" y="22" width="36" height="4" rx="2" fill="#bce0ff"/><rect x="8" y="30" width="40" height="4" rx="2" fill="#bce0ff"/><circle cx="13" cy="48" r="4" fill="#59afff"/><rect x="22" y="46" width="22" height="4" rx="2" fill="#bce0ff"/></svg>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-gray-700">Type 1 · Classic</span>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" checked />
+            </div>
+          </label>
+          <label class="rr-card rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white p-2.5 cursor-pointer">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#f2f4f7"/><circle cx="44" cy="44" r="12" fill="#a3cd61"/><circle cx="44" cy="38" r="4" fill="#fff"/><rect x="8" y="10" width="34" height="5" rx="2" fill="#d0d5dd"/><rect x="8" y="20" width="28" height="4" rx="2" fill="#e4e7ec"/></svg>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-gray-700">Type 2 · Avatar</span>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" checked />
+            </div>
+          </label>
+          <label class="rr-card rounded-card border-2 border-gray-200 bg-white p-2.5 cursor-pointer hover:border-gray-300">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#ac7d88"/><circle cx="30" cy="16" r="6" fill="#fff"/><rect x="14" y="30" width="32" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="18" y="40" width="24" height="4" rx="2" fill="#fff" opacity=".6"/></svg>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-gray-700">Type 3 · Centered</span>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            </div>
+          </label>
+          <label class="rr-card rounded-card border-2 border-gray-200 bg-white p-2.5 cursor-pointer hover:border-gray-300">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#ec994b"/><rect x="10" y="12" width="40" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="10" y="22" width="32" height="4" rx="2" fill="#fff" opacity=".6"/><rect x="16" y="42" width="28" height="9" rx="4" fill="#fff"/></svg>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-gray-700">Type 4 · Action</span>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            </div>
+          </label>
+          <label class="rr-card rounded-card border-2 border-gray-200 bg-white p-2.5 cursor-pointer hover:border-gray-300">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#417d7a"/><circle cx="14" cy="14" r="5" fill="#fff"/><rect x="24" y="11" width="24" height="4" rx="2" fill="#fff" opacity=".8"/><rect x="10" y="26" width="40" height="4" rx="2" fill="#fff" opacity=".55"/><rect x="16" y="44" width="28" height="9" rx="4" fill="#82dbd8"/></svg>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-gray-700">Type 5 · Badge</span>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <!-- My templates -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center justify-between mb-1">
+          <h2 class="text-base font-medium text-gray-900">My templates</h2>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">2 custom</span>
+        </div>
+        <p class="text-xs text-gray-500 mb-4">Versioned media assets rendered by the render worker — edits create a new version, scheduled posts keep the one they were built with.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <label class="rr-card rounded-card border-2 border-primary-500 ring-2 ring-primary-100 bg-white p-2.5 cursor-pointer">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#417d7a"/><rect x="8" y="8" width="18" height="6" rx="2" fill="#82dbd8"/><rect x="10" y="24" width="40" height="4" rx="2" fill="#fff" opacity=".9"/><rect x="14" y="32" width="32" height="4" rx="2" fill="#fff" opacity=".65"/><circle cx="30" cy="48" r="5" fill="#fff"/></svg>
+            <div class="flex items-center justify-between">
+              <div class="min-w-0">
+                <span class="text-xs font-medium text-gray-700 block truncate">Summer whitening promo</span>
+                <span class="text-[11px] text-gray-400">v3 · DM Serif</span>
+              </div>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" checked />
+            </div>
+          </label>
+          <label class="rr-card rounded-card border-2 border-gray-200 bg-white p-2.5 cursor-pointer hover:border-gray-300">
+            <svg viewBox="0 0 60 60" class="w-full h-16 rounded mb-2"><rect width="60" height="60" rx="4" fill="#f24a72"/><rect x="8" y="10" width="44" height="5" rx="2" fill="#fff" opacity=".9"/><rect x="8" y="20" width="36" height="4" rx="2" fill="#fff" opacity=".65"/><rect x="8" y="28" width="40" height="4" rx="2" fill="#fff" opacity=".65"/><rect x="16" y="44" width="28" height="8" rx="4" fill="#fff"/></svg>
+            <div class="flex items-center justify-between">
+              <div class="min-w-0">
+                <span class="text-xs font-medium text-gray-700 block truncate">Brand red — bold quote</span>
+                <span class="text-[11px] text-gray-400">v1 · Poppins</span>
+              </div>
+              <input type="checkbox" class="rr-check h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-200" />
+            </div>
+          </label>
+          <!-- create/upload card -->
+          <button id="newTemplateCard" type="button" class="rounded-card border-2 border-dashed border-gray-300 bg-gray-50 hover:border-primary-400 hover:bg-primary-50 p-2.5 grid place-items-center text-center transition-colors min-h-[7.5rem]" data-ac="AC1">
+            <span>
+              <svg class="mx-auto h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m7-7H5"/></svg>
+              <span class="text-xs font-medium text-primary-600 block mt-1.5">New template</span>
+              <span class="text-[11px] text-gray-400 block">create or upload a background</span>
+            </span>
+          </button>
+        </div>
+        <div class="flex items-center justify-between mt-4">
+          <p class="text-xs text-gray-500"><span id="rrCount">4</span> templates in the auto-share rotation.</p>
+          <button id="saveRotation" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save rotation</button>
+        </div>
+      </section>
+
+      <p class="mock-note">GET/POST /share-templates · PATCH /share-templates/rotation { template_ids[] } — templates are versioned media assets (PF-10) rendered by the render worker (AD-12, tolerant of missing sub-assets — no v1 wkhtmltoimage all-or-nothing); auto-share round-robin draws only from the checked set (BF-048).</p>
+    </div>
+
+    <!-- ============ RIGHT: create panel + live preview (~2/5) ============ -->
+    <div class="w-full lg:w-2/5 lg:sticky lg:top-20 space-y-4">
+      <section id="createPanel" class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-ac="AC1">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-base font-medium text-gray-900">Create template</h2>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-50 text-warning-700">Draft</span>
+        </div>
+
+        <div class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Template name</label>
+            <input id="tplName" type="text" value="Fall check-up push" placeholder="e.g. Holiday promo"
+              class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Background <span class="text-gray-400 font-normal">(optional image)</span></label>
+            <div id="bgDrop" role="button" tabindex="0" class="rounded-card border-2 border-dashed border-gray-300 bg-gray-50 hover:border-primary-400 hover:bg-primary-50 cursor-pointer p-4 text-center transition-colors">
+              <svg class="mx-auto h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0-12L7 9m5-5l5 5"/></svg>
+              <p class="text-xs text-gray-600 mt-1.5"><span class="font-medium text-primary-600">Upload</span> or drag a 1080×1080 image</p>
+              <p id="bgMeta" class="text-[11px] text-gray-400 mt-0.5">JPG or PNG · up to 4 MB</p>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Background color</label>
+            <div id="tplSwatches" class="flex flex-wrap items-center gap-2.5">
+              <button type="button" data-color="#417D7A" title="Viridian Green" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-primary-500" style="background:#417D7A"></button>
+              <button type="button" data-color="#82DBD8" title="Deep Aquamarine" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#82DBD8"></button>
+              <button type="button" data-color="#AC7D88" title="Turkish Rose" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#AC7D88"></button>
+              <button type="button" data-color="#EC994B" title="Royal Orange" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#EC994B"></button>
+              <button type="button" data-color="#A3CD61" title="Green Yellow" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#A3CD61"></button>
+              <button type="button" data-color="#F24A72" title="Infra Red" class="tpl-swatch h-9 w-9 rounded-card ring-2 ring-offset-2 ring-transparent" style="background:#F24A72"></button>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Font</label>
+            <select id="tplFont" class="w-full h-10 px-3 rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200">
+              <option selected>Inter</option>
+              <option>DM Serif Display</option>
+              <option>Poppins</option>
+              <option>Roboto Slab</option>
+              <option>Caveat</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- live 1080x1080 preview -->
+        <div class="mt-5">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-medium text-gray-900">Live preview</h3>
+            <span class="text-xs text-gray-400">1080 × 1080 · JPG</span>
+          </div>
+          <div id="tplPreview" class="aspect-square w-full rounded-card overflow-hidden relative grid place-items-center text-center p-8" style="background:#417D7A">
+            <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(0,0,0,.18))"></div>
+            <div class="relative flex flex-col items-center gap-3 text-white w-full">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-card bg-white/90 text-[11px] font-bold text-gray-800">ACME</span>
+              <div class="text-xl tracking-wide" style="color:#FACA15">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p id="tplQuote" class="text-base font-medium leading-snug max-w-[16rem]">&ldquo;Your latest 5-star review renders here — text auto-fits the layout.&rdquo;</p>
+              <span class="text-sm font-semibold">Dana M.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-2 mt-4">
+          <button id="tplCancel" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+          <button id="tplSave" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Save template</button>
+        </div>
+        <p class="mock-note mt-4">POST /share-templates { name, background_media_id?, color, font } → render worker produces the preview asset; saving bumps the version (PF-10), older scheduled posts keep their pinned version.</p>
+      </section>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "reviews", storyDomain: "ai", back: { href: "reviews-list.html", label: "Reviews" }, route: "/reviews/share/templates", search: "Search templates…" });</script>
+<script>
+(function () {
+  // ---- round-robin selection ----
+  var rrCount = document.getElementById('rrCount');
+  function refreshRotation() {
+    var checks = document.querySelectorAll('.rr-check');
+    var n = 0;
+    checks.forEach(function (c) {
+      var card = c.closest('.rr-card');
+      var on = c.checked;
+      if (on) n++;
+      card.classList.toggle('border-primary-500', on);
+      card.classList.toggle('ring-2', on);
+      card.classList.toggle('ring-primary-100', on);
+      card.classList.toggle('border-gray-200', !on);
+    });
+    rrCount.textContent = n;
+  }
+  document.querySelectorAll('.rr-check').forEach(function (c) {
+    c.addEventListener('change', refreshRotation);
+  });
+  document.getElementById('saveRotation').addEventListener('click', function () {
+    var n = rrCount.textContent;
+    if (n === '0') { OggvoShell.toast('Select at least one template for the rotation', 'error'); return; }
+    OggvoShell.toast('Rotation saved — auto-share will cycle through ' + n + ' templates', 'success');
+  });
+
+  // ---- create panel ----
+  var preview = document.getElementById('tplPreview');
+  document.getElementById('tplSwatches').addEventListener('click', function (e) {
+    var s = e.target.closest('.tpl-swatch');
+    if (!s) return;
+    document.querySelectorAll('.tpl-swatch').forEach(function (x) {
+      var on = x === s;
+      x.classList.toggle('ring-primary-500', on);
+      x.classList.toggle('ring-transparent', !on);
+    });
+    preview.style.background = s.getAttribute('data-color');
+  });
+  document.getElementById('tplFont').addEventListener('change', function (e) {
+    var f = e.target.value;
+    var stack = f === 'DM Serif Display' || f === 'Roboto Slab' ? 'Georgia, serif'
+      : f === 'Caveat' ? '"Comic Sans MS", cursive'
+      : 'Inter, system-ui, sans-serif';
+    document.getElementById('tplQuote').style.fontFamily = stack;
+  });
+
+  var bg = document.getElementById('bgDrop');
+  var bgMeta = document.getElementById('bgMeta');
+  function fakeBgUpload() {
+    bgMeta.textContent = 'clinic-teal-texture.jpg · 1.2 MB — uploaded, stored as media key';
+    preview.style.backgroundImage = 'radial-gradient(circle at 30% 20%, rgba(255,255,255,.25), transparent 60%)';
+    OggvoShell.toast('Background uploaded (presigned S3 → CDN key)', 'success');
+  }
+  bg.addEventListener('click', fakeBgUpload);
+  bg.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fakeBgUpload(); } });
+  bg.addEventListener('dragover', function (e) { e.preventDefault(); });
+  bg.addEventListener('drop', function (e) { e.preventDefault(); fakeBgUpload(); });
+
+  document.getElementById('tplSave').addEventListener('click', function () {
+    var name = document.getElementById('tplName').value.trim() || 'Untitled template';
+    OggvoShell.toast('Saved "' + name + '" — render worker is producing the preview asset', 'success');
+  });
+  document.getElementById('tplCancel').addEventListener('click', function () {
+    OggvoShell.toast('Draft discarded', 'gray');
+  });
+  document.getElementById('newTemplateCard').addEventListener('click', function () {
+    document.getElementById('tplName').focus();
+    OggvoShell.toast('Create panel focused — name your template', 'primary');
+  });
+
+  refreshRotation();
+})();
+</script>
+</body></html>

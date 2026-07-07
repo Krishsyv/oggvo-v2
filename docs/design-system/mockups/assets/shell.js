@@ -50,6 +50,7 @@
     { key: "media", label: "Media", href: "media/media-library.html", icon: ICONS.media },
     { key: "widgets", label: "Widgets", href: "widgets/widgets-list.html", icon: ICONS.widgets },
     { key: "tutorials", label: "Tutorials", href: "tutorials/tutorials.html", icon: ICONS.tutorials },
+    { key: "support", label: "Support", href: "support/support.html", icon: ICONS.tutorials },
     { key: "settings", label: "Settings", href: "settings/settings.html", icon: ICONS.settings },
     { key: "admin", label: "Admin", href: "admin/admin.html", icon: ICONS.admin },
   ];

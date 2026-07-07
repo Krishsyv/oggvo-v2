@@ -29,6 +29,10 @@ const DOMAIN_LABELS = {
   integrations: "Integrations", messaging: "Connect", reviews: "Reviews",
   settings: "Settings", social: "Social", surveys: "Surveys", widgets: "Widgets",
   tutorials: "Tutorials", support: "Support", media: "Media", referrals: "Referrals",
+  // foundation net-new epics (docs/foundation/04-epics-and-stories.md) — these
+  // use the normalized <EPIC>-<n.m> id scheme (TEAM-1.1), not bare US-x.y.
+  team: "Team", billing: "Billing", tfv: "Toll-Free", notifications: "Notifications",
+  audit: "Audit", onboarding: "Onboarding", ai: "AI",
 };
 
 // ---------- tiny, focused markdown -> HTML ----------
@@ -132,7 +136,9 @@ function parseDoc(domain, md) {
     const epicM = /^##\s+(Epic\s+.+)$/.exec(raw);
     if (epicM) { epic = epicM[1].trim(); continue; }
 
-    const storyM = /^###\s+(US-[A-Za-z0-9.]+)\s+[—-]\s+(.+)$/.exec(raw);
+    // Accept both id schemes: legacy bare "US-x.y" and normalized "<EPIC>-<n.m>"
+    // (TEAM-1.1, BILL-1.2, …) used by the foundation's net-new epics.
+    const storyM = /^###\s+(US-[A-Za-z0-9.]+|[A-Z]{2,6}-\d+(?:\.\d+)?)\s+[—-]\s+(.+)$/.exec(raw);
     if (storyM) {
       flush();
       cur = { id: storyM[1], title: storyM[2].trim(), epic, persona: null, bodyLines: [] };

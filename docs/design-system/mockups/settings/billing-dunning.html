@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Billing — Payment issue</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Payment issue</h1>
+    <p class="mt-1 text-sm text-gray-500">Your Growth renewal didn't go through — here's exactly what happens next.</p>
+  </div>
+
+  <div class="max-w-3xl space-y-6">
+
+    <!-- ===== Payment-failed banner ===== -->
+    <div data-story="BILL-1.4" class="rounded-card border border-error-500/40 bg-error-50 p-4">
+      <div class="flex items-start gap-3">
+        <span class="h-9 w-9 shrink-0 rounded-full bg-error-100 text-error-600 grid place-items-center">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M8 15h2"/></svg>
+        </span>
+        <div class="min-w-0 flex-1">
+          <h2 class="text-sm font-semibold text-gray-900">Payment failed — we'll retry automatically</h2>
+          <p class="mt-1 text-sm text-gray-600">Your card <span class="font-medium text-gray-900">Visa ending 4242</span> was declined on Jul 2, 2026 for the <span class="font-medium text-gray-900">$99.00</span> Growth renewal (reason from your bank: insufficient funds). Stripe will keep retrying — updating your card fixes this instantly.</p>
+        </div>
+        <button type="button" data-update-payment data-story="BILL-1.4" class="shrink-0 h-9 px-3 rounded-card bg-error-500 text-white text-sm font-medium hover:bg-error-600">Update payment method</button>
+      </div>
+    </div>
+
+    <!-- ===== Retry timeline ===== -->
+    <section data-story="BILL-1.4" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Automatic retry schedule</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Stripe smart retries — a successful charge at any point clears everything below.</p>
+      </div>
+      <div class="p-5">
+        <ol class="relative space-y-6 pl-6 border-l border-gray-200 ml-2">
+          <li class="relative">
+            <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-error-100 border-2 border-error-500 grid place-items-center"></span>
+            <p class="text-sm font-medium text-gray-900">Attempt 1 — failed</p>
+            <p class="text-xs text-gray-500 mt-0.5">Jul 2, 2026, 6:00 AM · card declined (insufficient funds)</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-error-100 border-2 border-error-500 grid place-items-center"></span>
+            <p class="text-sm font-medium text-gray-900">Attempt 2 — failed</p>
+            <p class="text-xs text-gray-500 mt-0.5">Jul 5, 2026, 6:00 AM · card declined (insufficient funds)</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-warning-100 border-2 border-warning-500"></span>
+            <p class="text-sm font-medium text-gray-900">Final attempt — scheduled</p>
+            <p class="text-xs text-gray-500 mt-0.5">Jul 9, 2026, 6:00 AM · last automatic retry before the grace period starts</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Grace-period explainer ===== -->
+    <section data-story="BILL-1.4" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">What happens if the final retry fails</h2>
+        <p class="mt-0.5 text-xs text-gray-500">A short grace period, then features pause — your data is never touched.</p>
+      </div>
+      <div class="p-5 grid sm:grid-cols-3 gap-4">
+        <div class="rounded-card border border-gray-200 p-4">
+          <span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Grace</span>
+          <p class="mt-2 text-sm font-medium text-gray-900">Jul 9 – Jul 11</p>
+          <p class="mt-1 text-xs text-gray-500">Everything keeps working. We email reminders and show this notice.</p>
+        </div>
+        <div class="rounded-card border border-gray-200 p-4">
+          <span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Paused</span>
+          <p class="mt-2 text-sm font-medium text-gray-900">From Jul 12, 2026</p>
+          <p class="mt-1 text-xs text-gray-500">Sending features pause until payment succeeds. You can still sign in and view everything.</p>
+        </div>
+        <div class="rounded-card border border-gray-200 p-4">
+          <span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Data safe</span>
+          <p class="mt-2 text-sm font-medium text-gray-900">Always</p>
+          <p class="mt-1 text-xs text-gray-500">Reviews, contacts, conversations and campaigns are never deleted — pay any time and pick up where you left off.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Suspended-state preview ===== -->
+    <div>
+      <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Preview · what the paused account looks like from Jul 12</p>
+      <section data-story="BILL-1.4" class="bg-white border border-gray-200 rounded-card shadow-card">
+        <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-200">
+          <div>
+            <h2 class="text-sm font-semibold text-gray-900">Account paused — payment required</h2>
+            <p class="mt-0.5 text-xs text-gray-500">Acme Roofing Co. · Growth · unpaid since Jul 1, 2026</p>
+          </div>
+          <span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Suspended</span>
+        </div>
+        <div class="p-5 grid sm:grid-cols-2 gap-5">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Paused until payment</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-error-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Campaign &amp; review-request sends</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-error-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Connect SMS sending &amp; replies</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-error-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Social publishing &amp; scheduling</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-error-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>AI content generation</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Still available</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Sign-in and every dashboard, read-only</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Incoming reviews keep collecting</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Contact &amp; review exports</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 shrink-0 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Billing pages — reactivate any time</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 px-5 py-4 border-t border-gray-200 bg-gray-50 rounded-b-card">
+          <button type="button" data-reactivate data-story="BILL-1.4" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Update payment &amp; reactivate
+          </button>
+          <p class="text-xs text-gray-500 sm:ml-2">Everything unpauses within a minute of a successful charge — queued work resumes automatically.</p>
+        </div>
+      </section>
+    </div>
+
+    <p class="mock-note">Stripe invoice.payment_failed → subscription state past_due; smart retries per Stripe dunning config. After the final failure a grace window (3 days) is tracked locally, then state → suspended: gated routes return 402 via @RequireEntitlement and workers stop spending provider money. No data is ever deleted (BILL-1.4). invoice.paid → instant reactivation. Update payment → POST /billing/portal-session.</p>
+
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "settings", storyDomain: "billing", back: { href: "billing-plans.html", label: "Plan & billing" }, route: "/settings/billing/payment-issue", search: "Search settings…" });
+
+  (function () {
+    [].slice.call(document.querySelectorAll("[data-update-payment], [data-reactivate]")).forEach(function (b) {
+      b.addEventListener("click", function () { OggvoShell.toast("Redirecting to Stripe billing portal…", "primary"); });
+    });
+  })();
+</script>
+</body>
+</html>

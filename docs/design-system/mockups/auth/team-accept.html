@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Accept team invite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-100 text-gray-700">
+  <button onclick="dsToggleTheme()" title="Toggle theme" class="icon-btn fixed top-4 right-4 bg-white border border-gray-200 shadow-card z-50"><svg class="theme-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10l1.4 1.4m0-13.8l-1.4 1.4m-10 10l-1.4 1.4"/></svg><svg class="theme-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-9-9 6.5 6.5 0 109 9z"/></svg></button>
+
+  <div class="min-h-screen grid place-items-center p-4">
+    <div class="w-full max-w-md space-y-3">
+
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="text-sm text-primary-600 hover:underline">← All mockups</a>
+        <p class="mock-note">PUBLIC · /team/accept?token=… · no portal shell</p>
+      </div>
+
+      <!-- ===== State 1: logged-in invitee — one-click accept ===== -->
+      <div data-story="TEAM-1.2" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card p-8">
+        <div class="flex flex-col items-center text-center">
+          <div class="h-10 w-10 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold">O</div>
+          <h1 class="text-xl font-semibold text-gray-900 mt-3">You're invited to Acme Roofing Co.</h1>
+          <p class="text-sm text-gray-500 mt-1"><span class="font-medium text-gray-700">Sarah Mitchell</span> (sarah@acmeroofing.com) invited you to join their team on OGGVO.</p>
+        </div>
+
+        <div class="mt-6 rounded-card border border-gray-200 bg-gray-50 p-4">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="h-9 w-9 shrink-0 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-[11px] font-semibold text-white">AR</span>
+              <span class="leading-tight min-w-0">
+                <span class="block text-sm font-medium text-gray-900 truncate">Acme Roofing Co.</span>
+                <span class="block text-xs text-gray-500">San Francisco, CA</span>
+              </span>
+            </div>
+            <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700">Admin</span>
+          </div>
+          <p class="mt-3 text-xs text-gray-500 border-t border-gray-200 pt-3">As an <span class="font-medium text-gray-700">Admin</span> you can manage the team, campaigns, contacts and reviews — and activate Connect and SMS for this profile.</p>
+        </div>
+
+        <p class="mt-4 text-center text-xs text-gray-500">You're signed in as <span class="font-medium text-gray-700">jordan@acmeroofing.com</span></p>
+        <button type="button" data-accept class="mt-3 w-full h-11 rounded-card bg-primary-500 text-white font-medium hover:bg-primary-600">Accept invite</button>
+        <p class="mt-3 text-center text-xs text-gray-400">Not you? <a href="auth-login.html" class="text-primary-600 hover:underline">Sign in with a different account</a></p>
+      </div>
+
+      <p class="mock-note">STATE · signed-in invitee. GET /auth/team-invites/:token resolves inviter + profile + role; POST /auth/team-invites/:token/accept flips the pending user_profiles row to active — the profile then appears in the invitee's switcher (TEAM-1.2 AC2).</p>
+
+      <!-- ===== State 2: no account yet — create account + accept ===== -->
+      <div data-story="TEAM-1.1" data-ac="AC3" class="bg-white border border-gray-200 rounded-card shadow-card p-8">
+        <div class="flex flex-col items-center text-center mb-6">
+          <div class="h-10 w-10 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 text-white grid place-items-center font-bold">O</div>
+          <h1 class="text-xl font-semibold text-gray-900 mt-3">Join Acme Roofing Co.</h1>
+          <p class="text-sm text-gray-500 mt-1">Sarah Mitchell invited <span class="font-medium text-gray-700">dana.frost@gmail.com</span> as a <span class="font-medium text-gray-700">Member</span>. Create your account to accept.</p>
+        </div>
+
+        <form data-create-form class="space-y-4" onsubmit="return false" novalidate>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Full name</label>
+            <input data-create-name type="text" autocomplete="name" placeholder="Dana Frost" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-gray-700">Password</label>
+            <input data-create-pw type="password" autocomplete="new-password" placeholder="••••••••" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+            <p class="text-xs text-gray-500">At least 8 characters, with a letter and a number.</p>
+          </div>
+          <button type="submit" class="w-full h-11 rounded-card bg-primary-500 text-white font-medium hover:bg-primary-600">Create account &amp; accept</button>
+        </form>
+        <p class="mt-3 text-center text-xs text-gray-400">Already have an account? <a href="auth-login.html" class="text-primary-600 hover:underline">Sign in to accept</a></p>
+      </div>
+
+      <p class="mock-note">STATE · invitee has no OGGVO account. Accepting routes through account activation first (TEAM-1.1 AC3): POST /auth/team-invites/:token/register { name, password } creates the user, marks the invite used, then lands in the new profile.</p>
+
+      <!-- ===== State 3: expired token ===== -->
+      <div data-story="TEAM-1.2" data-ac="AC1" class="bg-white border border-warning-500/40 rounded-card shadow-card p-8 text-center">
+        <span class="mx-auto h-14 w-14 rounded-full bg-warning-100 text-warning-600 grid place-items-center">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l2.5 2"/></svg>
+        </span>
+        <h1 class="text-xl font-semibold text-gray-900 mt-4">This invite expired</h1>
+        <p class="text-sm text-gray-500 mt-1 max-w-sm mx-auto">Invite links are valid for 7 days, and this one ran out on Jul 3. Ask <span class="font-medium text-gray-700">Sarah</span> to resend it from Settings → Team — the new link replaces this one.</p>
+        <button type="button" data-request-resend class="mt-6 w-full h-11 rounded-card border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50">Ask Sarah to resend</button>
+      </div>
+
+      <p class="mock-note">STATE · expired / already-used token (TEAM-1.2 AC1 — distinct state, never a silent 404). "Ask to resend" → POST /auth/team-invites/:token/nudge emails the inviter; the resend itself rotates the token (TEAM-1.1 AC2).</p>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var accept = document.querySelector("[data-accept]");
+      accept.addEventListener("click", function () {
+        accept.disabled = true;
+        accept.textContent = "Joining Acme Roofing Co.…";
+        setTimeout(function () {
+          accept.classList.remove("bg-primary-500", "hover:bg-primary-600");
+          accept.classList.add("bg-success-500");
+          accept.textContent = "You're in — opening the portal…";
+        }, 800);
+      });
+
+      var form = document.querySelector("[data-create-form]");
+      var name = document.querySelector("[data-create-name]");
+      var pw = document.querySelector("[data-create-pw]");
+      form.addEventListener("submit", function () {
+        var bad = false;
+        if (!(name.value || "").trim()) { name.classList.add("border-error-500"); bad = true; } else { name.classList.remove("border-error-500"); }
+        var v = pw.value || "";
+        if (!(v.length >= 8 && /[A-Za-z]/.test(v) && /\d/.test(v))) { pw.classList.add("border-error-500"); bad = true; } else { pw.classList.remove("border-error-500"); }
+        if (bad) return;
+        var btn = form.querySelector("button[type=submit]");
+        btn.disabled = true;
+        btn.textContent = "Creating your account…";
+        setTimeout(function () { btn.textContent = "Account created — joining Acme Roofing Co.…"; }, 800);
+      });
+
+      var nudge = document.querySelector("[data-request-resend]");
+      nudge.addEventListener("click", function () {
+        nudge.disabled = true;
+        nudge.textContent = "Sarah has been notified — check your inbox soon";
+      });
+    })();
+  </script>
+</body>
+</html>

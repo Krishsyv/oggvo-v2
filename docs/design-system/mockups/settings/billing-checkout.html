@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Billing — Checkout handoff</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Confirm your upgrade</h1>
+    <p class="mt-1 text-sm text-gray-500">Review the change, then finish payment on Stripe's secure checkout.</p>
+  </div>
+
+  <div class="max-w-xl space-y-6">
+
+    <!-- ===== Order summary ===== -->
+    <section data-story="BILL-1.2" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Order summary</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Acme Roofing Co. · Growth → Scale</p>
+      </div>
+      <div class="p-5 space-y-4">
+        <div class="flex items-center justify-between gap-3 rounded-card border border-gray-200 p-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="h-9 w-9 shrink-0 rounded-card bg-primary-100 text-primary-600 grid place-items-center">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block text-sm font-medium text-gray-900">Scale plan</span>
+              <span class="block text-xs text-gray-500">$199 / mo · billed annually · 2,000 SMS credits / mo</span>
+            </span>
+          </div>
+          <span class="badge bg-primary-100 text-primary-700">Upgrade</span>
+        </div>
+
+        <dl class="space-y-2 text-sm">
+          <div class="flex items-start justify-between gap-4">
+            <dt class="text-gray-600">Scale · Jul 6 – Nov 30, 2026 (prorated)</dt>
+            <dd class="font-medium text-gray-900 tabular-nums">$961.71</dd>
+          </div>
+          <div class="flex items-start justify-between gap-4">
+            <dt class="text-gray-600">Credit — unused Growth (Jul 6 – Nov 30, 2026)</dt>
+            <dd class="font-medium text-success-600 tabular-nums">−$478.45</dd>
+          </div>
+          <div class="flex items-start justify-between gap-4 pt-2 border-t border-gray-200">
+            <dt class="text-sm font-semibold text-gray-900">Total due today</dt>
+            <dd class="text-base font-semibold text-gray-900 tabular-nums">$483.26</dd>
+          </div>
+        </dl>
+        <p class="text-xs text-gray-500">Your billing period is unchanged — from Dec 1, 2026 you'll be billed <span class="font-medium text-gray-700">$2,388.00 / yr</span> for Scale. New entitlements activate within a minute of payment.</p>
+      </div>
+      <div class="px-5 py-4 border-t border-gray-200 space-y-3">
+        <button type="button" data-checkout data-story="BILL-1.2" data-ac="AC1" class="w-full inline-flex items-center justify-center gap-2 h-11 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 118 0v3"/></svg>
+          Continue to secure checkout
+        </button>
+        <p class="text-center text-xs text-gray-500">You'll be redirected to <span class="font-medium" style="color:#635BFF">Stripe</span> to complete payment.</p>
+        <p class="flex items-start justify-center gap-1.5 text-center text-xs text-gray-400">
+          <svg class="h-3.5 w-3.5 mt-px shrink-0 text-success-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+          Card details are entered on Stripe and never touch OGGVO's servers.
+        </p>
+        <p class="text-center">
+          <a href="billing-plans.html" data-cancel data-story="BILL-1.2" class="text-xs font-medium text-gray-500 hover:text-gray-700 hover:underline">Cancel and go back to plans</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Returned-from-Stripe success state ===== -->
+    <div>
+      <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">State · returning from Stripe (success)</p>
+      <section data-story="BILL-1.2" data-ac="AC1" class="bg-white border border-success-500/40 rounded-card shadow-card">
+        <div class="p-5">
+          <div class="flex items-start gap-3">
+            <span class="h-9 w-9 shrink-0 rounded-full bg-success-100 text-success-600 grid place-items-center">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <div class="min-w-0">
+              <h2 class="text-sm font-semibold text-gray-900">Payment confirmed — you're on Scale</h2>
+              <p class="mt-1 text-sm text-gray-600">We charged <span class="font-medium text-gray-900">$483.26</span> to Visa ending 4242. A receipt is on its way to hello@acmeroofing.com.</p>
+              <p class="mt-1 text-xs text-gray-500">2,000 SMS credits / mo, unlimited widgets and 15 social accounts are unlocking now — this usually takes under a minute while Stripe's webhook confirms.</p>
+              <div class="mt-3 flex items-center gap-2">
+                <button type="button" data-success-toast class="h-9 px-3 rounded-card bg-success-500 text-white text-sm font-medium hover:bg-success-600">Back to Plan &amp; billing</button>
+                <button type="button" data-success-receipt class="h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Download receipt</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="mock-note">POST /billing/checkout-session → redirect to Stripe Checkout (session-scoped, prices from the versioned plan catalog). Return URL /settings/billing?checkout=success shows the confirmation card; entitlements flip when the checkout.session.completed webhook lands (signature verified — v2 never skips webhook verification). Cancel URL returns here with no change.</p>
+
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "settings", storyDomain: "billing", back: { href: "billing-plans.html", label: "Plan & billing" }, route: "/settings/billing/checkout", search: "Search settings…" });
+
+  (function () {
+    var checkout = document.querySelector("[data-checkout]");
+    if (checkout) checkout.addEventListener("click", function () {
+      checkout.disabled = true;
+      checkout.classList.add("opacity-50", "cursor-not-allowed");
+      OggvoShell.toast("Redirecting to Stripe Checkout…", "primary");
+      setTimeout(function () {
+        checkout.disabled = false;
+        checkout.classList.remove("opacity-50", "cursor-not-allowed");
+      }, 1500);
+    });
+    var back = document.querySelector("[data-success-toast]");
+    if (back) back.addEventListener("click", function () { OggvoShell.toast("Scale entitlements active", "success"); });
+    var receipt = document.querySelector("[data-success-receipt]");
+    if (receipt) receipt.addEventListener("click", function () { OggvoShell.toast("Downloading receipt · Jul 6, 2026", "gray"); });
+  })();
+</script>
+</body>
+</html>

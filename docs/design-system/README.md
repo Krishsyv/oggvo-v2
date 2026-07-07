@@ -222,12 +222,54 @@ only, not production components.
 | `auth-login.html` · `auth-signup.html` · `auth-onboarding.html` | Auth (public, no shell) | auth/* |
 | `_template.html` | Starter for any new page | — |
 
+Later additions (previously shipped but missing from this map):
+
+| Mockup file | Screen | Stories |
+| --- | --- | --- |
+| `auth/auth-forgot.html` · `auth-reset.html` · `auth-activate.html` | Password + activation flows (standalone) | auth/* |
+| `auth/setup-questionnaire.html` · `setup-automation.html` | Onboarding wizard steps (standalone) | auth addendum / onboarding |
+| `admin/admin-notifications.html` · `admin-settings.html` · `admin-user-form.html` · `admin-template-editor.html` · `admin-referrals.html` | Admin sub-pages (push broadcasts, platform settings, staff users, template editor, referral directory) | admin A6–A12 |
+| `settings/referrals.html` | Client referral program (operator side) | referrals RF1 |
+| `media/media-library.html` | `/media` gallery (reference-counted usage) | media M1–M4 |
+| `widgets/widget-landing.html` | Landing-page widget builder | widgets E5 |
+| `tutorials/tutorials.html` | `/tutorials` (categories + search, BF-001) | tutorials T1–T3 |
+| `support/support.html` · `support/article.html` | Help center + article | support S1–S2 |
+| `public/unsubscribe.html` · `public/data-deletion-status.html` | Public consent/data-rights pages (standalone) | compliance E5–E6 |
+| `system/404.html` · `system/maintenance.html` | System states (standalone) | — |
+
+**Foundation net-new epics (added 2026-07-07** — story IDs use the normalized `EPIC-n.m` scheme
+from `docs/foundation/04-epics-and-stories.md`; per-domain story files live in
+`docs/{billing,team,tfv,notifications,audit,onboarding,ai}/user-stories.md`):
+
+| Mockup file | Screen | Stories |
+| --- | --- | --- |
+| `settings/billing-plans.html` | Plan catalog + change-plan + history | BILL-1.1/1.2 |
+| `settings/billing-checkout.html` | Stripe checkout handoff | BILL-1.2 |
+| `settings/billing-limit-reached.html` | Entitlement over-limit (queued sends + upgrade prompt) | BILL-1.3 |
+| `settings/billing-dunning.html` | Payment-failure grace/suspension states | BILL-1.4 |
+| `admin/admin-billing.html` | Staff plan admin + comp overrides + MRR | BILL-1.1/1.5 |
+| `settings/team.html` | Member management (roles, invites) | TEAM-1.1/1.3/1.4 |
+| `auth/team-accept.html` | Invite-accept landing (standalone) | TEAM-1.2 |
+| `settings/tfv.html` | TFV start/resume (Twilio Embeddable) | TFV-1.1/1.2 |
+| `settings/tfv-status.html` | TFV status timeline + correct/resubmit | TFV-1.3/1.4 |
+| `admin/admin-tfv.html` | Staff TFV panel (assign number, sync, history) | TFV-1.5/1.6 |
+| `settings/notifications.html` | Notification preference center | NOTIF-1.1 |
+| `admin/admin-deliveries.html` | Delivery ledger (support forensics) | NOTIF-1.4 |
+| `admin/admin-audit.html` | Audit forensics search + export | AUDIT-1.4/1.5 |
+| `contacts/contact-history.html` | Entity-history timeline (pattern page) | AUDIT-1.3 |
+| `auth/setup-company.html` · `setup-team.html` · `setup-accounts.html` | Onboarding wizard steps (company/team/connect) | ONBD-1.2/1.4/1.5 |
+| `dashboard/dashboard-checklist.html` | "Get set up" recommended-feature checklist | ONBD-1.3 |
+| `reviews/ai-templates.html` | Custom share-template manager + round-robin | AI-1.1 |
+| `reviews/ai-composer.html` | AI share-copy composer (quota, edit-before-post) | AI-1.2/1.3 |
+
+Removed: `social/social-story.html` (story composer — dropped feature per the epic register).
+
 ---
 
 ## 6. Authoring a new page (reusable shell)
 
 **Folder layout:** the mockups are organized one folder per domain —
-`mockups/{dashboard,reviews,funnel,contacts,campaigns,connect,social,surveys,widgets,settings,admin,auth}/`.
+`mockups/{dashboard,reviews,funnel,contacts,campaigns,connect,social,surveys,widgets,settings,admin,auth,media,tutorials,support,public,system}/`.
 Shared code stays at the root: `mockups/assets/` (the four assets below), `mockups/index.html` (the
 catalog), and `mockups/_template.html`. **Because pages live one level deep, they reference the shared
 assets as `../assets/…`** (the root `_template.html` uses `assets/…`; bump each path to `../assets/…`
@@ -329,4 +371,3 @@ example (composer cards bound to `US-R4.1/4.2/4.3`, individual controls to their
 You can also open a story programmatically: `OggvoShell.openStory("US-R4.1", "AC3")`.
 
 A story id with **no** `data-story` reference anywhere is an un-mocked feature — a cheap coverage signal.
-</content>

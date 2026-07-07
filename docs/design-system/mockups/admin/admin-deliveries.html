@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin · Delivery Ledger</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Delivery Ledger</h1>
+      <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+        OGGVO_ADMIN
+      </span>
+    </div>
+    <button type="button" data-refresh class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 10-2.3 5.6M20 12V6m0 6h-6"/></svg>
+      Refresh
+    </button>
+  </div>
+
+  <!-- Support-scenario callout -->
+  <div data-story="NOTIF-1.4" class="flex items-start gap-3 rounded-card border border-primary-200 bg-primary-50 p-4 mb-6">
+    <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600 shrink-0"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+    <div class="text-sm">
+      <p class="font-medium text-gray-900">"Did profile X get their notification — and why not?" is one lookup here.</p>
+      <p class="mt-0.5 text-gray-600">Every channel attempt writes exactly one ledger row with the <span class="font-medium text-gray-900">app-level</span> provider result — e.g. Merchant Law's missing new-review email (Jun 24 handoff) resolves below in a single filtered query: SendGrid accepted the request but returned an in-body 500.</p>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="flex flex-col lg:flex-row lg:items-center gap-3 mb-4" data-story="NOTIF-1.4">
+    <div class="relative flex-1 max-w-sm">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="dl-search" type="text" placeholder="Filter by profile, recipient or event…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="dl-channel" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All channels</option>
+      <option value="email">Email</option>
+      <option value="sms">SMS</option>
+      <option value="push">Push</option>
+    </select>
+    <select id="dl-status" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All statuses</option>
+      <option value="delivered">Delivered</option>
+      <option value="failed">Failed</option>
+      <option value="blocked">Blocked</option>
+      <option value="queued">Queued</option>
+    </select>
+    <select id="dl-dates" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option>Last 24 hours</option>
+      <option selected>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>Custom range…</option>
+    </select>
+  </div>
+
+  <!-- Ledger table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="NOTIF-1.2" data-ac="AC1">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Timestamp</th>
+            <th class="px-4 py-3 font-medium">Profile</th>
+            <th class="px-4 py-3 font-medium">Event type</th>
+            <th class="px-4 py-3 font-medium">Channel</th>
+            <th class="px-4 py-3 font-medium">Recipient</th>
+            <th class="px-4 py-3 font-medium">Provider</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="w-10 px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody id="dl-tbody" class="divide-y divide-gray-100">
+
+          <!-- Row 1 — failed, SendGrid in-body 500 (the support scenario) -->
+          <tr data-dl-row data-channel="email" data-status="failed" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 09:14 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Merchant Law</span><span class="block text-xs text-gray-500">merchant-law</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">New review</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Email</span></td>
+            <td class="px-4 py-3 text-gray-600">d.merchant@merchantlaw.com</td>
+            <td class="px-4 py-3 text-gray-600">SendGrid</td>
+            <td class="px-4 py-3">
+              <span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Failed</span>
+              <span class="block mt-1 text-xs text-error-600">SendGrid 500: Missing from_email</span>
+            </td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                  <dl class="space-y-1.5 text-xs">
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9ZK4M2Q</dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">review.created · evt_01J9ZK4KXA</dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Review</dt><dd><a href="#" class="text-primary-600 hover:underline">rev_88213 — 5★ Google, "Excellent counsel…"</a></dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Subscription</dt><dd class="text-gray-900">New review · email → d.merchant@merchantlaw.com</dd></div>
+                  </dl>
+                </div>
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Provider result (app-level)</p>
+                  <div class="rounded-card bg-gray-100 p-3 overflow-x-auto">
+                    <pre class="text-xs text-gray-700 leading-relaxed">HTTP 200 (accepted) · body status: 500
+{ "errors": [ { "message": "Missing from_email",
+    "field": "from.email" } ] }</pre>
+                  </div>
+                  <p class="mt-2 text-xs text-gray-500">The HTTP call "succeeded" — only the in-body result shows the failure. That's why the ledger records the <span class="font-medium text-gray-700">app-level</span> outcome, not just the transport code. Push + in-app for this event still delivered (fan-out is independent).</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2 — blocked by quiet hours -->
+          <tr data-dl-row data-channel="sms" data-status="blocked" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 06:02 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Bright Smile Dental</span><span class="block text-xs text-gray-500">bright-smile-dental</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">Negative review</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">SMS</span></td>
+            <td class="px-4 py-3 text-gray-600">(503) 555-0148</td>
+            <td class="px-4 py-3 text-gray-600">Twilio</td>
+            <td class="px-4 py-3">
+              <span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Blocked</span>
+              <span class="block mt-1 text-xs text-warning-600">Quiet hours, rescheduled 09:00 PT</span>
+            </td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                  <dl class="space-y-1.5 text-xs">
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9ZH8P7T</dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">review.created (2★) · evt_01J9ZH8N2C</dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Review</dt><dd><a href="#" class="text-primary-600 hover:underline">rev_88104 — 2★ Google, "Waited 40 minutes…"</a></dd></div>
+                    <div class="flex gap-2"><dt class="w-32 text-gray-500">Reschedule</dt><dd class="text-gray-900">Jul 6, 2026 · 09:00 AM America/Los_Angeles</dd></div>
+                  </dl>
+                </div>
+                <div class="rounded-card border border-gray-200 bg-white p-4">
+                  <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Policy result (no provider call)</p>
+                  <div class="rounded-card bg-gray-100 p-3 overflow-x-auto">
+                    <pre class="text-xs text-gray-700 leading-relaxed">blocked_by: quiet_hours
+profile_tz: America/Los_Angeles (per-profile,
+  not hardcoded Pacific)
+window: 09:00–20:00 · requeued job ntf_77021</pre>
+                  </div>
+                  <p class="mt-2 text-xs text-gray-500">Blocked rows never reach the provider; the ledger still records the attempt and the reschedule so support sees the full story.</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3 — delivered push -->
+          <tr data-dl-row data-channel="push" data-status="delivered" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 6, 2026 · 06:02 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Bright Smile Dental</span><span class="block text-xs text-gray-500">bright-smile-dental</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">Negative review</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Push</span></td>
+            <td class="px-4 py-3 text-gray-600">Chrome on Linux (Maria G.)</td>
+            <td class="px-4 py-3 text-gray-600">Web Push</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Delivered</span></td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9ZH8P9X</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">review.created (2★) · evt_01J9ZH8N2C — same event as the blocked SMS above; push delivered anyway</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Device</dt><dd class="text-gray-900">psh_5531 · Chrome on Linux · last seen 4 min ago</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 4 — delivered survey email -->
+          <tr data-dl-row data-channel="email" data-status="delivered" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 5, 2026 · 04:47 PM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Urban Cuts Barbershop</span><span class="block text-xs text-gray-500">urban-cuts</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">Survey completed</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Email</span></td>
+            <td class="px-4 py-3 text-gray-600">tom@urbancuts.co</td>
+            <td class="px-4 py-3 text-gray-600">SendGrid</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Delivered</span></td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9YD2R4K</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">survey.completed · evt_01J9YD2QLM</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Survey</dt><dd><a href="#" class="text-primary-600 hover:underline">srv_2210 — "Post-Cut Satisfaction" · response #1,384</a></dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Provider ref</dt><dd class="text-gray-900">sg_msg 14c8b2ef-0a11 · HTTP 202 · delivered webhook 04:47:31 PM</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 5 — failed push, expired subscription -->
+          <tr data-dl-row data-channel="push" data-status="failed" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 5, 2026 · 11:20 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Maple Tree Realty</span><span class="block text-xs text-gray-500">maple-tree</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">Social post failed</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Push</span></td>
+            <td class="px-4 py-3 text-gray-600">Chrome on Windows (Alicia R.)</td>
+            <td class="px-4 py-3 text-gray-600">Web Push</td>
+            <td class="px-4 py-3">
+              <span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Failed</span>
+              <span class="block mt-1 text-xs text-error-600">410 Gone: subscription expired — device deactivated</span>
+            </td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9XW1H8B</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">post.failed · evt_01J9XW1G3D (Facebook token expired)</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Post</dt><dd><a href="#" class="text-primary-600 hover:underline">pst_4407 — "Open house Saturday…" · scheduled Jul 5, 11:00 AM</a></dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Side effect</dt><dd class="text-gray-900">push_channels psh_2118 marked is_active=false · email to the same recipient delivered</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 6 — delivered SMS inbound alert -->
+          <tr data-dl-row data-channel="sms" data-status="delivered" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 4, 2026 · 02:31 PM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Bloom Florist</span><span class="block text-xs text-gray-500">bloom-florist</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">Inbound SMS</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">SMS</span></td>
+            <td class="px-4 py-3 text-gray-600">(415) 555-0107</td>
+            <td class="px-4 py-3 text-gray-600">Twilio</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Delivered</span></td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9V8N3QW</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">sms.inbound · evt_01J9V8N2ZR — reply from contact Dana Moore (#4821)</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Provider ref</dt><dd class="text-gray-900">SM8c02e1af44 · status callback: delivered 02:31:09 PM</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 7 — queued campaign digest -->
+          <tr data-dl-row data-channel="email" data-status="queued" class="hover:bg-gray-50 cursor-pointer">
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-600">Jul 4, 2026 · 09:00 AM</td>
+            <td class="px-4 py-3"><span class="block font-semibold text-gray-900">Pacific Dental Group</span><span class="block text-xs text-gray-500">pacific-dental</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-700">New review</td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Email</span></td>
+            <td class="px-4 py-3 text-gray-600">priya@pacificdental.com</td>
+            <td class="px-4 py-3 text-gray-600">SendGrid</td>
+            <td class="px-4 py-3"><span class="badge bg-gray-100 text-gray-600"><span class="badge-dot"></span>Queued</span></td>
+            <td class="px-4 py-3 text-right"><svg data-chev class="h-4 w-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></td>
+          </tr>
+          <tr data-dl-detail class="hidden bg-gray-50">
+            <td colspan="8" class="px-4 py-4">
+              <div class="rounded-card border border-gray-200 bg-white p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2">Correlation</p>
+                <dl class="space-y-1.5 text-xs">
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Ledger id</dt><dd class="text-gray-900 font-medium">dlv_01J9TQ6C2M</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Event</dt><dd class="text-gray-900">review.created · evt_01J9TQ6BXH</dd></div>
+                  <div class="flex gap-2"><dt class="w-32 text-gray-500">Queue</dt><dd class="text-gray-900">BullMQ notifications · job ntf_76854 · attempt 1 pending (profile campaigns paused)</dd></div>
+                </dl>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Empty state -->
+          <tr id="dl-empty" class="hidden">
+            <td colspan="8" class="px-4 py-14 text-center">
+              <span class="inline-grid place-items-center h-11 w-11 rounded-card bg-gray-100 text-gray-400 mb-3"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg></span>
+              <p class="text-sm font-medium text-gray-700">No deliveries match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Widen the date range or clear a filter.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination footer -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–7 of 18,904</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">3</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/notification-deliveries?query,channel,status,dates[],page → notification_deliveries (one row per channel attempt, NOTIF-1.2). Status stores the app-level provider result — an HTTP-200-with-in-body-500 is recorded as failed with the body error. Gated to OGGVO_ADMIN / @Roles(SUPPORT)+.</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "admin", storyDomain: "notifications", back: { href: "admin.html", label: "Back to Admin" }, route: "/admin/deliveries", search: "Search deliveries…" });
+
+  (function () {
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+    // ---- Row expand → payload drawer --------------------------------------
+    $$("[data-dl-row]").forEach(function (row) {
+      row.addEventListener("click", function () {
+        var detail = row.nextElementSibling;
+        var open = detail.classList.toggle("hidden");
+        var chev = row.querySelector("[data-chev]");
+        if (chev) chev.classList.toggle("rotate-180", !open);
+      });
+    });
+
+    // ---- Filters (live) ----------------------------------------------------
+    var search = document.getElementById("dl-search");
+    var channel = document.getElementById("dl-channel");
+    var status = document.getElementById("dl-status");
+    var empty = document.getElementById("dl-empty");
+    var rows = $$("[data-dl-row]");
+    function applyFilters() {
+      var q = (search.value || "").trim().toLowerCase();
+      var ch = channel.value, st = status.value;
+      var any = false;
+      rows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) &&
+                   (!ch || r.getAttribute("data-channel") === ch) &&
+                   (!st || r.getAttribute("data-status") === st);
+        r.classList.toggle("hidden", !show);
+        var detail = r.nextElementSibling;
+        if (!show) { detail.classList.add("hidden"); var c = r.querySelector("[data-chev]"); if (c) c.classList.remove("rotate-180"); }
+        if (show) any = true;
+      });
+      empty.classList.toggle("hidden", any);
+    }
+    search.addEventListener("input", applyFilters);
+    channel.addEventListener("change", applyFilters);
+    status.addEventListener("change", applyFilters);
+    document.getElementById("dl-dates").addEventListener("change", function (e) {
+      OggvoShell.toast("Range: " + e.target.value, "gray");
+    });
+
+    // ---- Refresh -----------------------------------------------------------
+    document.querySelector("[data-refresh]").addEventListener("click", function () {
+      OggvoShell.toast("Ledger refreshed", "primary");
+    });
+  })();
+</script>
+</body>
+</html>

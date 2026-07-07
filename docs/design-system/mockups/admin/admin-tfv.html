@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin · Toll-Free Verification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Toll-Free Verification</h1>
+      <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+        OGGVO_ADMIN
+      </span>
+    </div>
+    <button type="button" data-sync-all data-story="TFV-1.5" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 10-2.3 5.6M20 12V6m0 6h-6"/></svg>
+      Sync all now
+    </button>
+  </div>
+
+  <!-- Filter row -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4" data-story="TFV-1.5">
+    <div class="relative flex-1 max-w-sm">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="tfv-search" type="text" placeholder="Search by profile or number…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="tfv-status" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All portal statuses</option>
+      <option value="draft">Draft</option>
+      <option value="submitted">Submitted</option>
+      <option value="needs_correction">Needs correction</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  </div>
+
+  <!-- Profiles table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="TFV-1.5">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Profile</th>
+            <th class="px-4 py-3 font-medium">Eligible</th>
+            <th class="px-4 py-3 font-medium">Toll-free number</th>
+            <th class="px-4 py-3 font-medium">Portal status</th>
+            <th class="px-4 py-3 font-medium">Twilio status</th>
+            <th class="px-4 py-3 font-medium">Last synced</th>
+            <th class="w-56 px-4 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tfv-tbody" class="divide-y divide-gray-100">
+
+          <tr class="hover:bg-gray-50" data-status="approved" data-name="Bloom Florist">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">BL</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Bloom Florist</span><span class="block text-xs text-gray-500">bloom-florist</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" checked />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-700">+1 (833) 555-0121</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Approved</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-600">TWILIO_APPROVED</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Today · 14:32</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-sync-row class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Sync now</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="needs_correction" data-name="Bright Smile Dental">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">BS</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Bright Smile Dental</span><span class="block text-xs text-gray-500">bright-smile-dental</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" checked />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-700">+1 (833) 555-0148</td>
+            <td class="px-4 py-3"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Needs correction</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-600">TWILIO_REJECTED</span> <span class="text-xs text-gray-400">· correctable</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Today · 09:18</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-sync-row class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Sync now</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="submitted" data-name="Urban Cuts Barbershop">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">UC</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Urban Cuts Barbershop</span><span class="block text-xs text-gray-500">urban-cuts</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" checked />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-700">+1 (833) 555-0173</td>
+            <td class="px-4 py-3"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>Submitted</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-600">IN_REVIEW</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Today · 11:05</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-sync-row class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Sync now</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="draft" data-name="Maple Tree Realty">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">MT</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Maple Tree Realty</span><span class="block text-xs text-gray-500">maple-tree</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" checked />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-400">— not assigned</td>
+            <td class="px-4 py-3"><span class="badge bg-gray-100 text-gray-600"><span class="badge-dot"></span>Draft</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-400">— not created</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Today · 07:00</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-assign-open class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign number</button>
+              <button data-sync-row class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Sync now</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="rejected" data-name="Pacific Dental Group">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">PD</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Pacific Dental Group</span><span class="block text-xs text-gray-500">pacific-dental</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" checked />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap tabular-nums text-gray-700">+1 (833) 555-0190</td>
+            <td class="px-4 py-3"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Rejected</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-600">TWILIO_REJECTED</span> <span class="text-xs text-gray-400">· final</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Today · 08:44</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-sync-row class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Sync now</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="" data-name="Riverside Hardware">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-gray-400 to-gray-600 grid place-items-center text-xs font-semibold text-white shrink-0">RH</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Riverside Hardware</span><span class="block text-xs text-gray-500">riverside-hw</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <label class="relative inline-flex items-center cursor-pointer" title="Toll-free eligibility">
+                <input type="checkbox" data-elig class="sr-only peer" />
+                <span class="w-9 h-5 rounded-full bg-gray-300 peer-checked:bg-primary-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4"></span>
+              </label>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-400">— not assigned</td>
+            <td class="px-4 py-3"><span class="text-xs text-gray-400">Not eligible</span></td>
+            <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-xs text-gray-400">—</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-400">—</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-assign-open class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign number</button>
+              <button data-history-open class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+            </td>
+          </tr>
+
+          <tr id="tfv-empty" class="hidden">
+            <td colspan="7" class="px-4 py-14 text-center">
+              <p class="text-sm font-medium text-gray-700">No profiles match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Try a different search term or portal status.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–6 of 214</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deactivation guarantee -->
+  <div data-story="TFV-1.6" class="mt-4 flex items-start gap-2 rounded-card border border-gray-200 bg-white shadow-card p-4 text-sm text-gray-600">
+    <svg class="h-4 w-4 mt-0.5 shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.3 12l1.8 1.8L15 10"/></svg>
+    <span><span class="font-medium text-gray-900">Deactivating always resets local state even if Twilio-side cleanup fails.</span> Turning eligibility off clears the number assignment and disables sending immediately; releasing the number at Twilio is best-effort and idempotent — no v1-style subaccount-close deadlock where a dead provider ref blocks re-provisioning forever.</span>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/tollfree/profiles?query,status[] → twilio_tollfree_inquiries joined to profiles (TFV-1.5). Portal status is the normalized state machine (draft → submitted → needs_correction → approved | rejected); Twilio status is the raw provider value, kept side-by-side for support. "Sync now" enqueues an immediate twilio-tollfree-sync job — poll is the source of truth, webhook only a hint (TFV-1.3). Eligibility toggle → PATCH /admin/tollfree/profiles/:id/eligibility. Gated to @Roles(STAFF_MANAGER)+.</p>
+
+  <!-- ===== Assign-number modal ===== -->
+  <div id="m-assign" data-modal data-story="TFV-1.5" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Assign toll-free number · <span data-biz>profile</span></h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-3 text-sm text-gray-600">
+        <div class="relative">
+          <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+          <input id="assign-search" type="text" placeholder="Search available +1 (833) numbers…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+        </div>
+        <ul id="assign-list" class="divide-y divide-gray-100 border border-gray-200 rounded-card overflow-hidden">
+          <li data-num class="flex items-center justify-between px-3 py-2.5 hover:bg-gray-50">
+            <span><span class="block font-medium text-gray-900 tabular-nums">+1 (833) 555-0202</span><span class="block text-xs text-gray-500">Toll-free · US/CA · $2.15/mo</span></span>
+            <button data-assign-pick class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign</button>
+          </li>
+          <li data-num class="flex items-center justify-between px-3 py-2.5 hover:bg-gray-50">
+            <span><span class="block font-medium text-gray-900 tabular-nums">+1 (833) 555-0216</span><span class="block text-xs text-gray-500">Toll-free · US/CA · $2.15/mo</span></span>
+            <button data-assign-pick class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign</button>
+          </li>
+          <li data-num class="flex items-center justify-between px-3 py-2.5 hover:bg-gray-50">
+            <span><span class="block font-medium text-gray-900 tabular-nums">+1 (833) 555-0247</span><span class="block text-xs text-gray-500">Toll-free · US/CA · $2.15/mo</span></span>
+            <button data-assign-pick class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign</button>
+          </li>
+          <li data-num class="flex items-center justify-between px-3 py-2.5 hover:bg-gray-50">
+            <span><span class="block font-medium text-gray-900 tabular-nums">+1 (833) 555-0261</span><span class="block text-xs text-gray-500">Toll-free · US/CA · $2.15/mo</span></span>
+            <button data-assign-pick class="px-2.5 py-1.5 text-xs font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Assign</button>
+          </li>
+          <li id="assign-empty" class="hidden px-3 py-6 text-center text-xs text-gray-400">No available numbers match that search.</li>
+        </ul>
+        <div class="flex items-start gap-2 rounded-card border border-gray-200 bg-gray-50 p-3 text-xs text-gray-500">
+          <svg class="h-4 w-4 mt-px shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8h.01M12 11v5"/></svg>
+          A number <span class="font-medium text-gray-700">can be assigned before verification starts</span> — sending only switches on when status = approved <b>and</b> a number is assigned, never one without the other.
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Per-profile history drawer ===== -->
+  <div data-history-scrim class="hidden fixed inset-0 z-40 bg-gray-900/50"></div>
+  <aside data-history-drawer data-story="TFV-1.5" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white border-l border-gray-200 shadow-pop translate-x-full transition-transform duration-200 flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">Verification history</h3>
+        <p class="mt-0.5 text-xs text-gray-500" data-history-name>Profile</p>
+      </div>
+      <button data-history-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5">
+      <ol class="relative space-y-6 pl-6 border-l border-gray-200 ml-2 text-sm">
+        <li class="relative">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-gray-100 border-2 border-gray-400"></span>
+          <p class="font-medium text-gray-900">Draft started <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 ml-1">draft</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jul 1, 2026 · 10:04 — inquiry created; Twilio Compliance Embeddable session opened by owner.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-primary-100 border-2 border-primary-500"></span>
+          <p class="font-medium text-gray-900">Submitted to Twilio <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ml-1">submitted</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jul 2, 2026 · 16:41 — embedded form completed; awaiting Twilio review.</p>
+        </li>
+        <li class="relative" data-story="TFV-1.4">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-warning-100 border-2 border-warning-500"></span>
+          <p class="font-medium text-gray-900">Corrections requested <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700 ml-1">needs_correction</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jul 5, 2026 · 09:18 — detected by the sync poll. Rejection reasons:</p>
+          <ul class="mt-1.5 space-y-1 text-xs text-gray-600 list-disc pl-4">
+            <li><span class="font-medium text-gray-800">Business address does not match registration</span> — submitted address differs from the state record.</li>
+            <li><span class="font-medium text-gray-800">Opt-in description insufficient</span> — needs the exact consent point plus a screenshot or URL.</li>
+          </ul>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-primary-100 border-2 border-primary-500"></span>
+          <p class="font-medium text-gray-900">Resubmitted <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ml-1">submitted</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jul 6, 2026 · 11:27 — owner fixed both flagged sections; previous answers kept.</p>
+        </li>
+        <li class="relative" data-story="TFV-1.6">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-success-100 border-2 border-success-500"></span>
+          <p class="font-medium text-gray-900">Approved <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700 ml-1">approved</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jul 7, 2026 · 08:02 — sync flipped tollfree_sending_enabled; SMS sending live on the assigned number.</p>
+        </li>
+      </ol>
+    </div>
+    <div class="px-5 py-4 border-t border-gray-200">
+      <p class="text-xs text-gray-400">Every transition the sync poll observes is recorded with its raw Twilio payload — including full rejection reasons — so support never has to open the Twilio console.</p>
+    </div>
+  </aside>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "admin", storyDomain: "tfv", back: { href: "../index.html", label: "All mockups" }, route: "/admin/tollfree", search: "Search profiles…" });
+
+  (function () {
+    var $ = function (s) { return document.querySelector(s); };
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+    var activeBiz = "this profile";
+
+    // ---- Search + status filter ----
+    var search = $("#tfv-search");
+    var status = $("#tfv-status");
+    var empty = $("#tfv-empty");
+    var rows = $$("#tfv-tbody tr").filter(function (r) { return r !== empty; });
+    function filter() {
+      var q = (search.value || "").trim().toLowerCase();
+      var st = status.value;
+      var any = false;
+      rows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) && (!st || r.getAttribute("data-status") === st);
+        r.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      empty.classList.toggle("hidden", any);
+    }
+    search.addEventListener("input", filter);
+    status.addEventListener("change", filter);
+
+    // ---- Eligibility toggles (TFV-1.6 guarantee) ----
+    $$("[data-elig]").forEach(function (t) {
+      t.addEventListener("change", function () {
+        var name = t.closest("tr").getAttribute("data-name");
+        if (t.checked) {
+          OggvoShell.toast("Toll-free eligibility enabled for " + name, "success");
+        } else {
+          OggvoShell.toast("Deactivated " + name + " — local state reset; Twilio cleanup is best-effort", "error");
+        }
+      });
+    });
+
+    // ---- Sync now ----
+    $$("[data-sync-row]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        OggvoShell.toast("Sync enqueued for " + b.closest("tr").getAttribute("data-name") + " — poll is the source of truth", "primary");
+      });
+    });
+    $("[data-sync-all]").addEventListener("click", function () {
+      OggvoShell.toast("Full twilio-tollfree-sync sweep enqueued (214 profiles)", "primary");
+    });
+
+    // ---- Assign-number modal ----
+    var modal = $("#m-assign");
+    var assignSearch = $("#assign-search");
+    var nums = $$("#assign-list [data-num]");
+    var assignEmpty = $("#assign-empty");
+    $$("[data-assign-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        activeBiz = b.closest("tr").getAttribute("data-name");
+        modal.querySelector("[data-biz]").textContent = activeBiz;
+        assignSearch.value = "";
+        nums.forEach(function (n) { n.classList.remove("hidden"); });
+        assignEmpty.classList.add("hidden");
+        modal.classList.remove("hidden");
+        assignSearch.focus();
+      });
+    });
+    assignSearch.addEventListener("input", function () {
+      var q = (assignSearch.value || "").replace(/\D/g, "");
+      var any = false;
+      nums.forEach(function (n) {
+        var digits = n.textContent.replace(/\D/g, "");
+        var show = !q || digits.indexOf(q) !== -1;
+        n.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      assignEmpty.classList.toggle("hidden", any);
+    });
+    $$("[data-assign-pick]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var num = b.closest("[data-num]").querySelector(".tabular-nums").textContent;
+        modal.classList.add("hidden");
+        OggvoShell.toast(num + " assigned to " + activeBiz + " — verification can start (or finish) independently", "success");
+      });
+    });
+    $$("#m-assign [data-close]").forEach(function (b) {
+      b.addEventListener("click", function () { modal.classList.add("hidden"); });
+    });
+    modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.add("hidden"); });
+
+    // ---- History drawer ----
+    var drawer = $("[data-history-drawer]");
+    var scrim = $("[data-history-scrim]");
+    function openDrawer(name) {
+      drawer.querySelector("[data-history-name]").textContent = name + " · toll-free verification timeline";
+      scrim.classList.remove("hidden");
+      drawer.classList.remove("translate-x-full");
+    }
+    function closeDrawer() {
+      scrim.classList.add("hidden");
+      drawer.classList.add("translate-x-full");
+    }
+    $$("[data-history-open]").forEach(function (b) {
+      b.addEventListener("click", function () { openDrawer(b.closest("tr").getAttribute("data-name")); });
+    });
+    $("[data-history-close]").addEventListener("click", closeDrawer);
+    scrim.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { modal.classList.add("hidden"); closeDrawer(); }
+    });
+  })();
+</script>
+</body>
+</html>

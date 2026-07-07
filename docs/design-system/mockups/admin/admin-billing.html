@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Admin — Billing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Billing</h1>
+      <span class="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/></svg>
+        OGGVO_ADMIN
+      </span>
+    </div>
+    <button data-story="BILL-1.1" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h10"/></svg>
+      Manage plan catalog
+    </button>
+  </div>
+
+  <!-- Summary stat cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-story="BILL-1.1">
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">MRR</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-success-100 text-success-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2 2.6 5 3.3 5 1.6 5 3.4-2.2 3-5 3-5-1.1-5-3"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2 tabular-nums">$86,410</div>
+      <p class="text-xs text-success-600 mt-1">+4.2% vs June</p>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Active subscriptions</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2 tabular-nums">1,047</div>
+      <p class="text-xs text-gray-400 mt-1">Starter 512 · Growth 428 · Scale 107</p>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4" data-story="BILL-1.4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">In dunning</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-warning-100 text-warning-700"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2 tabular-nums">23</div>
+      <p class="text-xs text-gray-400 mt-1">17 retrying · 4 grace · 2 suspended</p>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-card shadow-card p-4" data-story="BILL-1.1">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wide text-gray-500">Grandfathered</span>
+        <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-gray-100 text-gray-500"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l2.5 2"/></svg></span>
+      </div>
+      <div class="text-2xl font-semibold text-gray-900 mt-2 tabular-nums">61</div>
+      <p class="text-xs text-gray-400 mt-1">On retired plan versions</p>
+    </div>
+  </div>
+
+  <!-- Filter row -->
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+    <div class="relative flex-1 max-w-sm">
+      <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4-4"/></svg>
+      <input id="bill-search" type="text" placeholder="Search by business or owner email…" class="w-full h-10 pl-9 pr-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200" />
+    </div>
+    <select id="bill-status" class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option value="">All statuses</option>
+      <option value="active">Active</option>
+      <option value="grace">Grace</option>
+      <option value="suspended">Suspended</option>
+      <option value="grandfathered">Grandfathered</option>
+      <option value="comp">Comp / trial</option>
+    </select>
+    <select class="h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-sm">
+      <option>All plans</option>
+      <option>Starter</option>
+      <option>Growth</option>
+      <option>Scale</option>
+    </select>
+  </div>
+
+  <!-- Profiles-with-plans table -->
+  <div class="bg-white border border-gray-200 rounded-card shadow-card overflow-hidden" data-story="BILL-1.2" data-ac="AC3">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+          <tr class="text-left">
+            <th class="px-4 py-3 font-medium">Profile</th>
+            <th class="px-4 py-3 font-medium">Plan</th>
+            <th class="px-4 py-3 font-medium text-right">MRR</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="px-4 py-3 font-medium">Renews</th>
+            <th class="w-44 px-4 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bill-tbody" class="divide-y divide-gray-100">
+
+          <tr class="hover:bg-gray-50" data-status="active" data-name="Bloom Florist">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">BL</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Bloom Florist</span><span class="block text-xs text-gray-500">hannah@bloomflorist.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Growth <span class="text-xs text-gray-400">v3</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">$99</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Aug 1, 2026</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="active" data-name="Maple Tree Realty">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">MT</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Maple Tree Realty</span><span class="block text-xs text-gray-500">alicia@mapletreerealty.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Scale <span class="text-xs text-gray-400">v2</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">$199</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jul 15, 2026</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="grace" data-name="Apex Fitness Studio">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">AF</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Apex Fitness Studio</span><span class="block text-xs text-gray-500">james@apexfitness.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Growth <span class="text-xs text-gray-400">v3</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">$99</td>
+            <td class="px-4 py-3" data-story="BILL-1.4"><span class="badge bg-warning-100 text-warning-700"><span class="badge-dot"></span>Grace</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Unpaid · pauses Jul 12</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="suspended" data-name="Riverside Hardware">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-gray-400 to-gray-600 grid place-items-center text-xs font-semibold text-white shrink-0">RH</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Riverside Hardware</span><span class="block text-xs text-gray-500">m.owens@riverside-hw.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Starter <span class="text-xs text-gray-400">v2</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-400">$0</td>
+            <td class="px-4 py-3" data-story="BILL-1.4"><span class="badge bg-error-100 text-error-700"><span class="badge-dot"></span>Suspended</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Paused Jun 18 · data kept</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="grandfathered" data-name="Pacific Dental Group">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">PD</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Pacific Dental Group</span><span class="block text-xs text-gray-500">priya@pacificdental.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Growth <span class="text-xs text-gray-400">v1 · retired</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">$79</td>
+            <td class="px-4 py-3" data-story="BILL-1.1"><span class="badge bg-gray-100 text-gray-600"><span class="badge-dot"></span>Grandfathered</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jul 22, 2026</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="comp" data-name="Summit Ventures">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">SV</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Summit Ventures</span><span class="block text-xs text-gray-500">diego@summitventures.io</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Scale <span class="text-xs text-gray-400">v2 · comp</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-400">$0</td>
+            <td class="px-4 py-3" data-story="BILL-1.5"><span class="badge bg-primary-100 text-primary-700"><span class="badge-dot"></span>Comp / trial</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Expires Jul 23, 2026</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr class="hover:bg-gray-50" data-status="active" data-name="Greenhouse Café">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="h-9 w-9 rounded-card bg-gradient-to-br from-primary-400 to-primary-600 grid place-items-center text-xs font-semibold text-white shrink-0">GH</span>
+                <span class="leading-tight"><span class="block font-semibold text-gray-900">Greenhouse Café</span><span class="block text-xs text-gray-500">elena@greenhousecafe.com</span></span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">Starter <span class="text-xs text-gray-400">v2</span></td>
+            <td class="px-4 py-3 text-right tabular-nums text-gray-700">$49</td>
+            <td class="px-4 py-3"><span class="badge bg-success-100 text-success-700"><span class="badge-dot"></span>Active</span></td>
+            <td class="px-4 py-3 whitespace-nowrap text-gray-600">Jul 17, 2026</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              <button data-history-open data-story="BILL-1.2" data-ac="AC3" class="px-2.5 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">History</button>
+              <button data-override-open data-story="BILL-1.5" class="px-2.5 py-1.5 text-xs font-medium text-primary-600 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Override</button>
+            </td>
+          </tr>
+
+          <tr id="bill-empty" class="hidden">
+            <td colspan="6" class="px-4 py-14 text-center">
+              <p class="text-sm font-medium text-gray-700">No profiles match your filters</p>
+              <p class="text-xs text-gray-400 mt-1">Try a different search term or status.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-gray-200 bg-white">
+      <span class="text-sm text-gray-500">Showing 1–7 of 1,131</span>
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Prev</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-white bg-primary-500 border border-primary-500 rounded-card">1</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">2</button>
+        <button class="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note mt-6">GET /admin/billing/stats + GET /admin/billing/subscriptions?query,status[],plan. Status badge tones: Active→success · Grace→warning · Suspended→error · Grandfathered→gray · Comp/trial→primary. Override → POST /admin/billing/overrides (reason required, writes audit_log row, BILL-1.5). History drawer → GET /admin/billing/subscriptions/:id/history (BILL-1.2 AC3). Gated to @Roles(STAFF_MANAGER)+.</p>
+
+  <!-- ===== Comp / trial override modal ===== -->
+  <div id="m-override" data-modal data-story="BILL-1.5" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="bg-white rounded-card shadow-pop w-full max-w-md">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900">Comp / trial override · <span data-biz>profile</span></h3>
+        <button data-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="px-5 py-4 space-y-4 text-sm text-gray-600">
+        <label class="block">
+          <span class="block font-medium text-gray-700 mb-1">Grant plan</span>
+          <select id="override-plan" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white text-gray-900">
+            <option>Starter — $49/mo entitlements</option>
+            <option selected>Growth — $99/mo entitlements</option>
+            <option>Scale — $199/mo entitlements</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="block font-medium text-gray-700 mb-1">Reason <span class="text-error-500">*</span></span>
+          <textarea id="override-reason" rows="3" placeholder="e.g. Outage make-good — 30 days of Scale entitlements per support ticket #4821" class="w-full px-3 py-2 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 text-gray-900"></textarea>
+          <p id="override-reason-err" class="hidden mt-1 text-xs text-error-600">A reason is required — it's written to the audit trail.</p>
+        </label>
+        <label class="block">
+          <span class="block font-medium text-gray-700 mb-1">Expires</span>
+          <input id="override-expiry" type="date" value="2026-08-05" min="2026-07-07" class="w-full h-10 px-3 rounded-card border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white text-gray-900" />
+          <p class="mt-1 text-xs text-gray-400">On expiry the profile reverts to its paid plan automatically.</p>
+        </label>
+        <div class="flex items-start gap-2 rounded-card border border-gray-200 bg-gray-50 p-3 text-xs text-gray-500">
+          <svg class="h-4 w-4 mt-px shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.3 12l1.8 1.8L15 10"/></svg>
+          This override is <span class="font-medium text-gray-700">audited</span>: the grant, your staff identity, reason and expiry are recorded and appear in the profile's plan-change history.
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button data-close class="px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50">Cancel</button>
+        <button id="override-grant" class="px-3.5 py-2 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600">Grant override</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Plan-change history drawer ===== -->
+  <div data-history-scrim class="hidden fixed inset-0 z-40 bg-gray-900/50"></div>
+  <aside data-history-drawer data-story="BILL-1.2" data-ac="AC3" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white border-l border-gray-200 shadow-pop translate-x-full transition-transform duration-200 flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">Plan-change history</h3>
+        <p class="mt-0.5 text-xs text-gray-500" data-history-name>Profile</p>
+      </div>
+      <button data-history-close class="text-gray-400 hover:text-gray-600" aria-label="Close"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5">
+      <ol class="relative space-y-6 pl-6 border-l border-gray-200 ml-2 text-sm">
+        <li class="relative">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-primary-100 border-2 border-primary-500"></span>
+          <p class="font-medium text-gray-900">Growth v3 <span class="text-gray-400 font-normal">← Starter v2</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Jun 14, 2026 · Owner (self-serve) · Stripe Checkout upgrade, prorated $37.40</p>
+        </li>
+        <li class="relative" data-story="BILL-1.4">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-warning-100 border-2 border-warning-500"></span>
+          <p class="font-medium text-gray-900">Grace entered → recovered</p>
+          <p class="text-xs text-gray-500 mt-0.5">Apr 3 – Apr 6, 2026 · System · payment failed twice, card updated, invoice paid on retry 3</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-primary-100 border-2 border-primary-500"></span>
+          <p class="font-medium text-gray-900">Starter v2 <span class="text-gray-400 font-normal">← Trial (Growth)</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Mar 2, 2026 · Owner (self-serve) · trial converted via Stripe Checkout</p>
+        </li>
+        <li class="relative" data-story="BILL-1.5">
+          <span class="absolute -left-[31px] top-0.5 h-4 w-4 rounded-full bg-gray-100 border-2 border-gray-400"></span>
+          <p class="font-medium text-gray-900">Trial (Growth) granted</p>
+          <p class="text-xs text-gray-500 mt-0.5">Feb 16, 2026 · Alicia Reyes (staff) · "14-day comp trial — inbound demo request" · expired Mar 2, 2026 · audited</p>
+        </li>
+      </ol>
+    </div>
+    <div class="px-5 py-4 border-t border-gray-200">
+      <p class="text-xs text-gray-400">Every transition is recorded — subscription webhooks, scheduled downgrades, dunning states and staff overrides all land here (BILL-1.2 AC3).</p>
+    </div>
+  </aside>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "admin", storyDomain: "billing", back: { href: "../index.html", label: "All mockups" }, route: "/admin/billing", search: "Search profiles…" });
+
+  (function () {
+    var $ = function (s) { return document.querySelector(s); };
+    var $$ = function (s) { return [].slice.call(document.querySelectorAll(s)); };
+    var activeBiz = "this profile";
+
+    // ---- Search + status filter ----
+    var search = $("#bill-search");
+    var status = $("#bill-status");
+    var empty = $("#bill-empty");
+    var rows = $$("#bill-tbody tr").filter(function (r) { return r !== empty; });
+    function filter() {
+      var q = (search.value || "").trim().toLowerCase();
+      var st = status.value;
+      var any = false;
+      rows.forEach(function (r) {
+        var show = (!q || r.textContent.toLowerCase().indexOf(q) !== -1) && (!st || r.getAttribute("data-status") === st);
+        r.classList.toggle("hidden", !show);
+        if (show) any = true;
+      });
+      empty.classList.toggle("hidden", any);
+    }
+    search.addEventListener("input", filter);
+    status.addEventListener("change", filter);
+
+    // ---- Override modal ----
+    var modal = $("#m-override");
+    var reason = $("#override-reason");
+    var reasonErr = $("#override-reason-err");
+    $$("[data-override-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        activeBiz = b.closest("tr").getAttribute("data-name");
+        modal.querySelector("[data-biz]").textContent = activeBiz;
+        reason.value = "";
+        reasonErr.classList.add("hidden");
+        reason.classList.remove("border-error-500");
+        modal.classList.remove("hidden");
+        reason.focus();
+      });
+    });
+    $$("#m-override [data-close]").forEach(function (b) {
+      b.addEventListener("click", function () { modal.classList.add("hidden"); });
+    });
+    $("#override-grant").addEventListener("click", function () {
+      if (!(reason.value || "").trim()) {
+        reasonErr.classList.remove("hidden");
+        reason.classList.add("border-error-500");
+        reason.focus();
+        return;
+      }
+      modal.classList.add("hidden");
+      var plan = $("#override-plan").value.split(" — ")[0];
+      OggvoShell.toast(plan + " override granted to " + activeBiz + " · audited", "success");
+    });
+    modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.add("hidden"); });
+
+    // ---- History drawer ----
+    var drawer = $("[data-history-drawer]");
+    var scrim = $("[data-history-scrim]");
+    function openDrawer(name) {
+      drawer.querySelector("[data-history-name]").textContent = name + " · subscription timeline";
+      scrim.classList.remove("hidden");
+      drawer.classList.remove("translate-x-full");
+    }
+    function closeDrawer() {
+      scrim.classList.add("hidden");
+      drawer.classList.add("translate-x-full");
+    }
+    $$("[data-history-open]").forEach(function (b) {
+      b.addEventListener("click", function () { openDrawer(b.closest("tr").getAttribute("data-name")); });
+    });
+    $("[data-history-close]").addEventListener("click", closeDrawer);
+    scrim.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { modal.classList.add("hidden"); closeDrawer(); }
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Notification Preferences</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Notification Preferences</h1>
+      <p class="mt-1 text-sm text-gray-500">Who gets alerted, and on which channels, when something happens on this profile.</p>
+    </div>
+    <button type="button" data-save-prefs data-story="NOTIF-1.1" class="inline-flex items-center gap-2 h-10 px-4 rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      Save preferences
+    </button>
+  </div>
+
+  <!-- ===================== EVENT-TYPE PREFERENCE CENTER ===================== -->
+  <section data-story="NOTIF-1.1" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card mb-6">
+    <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-200">
+      <div>
+        <h2 class="text-sm font-semibold text-gray-900">Event types</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Each event fans out independently to the recipients and channels below.</p>
+      </div>
+      <div class="hidden sm:flex items-center gap-4 text-[11px] font-medium uppercase tracking-wide text-gray-400 pr-1">
+        <span class="w-14 text-center">Email</span><span class="w-14 text-center">Push</span><span class="w-14 text-center">In-app</span>
+      </div>
+    </div>
+
+    <div class="divide-y divide-gray-100">
+
+      <!-- New review -->
+      <div data-event-row data-event="New review" class="px-5 py-4 flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-success-100 text-success-700 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 4.5l2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5L5 9.2l4.5-.6 2-4.1z"/></svg></span>
+            <div>
+              <p class="text-sm font-medium text-gray-900">New review</p>
+              <p class="text-xs text-gray-500">Any review lands from a connected platform or manual add.</p>
+            </div>
+          </div>
+          <div data-recipient-wrap class="mt-3 flex flex-wrap items-center gap-2">
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">maria@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">frontdesk@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <input type="email" data-add-recipient placeholder="add email + Enter" class="h-7 w-44 px-2 text-xs rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 placeholder:text-gray-400" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0 sm:pt-1.5">
+          <span class="sm:hidden text-xs text-gray-400 w-12">Email</span><span class="w-14 grid place-items-center"><button type="button" data-channel="email" data-on="true" aria-label="New review · email" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">Push</span><span class="w-14 grid place-items-center"><button type="button" data-channel="push" data-on="true" aria-label="New review · push" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">In-app</span><span class="w-14 grid place-items-center"><button type="button" data-channel="in-app" data-on="true" aria-label="New review · in-app" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+        </div>
+      </div>
+
+      <!-- Negative review -->
+      <div data-event-row data-event="Negative review" class="px-5 py-4 flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-error-100 text-error-600 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/></svg></span>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Negative review <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-700">&le; 2&#9733;</span></p>
+              <p class="text-xs text-gray-500">Immediate alert so you can respond before it spreads.</p>
+            </div>
+          </div>
+          <div data-recipient-wrap class="mt-3 flex flex-wrap items-center gap-2">
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">maria@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">dr.patel@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <input type="email" data-add-recipient placeholder="add email + Enter" class="h-7 w-44 px-2 text-xs rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 placeholder:text-gray-400" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0 sm:pt-1.5">
+          <span class="sm:hidden text-xs text-gray-400 w-12">Email</span><span class="w-14 grid place-items-center"><button type="button" data-channel="email" data-on="true" aria-label="Negative review · email" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">Push</span><span class="w-14 grid place-items-center"><button type="button" data-channel="push" data-on="true" aria-label="Negative review · push" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">In-app</span><span class="w-14 grid place-items-center"><button type="button" data-channel="in-app" data-on="true" aria-label="Negative review · in-app" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+        </div>
+      </div>
+
+      <!-- Survey completed -->
+      <div data-event-row data-event="Survey completed" class="px-5 py-4 flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg></span>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Survey completed</p>
+              <p class="text-xs text-gray-500">A contact finishes a survey; the alert links to their responses.</p>
+            </div>
+          </div>
+          <div data-recipient-wrap class="mt-3 flex flex-wrap items-center gap-2">
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">maria@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <input type="email" data-add-recipient placeholder="add email + Enter" class="h-7 w-44 px-2 text-xs rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 placeholder:text-gray-400" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0 sm:pt-1.5">
+          <span class="sm:hidden text-xs text-gray-400 w-12">Email</span><span class="w-14 grid place-items-center"><button type="button" data-channel="email" data-on="true" aria-label="Survey completed · email" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">Push</span><span class="w-14 grid place-items-center"><button type="button" data-channel="push" data-on="false" aria-label="Survey completed · push" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 transition-colors"><span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">In-app</span><span class="w-14 grid place-items-center"><button type="button" data-channel="in-app" data-on="true" aria-label="Survey completed · in-app" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+        </div>
+      </div>
+
+      <!-- Social post failed -->
+      <div data-event-row data-event="Social post failed" class="px-5 py-4 flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-warning-100 text-warning-700 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Social post failed</p>
+              <p class="text-xs text-gray-500">A scheduled post couldn't publish (expired token, provider error).</p>
+            </div>
+          </div>
+          <div data-recipient-wrap class="mt-3 flex flex-wrap items-center gap-2">
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">maria@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <input type="email" data-add-recipient placeholder="add email + Enter" class="h-7 w-44 px-2 text-xs rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 placeholder:text-gray-400" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0 sm:pt-1.5">
+          <span class="sm:hidden text-xs text-gray-400 w-12">Email</span><span class="w-14 grid place-items-center"><button type="button" data-channel="email" data-on="true" aria-label="Social post failed · email" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">Push</span><span class="w-14 grid place-items-center"><button type="button" data-channel="push" data-on="true" aria-label="Social post failed · push" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">In-app</span><span class="w-14 grid place-items-center"><button type="button" data-channel="in-app" data-on="true" aria-label="Social post failed · in-app" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+        </div>
+      </div>
+
+      <!-- Inbound SMS -->
+      <div data-event-row data-event="Inbound SMS" class="px-5 py-4 flex flex-col sm:flex-row sm:items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="inline-grid place-items-center h-8 w-8 rounded-card bg-primary-100 text-primary-600 shrink-0"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-9 8.4 8.5 8.5 0 01-3.9-.9L3 21l2-5.1a8.38 8.38 0 01-.9-3.9 8.5 8.5 0 018.5-8.5 8.38 8.38 0 018.4 8z"/></svg></span>
+            <div>
+              <p class="text-sm font-medium text-gray-900">Inbound SMS</p>
+              <p class="text-xs text-gray-500">A contact replies to your business number; opens the Connect inbox.</p>
+            </div>
+          </div>
+          <div data-recipient-wrap class="mt-3 flex flex-wrap items-center gap-2">
+            <span data-recipient class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">frontdesk@brightsmiledental.com <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button></span>
+            <input type="email" data-add-recipient placeholder="add email + Enter" class="h-7 w-44 px-2 text-xs rounded-card border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 placeholder:text-gray-400" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 shrink-0 sm:pt-1.5">
+          <span class="sm:hidden text-xs text-gray-400 w-12">Email</span><span class="w-14 grid place-items-center"><button type="button" data-channel="email" data-on="false" aria-label="Inbound SMS · email" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 transition-colors"><span class="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">Push</span><span class="w-14 grid place-items-center"><button type="button" data-channel="push" data-on="true" aria-label="Inbound SMS · push" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+          <span class="sm:hidden text-xs text-gray-400 w-12">In-app</span><span class="w-14 grid place-items-center"><button type="button" data-channel="in-app" data-on="true" aria-label="Inbound SMS · in-app" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500 transition-colors"><span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow transition-transform"></span></button></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="px-5 py-3 border-t border-gray-200 bg-gray-50 rounded-b-card">
+      <p class="flex items-start gap-1.5 text-xs text-gray-500">
+        <svg class="h-3.5 w-3.5 mt-px shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+        Transactional and compliance mail (opt-out confirmations, billing receipts, A2P notices) is always delivered and can't be disabled here.
+      </p>
+    </div>
+  </section>
+
+  <p class="mock-note mb-6">GET /profiles/current/notification-preferences · save PATCH per event type → notification_subscriptions (event_type, recipient emails[], channels[]). Each domain event fans out one ledger row per channel (NOTIF-1.2); a failed channel never blocks the others.</p>
+
+  <!-- ===================== PUSH DEVICES ===================== -->
+  <section data-story="NOTIF-1.1" data-ac="AC2" class="bg-white border border-gray-200 rounded-card shadow-card">
+    <div class="flex items-center justify-between gap-4 px-5 py-4 border-b border-gray-200">
+      <div>
+        <h2 class="text-sm font-semibold text-gray-900">Push devices</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Browsers and phones registered for push. Tracked server-side — no browser-cookie fingerprinting.</p>
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 tabular-nums" data-device-count>3 devices</span>
+    </div>
+
+    <div data-device-list class="divide-y divide-gray-100">
+      <div data-device-row data-device="Chrome on Linux" class="flex items-center justify-between gap-4 px-5 py-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="inline-grid place-items-center h-9 w-9 rounded-card bg-gray-100 text-gray-500 shrink-0"><svg class="h-4.5 w-4.5 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <div class="min-w-0 leading-tight">
+            <p class="text-sm font-medium text-gray-900 truncate">Chrome on Linux <span class="ml-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-700">This device</span></p>
+            <p class="text-xs text-gray-500">Registered Jun 2, 2026 · last seen 4 minutes ago</p>
+          </div>
+        </div>
+        <button type="button" data-revoke-device class="h-9 px-3 rounded-card border border-gray-300 bg-white text-xs font-medium text-error-600 hover:bg-error-50 shrink-0">Revoke</button>
+      </div>
+      <div data-device-row data-device="Safari on iPhone 15" class="flex items-center justify-between gap-4 px-5 py-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="inline-grid place-items-center h-9 w-9 rounded-card bg-gray-100 text-gray-500 shrink-0"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+          <div class="min-w-0 leading-tight">
+            <p class="text-sm font-medium text-gray-900 truncate">Safari on iPhone 15</p>
+            <p class="text-xs text-gray-500">Registered May 18, 2026 · last seen yesterday, 6:12 PM</p>
+          </div>
+        </div>
+        <button type="button" data-revoke-device class="h-9 px-3 rounded-card border border-gray-300 bg-white text-xs font-medium text-error-600 hover:bg-error-50 shrink-0">Revoke</button>
+      </div>
+      <div data-device-row data-device="Chrome on Windows" class="flex items-center justify-between gap-4 px-5 py-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="inline-grid place-items-center h-9 w-9 rounded-card bg-gray-100 text-gray-500 shrink-0"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <div class="min-w-0 leading-tight">
+            <p class="text-sm font-medium text-gray-900 truncate">Chrome on Windows <span class="ml-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-700">Stale</span></p>
+            <p class="text-xs text-gray-500">Registered Feb 9, 2026 · last seen Apr 30, 2026</p>
+          </div>
+        </div>
+        <button type="button" data-revoke-device class="h-9 px-3 rounded-card border border-gray-300 bg-white text-xs font-medium text-error-600 hover:bg-error-50 shrink-0">Revoke</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="mock-note mt-6">GET /profiles/current/push-devices → push_channels (endpoint, ua, is_active, last_seen_at) · Revoke → DELETE /profiles/current/push-devices/:id. Registration happens at subscribe time via the service worker; the server owns device state (replaces the v1 opn-cookie hack).</p>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "settings", storyDomain: "notifications", back: { href: "settings.html", label: "Back to Settings" }, route: "/settings/notifications", search: "Search settings…" });
+
+  (function () {
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+    // ---- Channel switches (per event row) ---------------------------------
+    $$("[data-channel]").forEach(function (sw) {
+      sw.addEventListener("click", function () {
+        var on = sw.getAttribute("data-on") !== "true";
+        sw.setAttribute("data-on", on ? "true" : "false");
+        sw.classList.toggle("bg-primary-500", on);
+        sw.classList.toggle("bg-gray-300", !on);
+        var knob = sw.querySelector("span");
+        knob.classList.toggle("translate-x-5", on);
+        knob.classList.toggle("translate-x-0.5", !on);
+        var event = sw.closest("[data-event-row]").getAttribute("data-event");
+        OggvoShell.toast(event + " · " + sw.getAttribute("data-channel") + (on ? " on" : " off"), on ? "success" : "gray");
+      });
+    });
+
+    // ---- Recipient chips: add on Enter, remove on × -----------------------
+    $$("[data-add-recipient]").forEach(function (input) {
+      input.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        var v = input.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { OggvoShell.toast("Enter a valid email", "error"); return; }
+        var chip = document.createElement("span");
+        chip.setAttribute("data-recipient", "");
+        chip.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700";
+        chip.innerHTML = v + ' <button type="button" data-remove-recipient class="hover:text-primary-500" title="Remove recipient">&times;</button>';
+        input.parentNode.insertBefore(chip, input);
+        input.value = "";
+        OggvoShell.toast(v + " added as recipient", "success");
+      });
+    });
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-remove-recipient]");
+      if (!b) return;
+      var chip = b.closest("[data-recipient]");
+      var email = chip.textContent.replace("×", "").trim();
+      chip.remove();
+      OggvoShell.toast(email + " removed", "gray");
+    });
+
+    // ---- Push devices: revoke ---------------------------------------------
+    var count = document.querySelector("[data-device-count]");
+    $$("[data-revoke-device]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var row = btn.closest("[data-device-row]");
+        var name = row.getAttribute("data-device");
+        row.remove();
+        var left = $$("[data-device-row]").length;
+        count.textContent = left + (left === 1 ? " device" : " devices");
+        OggvoShell.toast(name + " revoked — push disabled for that device", "gray");
+      });
+    });
+
+    // ---- Save --------------------------------------------------------------
+    document.querySelector("[data-save-prefs]").addEventListener("click", function () {
+      OggvoShell.toast("Notification preferences saved", "success");
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Contact History</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6" data-story="AUDIT-1.3">
+    <div>
+      <a href="contacts-list.html" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-2">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        Back to Contacts
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="h-11 w-11 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">DW</span>
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-900 leading-tight">Dana Whitfield</h1>
+          <p class="text-sm text-gray-500 mt-0.5">History · contact #4127 · Bright Smile Dental</p>
+        </div>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 text-xs text-gray-500 shrink-0 sm:mt-8">
+      <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l2.5 2"/></svg>
+      5 events · newest first
+    </span>
+  </div>
+
+  <div class="max-w-3xl">
+
+    <!-- Entity-history timeline -->
+    <section data-story="AUDIT-1.3" class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+      <ol class="space-y-0">
+
+        <!-- Jul 5 — campaign email sent -->
+        <li class="relative flex gap-4 pb-7">
+          <span class="absolute left-[11px] top-6 bottom-0 w-px bg-gray-200"></span>
+          <span class="h-6 w-6 shrink-0 rounded-full bg-primary-100 grid place-items-center"><svg class="h-3.5 w-3.5 text-primary-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg></span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-medium text-gray-900">Campaign email sent</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">System</span>
+            </div>
+            <p class="mt-0.5 text-xs text-gray-500">Jul 5, 2026 · 04:15 PM — "Post-visit review request" (campaign #287), step 1 of 3, to dana.whitfield@gmail.com.</p>
+            <a href="../admin/admin-deliveries.html" class="mt-1 inline-flex items-center gap-1 text-xs font-medium text-primary-600 hover:underline">
+              View in delivery ledger
+              <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7m0 0H9m8 0v8"/></svg>
+            </a>
+          </div>
+        </li>
+
+        <!-- Jul 2 — phone edited, before→after diff pills -->
+        <li class="relative flex gap-4 pb-7">
+          <span class="absolute left-[11px] top-6 bottom-0 w-px bg-gray-200"></span>
+          <span class="h-6 w-6 shrink-0 rounded-full bg-warning-100 grid place-items-center"><svg class="h-3.5 w-3.5 text-warning-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1 1-4L16.5 4.5z"/></svg></span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-medium text-gray-900">Phone number edited</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Elena Voss · Owner</span>
+            </div>
+            <p class="mt-0.5 text-xs text-gray-500">Jul 2, 2026 · 11:26 AM — updated after a bounced review-request SMS.</p>
+            <div class="mt-1.5 flex items-center gap-1.5 text-xs">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-error-100 text-error-700 line-through tabular-nums">(415) 555-0186</span>
+              <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16m0 0l-5-5m5 5l-5 5"/></svg>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-success-100 text-success-700 tabular-nums">(415) 555-0217</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Jun 20 — status pending → activated -->
+        <li class="relative flex gap-4 pb-7">
+          <span class="absolute left-[11px] top-6 bottom-0 w-px bg-gray-200"></span>
+          <span class="h-6 w-6 shrink-0 rounded-full bg-success-100 grid place-items-center"><svg class="h-3.5 w-3.5 text-success-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-medium text-gray-900">Status changed</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">System · activator</span>
+            </div>
+            <p class="mt-0.5 text-xs text-gray-500">Jun 20, 2026 · 09:00 AM — activation window reached (per-profile timezone, America/Los_Angeles); campaign eligibility recomputed in the same pass.</p>
+            <div class="mt-1.5 flex items-center gap-1.5 text-xs">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-error-100 text-error-700 line-through">pending</span>
+              <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16m0 0l-5-5m5 5l-5 5"/></svg>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full font-medium bg-success-100 text-success-700">activated</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Jun 18 — tag added -->
+        <li class="relative flex gap-4 pb-7">
+          <span class="absolute left-[11px] top-6 bottom-0 w-px bg-gray-200"></span>
+          <span class="h-6 w-6 shrink-0 rounded-full bg-primary-100 grid place-items-center"><svg class="h-3.5 w-3.5 text-primary-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h6.6a1 1 0 01.7.3l7.4 7.4a1 1 0 010 1.4l-6.6 6.6a1 1 0 01-1.4 0L4.3 12.3a1 1 0 01-.3-.7V5z"/><circle cx="8.5" cy="8.5" r="1.2"/></svg></span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-medium text-gray-900">Tag added</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">Maria Lopez · User</span>
+            </div>
+            <p class="mt-0.5 text-xs text-gray-500">Jun 18, 2026 · 03:44 PM — tagged <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">VIP</span> from the contact detail page; now matches the "VIP thank-you" campaign audience.</p>
+          </div>
+        </li>
+
+        <!-- Jun 15 — created via CSV import -->
+        <li class="relative flex gap-4">
+          <span class="h-6 w-6 shrink-0 rounded-full bg-gray-100 grid place-items-center"><svg class="h-3.5 w-3.5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg></span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-medium text-gray-900">Contact created via CSV import</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">System · import job #482</span>
+            </div>
+            <p class="mt-0.5 text-xs text-gray-500">Jun 15, 2026 · 02:09 PM — row 118 of <a href="import-detail.html" class="text-primary-600 hover:underline">june-clients.csv</a> (214 contacts) · import initiated by Maria Lopez · created as <span class="font-medium text-gray-600">pending</span>.</p>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Pattern-reuse note -->
+    <div class="mt-4 flex items-start gap-2 rounded-card border border-gray-200 bg-white shadow-card p-4 text-sm text-gray-600" data-story="AUDIT-1.3">
+      <svg class="h-4 w-4 mt-0.5 shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8h.01M12 11v5"/></svg>
+      <span><span class="font-medium text-gray-900">This timeline is the generic entity-history component.</span> It renders the same audit_events stream for any record — campaigns, reviews, integrations, team members — filtered to one entity ref. Actor chips distinguish user / staff / system; field edits always show before → after.</span>
+    </div>
+
+    <p class="mock-note mt-6">GET /contacts/:id/history → audit_events filtered to entity=contact:4127, newest first (AUDIT-1.3). Same append-only rows as the staff forensics search — this is the tenant-scoped view of them (TenantGuard: only this profile's events, staff actors shown but impersonation session ids withheld). "View in delivery ledger" deep-links the send event's ledger row via its correlation id.</p>
+
+  </div>
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "contacts", storyDomain: "audit", back: { href: "contacts-list.html", label: "Back to Contacts" }, route: "/contacts/4127/history", search: "Search contacts…" });
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · AI Share Copy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head><body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6" data-story="AI-1.2">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">AI share copy</h1>
+      <p class="text-sm text-gray-500 mt-1">Draft the post text for this review — pick a tone, edit anything, then continue to scheduling.</p>
+    </div>
+    <a href="reviews-list.html" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 shrink-0">
+      <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+      Back to Reviews
+    </a>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+    <!-- ============ LEFT: composer (~3/5) ============ -->
+    <div class="w-full lg:w-3/5 space-y-5" data-story="AI-1.2">
+
+      <!-- Source review -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-base font-medium text-gray-900">Source review</h2>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">Read-only</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="h-10 w-10 shrink-0 rounded-full bg-gray-200 grid place-items-center text-sm font-semibold text-gray-600">DM</div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="font-semibold text-gray-900">Dana M.</span>
+                <div class="text-warning-500 text-sm tracking-tight">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Google</span>
+                <span class="text-xs text-gray-500 whitespace-nowrap">Jul 3, 2026</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-700 mt-2">Booked online in the morning and the whole job was done by 2pm. The tech explained every option before starting, the quote didn't move a cent, and they left the place cleaner than they found it. Easily the best service call we've had in years.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tone + generated copy -->
+      <section class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-base font-medium text-gray-900">Generated copy</h2>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">
+            <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M17 3l4 4-9 9H8v-4l9-9z"/></svg>
+            Editable — this is a draft, not the post
+          </span>
+        </div>
+
+        <!-- tone presets -->
+        <div class="mb-3" data-ac="AC1">
+          <label class="text-sm font-medium text-gray-700 block mb-2">Tone</label>
+          <div id="toneRow" class="flex flex-wrap gap-2">
+            <button type="button" data-tone="professional" class="tone-pill px-3.5 py-1.5 rounded-full text-sm font-medium bg-primary-500 text-white">Professional</button>
+            <button type="button" data-tone="warm" class="tone-pill px-3.5 py-1.5 rounded-full text-sm font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">Warm</button>
+            <button type="button" data-tone="playful" class="tone-pill px-3.5 py-1.5 rounded-full text-sm font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">Playful</button>
+            <button type="button" data-tone="grateful" class="tone-pill px-3.5 py-1.5 rounded-full text-sm font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">Grateful</button>
+          </div>
+        </div>
+
+        <textarea id="copyBox" rows="4" data-ac="AC2"
+          class="w-full px-3 py-2 rounded-card border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y">Another 5-star review for Acme Co. Dana booked online in the morning and had everything completed by 2pm — transparent pricing, clear communication, spotless work. Read the full review: [[link]]</textarea>
+        <div class="flex items-center justify-between mt-1.5">
+          <span id="copyMeta" class="text-xs text-gray-400">212 chars · Professional · edited 0 times</span>
+          <button id="regenBtn" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-card hover:bg-gray-50 disabled:opacity-60">
+            <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.6 9A7.5 7.5 0 0119 8m-.6 7A7.5 7.5 0 015 16"/></svg>
+            Regenerate
+          </button>
+        </div>
+
+        <!-- guardrail -->
+        <p class="mt-4 rounded-card bg-gray-50 border border-gray-200 px-3 py-2 text-xs text-gray-600 inline-flex items-start gap-1.5 w-full">
+          <svg class="h-4 w-4 text-success-500 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 4.4-3 8.2-7 9-4-.8-7-4.6-7-9V7l7-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+          Nothing posts automatically — you approve every post in the scheduling step, same as a hand-written one.
+        </p>
+      </section>
+
+      <!-- Continue -->
+      <div class="flex items-center justify-between gap-3">
+        <p class="text-xs text-gray-400 inline-flex items-center gap-1.5" data-story="AI-1.3">
+          <svg class="h-3.5 w-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19h16M7 15v-3m5 3V8m5 7v-6"/></svg>
+          Counts toward the dashboard &ldquo;AI used&rdquo; metric when you accept — a real counter, not v1's hardcoded 0%.
+        </p>
+        <a href="reviews-share.html" id="continueBtn" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-primary-500 rounded-card hover:bg-primary-600 shrink-0">
+          Continue to schedule
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <p class="mock-note">POST /reviews/:id/share-copy { tone } → provider gateway (model swappable, AC3); accepting the draft increments ai_usage (AI-1.3) and hands the text to the existing share composer — the approval/scheduling path is unchanged (AC2).</p>
+    </div>
+
+    <!-- ============ RIGHT: quota + tips (~2/5) ============ -->
+    <div class="w-full lg:w-2/5 lg:sticky lg:top-20 space-y-4">
+
+      <!-- quota meter -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5" data-story="AI-1.2" data-ac="AC3">
+        <div class="flex items-center justify-between mb-1">
+          <h3 class="text-sm font-medium text-gray-900">AI generations</h3>
+          <span id="quotaChip" class="text-sm font-semibold text-gray-900 tabular-nums">12 / 50</span>
+        </div>
+        <p class="text-xs text-gray-500 mb-3">this month · resets Aug 1</p>
+        <div class="h-2 rounded-full bg-gray-100">
+          <div id="quotaBar" class="h-2 rounded-full bg-primary-500 transition-all" style="width:24%"></div>
+        </div>
+        <div class="flex items-center justify-between mt-3">
+          <span class="text-xs text-gray-400">Growth plan entitlement</span>
+          <a href="../settings/billing-plans.html" class="text-xs font-medium text-primary-600 hover:text-primary-700">Need more? Upgrade</a>
+        </div>
+      </div>
+
+      <!-- what the model saw -->
+      <div class="bg-white border border-gray-200 rounded-card shadow-card p-5">
+        <h3 class="text-sm font-medium text-gray-900 mb-3">What the draft is built from</h3>
+        <ul class="text-sm text-gray-600 space-y-2">
+          <li class="flex items-start gap-2"><svg class="h-4 w-4 text-success-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>The review text, rating and reviewer first name</li>
+          <li class="flex items-start gap-2"><svg class="h-4 w-4 text-success-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Your business name and the source platform</li>
+          <li class="flex items-start gap-2"><svg class="h-4 w-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>No contact data or private messages are sent to the model</li>
+        </ul>
+        <p class="text-xs text-gray-400 mt-3">The <code>[[link]]</code> placeholder resolves to the public review link at post time, same as manual share messages.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>OggvoShell.mount({ active: "reviews", storyDomain: "ai", back: { href: "reviews-list.html", label: "Reviews" }, route: "/reviews/share/copy", search: "Search reviews…" });</script>
+<script>
+(function () {
+  var COPY = {
+    professional: [
+      "Another 5-star review for Acme Co. Dana booked online in the morning and had everything completed by 2pm — transparent pricing, clear communication, spotless work. Read the full review: [[link]]",
+      "Five stars from Dana on Google: same-day turnaround, a quote that didn't change, and a spotless finish. This is the standard we hold every job to. Full review: [[link]]"
+    ],
+    warm: [
+      "Thank you, Dana! Reviews like this are why we do what we do — same-day service, honest pricing, and leaving your place better than we found it. Read Dana's story: [[link]]",
+      "Nothing makes our week like this. Dana booked in the morning and was sorted by 2pm — and took the time to leave us five stars. Thank you! [[link]]"
+    ],
+    playful: [
+      "Booked at 9, done by 2, five stars by dinner. Dana, you just set the bar for our whole month. See what all the fuss is about: [[link]]",
+      "Plot twist: the quote didn't change and the place was cleaner afterwards. Dana's 5-star review has the whole story: [[link]]"
+    ],
+    grateful: [
+      "We're truly grateful to Dana for this 5-star review. Trusting someone with your home matters, and we never take it for granted. Thank you for letting us earn it: [[link]]",
+      "Deeply thankful for customers like Dana — for the trust, the kind words, and the five stars. It means more than you know. [[link]]"
+    ]
+  };
+  var state = { tone: "professional", variant: 0, edits: 0, used: 12, quota: 50 };
+
+  var box = document.getElementById("copyBox");
+  var meta = document.getElementById("copyMeta");
+  var regen = document.getElementById("regenBtn");
+  var toneRow = document.getElementById("toneRow");
+
+  function toneLabel() {
+    return state.tone.charAt(0).toUpperCase() + state.tone.slice(1);
+  }
+  function refreshMeta() {
+    meta.textContent = box.value.length + " chars · " + toneLabel() + " · edited " + state.edits + " time" + (state.edits === 1 ? "" : "s");
+  }
+  function bumpQuota() {
+    state.used++;
+    document.getElementById("quotaChip").textContent = state.used + " / " + state.quota;
+    document.getElementById("quotaBar").style.width = Math.round(state.used / state.quota * 100) + "%";
+  }
+  function generate() {
+    if (state.used >= state.quota) {
+      OggvoShell.toast("Monthly AI quota reached — upgrade for more generations", "error");
+      return;
+    }
+    regen.disabled = true;
+    setTimeout(function () {
+      var list = COPY[state.tone];
+      state.variant = (state.variant + 1) % list.length;
+      box.value = list[state.variant];
+      state.edits = 0;
+      bumpQuota();
+      refreshMeta();
+      regen.disabled = false;
+      OggvoShell.toast("New " + toneLabel().toLowerCase() + " draft generated", "primary");
+    }, 600);
+  }
+
+  toneRow.addEventListener("click", function (e) {
+    var pill = e.target.closest(".tone-pill");
+    if (!pill) return;
+    state.tone = pill.getAttribute("data-tone");
+    state.variant = -1; // next generate starts at first variant of the new tone
+    document.querySelectorAll(".tone-pill").forEach(function (p) {
+      var on = p === pill;
+      p.className = "tone-pill px-3.5 py-1.5 rounded-full text-sm font-medium " +
+        (on ? "bg-primary-500 text-white" : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50");
+    });
+    generate();
+  });
+
+  regen.addEventListener("click", generate);
+
+  box.addEventListener("input", function () {
+    state.edits++;
+    refreshMeta();
+  });
+
+  document.getElementById("continueBtn").addEventListener("click", function () {
+    OggvoShell.toast("Draft accepted — ai_usage +1; opening the share composer", "success");
+  });
+
+  refreshMeta();
+})();
+</script>
+</body></html>

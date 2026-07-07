@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OGGVO v2 · Billing — Plans</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/shell.css" />
+</head>
+<body class="bg-gray-50 text-gray-700">
+<main data-shell-content class="flex-1 p-6">
+
+  <!-- PageHeader -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Plan &amp; billing</h1>
+    <p class="mt-1 text-sm text-gray-500">Your subscription, entitlements and plan history for Acme Roofing Co.</p>
+  </div>
+
+  <div class="space-y-6 max-w-5xl">
+
+    <!-- ===== Current plan summary ===== -->
+    <section data-story="BILL-1.2" data-ac="AC1" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Current plan</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Managed through Stripe. Entitlements update within a minute of any change.</p>
+      </div>
+      <div class="p-5">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 rounded-card border border-primary-200 bg-primary-50 p-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-base font-semibold text-gray-900">Growth</span>
+              <span class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs font-medium">Current plan</span>
+              <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs font-medium">v3</span>
+            </div>
+            <p class="mt-1 text-sm text-gray-600">$99 / month · billed annually · current period ends <span class="font-medium text-gray-900">Nov 30, 2026</span></p>
+            <p class="mt-0.5 text-xs text-gray-500">Includes Connect SMS with 500 credits / month · 412 of 500 used this cycle</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="billing-checkout.html" data-story="BILL-1.2" class="h-9 px-3 inline-flex items-center rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Upgrade to Scale</a>
+          </div>
+        </div>
+
+        <!-- Payment method row -->
+        <div data-story="BILL-1.2" data-ac="AC1" class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-card border border-gray-200 p-4">
+          <div class="flex items-center gap-3 min-w-0">
+            <!-- Visa brand mark (brand hex allowed) -->
+            <span class="h-8 w-12 shrink-0 rounded border border-gray-200 bg-white grid place-items-center">
+              <svg viewBox="0 0 48 16" class="h-3.5 w-auto" aria-label="Visa"><text x="0" y="13" font-family="Inter, sans-serif" font-size="14" font-weight="700" font-style="italic" fill="#1434CB">VISA</text></svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block text-sm font-medium text-gray-900">Visa ending 4242</span>
+              <span class="block text-xs text-gray-500">Expires 08 / 2028 · billing email hello@acmeroofing.com</span>
+            </span>
+          </div>
+          <button type="button" data-portal class="inline-flex items-center gap-1.5 h-9 px-3 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+            Manage in Stripe billing portal
+            <svg class="h-3.5 w-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Plan comparison grid ===== -->
+    <section data-story="BILL-1.1" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Compare plans</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Plans are staff-defined and versioned — you keep your version until you change plans.</p>
+      </div>
+      <div class="p-5 grid md:grid-cols-3 gap-4">
+
+        <!-- Starter -->
+        <div data-story="BILL-1.1" class="rounded-card border border-gray-200 p-4 flex flex-col">
+          <h3 class="text-sm font-semibold text-gray-900">Starter</h3>
+          <p class="mt-1"><span class="text-2xl font-semibold text-gray-900">$49</span><span class="text-sm text-gray-500"> / mo</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">For a single location getting started.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-1">
+            <li class="flex items-center justify-between gap-2"><span>SMS credits / mo</span><span class="font-medium text-gray-900 tabular-nums">—</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Widgets</span><span class="font-medium text-gray-900 tabular-nums">1</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Social accounts</span><span class="font-medium text-gray-900 tabular-nums">2</span></li>
+            <li class="flex items-center justify-between gap-2"><span>AI generations / mo</span><span class="font-medium text-gray-900 tabular-nums">10</span></li>
+          </ul>
+          <button type="button" data-downgrade="Starter" data-story="BILL-1.2" data-ac="AC2" class="mt-4 h-10 w-full rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Downgrade to Starter</button>
+          <p class="mt-2 text-xs text-warning-600 text-center">Takes effect at period end · Nov 30, 2026</p>
+        </div>
+
+        <!-- Growth (current) -->
+        <div data-story="BILL-1.1" class="rounded-card border-2 border-primary-500 p-4 flex flex-col relative">
+          <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary-500 text-white px-2.5 py-0.5 rounded-full text-[11px] font-medium">Your plan</span>
+          <h3 class="text-sm font-semibold text-gray-900">Growth</h3>
+          <p class="mt-1"><span class="text-2xl font-semibold text-gray-900">$99</span><span class="text-sm text-gray-500"> / mo</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">Reviews + Connect SMS for growing teams.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-1">
+            <li class="flex items-center justify-between gap-2"><span>SMS credits / mo</span><span class="font-medium text-gray-900 tabular-nums">500</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Widgets</span><span class="font-medium text-gray-900 tabular-nums">3</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Social accounts</span><span class="font-medium text-gray-900 tabular-nums">5</span></li>
+            <li class="flex items-center justify-between gap-2"><span>AI generations / mo</span><span class="font-medium text-gray-900 tabular-nums">100</span></li>
+          </ul>
+          <button type="button" disabled class="mt-4 h-10 w-full rounded-card border border-gray-200 bg-gray-50 text-sm font-medium text-gray-400 cursor-not-allowed">Current plan</button>
+          <p class="mt-2 text-xs text-gray-400 text-center">Renews Nov 30, 2026</p>
+        </div>
+
+        <!-- Scale -->
+        <div data-story="BILL-1.1" class="rounded-card border border-gray-200 p-4 flex flex-col">
+          <h3 class="text-sm font-semibold text-gray-900">Scale</h3>
+          <p class="mt-1"><span class="text-2xl font-semibold text-gray-900">$199</span><span class="text-sm text-gray-500"> / mo</span></p>
+          <p class="text-xs text-gray-500 mt-0.5">High-volume messaging and multi-channel social.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-1">
+            <li class="flex items-center justify-between gap-2"><span>SMS credits / mo</span><span class="font-medium text-gray-900 tabular-nums">2,000</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Widgets</span><span class="font-medium text-gray-900">Unlimited</span></li>
+            <li class="flex items-center justify-between gap-2"><span>Social accounts</span><span class="font-medium text-gray-900 tabular-nums">15</span></li>
+            <li class="flex items-center justify-between gap-2"><span>AI generations / mo</span><span class="font-medium text-gray-900 tabular-nums">500</span></li>
+          </ul>
+          <a href="billing-checkout.html" data-story="BILL-1.2" data-ac="AC1" class="mt-4 h-10 w-full inline-flex items-center justify-center rounded-card bg-primary-500 text-white text-sm font-medium hover:bg-primary-600">Upgrade to Scale</a>
+          <p class="mt-2 text-xs text-gray-400 text-center">Prorated — takes effect immediately</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Plan-change history ===== -->
+    <section data-story="BILL-1.2" data-ac="AC3" class="bg-white border border-gray-200 rounded-card shadow-card">
+      <div class="px-5 py-4 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-900">Plan-change history</h2>
+        <p class="mt-0.5 text-xs text-gray-500">Every plan transition on this profile, including staff-granted trials.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs font-medium text-gray-500 border-b border-gray-200">
+              <th class="px-5 py-2.5 font-medium">Date</th>
+              <th class="px-5 py-2.5 font-medium">Change</th>
+              <th class="px-5 py-2.5 font-medium">Actor</th>
+              <th class="px-5 py-2.5 font-medium">Reason</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-900">Jun 14, 2026</td>
+              <td class="px-5 py-3 whitespace-nowrap"><span class="text-gray-500">Starter</span> <span class="text-gray-400">→</span> <span class="font-medium text-gray-900">Growth v3</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Alex Carter <span class="text-xs text-gray-400">(Owner)</span></td>
+              <td class="px-5 py-3 text-gray-600">Self-serve upgrade via Stripe Checkout</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-900">Mar 2, 2026</td>
+              <td class="px-5 py-3 whitespace-nowrap"><span class="text-gray-500">Trial (Growth)</span> <span class="text-gray-400">→</span> <span class="font-medium text-gray-900">Starter v2</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Alex Carter <span class="text-xs text-gray-400">(Owner)</span></td>
+              <td class="px-5 py-3 text-gray-600">Trial converted to paid subscription</td>
+            </tr>
+            <tr data-story="BILL-1.5">
+              <td class="px-5 py-3 whitespace-nowrap text-gray-900">Feb 16, 2026</td>
+              <td class="px-5 py-3 whitespace-nowrap"><span class="text-gray-500">—</span> <span class="text-gray-400">→</span> <span class="font-medium text-gray-900">Trial (Growth)</span></td>
+              <td class="px-5 py-3 whitespace-nowrap text-gray-600">Alicia Reyes <span class="text-xs text-primary-600">(OGGVO staff)</span></td>
+              <td class="px-5 py-3 text-gray-600">14-day comp trial — inbound demo request · expired Mar 2, 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="mock-note">GET /billing/subscription + /billing/plans (versioned catalog) + /billing/history. Upgrade → POST /billing/checkout-session (Stripe Checkout) · downgrade → POST /billing/schedule-change (applies at period end via webhook) · payment method → POST /billing/portal-session. Entitlements refresh &lt;1 min after the Stripe webhook (BILL-1.2 AC1).</p>
+
+  </div>
+
+  <!-- Downgrade confirm modal -->
+  <div data-downgrade-modal data-story="BILL-1.2" data-ac="AC2" class="hidden fixed inset-0 z-50 bg-gray-900/50 grid place-items-center p-4">
+    <div class="w-full max-w-md bg-white rounded-card shadow-pop">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="text-sm font-semibold text-gray-900">Downgrade to Starter?</h3>
+        <button type="button" data-downgrade-close class="text-gray-400 hover:text-gray-600" aria-label="Close">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-5 space-y-3 text-sm text-gray-600">
+        <p>You'll keep <span class="font-medium text-gray-900">Growth</span> until the end of your current period. Starter starts on <span class="font-medium text-gray-900">Dec 1, 2026</span>.</p>
+        <div class="rounded-card border border-warning-500/40 bg-warning-50 p-3 text-xs text-warning-700">
+          Takes effect at period end — <span class="font-medium">Nov 30, 2026</span>. After that, Connect SMS is no longer included and social accounts drop from 5 to 2.
+        </div>
+        <p class="text-xs text-gray-500">Nothing is deleted. Anything over Starter limits becomes read-only until you upgrade again.</p>
+      </div>
+      <div class="flex items-center justify-end gap-2 px-5 py-4 border-t border-gray-200">
+        <button type="button" data-downgrade-close class="h-10 px-4 rounded-card border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Keep Growth</button>
+        <button type="button" data-downgrade-confirm class="h-10 px-4 rounded-card bg-warning-500 text-white text-sm font-medium hover:bg-warning-600">Schedule downgrade</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="../assets/shell.js"></script>
+<script>
+  OggvoShell.mount({ active: "settings", storyDomain: "billing", back: { href: "../index.html", label: "All mockups" }, route: "/settings/billing/plans", search: "Search settings…" });
+
+  (function () {
+    var $ = function (s) { return document.querySelector(s); };
+    var $$ = function (s) { return [].slice.call(document.querySelectorAll(s)); };
+
+    // Stripe billing portal link
+    var portal = $("[data-portal]");
+    if (portal) portal.addEventListener("click", function () { OggvoShell.toast("Redirecting to Stripe billing portal…", "primary"); });
+
+    // Downgrade confirm modal
+    var modal = $("[data-downgrade-modal]");
+    $$("[data-downgrade]").forEach(function (b) {
+      b.addEventListener("click", function () { modal.classList.remove("hidden"); });
+    });
+    $$("[data-downgrade-close]").forEach(function (b) {
+      b.addEventListener("click", function () { modal.classList.add("hidden"); });
+    });
+    var confirm = $("[data-downgrade-confirm]");
+    if (confirm) confirm.addEventListener("click", function () {
+      modal.classList.add("hidden");
+      OggvoShell.toast("Downgrade to Starter scheduled for Nov 30, 2026", "warning");
+    });
+    modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.add("hidden"); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.classList.add("hidden"); });
+  })();
+</script>
+</body>
+</html>
