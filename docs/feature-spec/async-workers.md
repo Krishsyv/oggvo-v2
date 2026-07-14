@@ -129,6 +129,9 @@ it enqueues/invokes.
   transient) and applies Deactivate / `RateLimitRetry(Retry-After)` / `RetryAfter(backoff)` with
   `Attempts++` and `MaxSocialAttempts` cap — the fix for the May 16 Zillow mass-deactivation that the
   old "any non-200 → Deactivate" logic caused.
+- **Silent-halt guard (v2)** — the puller needs a **staleness alarm** ("no successful review save in
+  N hours" or "eligible backlog growing"): the Jul 2–8 2026 dedupe halt (see §5 / Known bugs) surfaced
+  only as a client complaint days later because the only signal was an INFO-level skip log.
 - **Auto-share gating** — `shareReview` applies `isBadReview` (low-score / old-review skip), a minimum
   rating threshold, a platform **whitelist**, and template rotation
   (`AutoReviewShareMode` = `rotate`|`fixed`, pool `type-1..type-5`). A `backfill-share` subcommand
@@ -146,7 +149,9 @@ it enqueues/invokes.
   queued), validates (`getValidJobs`), fans out to a buffered channel.
 - **External services** — Facebook/Instagram Graph API (`socials.FB`), Twitter/X API (oauth1),
   LinkedIn API (`socials.LinkedIn`), Google Business Profile, S3/asset host for media URLs
-  (`https://api.oggvo.com/assets/media/...`). Vendor creds from `bots/social/docker/config.json`
+  (`https://api.oggvo.com/assets/media/...` — **the Instagram paths hardcoded this prod host as
+  string literals** while the FB/Google paths used the `APP_DOMAIN` env var; see Known bugs, §7).
+  Vendor creds from `bots/social/docker/config.json`
   (Secrets Manager `oggvo/bot-social/config-json`).
 - **Tables** — `post`/`social_post` (claim via `FOR UPDATE SKIP LOCKED`, stamp `Status`, `URL`,
   `SocialID`, `FailureReason`, `Attempts`, `ClaimedAt`, `NextAttemptAt`), `social`, `review`, `image`,
@@ -247,6 +252,13 @@ it enqueues/invokes.
   - **v2 fix:** store all timestamps UTC, schedule per **profile/user timezone** (ARCHITECTURE.md says
     "sender bot hardcodes Pacific → per-profile timezone honoured by schedulers"). The send-window and
     weekend checks become per-profile-TZ comparisons, not container-clock comparisons.
+- **Velocity guardrails (sender, v2):** v1 had none — every recipient of a Delay=0 campaign got the
+  *identical* `ScheduledDate` (no jitter), no per-profile daily cap, no contact cooldown (`LastSent`
+  written but never read as a gate), and bounce/spam webhooks recorded stats without suppressing
+  anyone. v1 Stage 0 of #442 (2026-07-12) retrofitted per-profile send caps at the
+  `commons.GetSchedules` choke point (10/fetch-cycle via claim-deferral, 100/day, env-overridable) —
+  burst + daily only. v2 sender queue: schedule with **jitter** + per-profile **burst/daily caps**,
+  consult **one suppression list** before every send, and enforce a **per-contact cooldown**.
 - **Idempotency / dedupe:**
   - sender/newsletter generate a unique **tracker UUID** with a `CheckTracker` collision loop before
     `InsertTracker`; `SetScheduleSent` marks a schedule done so it is not re-sent.
@@ -255,11 +267,21 @@ it enqueues/invokes.
   - row-claim columns (`ClaimedAt` + 15-min timeout, `NextAttemptAt`, `Attempts`/`MaxSocialAttempts`)
     provide at-least-once with retry/backoff and a terminal give-up.
   - sender-bot/newsletter-bot/review-puller-bot Lambdas chunk work and dispatch deterministically
-    (sorted by ID, content hashed) to make SQS replays safe.
+    (sorted by ID, content hashed) to make SQS replays safe. **Caveat: this content-hash dedupe is
+    exactly what silently halted the review-puller Jul 2–8 2026** (see Known bugs, §7) — scraping is
+    *recurring* work, so the identical connection set legitimately re-dispatches every eligibility
+    cycle, and every cycle after the first was skipped as "already processed".
+  - **v2 dedupe-key rule:** keys must match work semantics — **per-dispatch unique IDs (UUID) for
+    recurring jobs** (dedupe only guards queue redelivery); content hashes only for genuinely
+    one-shot work.
   - **v2:** ARCHITECTURE.md mandates a **processed-key table** so BullMQ retries are idempotent; reuse
     tracker UUID + per-(profile,campaign,recipient,day) keys.
 - **Retry classification (review-puller/social):** terminal → deactivate; rate-limit → retry after
   `Retry-After` (no attempt increment); transient → backoff + attempt increment; cap at max attempts.
+  For **publish** jobs the classification must be per-platform, publish is **non-idempotent** — a 5xx
+  may have created the post, so **read-back reconcile** (did it land?) before any retry — and the
+  platform's **actual error message** is persisted on the job, never a generic string (see the June
+  2026 Google localPosts incident in Known bugs, §7).
 
 ## 6. Integrations
 - **SendGrid (Twilio)** — all outbound email via the `sendEmail` Lambda; delivery/bounce/complaint
@@ -323,6 +345,31 @@ it enqueues/invokes.
   container restart policy. v2 should handle per-job failures with BullMQ retry, not process exit.
 - **Synchronous email Invoke:** sender/newsletter block on a `RequestResponse` `sendEmail` invoke per
   recipient (slow, serial). v2 fans out to the `email-send` queue for parallelism/backpressure.
+- **IG hardcoded prod media URL (fixed in v1 2026-07-09):** the Instagram publisher inlined
+  `"https://api.oggvo.com/"` string literals in **both** social-bot copies while the Facebook/Google
+  paths next to it correctly used the `APP_DOMAIN` env var — so every IG photo/video/review post from
+  a non-prod environment failed with Meta's "Media download has failed" (the file only exists in that
+  env's bucket). v2: never inline environment-specific URLs — all public base URLs come from typed
+  env config, and platform publishers share one URL-builder so a per-platform copy can't drift.
+- **Every publish error treated as terminal (June 2026 Google localPosts incident):** Google's v4
+  localPosts API intermittently rejected valid image posts with 400 ValidationError "Fetching image
+  failed" (errorDetails code 1000) even though Google's own fetcher had just downloaded the image
+  with 200, and Google 500s killed posts the same way — v1 set `Status=-1` with a generic
+  `FailureReason="Error posting to google"` and never retried. 40+ posts across ~19 profiles
+  permanently failed in one month; sibling posts in the same batch succeeded seconds apart, proving
+  transience. Patched late in v1 (retry-with-backoff for the fetch-failed case only). v2: per-platform
+  transient/terminal error taxonomy from day one — retry transient (pre-creation validation
+  rejections, 429s) with escalating backoff + attempt cap; publish is **non-idempotent** (5xx may have
+  created the post — read-back reconcile before retrying); persist the platform's actual error
+  message on the job (see §5).
+- **Review-puller dedupe halt (Jul 2–8 2026):** the Lambda review-puller silently halted **all**
+  scraping for a week (Google review saves 25/day → 0) because job dedupe keyed on a **content hash**
+  (sha256 of profile+connection IDs, marked processed in DynamoDB for 14 days) — but scraping is
+  *recurring* work, so the identical connection set legitimately re-dispatches every eligibility
+  cycle and every cycle after the first was skipped as "already processed", without releasing row
+  claims; the only signal was an INFO-level skip log. v2: per-dispatch UUID dedupe keys for recurring
+  jobs (see §5) + a staleness alarm on the puller so a silent halt pages someone instead of surfacing
+  as a client complaint days later.
 
 ## 8. Open questions / parity risks
 - **Daemon vs Lambda as source of truth:** which v1 variant is actually running in prod per job? The
@@ -341,4 +388,5 @@ it enqueues/invokes.
   into the messaging domain; cost/PII handling is undefined in v1.
 - **Idempotency table design:** ARCHITECTURE.md mandates a processed-key table but does not specify
   granularity per queue; needs a per-queue key strategy (tracker UUID, (profile,campaign,recipient,day),
-  social_post id, etc.).
+  social_post id, etc.) — and each key must respect the recurring-vs-one-shot rule from §5
+  (per-dispatch UUIDs for recurring jobs; content hashes only for genuinely one-shot work).

@@ -29,9 +29,14 @@
 **Global rules**
 - Every editor read/write is scoped to the caller's `profileId` (TenantGuard); link update/toggle/delete/reorder
   re-checks `profileId` ownership before mutating.
-- **Funnel routing** is decided by `HappyMinimum` (set on the Positive tab): rating **≥ threshold** → positive /
-  review-platform path; **below** → negative / private-feedback path. Special values **`1` = Review to All**,
-  **`0` = Feedback to All** override the split.
+- **No review gating in v2 (fix-on-rebuild, compliance-critical).** v1 routed by `HappyMinimum` (set on the
+  Positive tab): rating **≥ threshold** → public review platforms; **below** → private feedback form (special
+  values **`1` = Review to All**, **`0` = Feedback to All**). That is default-on review gating — a
+  **Google-policy violation** (2025–26 enforcement suspends Business Profiles) and **FTC Consumer Review Rule**
+  exposure. *Status 2026-07-12:* v1 Stage 0 of #442 (`feat/gbp-compliance-stage0`) clamped `HappyMinimum` to 1
+  everywhere, made the funnel always show public links, and kept feedback leavers Active. **v2 rule: no gating
+  primitive at all, not even behind a flag** — every rating sees the same public review links; private feedback
+  is offered *in addition*, never *instead*.
 - **Design storage moves S3 → DB:** v1 stores the Unlayer design as `funnel.json` + `html.json` on S3 (the
   `funnel_designs` row is only a pointer). v2 stores it inline in `funnel_designs.exported_json` /
   `exported_html`; the public page reads the DB and injects **sanitized HTML** (no runtime Vue template compile).
@@ -65,12 +70,13 @@ clicking the link text copies it, tooltip **"Click to copy"** → **"Copied!"**)
   stays or a typed builder replaces it, and how the public page renders the artifact (sanitized HTML injection).
 
 ### US-D1.2 — Positive editor
-**As an** Operator **I want** to edit the "happy" screen **so that** good raters are routed to review platforms.
+**As an** Operator **I want** to edit the review screen **so that** customers see a branded review-platform screen.
 - **AC1** Split view: live preview (left) + form (right). Form panel heading **"Positive Window"**, subtext
   **"This page will appear after selecting Stars"**.
-- **AC2** Fields: **Select an option** (`HappyMinimum`, see US-D1.5), **Header** (`ThankYouMessage`), **Body**
-  (`MessageHappy`) — both textareas, placeholder **"Write your thoughts here..."** — plus the embedded
-  **platform-link manager** (Epic D2). Footer: **Cancel** / **Apply**.
+- **AC2** Fields: **Header** (`ThankYouMessage`), **Body** (`MessageHappy`) — both textareas, placeholder
+  **"Write your thoughts here..."** — plus the embedded **platform-link manager** (Epic D2). Footer:
+  **Cancel** / **Apply**. *(v1 also had a **Select an option** `HappyMinimum` threshold here — removed in v2,
+  see US-D1.5.)*
 - **AC3** Apply → `POST /design/savecontent` (v2 `PATCH /funnel/content`); success toast **"Data updated successfully!"**.
 - **AC4** Preview shows read-only stars + count, the heading/body, and **"Connect with {platform}"** buttons from the
   active links; empty state **"No Platforms!"**.
@@ -79,7 +85,7 @@ clicking the link text copies it, tooltip **"Click to copy"** → **"Copied!"**)
   colors are edited here, on the Main designer, or not at all.
 
 ### US-D1.3 — Negative (private-feedback) editor
-**As an** Operator **I want** to edit the "unhappy" screen **so that** low raters reach me privately instead of posting publicly.
+**As an** Operator **I want** to edit the private-feedback screen **so that** customers can also reach me directly (offered *in addition* to the public review links, never *instead* — see Global rules).
 - **AC1** Split view. Form panel heading **"Negative Window"**, subtext **"This page will appear after selecting Stars"**.
 - **AC2** Fields: **Header** (`NegativeFeedbackMessage`), **Body** (`MessageUnhappy`) — placeholder
   **"Write your thoughts here..."** — plus the link manager (Epic D2; section sub-heading
@@ -91,7 +97,8 @@ clicking the link text copies it, tooltip **"Click to copy"** → **"Copied!"**)
   (ph "Write your thoughts here..."), submit **"Leave Feedback"**. When links exist, a row reads
   **"Do you want to leave a review online? Select a platform below."**
 - **Open:** the negative form's public submission (create `review` + `recipient`, tag "Left Oggvo Feedback",
-  set Inactive, delete prior reviews) is owned by the reviews domain — locate/spec the public endpoint
+  delete prior reviews; v1 also set the recipient **Inactive** — fix-on-rebuild: v2 keeps feedback leavers
+  **Active**) is owned by the reviews domain — locate/spec the public endpoint
   (see [reviews US-P1.3](../reviews/user-stories.md)).
 
 ### US-D1.4 — Thank-You editor
@@ -100,13 +107,18 @@ clicking the link text copies it, tooltip **"Click to copy"** → **"Copied!"**)
   **Cancel** / **Apply** → `POST /design/savecontent`, toast **"Data updated successfully!"**. Preview = centered
   success icon + heading + body; **no platform links**.
 
-### US-D1.5 — Funnel routing threshold (`HappyMinimum`)
-**As an** Operator **I want** to choose which ratings count as "happy" **so that** the split routes correctly.
-- **AC1** "Select an option" sets `HappyMinimum` with these exact options: **5 Stars and Above** (5),
-  **4 Stars and Above** (4), **3 Stars and Above** (3), **2 Stars and Above** (2), **Review to All** (1),
-  **Feedback to All** (0).
-- **AC2** Saved via `savecontent`. Special-cased keys on save: `header → MessageHeader`, `body → MessageText`,
-  `footer → CustomPoweredBy`; every save stamps `LastUpdatedBy`.
+### US-D1.5 — Funnel routing threshold (`HappyMinimum`) — **removed in v2 (no review gating)**
+**v1 story (do not rebuild):** the Positive tab's "Select an option" set `HappyMinimum` with these exact
+options — **5 Stars and Above** (5), **4 Stars and Above** (4), **3 Stars and Above** (3),
+**2 Stars and Above** (2), **Review to All** (1), **Feedback to All** (0) — and routed low raters away from
+the public review links.
+- **Why removed:** that is review gating — a Google-policy violation (2025–26 enforcement suspends Business
+  Profiles) and FTC Consumer Review Rule exposure (see Global rules). v1 #442 Stage 0 (2026-07-12) already
+  clamped the value to 1 everywhere; v2 ships **no threshold picker and no routing on rating**.
+- **AC1 (v2)** The Positive editor has **no threshold control**; the `savecontent` allowlist does not accept
+  a `HappyMinimum` key.
+- **AC2** Content saves via `savecontent`. Special-cased keys on save: `header → MessageHeader`,
+  `body → MessageText`, `footer → CustomPoweredBy`; every save stamps `LastUpdatedBy`.
 - **Fix-on-rebuild:** v1 `savecontent` mass-assigns arbitrary posted profile keys — **allowlist** the editable
   fields in v2.
 
@@ -175,10 +187,13 @@ clicking the link text copies it, tooltip **"Click to copy"** → **"Copied!"**)
 > summarized here for completeness.
 
 ### US-D3.1 — Render + route
-- **AC1** `GET /funnel/:shortname` (public) returns profile name, `happyMinimum`, positive/negative/thankyou copy,
-  rating count+avg, the design, and active links (rank-ordered). Fetch failure → 404.
-- **AC2** Selecting a rating routes per `happyMinimum` (US-D1.5): **≥** → positive (review-platform links, with the
-  US-D2.7 interstitial); **below** → negative feedback capture (US-D1.3 fields). Both end at the thank-you screen.
+- **AC1** `GET /funnel/:shortname` (public) returns profile name, positive/negative/thankyou copy,
+  rating count+avg, the design, and active links (rank-ordered). Fetch failure → 404. *(v1 also returned
+  `happyMinimum` — dropped in v2; there is no routing knob.)*
+- **AC2** The post-rating screen is **rating-independent**: every rating sees the same public review-platform
+  links (with the US-D2.7 interstitial), **plus** an optional private-feedback affordance (US-D1.3 fields) —
+  offered in addition, never instead. Both paths end at the thank-you screen. *(v1 routed here per
+  `happyMinimum` — the removed gate; see US-D1.5 and Global rules.)*
 
 ---
 

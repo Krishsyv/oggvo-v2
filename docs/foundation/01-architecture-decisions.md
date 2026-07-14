@@ -175,8 +175,13 @@ This is the biggest *new* structural decision, earned by the bot-parity postmort
   the shared taxonomy: `terminal | rate_limited | transient | auth_revoked`.
 - **Rules enforced by the taxonomy:** only `auth_revoked` may deactivate a connection (never a
   JSON-decode error — the Zillow incident); `rate_limited` requeues with provider-specific
-  backoff; publishing operations are **non-idempotent → terminal on error** (never auto-retry a
-  possibly-published post; offer manual "Retry post" instead — which is exactly BF-044).
+  backoff; publishing operations are **non-idempotent → read-back reconcile before any retry**
+  (a 5xx may have created the post — confirm it did *not* land before re-attempting). Transient
+  platform errors (Google's "Fetching image failed" 400s, 429s, 5xx confirmed-not-created) retry
+  with escalating backoff + attempt cap — the June 2026 Google localPosts incident (intermittent
+  ValidationErrors on valid image posts; 40+ posts across ~19 profiles permanently lost) is the
+  motivation: v1 treated every publish error as terminal. Truly terminal errors surface the
+  platform's **actual** error message plus a manual "Retry post" (which is exactly BF-044).
 - Disconnect is a **lifecycle state machine** (active → grace-period soft-delete of children →
   purge), with provider token revocation and the Meta data-deletion callback built in from day one.
 - No SDK import outside its gateway; no raw curl in controllers (v1's test-SMS-in-controller).

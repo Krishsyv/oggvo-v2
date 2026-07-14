@@ -118,6 +118,9 @@
 - **AC2** The primary button reads **Start Verification** when `not_started`, **Resume Verification** when `in_progress`/`needs_correction`, and is disabled when no number is assigned.
 - **AC3** In non-mock mode, `initialize` returns `503` if the SDK provider has not populated `registrationId`/`inquiryId`/`inquirySessionTokenExpiresAt`.
 - **AC4** The returned session token reveals the embedded Twilio compliance form; on its `submitted`/`completed`/`state-change` events the page schedules debounced syncs (0/2s/5s).
+- **AC5** The Compliance Embeddable inquiry is created with **full prefill** — business name, address,
+  contact and use-case data the portal already holds — not just phone+email (fix-on-rebuild: v1 passed
+  only phone+email even though the create API accepts the full set, making customers re-type owned data).
 
 ### US-2.3 — Refresh my verification status
 **As an** Operator **I want** to refresh status on demand **so that** I see the latest decision without reloading.
@@ -187,6 +190,12 @@
 - **No DB transaction in v1 multi-step KYC** caused orphaned TrustHub entities on partial failure — v2 must **track created SIDs** for cleanup/rollback (fix-on-rebuild).
 - **Inbound routing** resolves an inbound `To` number to a profile preferring a toll-free number in `assigned|verified|active` (not released, not sync-error'd) whose profile is `TollfreeSendMode=active` with an `approved` verification; else falls back to `profiles.SMSNumber`.
 - **Events** are append-only and idempotent across both webhook and poll sources to survive push/poll races on `sync_state`/`portal_status`.
+- **One verification architecture** serves both A2P 10DLC and toll-free: shared state machine +
+  append-only event log + webhook **and** reconciling poll (with backoff scheduling) + stored provider
+  SIDs. Never reproduce the v1 split where the legacy 10DLC flow (commented-out webhook handler, dead
+  event-stream subscribe, never-stored `CampaignSid`, no-backoff pollers) diverged from TFV.
+- **Test fixtures compute dates relative to "now"** — v1 TFV tests hardcoded future dates
+  (`EditExpiration '2026-06-24'`) that became date-bombs once the date passed (fix-on-rebuild).
 
 ## Open questions / parity risks
 
@@ -231,7 +240,8 @@
 > the request is authorized by an opaque token/code in the URL). v2 target: module
 > `apps/api/src/modules/public` (or the existing `integrations` Meta webhook handler for the deletion
 > callback) · tables `contacts`/`unsubscribes` (email opt-out) + `deletion_request` (FB data-deletion
-> state machine, 30-day grace) · build phase — alongside the Meta Data Deletion Callback. Mockups:
+> state machine, grace window — default 30; per-platform env config, clamp 1–90) · build phase —
+> alongside the Meta Data Deletion Callback. Mockups:
 > [`../design-system/mockups/public/unsubscribe.html`](../design-system/mockups/public/unsubscribe.html),
 > [`../design-system/mockups/public/data-deletion-status.html`](../design-system/mockups/public/data-deletion-status.html).
 
@@ -249,8 +259,16 @@
   safe generic state (404 / "request not found"), never leaks whether an email or account exists.
 - Public pages are rate-limited and CAPTCHA-mockable in non-prod (fix-on-rebuild: v1 CAPTCHA only
   bypassed under `ENVIRONMENT==='testing'`).
-- All timestamps stored UTC (timestamptz); the 30-day grace window and any rendered dates use the
-  profile timezone, not a hardcoded Pacific assumption (fix-on-rebuild).
+- All timestamps stored UTC (timestamptz); the grace window (default 30; per-platform env config,
+  clamp 1–90) and any rendered dates use the profile timezone, not a hardcoded Pacific assumption
+  (fix-on-rebuild).
+- **Fix-on-rebuild (grace window is env config, not a setting):** v1 first shipped the Meta deletion
+  grace period as an admin-editable `system_settings` row + Manage → Settings UI — wrong home for a
+  compliance parameter (any `OGGVO_ACCOUNT_MANAGER` could stretch a Meta deletion delay to 90 days, no
+  per-environment values); reworked 2026-07-09 to **typed env config, per platform and per
+  environment**, with a code-side clamp (1–90) + fallback (30). Null/whole-app deletion requests take
+  `min()` of the platform windows. Rule: tenant preference → DB + UI; compliance/operational
+  parameter → typed env config with validated bounds.
 
 ---
 
@@ -274,7 +292,8 @@
 - **AC2** Status mapping to the UI: `received` → "Request received" (queued); `pending` → "Deletion scheduled" with the grace-period purge date and a note that reconnecting cancels it; `completed` → "Data deleted" with the purge date; `cancelled` → "Deletion cancelled" (account reconnected, data retained).
 - **AC3** An unknown/expired/invalid code renders `not_found` ("Request not found") without disclosing whether any request exists.
 - **AC4** A `?code=` deep link (the exact URL Meta returns to the user alongside the `confirmation_code`) renders the status immediately on load.
-- **AC5** The page is the user-facing surface of the **Meta Data Deletion Callback** (`POST /integrations/facebook/data-deletion`, HMAC-verified) which creates the `deletion_request` row and returns `{url, confirmation_code}`; reconnecting the account within the 30-day grace transitions the request to `cancelled`.
+- **AC5** The page is the user-facing surface of the **Meta Data Deletion Callback** (`POST /integrations/facebook/data-deletion`, HMAC-verified) which creates the `deletion_request` row and returns `{url, confirmation_code}`; reconnecting the account within the grace window (default 30; per-platform env config, clamp 1–90)
+  transitions the request to `cancelled`.
 
 ---
 

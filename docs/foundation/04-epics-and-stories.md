@@ -37,7 +37,7 @@ Phases refer to the roadmap releases (R1–R5) in [`05-roadmap.md`](05-roadmap.m
 | **MEDIA** | Media library | media | `docs/media/user-stories.md` M1–M4 | — | R1 |
 | **CAMP** | Campaigns & eligibility engine | campaigns | `docs/campaigns/user-stories.md` C1–C6 | BF-038 (template default dates), BF-027 (editable Review-Us button), BF-007 (prominent tab indicator), BF-010 (test-send exclusion from analytics) | R2 |
 | **MSG** | Connect messaging & calls | messaging | `docs/messaging/user-stories.md` M1–M7 | BF-022 (test SMS via sandbox mode), BF-031 (QR with logo) | R2 |
-| **CMPL** | Twilio A2P + TFV + consent pages | compliance | `docs/compliance/user-stories.md` E1–E6 + §TFV below | — | R2–R3 |
+| **CMPL** | Twilio A2P + TFV + consent pages + sending identity | compliance | `docs/compliance/user-stories.md` E1–E6 + §TFV + §SND below | — | R2–R3 |
 | **SOC** | Social publishing & planner | social | `docs/social/user-stories.md` | BF-044 (retry failed post), BF-043 (edit scheduled/pending post), BF-041 (delete with provider-side delete + honest messaging) | R3 |
 | **SUR** | Surveys | surveys | `docs/surveys/user-stories.md` E1–E5 | BF-009 (descriptions optional), BF-008 (editable start button), BF-040 (thank-you URL cleanup), BF-011 (completion notification), BF-039 (prebuilt templates) | R3 |
 | **WID** | Widgets | widgets | `docs/widgets/user-stories.md` E1–E6 | — | R3 |
@@ -144,6 +144,25 @@ ship linear, decide branching later), Contact-Advisor mailto (replaced by HELP c
   approved and a number is assigned; deactivation resets local state even if Twilio-side cleanup
   fails (the v1 subaccount-close deadlock, CLAUDE.md).
 
+### §SND — Per-tenant sending identity & DNS onboarding (under CMPL; PF-17)
+
+> Net-new: v1 shares **one** email identity for all tenants — hardcoded `From: review@oggvo.com`,
+> one SendGrid account, all review links on `portal.oggvo.com` — so every tenant's complaints
+> pool into one reputation bucket. `sending_domain` + `profiles.review_domain` are an R0 schema
+> gap ([`05-roadmap.md`](05-roadmap.md)).
+
+- **SND-1.1 — Verify a sending domain.** As an **Owner** I add my domain, get the DNS records
+  (DKIM/SPF/return-path) to publish, and watch verification complete self-serve. AC1
+  `sending_domain` row tracks a state machine (`pending → verifying → verified | failed`) with a
+  re-check job; AC2 from-addresses on the domain unlock only at `verified`; AC3 later
+  verification loss (record removed) falls back to the pool — sends degrade, never hard-fail.
+- **SND-1.2 — Branded review domain.** As an **Owner** my review/funnel links use my branded
+  `review_domain` (same self-serve DNS flow) instead of the shared portal host, so my link
+  reputation is mine.
+- **SND-1.3 — Neutral pool fallback.** As the **System** I send for tenants without a verified
+  domain from a neutral shared-pool identity, isolated from verified tenants' domains — one bad
+  sender can no longer burn everyone's deliverability.
+
 ### §NOTIF — Notifications hub
 
 > Consolidates: nav badges (global), review-alert emails + push devices (settings E4), survey
@@ -177,6 +196,16 @@ ship linear, decide branching later), Contact-Advisor mailto (replaced by HELP c
   by provider review id). **PLAT-1.3 — Feed parity.** Reviews from X filter/search/share like any
   other source; manual-add lists X too (generalizes BF-042's GigSalad ask). **PLAT-1.4 — Funnel
   link.** X joins the funnel platform catalog (FUN links).
+
+> **BF-042 scope note (platform assets):** GigSalad also exposed two defects to fix once here,
+> not per platform. (1) v1 resolves platform logos two inconsistent ways — most surfaces use the
+> `linkmaster.ImageURL` slug, but the review share/preview views build the path from
+> `strtolower(review.Site)`, broken for every multi-word platform ("Gig Salad" →
+> `gig salad-lg.png`; BF-042 papered over it with a space-named duplicate file). (2) Logo assets
+> live only on an unversioned S3 mount with no deploy path — BF-042's logos were deferred and
+> lost for weeks. v2: **one canonical asset slug on the platform record** used by every renderer,
+> and platform logos versioned in the repo/CDN pipeline — never hand-placed on storage. Every
+> PLAT-1.x platform onboarding inherits this.
 
 ### §AI — AI template & content generation
 

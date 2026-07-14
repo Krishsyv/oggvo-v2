@@ -28,7 +28,9 @@
 
 ## Satellite routing (v1 col → satellite.col — transforms per G-rules unless noted)
 
-**profile_review_settings:** HappyMinimum, StarShape, StarText1–5, MessageHeader, MessageText,
+**profile_review_settings:** **HappyMinimum (migrate clamped to 1 — v1 #442 Stage 0 already clamped it
+everywhere, and v2 has no review-gating primitive, so the column is inert/compat-only; never route on it)**,
+StarShape, StarText1–5, MessageHeader, MessageText,
 MessageHappy, MessageUnhappy, ThankYouHeading, ThankYouBody, ThankYouMessage,
 NegativeFeedbackMessage, CustomPoweredBy, ShowBusinessNameText, ShowReviewStream,
 ShowLocationDetails, UseCaptcha, ShowPoweredBy, HideOggvoReviews, DoNotFilter, ShowReviews,

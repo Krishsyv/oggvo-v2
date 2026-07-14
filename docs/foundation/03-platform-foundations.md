@@ -33,9 +33,15 @@ MySQL wall-clock trick; two redundant resolvers; 5 legacy numeric tz ids.*
 ## PF-5 Provider error taxonomy
 All provider calls go through gateways (AD-13) mapping errors to
 `terminal | rate_limited | transient | auth_revoked`. Only `auth_revoked` may deactivate a
-connection. Publishing is non-idempotent → `terminal` on error + manual retry affordance.
-*v1 failure: the May-16 Zillow mass-deactivation (any error → Deactivate); Google JSON-decode
-errors killing connections.*
+connection. Publishing is non-idempotent → **reconcile via read-back before any retry** (a 5xx
+may have created the post); transient platform errors (e.g. Google localPosts "Fetching image
+failed" 400s, 429s, 5xx confirmed-not-created) retry with escalating backoff + attempt cap; only
+truly terminal errors stop with a manual retry affordance. Always persist the platform's actual
+error message on the job — never a generic string.
+*v1 failures: the May-16 Zillow mass-deactivation (any error → Deactivate); Google JSON-decode
+errors killing connections; June-2026 blanket-terminal publishing — Google intermittently 400'd
+valid image posts ("Fetching image failed") and 500'd, permanently failing 40+ posts across ~19
+profiles in one month with only `"Error posting to google"` recorded.*
 
 ## PF-6 Delivery ledger
 Every outbound email/SMS/push writes a `notification_deliveries` row: channel, provider, template,
@@ -83,7 +89,13 @@ dashboard per-tab fan-out.*
 ## PF-14 Observability
 pino structured logs (correlation id per request/job), OTel traces API→queue→gateway, Sentry.
 Every queue: depth/lag/DLQ alarms. Every gateway: error-taxonomy counters per provider (a
-mass-`auth_revoked` spike pages someone — that's the Zillow alarm).
+mass-`auth_revoked` spike pages someone — that's the Zillow alarm). Recurring pipelines
+(review puller, activator, senders) additionally get **business-outcome staleness alarms**,
+distinct from infra alarms — e.g. "no successful review save in N hours", "eligible backlog
+growing" — because a silent halt errors nothing. *v1 failure: the Lambda review-puller halted
+all scraping Jul 2–8 2026 (Google review saves 25/day → 0) — content-hash dedupe skipped every
+recurring re-dispatch as "already processed"; the only signal was an INFO-level skip log, and
+queue-depth/DLQ alarms would not have fired.*
 
 ## PF-15 Testing & definition of done
 Per slice: Vitest unit (services), repository tests incl. tenant-scoping, Playwright e2e for the
@@ -107,8 +119,24 @@ The legal layer for outbound, enforced **at the gateway/send-pipeline** so no fe
 - **Global suppression list** (per profile + platform-wide): hard bounces, spam complaints, and
   unsubscribes from the SendGrid event webhook feed it automatically. *v1 failure: the
   `webhookEmail` suppression logic was commented out — complaints kept getting mail.*
-- **Email deliverability:** SPF/DKIM/DMARC-authenticated sending domain(s); per-profile from-
-  addresses only via verified identities; List-Unsubscribe headers on all bulk mail.
+- **Send jitter:** cohort sends are spread over a window, never stamped one identical
+  scheduled-at. *v1 failure: every recipient of a Delay=0 campaign got the identical
+  `ScheduledDate`.*
+- **Per-profile burst + daily send caps**, env-overridable, enforced at the send-pipeline choke
+  point so manual bulk activation counts too (v1's 10/day `AutoActivateLimit` only throttled the
+  auto-activator bot). Reference values from v1 Stage 0 of #442 (2026-07-12, at
+  `commons.GetSchedules` via claim-deferral): 10 per fetch-cycle, 100/day.
+- **Per-contact cooldown** consulted before every send. *v1 failure: `LastSent` was written but
+  never read as a gate.*
+- **Email deliverability — per-tenant sending identity, first-class:** *v1 debt: one shared
+  identity for every tenant — hardcoded `From: review@oggvo.com`, one SendGrid account, all
+  review links on `portal.oggvo.com` — pooled every tenant's complaints into one reputation
+  bucket.* v2 models it explicitly: a `sending_domain` table with a DKIM/SPF/DMARC verification
+  state machine (pending → verifying → verified | failed, re-checked by job), a branded
+  `review_domain` per profile for review links, self-serve DNS onboarding (show records, verify,
+  surface status), and a **neutral-domain pool fallback** for tenants without a domain — so one
+  tenant's complaints never burn the others. Per-profile from-addresses only via verified
+  identities; List-Unsubscribe headers on all bulk mail.
 - Eligibility (the campaigns engine) consumes suppression/opt-out as an input — it never
   reimplements it.
 

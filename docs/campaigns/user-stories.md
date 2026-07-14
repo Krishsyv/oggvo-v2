@@ -181,6 +181,11 @@ or the Options/editor Status switch.
 - **Footer rendering centralized:** one renderer for placeholders so test sends and bulk sends can't drift.
 - **Event taxonomy:** consolidate v1's `Activity LIKE` strings + scheduler "sent" into a typed
   `campaign_events.eventType` (`open|click|unsubscribe|sent|test`) while preserving exact counting.
+- **Velocity & suppression guardrails (PF-17):** sends are scheduled with jitter (never one
+  identical timestamp for a Delay=0 cohort), capped per profile (burst + daily, env-overridable;
+  v1 Stage-0 reference: 10/fetch-cycle, 100/day), and gated before every send by the global
+  suppression list (bounces/complaints/STOP/unsubscribe) and a per-contact cooldown (v1 wrote
+  `LastSent` but never read it); bulk email carries List-Unsubscribe headers.
 
 ## Open questions (from spec)
 - Surveys (`EmailSurvey`/`SmsSurvey`) — campaigns module or a separate `surveys` module?

@@ -368,6 +368,11 @@ v1 dead-end scaffold becomes a real, countable, single-code-path feature.
 - **Raw SQL interpolation** of `$dates[0]/$dates[1]`/`$profileId` and the `getReadableSize` loop bug
   → parameterize / fix.
 - **Hardcoded Pacific business hours** in sender/activator → per-profile timezone.
+- **No source-platform guard on review sharing** (v1 #451/#442) — a Google review could be re-shared
+  to the same Google Business Profile (duplicate automated content, a GMB spam-enforcement trigger);
+  fixing it in v1 took guards in 4 creation paths + 2 executor bots because the rule lived nowhere
+  central → v2 enforces it **once** in `SocialPublisherService`: a review post's target platform must
+  never equal the review's source platform.
 
 ## Open questions / parity risks
 

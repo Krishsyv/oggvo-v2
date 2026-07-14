@@ -89,7 +89,7 @@ The connectors double as the **payment processors**: Square, Stripe, and Clover 
 
 ### Google (Business Profile) — `OAuth/Google.php`, `GoogleProvider.php`
 - **Connect** — OAuth2 via `google/apiclient`. Callback exchanges `code` (offline access) for tokens; fetches the Google **user id** (`people/me` resource name) and stores it in `AuthorizationID`. Scopes (`Keys::gScope`): `https://www.googleapis.com/auth/business.manage`, `https://www.googleapis.com/auth/userinfo.profile`. Credentials: `keys.gClientID`, `keys.gClientSecret`.
-- **Refresh-token sharing** — if Google returns **no** refresh token, it looks up another active Google connection with the same `user_id` (`getGoogleDuplicate`) and reuses that refresh token; if none, it **revokes** the access token and fails. On delete, the token is only revoked if no other connection shares the same `user_id`.
+- **Refresh-token sharing** — if Google returns **no** refresh token, it looks up another active Google connection with the same `user_id` (`getGoogleDuplicate`) and reuses that refresh token; if none, it **revokes** the access token and fails — **this revoke-and-fail is the BF-046 bug**: Google only returns a `refresh_token` on *first* consent, so a connect with no stored sibling token revoked the grant and failed ("always fails first, works second" — accidentally self-healing) until `prompt=consent` was forced. On delete, the token is only revoked if no other connection shares the same `user_id`.
 - **Location selection** — `Socials::getgoogleaccounts` / `getgooglelocations` / `savegooglelocation` lists accounts + locations and writes the chosen location's `PageID` (`accounts/<id>/locations/<id>`), review URI link, and `place_id`/maps URI onto the profile.
 - **Webhook** — none (reviews are pulled by the Go review-puller).
 
@@ -258,6 +258,7 @@ This domain **is** the integrations layer. External services and their use:
   - **Synchronous webhook processing** (some call multiple provider APIs inside the request) — move to queues so a 200 is returned fast and retries are safe.
   - **Shopify single hard-coded shop** (`shopifyDomain=oggvoportal`) — should be per-connection.
   - **Brand/campaign status webhook is a stub** (`TwilioVerification`) — implement properly (the toll-free one is the model to follow).
+  - **Google connect revoke-and-fail (BF-046)** — v1 relied on Google returning a `refresh_token` (only sent on **first** consent) and, when absent with no reusable sibling token, revoked the grant and failed. v2: always request offline access with `access_type=offline&prompt=consent` from day one, treat a missing `refresh_token` as a **handled state** (reuse the stored token for that provider `user_id`), and never use revoke-and-fail as control flow.
   - **QuickBooks empty catch** (`catch (SdkException|ServiceException) {}`) swallows errors silently.
   - **Heavy column overloading** in `social_stream` — replace with typed schema.
 

@@ -98,6 +98,11 @@ the connection is usable without ever storing plaintext secrets.
   "Missing required permissions" and stores nothing.
 - **AC6** On success the redirect page POSTs back / polls and the Integrations grid shows the card as
   **Connected** with a fresh `lastSyncedAt`.
+- **Fix-on-rebuild (BF-046):** the Google auth URL always requests offline access with
+  `access_type=offline&prompt=consent` from day one; a callback returning **no** `refresh_token`
+  (Google only sends one on first consent) is a **handled state** — reuse the stored token for that
+  provider `user_id` (see US-3.1 AC2), never revoke-and-fail (v1 revoked the grant and failed, so
+  connects "always failed first, worked second").
 
 ### US-2.3 — Provider sub-selection (pages / locations / accounts)
 **As an** Operator **I want** to pick which page/location/org to use **when** a provider exposes several

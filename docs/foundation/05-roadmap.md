@@ -36,7 +36,9 @@ old plan and why:
   `user_profiles.role`, `profile_onboarding`, four `twilio_tollfree_*` tables +
   `profiles.tollfree_*`, tutorials catalog (`tutorial_playlists`/`tutorial_videos`),
   `suppressions` (PF-17 — extend the existing `blacklisted_emails` into a channel-generic
-  suppression table), `deletion_requests` + retention-window columns (PF-18).
+  suppression table), `sending_domain` + `profiles.review_domain` (PF-17 — per-tenant sending
+  identity: DKIM/SPF verification state machine, branded review-link domain, neutral-pool
+  fallback), `deletion_requests` + retention-window columns (PF-18).
   **Reuse, don't duplicate:** `campaign_events`, `feature_flags`, `platform_whitelist` already
   exist in the schema. The scaffold `audit_log` (user_id/action/notes/related_*) is **upgraded to
   `audit_events`** per PF-19 (tenant scope, impersonator attribution, before/after diffs, action

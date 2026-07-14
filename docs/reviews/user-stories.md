@@ -141,7 +141,12 @@
 - **Fix-on-rebuild (BF-004):** `custom_color` must be normalized **once** server-side so `/image`, `/single` and the `/share`
   lookup compute one identical cache hash (v1 hashed it differently per route, so `/share` missed the generated image).
   Render via a headless worker (Playwright/Puppeteer) + S3 keys in the DB — **not** `wkhtmltoimage` over an NFS mount.
-- **Open:** image generation likely becomes an async render job; confirm queue + S3 storage + the cache key (`{reviewId}{profileId}{site}_{hash}`).
+  Derive file keys with **unambiguous separators** (e.g. `{reviewId}-{profileId}-{site}_{hash}`) or UUIDs — v1's
+  separator-less `{ReviewID}{ProfileID}{Site}` concatenation made `(ID=12, P=3)` and `(ID=1, P=23)` collide on
+  `123Facebook…` (cross-profile files silently overwrote each other, and the FB data-deletion purge's
+  `reviews/{ID}{ProfileID}{Site}*` glob could unlink another tenant's file); a trailing `_{hash}` does **not**
+  fix the ambiguous prefix. Never concatenate numeric ids into file keys.
+- **Open:** image generation likely becomes an async render job; confirm queue + S3 storage + the cache key (`{reviewId}-{profileId}-{site}_{hash}`).
 
 ### US-R4.2 — Write the post message
 - **AC1** A message textarea (default **"New Review!"**; the share API default when blank is "Please check the newest review! [[link]]")
@@ -159,6 +164,11 @@
   (fix-on-rebuild: v1 assumed US/Pacific canonical DB time converted on the frontend).
 - **AC5** The feed card footer reflects post state: a platform icon lights up once posted, with a tooltip showing
   **Quick Post / Created On / Scheduled For** timestamps.
+- **Fix-on-rebuild (source-platform guard — v1 #451/#442):** the platform picker must **exclude**, and
+  `POST /reviews/:id/share` must **reject**, the review's own source platform — a Google review re-posted to the
+  same Google Business Profile is duplicate automated content, a GMB spam-enforcement trigger. v1 had no guard
+  and fixing it took 4 creation paths + 2 executor bots because the rule lived nowhere central; v2 enforces it
+  **once** in the shared post-creation service: target platform ≠ review source platform.
 
 ---
 
@@ -203,10 +213,9 @@
 
 ## Epic F1 — Funnel content editors (Positive / Negative / Thank You)
 
-### US-F1.1 — Set the funnel routing threshold
-**As an** Operator **I want** to choose which ratings count as "happy" **so that** good raters go to review platforms and unhappy ones to private feedback.
-- **AC1** On the Positive tab, "Select an option" (`HappyMinimum`) sets the split: `5/4/3/2`★ & above → positive path; `1` = Review to All; `0` = Feedback to All.
-- **AC2** Saved via `POST /design/savecontent` (v2 `PATCH /funnel/content`); allowlist the posted fields (fix-on-rebuild: v1 mass-assigns arbitrary profile keys).
+### US-F1.1 — Funnel routing threshold — **removed in v2 (no review gating)**
+- **Fix-on-rebuild (compliance-critical):** v1's Positive-tab "Select an option" (`HappyMinimum`) gated the funnel — public review links only for ratings ≥ threshold (`1` = Review to All, `0` = Feedback to All), others diverted to private feedback. That is a Google-policy violation (2025–26 enforcement suspends Business Profiles) + FTC Consumer Review Rule exposure; v1 #442 Stage 0 (2026-07-12) clamped it to 1 everywhere. **v2 ships no gating primitive** — every rating sees the same public links; feedback is additive. Canonical treatment: [design-funnel US-D1.5](../design-funnel/user-stories.md).
+- **AC1** Content saves via `POST /design/savecontent` (v2 `PATCH /funnel/content`); allowlist the posted fields (fix-on-rebuild: v1 mass-assigns arbitrary profile keys) — `HappyMinimum` is not an accepted key.
 
 ### US-F1.2 — Edit the positive screen
 - **AC1** Split view: live preview (left) + form (right). Form: Header Color, Footer Color, Header heading, Body copy, embedded link manager. **Apply** saves; success toast.
@@ -249,15 +258,15 @@
 
 ### US-P1.1 — Rate the business
 **As a** Visitor **I want** to leave a star rating **so that** I can share my experience.
-- **AC1** `GET /funnel/:shortname` (public) returns profile name, `happyMinimum`, positive/negative/thankyou copy, rating count+avg, the design, and active platform links (rank-ordered). Fetch failure → 404.
-- **AC2** Selecting a rating routes: **≥ happyMinimum** → positive screen (review-platform links); **below** → negative feedback capture. Both end at the thank-you screen.
+- **AC1** `GET /funnel/:shortname` (public) returns profile name, positive/negative/thankyou copy, rating count+avg, the design, and active platform links (rank-ordered). Fetch failure → 404. *(v1 also returned `happyMinimum` — dropped in v2; no routing knob.)*
+- **AC2** Every rating lands on the **same screen**: the public review-platform links **plus** an optional private-feedback affordance — no routing on rating (the v1 `happyMinimum` gate is removed; see US-F1.1). Both paths end at the thank-you screen.
 
-### US-P1.2 — Happy path → review platforms
-- **AC1** The positive screen lists "Connect with {platform}" buttons; for google/facebook/zillow/realtor.com (when `SkipInstructions != 1`) a "How to leave a review" interstitial opens before the outbound link (respects Open-in-New-Window).
+### US-P1.2 — Public review-platform links (shown to every rating)
+- **AC1** The post-rating screen lists "Connect with {platform}" buttons; for google/facebook/zillow/realtor.com (when `SkipInstructions != 1`) a "How to leave a review" interstitial opens before the outbound link (respects Open-in-New-Window).
 - **Parity gap:** Yelp has server-side instructions but no modal branch — add it in v2.
 
-### US-P1.3 — Unhappy path → private feedback
-- **AC1** The negative screen collects First/Last name, Email, Phone, message; submitting creates a `review` + `recipient` server-side, tags the recipient "Left Oggvo Feedback", sets them Inactive, and deletes that recipient's prior reviews.
+### US-P1.3 — Optional private feedback (offered in addition, never instead)
+- **AC1** The feedback screen collects First/Last name, Email, Phone, message; submitting creates a `review` + `recipient` server-side, tags the recipient "Left Oggvo Feedback", and deletes that recipient's prior reviews. **Fix-on-rebuild:** the recipient stays **Active** (v1 set feedback leavers Inactive — only unhappy customers stopped being re-asked; #442 Stage 0 fixed this).
 - **Open question:** locate/spec the public submission endpoint (v1 `ReviewModel::addReview`, likely under `/common`).
 
 ---

@@ -78,6 +78,11 @@ The spec flags these per domain; the recurring ones:
 - Several webhook signature checks (Square, Twilio SMS, Shopify) and PAM TLS verification are disabled
   in v1 — enable them in v2.
 - v1 stores OAuth tokens in plaintext; v2 uses an AES-GCM-encrypted integrations vault.
+- v1 had **no source-platform guard on review sharing**: a Google review could be re-posted to the same
+  Google Business Profile (duplicate automated content, a GMB spam-enforcement trigger — v1 issue #451/#442).
+  Fixing it in v1 took guards in 4 creation paths + 2 executor bots (×2 ECS/Lambda copies) because the rule
+  lived nowhere central. In v2, enforce it **once** in the shared post-creation service: a review post's
+  target platform must never equal the review's source platform.
 - v1 media storage is **local-disk semantics over an S3-Files NFS mount** (`AwsS3` SDK only for some
   doc/JSON paths). The CI4 code assumes dirs always exist and uses `file_exists()`/`->move()`/GD
   `->save()` against `public/assets/media/...`; because S3 has no empty directories, missing prefixes
@@ -98,6 +103,22 @@ The spec flags these per domain; the recurring ones:
   every campaign create AND update AND contact change — one code path, no activator-vs-reconcile split,
   no Pending-only/Active-only blind spots.
 - Payment SDKs are years stale (Stripe v10, Square 2022) — use current SDKs.
+- v1's Instagram publisher **hardcoded the prod media base URL** (`"https://api.oggvo.com/"` string
+  literals in both social-bot copies) while the Facebook/Google paths next to it correctly used the
+  `APP_DOMAIN` env var — so every IG photo/video/review post from a non-prod environment failed with
+  Meta's "Media download has failed" (the file only exists in that env's bucket). Fixed in v1
+  (2026-07-09, ×2 ECS/Lambda copies). v2: never inline environment-specific URLs — all public base
+  URLs come from typed env config, and platform publishers share one URL-builder so a per-platform
+  copy can't drift.
+- v1's FB data-deletion grace period first shipped as an **admin-editable DB setting** (generic
+  `system_settings` key/value + Manage → Settings UI) — wrong home for a **compliance parameter**: any
+  `OGGVO_ACCOUNT_MANAGER` could stretch a Meta deletion delay to 90 days from a UI, and the value
+  couldn't differ per environment. Reworked (2026-07-09) to per-platform, per-environment env config
+  (plain CDK task-def vars → CI4 `.env`), with code-side clamp (1–90) + fallback (30) so a bad value
+  degrades safely; null/whole-app requests take `min()` of the platform windows. v2: classify each knob
+  before building UI for it — **tenant preference → DB + UI; compliance/operational parameter → typed
+  env config** (per-platform, per-environment) with validated bounds; don't default to "make it a
+  setting".
 - v1 media is a **shared per-profile gallery** (`image`/`video` rows) reused by reference across
   unrelated features — the same `image.ID` can back a social post (`social_post_media.MediaID`) AND a
   review-request campaign (`invite_campaign.ImageID`) — but nothing models this. The FB data-deletion
@@ -107,6 +128,26 @@ The spec flags these per domain; the recurring ones:
   v2: give media a real ownership/reference model (reference-counted or an explicit join per usage) so
   "is this file still referenced anywhere?" is one query, not a hand-maintained table list; never key a
   physical delete off one feature's references.
+- v1 Google OAuth connect relied on Google returning a `refresh_token` and, when it was absent
+  (Google only sends it on first consent), **revoked the grant and failed** — accidentally
+  self-healing ("always fails first, works second", BF-046) until `prompt=consent` was forced. v2:
+  always request offline access with `prompt=consent` from day one, and treat a missing
+  refresh_token as a handled state (reuse the stored one for that provider user id) — never
+  revoke-and-fail as control flow.
+- v1 resolves review-platform logos **two inconsistent ways**: most surfaces join `linkmaster` and use
+  its `ImageURL` slug (`link-logos/{slug}-sm.png`), but the review share/preview views
+  (`review/single.php`, `review/preview.php`) build the path from `strtolower(review.Site)` — broken
+  for every multi-word platform ("Gig Salad" → `gig salad-lg.png`, "Rate My Agent US" likewise; BF-042
+  papered over it with a space-named duplicate file). Logo files themselves live only on the
+  unversioned S3-Files mount, so "add a platform" ships a DB row via migration but the asset has no
+  deploy path and silently never arrives (BF-042's logos were deferred and lost for weeks). v2: one
+  canonical asset slug on the platform record used by every renderer, and platform logos versioned in
+  the repo/CDN pipeline — never hand-placed on storage.
+- v1 review share-images are named by **separator-less concatenation** `{ReviewID}{ProfileID}{Site}`
+  (`Reviews.php`, `PostModel.php`), so `(ID=12, P=3)` and `(ID=1, P=23)` collide on `123Facebook…` —
+  cross-profile files silently overwrite each other, and the FB data-deletion purge's
+  `reviews/{ID}{ProfileID}{Site}*` glob can unlink another tenant's file. v2: derive file keys with
+  unambiguous separators (or UUIDs) — never concatenate numeric ids.
 - v1 SMS **test-campaign** send (`Campaigns::test`) inlines a raw Twilio `Messages.json` curl in the
   controller and reads creds **only** from the profile row (`SMSNumberSID`/`SMSNumberToken`/`SMSNumber`)
   — no env override and no test-mode abstraction, so verifying locally means DB-seeding Twilio **test**
@@ -121,6 +162,27 @@ The spec flags these per domain; the recurring ones:
   only reset path → the profile can never re-provision (permanent deadlock). v2: clearing a profile's SMS
   number must always reset local state regardless of the provider-side close result (provider cleanup is
   best-effort, idempotent, and tolerant of already-gone subaccounts).
+- v1 legacy **A2P 10DLC** verification (settings wizard → `/twilio/compliance`) is worse than TFV on
+  every axis and none of it should be reproduced: the status webhook handler
+  (`Webhook/TwilioVerification::trigger`) is **fully commented out** (logs only, no signature check),
+  the Event Streams subscribe helper has an **inverted `in_array` guard** so brand/campaign
+  subscriptions are never created (dead code), the returned `CampaignSid` is **never stored** (status
+  is fetched via the hard-coded Twilio docs-example SID `QE2c6890…`), TrustHub policy/parent-profile
+  SIDs are hard-coded in controllers, the cron pollers reference `$this->request` (doesn't exist in
+  CLI; null-safes to `profile_id => 0` in notification emails) and re-poll every pending row forever
+  with no backoff, state is one mutable row keyed by a magic `Step` string ('1.1'…'5') with no
+  history/audit/rejection storage, and the multi-step wizard makes customers hand-type business
+  name/address/contact the portal already holds. v2: one verification architecture (see TFV bullet
+  below) for both 10DLC and toll-free.
+- v1 Twilio **toll-free verification** shipped webhook-only status sync (plus a manual "sync" button) —
+  a missed Twilio Event Streams webhook left the verification stale forever; a background poller
+  (`tollfree:status` + `NextSyncAt`/`SyncAttempts` backoff columns) had to be retrofitted. Also the
+  TrustHub Compliance Embeddable inquiry was created with only phone+email even though the create API
+  accepts full business/contact/use-case prefill the portal already holds. v2: any provider async-status
+  flow needs webhook + scheduled reconciliation poll from day one (never webhook-only), and always
+  prefill provider-hosted forms from owned data. Related test trap: v1 TFV tests hardcoded future
+  fixture dates (`EditExpiration '2026-06-24'`) that became date-bombs — always compute relative dates
+  in fixtures.
 - v1 **image generation** (review/testimonial + newsletter thumbnails) shells out to `wkhtmltoimage`
   with **no `--load-error-handling ignore`**, so a *single* unreachable asset (e.g. a reviewer avatar
   that 404/502s) makes the binary exit non-zero and the whole image fails with a generic "Error creating
@@ -160,13 +222,64 @@ The spec flags these per domain; the recurring ones:
   soft-deleted with `DeleteDate`, a naive reconnect created a *new* stream row and orphaned the old data —
   the retrofit had to restore the soft-deleted row instead. v2: capture the provider account/user id at
   connect time, and make reconnect restore (not duplicate) the integration so its data re-links.
+- v1's review funnel is **default-on review gating** — a Google-policy violation (2025–26 enforcement
+  suspends Business Profiles for it) and FTC Consumer Review Rule exposure. The star gate
+  (`Funnel/BaseModal.vue:149`: `score >= happyMinimum ? "positive" : "negative"`, `HappyMinimum`
+  DB default 4) shows public review links (Google writereview) only to high raters and diverts the rest
+  to a private feedback form; the gate is *triplicated* (Nuxt funnel page + `landingPage` and
+  `reviewStars` PHP widgets), and negative-feedback leavers are set `Inactive` (only unhappy customers
+  stop being re-asked). v2: **no gating primitive at all** — every customer sees the same public review
+  links; private feedback is offered *in addition*, never *instead*. See
+  `../oggvo/docs/review-email-deliverability-options.md` for the full audit.
+  *Status 2026-07-12:* v1 Stage 0 of #442 shipped on `feat/gbp-compliance-stage0` — HappyMinimum
+  migrated/clamped to 1 everywhere, funnel always shows public links (feedback opt-in), feedback
+  leavers stay Active. The v2 rule stands: don't rebuild the gating primitive, not even behind a flag.
+- v1 campaign sending has **no velocity/suppression guardrails**: every recipient of a Delay=0 campaign
+  gets the *identical* ScheduledDate (no jitter), manual bulk activation is uncapped (the 10/day
+  `AutoActivateLimit` only throttles the auto-activator bot), there is no per-profile daily send cap,
+  no contact cooldown (`LastSent` is written but never read as a gate), SendGrid `bounce`/`spamreport`
+  webhooks record stats but never suppress the recipient, the ≥1% spam / ≥4% bounce circuit breaker is
+  commented out, no `List-Unsubscribe`/`List-Unsubscribe-Post` headers (a Gmail/Yahoo bulk-sender
+  requirement), and inbound SMS STOP is never written back to `OptIn` (only Twilio-side blocking).
+  v2: schedule with jitter + per-profile caps, one suppression list consulted before every send (fed by
+  bounces/complaints/STOP/unsubscribe), cooldown per contact, and List-Unsubscribe headers from day one.
+  *Status 2026-07-12:* v1 Stage 0 of #442 added per-profile send caps at the `commons.GetSchedules`
+  choke point (10/fetch-cycle via claim-deferral, 100/day, env-overridable) — burst + daily cap only;
+  the suppression-list/cooldown/header gaps above are v1 Stage 1 and still open.
+- v1 shares **one email identity for all tenants** (hardcoded `From: review@oggvo.com`, one SendGrid
+  account, all review links on `portal.oggvo.com`) so every tenant's complaints pool into one reputation
+  bucket. v2: per-tenant sending identity as a first-class model (`sending_domain` + DKIM/SPF
+  verification state, branded `review_domain`, self-serve DNS onboarding; neutral-domain pool fallback
+  for tenants without a domain).
+- v1's social publisher treated **every platform error as terminal**: any Google localPosts error →
+  `Status=-1` + bare `FailureReason="Error posting to google"`, no retry. June 2026: Google's v4 API
+  intermittently rejected valid image posts with 400 ValidationError `"Fetching image failed"`
+  (errorDetails code 1000) even though Google's own fetcher had just downloaded the image with 200, and
+  Google 500s killed posts the same way — 40+ posts across ~19 profiles permanently failed in one month
+  (one client lost half their June calendar); sibling posts in the same batch succeeded seconds apart,
+  proving transience. Patched late in v1 (retry-with-backoff for the fetch-failed case only). v2: publish
+  jobs need a **transient/terminal error taxonomy per platform** from day one — retry transient
+  (pre-creation validation rejections, 429s) with escalating backoff + attempt cap, and treat publish as
+  **non-idempotent** (5xx may have created the post — reconcile via read-back before retrying), and always
+  persist the platform's actual error message on the job, never a generic string.
+- v1's Lambda review-puller silently **halted all scraping for a week** (Jul 2–8 2026, Google review
+  saves 25/day → 0) because job dedupe keyed on a **content hash** (sha256 of profile+connection IDs,
+  marked processed in DynamoDB for 14 days) — but scraping is *recurring* work, so the identical
+  connection set legitimately re-dispatches every eligibility cycle and every cycle after the first was
+  skipped as "already processed", without releasing row claims. And the only log signal was an INFO-level
+  skip — nothing alerted. v2: dedupe keys must match work semantics — **per-dispatch unique IDs (UUID)
+  for recurring jobs** (dedupe only guards queue redelivery), content hashes only for genuinely one-shot
+  work; plus a staleness alarm on the puller (e.g. "no successful review save in N hours" or "eligible
+  backlog growing") so a silent halt pages someone instead of surfacing as a client complaint days later.
 
 ## Known schema gaps (spec'd features with no v2 table yet)
 
 When you reach these, add the Drizzle tables first: toll-free verification tables
 (`twilio_tollfree_*` + `profiles.tollfree_*`), auto-share platform whitelist, `social_insights` source,
-a unified `campaign_events` table, and a few profile fields (`BusinessLogo`, `CampaignsPaused`,
-auto-review-share settings). See each domain file's "Open questions / parity risks" section.
+a unified `campaign_events` table, per-tenant sending identity (`sending_domain` with DKIM/SPF
+verification state + `profiles.review_domain`), and a few profile fields (`BusinessLogo`,
+`CampaignsPaused`, auto-review-share settings). See each domain file's "Open questions / parity risks"
+section.
 
 ## Pending: screenshots
 

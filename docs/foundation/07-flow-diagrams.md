@@ -28,9 +28,11 @@ flowchart LR
 ```mermaid
 flowchart TD
     E[Gateway call fails] --> C{Classify}
-    C -->|transient<br/>network, 5xx, decode| R[retry w/ backoff<br/>max N, then DLQ + alarm]
+    C -->|transient<br/>network, 5xx, decode,<br/>flaky validation 400s| RB{publish op?<br/>non-idempotent}
+    RB -->|yes → read-back:<br/>post created?| P[found → mark published]
+    RB -->|not created /<br/>not a publish op| R[retry w/ backoff<br/>max N, then DLQ + alarm]
     C -->|rate_limited| RL[requeue at provider-specific<br/>backoff window]
-    C -->|terminal<br/>non-idempotent publish| T[mark failed · NO auto-retry<br/>user gets 'Retry post' BF-044]
+    C -->|terminal| T[mark failed · persist platform's<br/>actual error · manual 'Retry post' BF-044]
     C -->|auth_revoked<br/>only this one!| D[deactivate connection<br/>+ notify owner to reconnect]
 ```
 

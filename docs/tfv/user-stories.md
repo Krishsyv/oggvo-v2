@@ -11,6 +11,7 @@
 **As an** Owner (eligible + feature-flagged) **I want** to start TFV inside the portal **so that** my toll-free number can send compliant SMS.
 - **AC1** API initializes the Twilio inquiry → `inquiry_id` + session token; the **Twilio-hosted embeddable form** mounts in the page (we never rebuild the compliance form).
 - **AC2** Ineligible profiles never see the entry point.
+- **Fix-on-rebuild:** create the inquiry with **full prefill** — business name, address, contact and use-case data the portal already holds (the create API accepts it); v1 passed only phone+email, making customers re-type owned data into the hosted form.
 
 ### TFV-1.2 — Resume verification
 **As an** Owner **I want** to resume a started verification where I left off **so that** I don't re-enter everything.
@@ -32,6 +33,11 @@
 ### TFV-1.6 — Sender activation
 **As the** System **I want** sending enabled only when approved + number assigned **so that** compliance is enforced.
 - **AC1** Deactivation always resets local state even if Twilio-side cleanup fails (fixes the v1 closed-subaccount deadlock).
+
+## Parity risks / testing notes
+
+- **Sync scheduling from day one:** the poller's `next_sync_at` / `sync_attempts` (backoff) columns belong in the initial `twilio_tollfree_*` schema — in v1 they were a retrofit after webhook-only status sync left verifications stale forever.
+- **No date-bomb fixtures:** compute fixture dates relative to "now" — v1 TFV tests hardcoded future dates (`EditExpiration '2026-06-24'`) that started failing once the date passed.
 
 ## Traceability
 

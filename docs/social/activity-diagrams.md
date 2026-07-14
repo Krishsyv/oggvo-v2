@@ -99,9 +99,11 @@ flowchart TD
     end
     subgraph Worker2[Worker · stamp result]
         E -- yes --> F[status = published\nset URL + socialId]
-        E -- no --> G{attempts < max?}
+        E -- no --> RB[Read-back reconcile:\npublish is non-idempotent —\na 5xx may have created the post]
+        RB -- post exists upstream --> F
+        RB -- not created --> G{transient error\nand attempts < max?}
         G -- yes --> H[status stays queued\nattempts++ , set nextAttemptAt\nre-enqueue with backoff]
-        G -- no --> I[status = failed\nset failureReason]
+        G -- no --> I[status = failed\nset failureReason =\nplatform's actual error]
         F --> J[Mirror status to\nsocial_campaign_posts if campaign]
         I --> J
     end

@@ -22,7 +22,7 @@ Index:
 flowchart TD
     subgraph Operator
         A([Open /design/positive | negative | thanks]) --> B[GET /design\n profile copy + rating stats]
-        B --> C[Edit Header / Body / HappyMinimum\n live preview updates]
+        B --> C[Edit Header / Body\n live preview updates\n no HappyMinimum - gate removed in v2]
         C --> D[Click Apply]
     end
     subgraph API[funnel service]
@@ -118,20 +118,27 @@ flowchart TD
     subgraph API[funnel public]
         A0[GET /funnel/:shortname] --> A1{Found?}
         A1 -- no --> A2[[404]]
-        A1 -- yes --> A3[Return copy, happyMinimum,\n active links, rating stats, design]
+        A1 -- yes --> A3[Return copy, active links,\n rating stats, design]
     end
-    B --> C{rating >= happyMinimum?\n 1 = review-all, 0 = feedback-all}
-    C -- yes --> D[Positive screen:\n Connect with platform buttons]
+    B --> C[Same screen for EVERY rating:\n public platform buttons\n + optional private-feedback affordance]
+    C --> D[Click Connect with platform]
     D --> E{platform in\n google/facebook/zillow/realtor.com\n AND skipInstructions != 1?}
     E -- yes --> F[How to leave a review interstitial\n disclaimer + Click to review CTA]
     E -- no --> G[Open platform link\n respect Open in New Window]
     F --> G
     G --> T[Thank-you screen]
-    C -- no --> I[Negative screen: feedback form\n name/email/phone/message]
-    I --> J[Leave Feedback -> create review + recipient\n tag Left Oggvo Feedback, set Inactive]
+    C -. optional, in addition .-> I[Private feedback form\n name/email/phone/message]
+    I --> J[Leave Feedback -> create review + recipient\n tag Left Oggvo Feedback - stays Active]
     J --> T
 ```
 
+> **Removed v1 gate (fix-on-rebuild, compliance-critical):** v1 branched at the post-rating step on
+> `rating >= happyMinimum` (`1` = review-all, `0` = feedback-all; DB default 4) — default-on review gating,
+> a Google-policy violation (2025–26 enforcement suspends Business Profiles) + FTC Consumer Review Rule
+> exposure — and set feedback leavers Inactive. v1 #442 Stage 0 (2026-07-12, `feat/gbp-compliance-stage0`)
+> clamped the threshold to 1 and kept feedback leavers Active. **v2 has no gating primitive at all**: public
+> links always render; private feedback is additive, never a substitute.
+>
 > Parity gap: Yelp has a server-side instruction view but no Vue modal branch — add it in v2.
 
 ---

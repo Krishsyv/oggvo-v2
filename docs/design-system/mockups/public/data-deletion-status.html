@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <p class="mock-note">User-facing status page for the Meta Data Deletion Callback. GET /public/data-deletion?code=&lt;code&gt; → {status: received | pending | completed | cancelled | not_found, scheduledPurgeAt, completedAt}. 30-day grace before purge; reconnecting cancels it.</p>
+      <p class="mock-note">User-facing status page for the Meta Data Deletion Callback. GET /public/data-deletion?code=&lt;code&gt; → {status: received | pending | completed | cancelled | not_found, scheduledPurgeAt, completedAt}. Grace window (default 30 days) before purge; reconnecting cancels it.</p>
     </div>
   </div>
 
@@ -103,7 +103,7 @@
         pending: {
           html: CLOCK, tint: 'bg-warning-100 text-warning-700',
           title: 'Deletion scheduled',
-          message: 'Your data is in a 30-day grace period and is scheduled for permanent deletion. Reconnecting your account before then will cancel this.'
+          message: 'Your data is in a grace period (default 30 days) and is scheduled for permanent deletion. Reconnecting your account before then will cancel this.'
         },
         completed: {
           html: TRASH, tint: 'bg-success-100 text-success-700',

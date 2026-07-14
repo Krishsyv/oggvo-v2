@@ -324,15 +324,24 @@ schedule **so that** I can announce platform news to the right accounts.
 
 > Mockup: [`admin-settings.html`](../design-system/mockups/admin/admin-settings.html) · route
 > `/admin/settings`. Global settings that apply across **all** accounts — distinct from a tenant's own
-> Settings page. Extends the v1 `manage/settings.vue` (which exposed only the FB/IG grace-period field).
+> Settings page. Supersedes the v1 `manage/settings.vue`, whose only field was an **editable** FB/IG
+> grace-period input — a discarded design (see US-A10.1); v1 itself reworked it to env config 2026-07-09.
 
-### US-A10.1 — Set the Meta data-deletion grace period
-**As an** Admin **I want** to configure the Facebook/Instagram data-deletion grace window **so that**
-disconnected accounts are purged on the right schedule.
-- **AC1** `GET /admin/settings` loads `data_deletion_grace_days` (default 30); the field validates as a
-  whole number ≥ 1 and saves via `PUT /admin/settings { data_deletion_grace_days }`.
-- **AC2** Copy states that changing the window affects only deletions started from now on — requests
-  already counting down keep their original date; reconnecting before the deadline cancels deletion.
+### US-A10.1 — View the Meta data-deletion grace windows (read-only)
+**As an** Admin **I want** to see the effective Facebook/Instagram data-deletion grace windows **so
+that** I know the purge schedule — without a UI that can change a compliance parameter.
+- **AC1** The grace window is **not admin-editable**. It comes from **typed env config** — per
+  platform, per environment — with a code-side clamp (1–90 days) and fallback (30) so a bad value
+  degrades safely. `GET /admin/settings` may return the effective per-platform values for read-only
+  display; `PUT /admin/settings` accepts **no** `data_deletion_grace_days` key.
+- **AC2** Copy states the window applies to deletions started from now on — requests already counting
+  down keep their original date; reconnecting before the deadline cancels deletion. Null/whole-app
+  deletion requests take the `min()` of the per-platform windows.
+- **Fix-on-rebuild:** v1 first shipped this as an admin-editable DB setting (generic `system_settings`
+  key/value + Manage → Settings UI) — any `OGGVO_ACCOUNT_MANAGER` could stretch a Meta deletion delay
+  to 90 days from a UI, and the value couldn't differ per environment; reworked 2026-07-09 to
+  per-platform, per-environment env config. Classify each knob before building UI for it: **tenant
+  preference → DB + UI; compliance/operational parameter → typed env config** with validated bounds.
 
 ### US-A10.2 — Toggle global switches & platform defaults
 **As an** Admin **I want** platform-wide toggles and default values **so that** I can control features
@@ -490,7 +499,8 @@ organised.
 | US-A8.2 | `GET /admin/referrals` |
 | US-A9.1 | `GET /admin/notifications` |
 | US-A9.2 | `POST /admin/notifications` |
-| US-A10.1–A10.3 | `GET /admin/settings`, `PUT /admin/settings` |
+| US-A10.1 | `GET /admin/settings` (read-only effective env-config values — no `PUT` for the grace window) |
+| US-A10.2–A10.3 | `GET /admin/settings`, `PUT /admin/settings` |
 | US-A11.1 | `POST /admin/users`, `GET /admin/users/:id`, `PUT /admin/users/:id` |
 | US-A11.2 | `POST/PUT /admin/users` (`profiles[]`, `permissions[]`) |
 | US-A12.1 | `GET /admin/templates/:id`, `PUT /admin/templates/:id`, `POST /admin/templates/:id/{test,image}` |

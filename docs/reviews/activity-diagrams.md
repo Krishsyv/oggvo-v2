@@ -135,21 +135,26 @@ flowchart TD
     subgraph API[funnel public]
         A0[GET /funnel/:shortname] --> A1{Found?}
         A1 -- no --> A2[[404]]
-        A1 -- yes --> A3[Return copy, happyMinimum,\nactive links, rating stats, design]
+        A1 -- yes --> A3[Return copy, active links,\nrating stats, design]
     end
-    B --> C{rating >= happyMinimum?\n(1 = review-all, 0 = feedback-all)}
-    C -- yes --> D[Positive screen]
-    D --> E[Click Connect with platform]
+    B --> C[Same screen for EVERY rating:\npublic platform links + optional\nprivate-feedback affordance]
+    C --> E[Click Connect with platform]
     E --> F{google/facebook/zillow/realtor\n& SkipInstructions != 1?}
     F -- yes --> G[Show how-to-review interstitial]
     F -- no --> H[Open platform link]
     G --> H
     H --> T[Thank-you screen]
-    C -- no --> I[Negative screen:\nprivate feedback form]
+    C -. optional, in addition .-> I[Private feedback form]
     I --> J[Submit name/email/phone/message]
-    J --> K[Create review + recipient\n tag 'Left Oggvo Feedback',\n set recipient Inactive,\n delete prior reviews]
+    J --> K[Create review + recipient\n tag 'Left Oggvo Feedback',\n recipient stays Active,\n delete prior reviews]
     K --> T
 ```
+
+> **Removed v1 gate (fix-on-rebuild, compliance-critical):** v1 branched here on `rating >= happyMinimum`
+> (1 = review-all, 0 = feedback-all; DB default 4) — default-on review gating, a Google-policy violation
+> (2025–26 enforcement suspends Business Profiles) + FTC Consumer Review Rule exposure — and set feedback
+> leavers Inactive. v1 #442 Stage 0 (2026-07-12) clamped the threshold to 1 and kept feedback leavers Active.
+> **v2 has no gating primitive**: public links always render; private feedback is additive, never a substitute.
 
 ---
 
@@ -249,7 +254,7 @@ flowchart TD
         A([Adjust ReviewStyleParams]) --> B[GET /reviews/:id/image\n type, version|custom_color, person,\n brand_logo/source_logo/reviewer_name/\n reviewer_image/action_button]
     end
     subgraph API[reviews service]
-        B --> C[Normalize style ONCE\n compute cache key\n {reviewId}{profileId}{site}_{hash}]
+        B --> C[Normalize style ONCE\n compute cache key\n {reviewId}-{profileId}-{site}_{hash}]
         C --> D{Cached image exists\n and height == 1080\n and not force_generate?}
         D -- yes --> E[Return existing S3 / CDN url]
         D -- no --> F[Enqueue render job]
@@ -269,3 +274,10 @@ flowchart TD
 > BF-004: in v1 `custom_color` was hashed differently across `/image`, `/single` and `/share`, so the
 > share lookup missed the generated image. v2 normalizes the style params once server-side so all three
 > share one identical cache key. Replaces v1's `wkhtmltoimage`-over-NFS with a headless worker + S3.
+>
+> **Fix-on-rebuild (key collision):** the cache key uses **unambiguous separators**
+> (`{reviewId}-{profileId}-{site}_{hash}`) — v1's separator-less `{ReviewID}{ProfileID}{Site}` concatenation
+> made `(ID=12, P=3)` and `(ID=1, P=23)` collide on `123Facebook…`, silently overwriting cross-profile files,
+> and the FB data-deletion purge's `reviews/{ID}{ProfileID}{Site}*` glob could unlink another tenant's file.
+> A trailing `_{hash}` alone does NOT fix this (the prefix stays ambiguous; globs stay cross-tenant) —
+> separated keys or UUIDs do. Never concatenate numeric ids into file keys.
