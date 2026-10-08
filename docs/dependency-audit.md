@@ -15,7 +15,7 @@
 | 1 | **Nuxt** (portal-frontend) | `3.6.2` (Jul 2023) | `3.21.8` / Nuxt `4.4.8` | **Nuxt 3 EOS 31 Jul 2026** | 🔴 Critical |
 | 2 | **Firebase JS SDK** | `8.3.3` (2021) | `12.15.0` | 4 majors behind, legacy namespaced API | 🔴 Critical |
 | 3 | **Stripe PHP** | `^10.11` | `20.2.1` | 10 majors behind (payments) | 🔴 Critical |
-| 4 | **AWS SDK for JS v2** (lambdas/sls) | `^2.1272` | v2 dead → v3 `3.9xx` | **EOL 8 Sep 2025, repo archived** | 🔴 Critical |
+| 4 | ~~**AWS SDK for JS v2** (lambdas/sls)~~ | ~~`^2.1272`~~ | — | **Resolved 2026-07-01:** `lambdas/sls` deleted (oggvo `07c47f1e2`); no v2 SDK consumer remains | ✅ Closed |
 | 5 | **Go toolchain** (all bots/lambdas) | `go 1.24.0` | `1.26.4` / `1.25.11` | **1.24 EOL 11 Feb 2026** | 🔴 Critical |
 | 6 | **CodeIgniter 4** (portal-api) | `4.3.7` (2023) | `4.7.3` | 4 minors behind | 🟠 High |
 | 7 | **Square PHP SDK** | `17.1.0.20220120` (pinned, Jan 2022) | `45.1.0.20260520` | Pinned, ~4 years stale (payments) | 🟠 High |
@@ -130,6 +130,8 @@ Sources: `go.mod` across [bots/](../../oggvo/bots/) and [lambdas/](../../oggvo/l
 ---
 
 ## 4. JS Lambdas
+
+> **Update 2026-10-08:** `lambdas/sls` was removed on 2026-07-01 (oggvo commit `07c47f1e2`). The `(sls)` rows below are historical; only `os-reporter` (already on `@aws-sdk/*` v3) remains a JS Lambda.
 
 Sources: [lambdas/sls/src/package.json](../../oggvo/lambdas/sls/src/package.json), [lambdas/os-reporter/src/package.json](../../oggvo/lambdas/os-reporter/src/package.json)
 
